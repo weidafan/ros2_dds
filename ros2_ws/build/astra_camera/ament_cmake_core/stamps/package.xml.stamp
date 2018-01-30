@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>astra_camera</name>
+  <version>0.2.0</version>
+  <description>Drivers for Orbbec Astra Devices. </description>
+  <author email="liuhua@orbbec.com">Tim Liu</author>
+  <license>BSD</license>
+
+  <maintainer email="liuhua@orbbec.com">Tim Liu</maintainer>
+
+  <build_depend>git</build_depend>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>boost</depend>
+  <depend>builtin_interfaces</depend>
+  <depend>libudev-dev</depend>
+  <depend>libusb-1.0-dev</depend>  
+  <depend>rclcpp</depend>
+  <depend>sensor_msgs</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

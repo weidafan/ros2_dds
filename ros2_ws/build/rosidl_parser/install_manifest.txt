@@ -1,0 +1,13 @@
+/home/aust/ros2_ws/install/share/rosidl_parser/environment/pythonpath.sh
+/home/aust/ros2_ws/install/lib/python3.5/site-packages/rosidl_parser/__init__.py
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/rosidl_parser
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/rosidl_parser
+/home/aust/ros2_ws/install/share/rosidl_parser/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/rosidl_parser/environment/path.sh
+/home/aust/ros2_ws/install/share/rosidl_parser/local_setup.bash
+/home/aust/ros2_ws/install/share/rosidl_parser/local_setup.sh
+/home/aust/ros2_ws/install/share/rosidl_parser/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/rosidl_parser
+/home/aust/ros2_ws/install/share/rosidl_parser/cmake/rosidl_parserConfig.cmake
+/home/aust/ros2_ws/install/share/rosidl_parser/cmake/rosidl_parserConfig-version.cmake
+/home/aust/ros2_ws/install/share/rosidl_parser/package.xml

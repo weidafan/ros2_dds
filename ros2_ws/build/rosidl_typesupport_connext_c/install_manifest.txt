@@ -1,0 +1,11 @@
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/rosidl_typesupport_connext_c
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/rosidl_typesupport_connext_c
+/home/aust/ros2_ws/install/share/rosidl_typesupport_connext_c/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/rosidl_typesupport_connext_c/environment/path.sh
+/home/aust/ros2_ws/install/share/rosidl_typesupport_connext_c/local_setup.bash
+/home/aust/ros2_ws/install/share/rosidl_typesupport_connext_c/local_setup.sh
+/home/aust/ros2_ws/install/share/rosidl_typesupport_connext_c/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/rosidl_typesupport_connext_c
+/home/aust/ros2_ws/install/share/rosidl_typesupport_connext_c/cmake/rosidl_typesupport_connext_cConfig.cmake
+/home/aust/ros2_ws/install/share/rosidl_typesupport_connext_c/cmake/rosidl_typesupport_connext_cConfig-version.cmake
+/home/aust/ros2_ws/install/share/rosidl_typesupport_connext_c/package.xml

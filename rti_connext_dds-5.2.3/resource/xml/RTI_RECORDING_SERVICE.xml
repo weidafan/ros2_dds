@@ -1,0 +1,340 @@
+<!-- 
+   (c) Copyright, Real-Time Innovations, Inc. 2015.  All rights reserved.
+   No duplications, whole or partial, manual or electronic, may be made
+   without prior written permission.  Any such copies, or
+   revisions thereof, must display this notice unaltered.
+   This code contains trade secrets of Real-Time Innovations, Inc.
+-->
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_record.xsd">
+ 
+    <!-- ****************************************************************** -->
+    <!-- Default configuration file for RTI Recording Service               -->
+    <!-- ****************************************************************** -->
+    <!-- Configuration name: default -->
+    
+    <!-- This configuration records all topics and all fields in the topics, 
+        for every topic discovered in domain 0. The data are always recorded in deserialized 
+        mode. Remote administration with Distributed Logger is active in domain 0. -->
+  
+    <recorder name="default">
+        <annotation>
+            <documentation> 
+                Record all topics in domain 0. 
+                Remote administration with Distributed Logger is enabled on domain 0. 
+            </documentation>
+        </annotation>
+        <verbosity>1</verbosity>
+        <!-- Set replay compatibility to true so what we record is ensured to be 
+            replayable using RTI Replay Service -->
+        <replay_compatibility>true</replay_compatibility>
+        <!-- Enable remote administration of Recorder in domain 0. Enable Distributed 
+            Logger with filter level set to warning. -->
+        <remote_access>
+            <enabled>true</enabled>
+            <remote_access_domain> domain0 </remote_access_domain>
+            <distributed_logger>
+                <enabled>true</enabled>
+                <filter_level>WARNING</filter_level>
+            </distributed_logger>
+        </remote_access>
+
+        <!-- Specify where to store the recorded data. -->
+        <recorder_database>
+            <database_name> rti_recorder_default.dat </database_name>
+        </recorder_database>
+        <!-- Create a DDS DomainParticipant in domain 0 with default QoS -->
+        <domain name="domain0">
+            <domain_id>0</domain_id>
+            <deserialize_mode>RTIDDS_DESERIALIZEMODE_ALWAYS</deserialize_mode>
+        </domain>
+        <!-- Create a TopicGroup. A TopicGroup is a collection of Topics whose 
+            names match the POSIX expression 'topic_expr'. The POSIX expression 'field_expr' 
+            specifies which fields in the Topics to record. Note that a TopicGroup is 
+            not bound to a particular domain yet. In this example, the TopicGroup All 
+            means record all fields in all the matching Topics -->
+        <topic_group name="All">
+            <topics>
+                <topic_expr> * </topic_expr>
+            </topics>
+            <field_expr> * </field_expr>
+        </topic_group>
+        <!-- Create a RecordGroup. A RecordGroup controls which TopicGroups are 
+            recorded for a set of domains. Each recorded Topic is stored in a table with 
+            the format "<RecordGroupName>$<DomainName>$<TopicName>". In this configuration, 
+            we want to record data from topics in TopicGroup "All" from the domain with 
+            name "domain0". -->
+        <record_group name="RecordAll">
+            <!-- specify which domains to record from -->
+            <domain_ref>
+                <element> domain0 </element>
+            </domain_ref>
+            <!-- specify which topics to record (topic group names) -->
+            <topic_ref>
+                <element> All </element>
+            </topic_ref>
+        </record_group>
+    </recorder>
+    <!-- ****************************************************************** -->
+    <!-- Configuration name: defaultNoAutoStart -->
+    <!-- This configuration records all topics and all fields in the topics, 
+        for every topic discovered in domain 0. The data are always recorded in deserialized 
+        mode. Remote administration with Distributed Logger is active in domain 0. 
+        Recording doesn't start automatically, it has to be started manually using 
+        remote administration. -->
+    <recorder name="defaultNoAutoStart">
+        <annotation>
+            <documentation>
+                Record all topics and fields in domain 0, but don't start 
+                recording right away (wait for remote start).
+                Enable remote administration in domain 0. Distributed Logger is
+                also enabled with filter level set to warning.
+            </documentation>
+        </annotation>
+        <!-- Setting this to false will make Recorder wait for a remote start command 
+            to start recording data -->
+        <auto_start>false</auto_start>
+        <verbosity>1</verbosity>
+        <!-- Enable remote administration of Recorder in domain 0. Enable Distributed 
+            Logger with filter level set to warning. -->
+        <remote_access>
+            <enabled>true</enabled>
+            <remote_access_domain> domain0 </remote_access_domain>
+            <distributed_logger>
+                <enabled>true</enabled>
+                <filter_level>WARNING</filter_level>
+            </distributed_logger>
+        </remote_access>
+        <!-- Specify where to store the recorded data. -->
+        <recorder_database>
+            <database_name> rti_recorder_default.dat </database_name>
+        </recorder_database>
+        <!-- Create a DDS DomainParticipant in domain 0 with default QoSs -->
+        <domain name="domain0">
+            <domain_id>0</domain_id>
+            <deserialize_mode>RTIDDS_DESERIALIZEMODE_ALWAYS</deserialize_mode>
+        </domain>
+        <!-- Create a TopicGroup. A TopicGroup is a collection of Topics whose 
+            names match the POSIX expression 'topic_expr'. The POSIX expression 'field_expr' 
+            specifies which fields in the Topics to record. Note that a TopicGroup is 
+            not bound to a particular domain yet. In this example, the TopicGroup All 
+            means record all fields in all the matching Topics -->
+        <topic_group name="All">
+            <topics>
+                <topic_expr> * </topic_expr>
+            </topics>
+            <field_expr> * </field_expr>
+        </topic_group>
+        <!-- Create a RecordGroup. A RecordGroup controls which TopicGroups are 
+            recorded for a set of domains. Each recorded Topic is stored in a table with 
+            the format "<RecordGroupName>$<DomainName>$<TopicName>". In this configuration, 
+            we want to record data from topics in TopicGroup "All" from the domain with 
+            name "domain0". -->
+        <record_group name="RecordAll">
+            <!-- specify which domains to record from -->
+            <domain_ref>
+                <element> domain0 </element>
+            </domain_ref>
+            <!-- specify which topics to record (topic group names) -->
+            <topic_ref>
+                <element> All </element>
+            </topic_ref>
+        </record_group>
+    </recorder>
+    <!-- ****************************************************************** -->
+    <!-- Configuration name: defaultNoAdmin -->
+    <!-- This configuration records all topics and all fields in the topics, 
+        for every topic discovered in domain 0. The data are always recorded in deserialized 
+        mode. Remote administration is disabled. No distributed logging will happen 
+        either. -->
+    <recorder name="defaultNoAdmin">
+        <annotation>
+            <documentation> 
+                Record all topics in domain 0.
+                Remote administration is disabled
+            </documentation>
+        </annotation>
+        <verbosity>1</verbosity>
+        <!-- Specify where to store the recorded data. -->
+        <recorder_database>
+            <database_name> rti_recorder_default.dat </database_name>
+        </recorder_database>
+        <!-- Create a DDS DomainParticipant in domain 0 with default QoSs -->
+        <domain name="domain0">
+            <domain_id>0</domain_id>
+            <deserialize_mode>RTIDDS_DESERIALIZEMODE_ALWAYS</deserialize_mode>
+        </domain>
+        <!-- Create a TopicGroup. A TopicGroup is a collection of Topics whose 
+            names match the POSIX expression 'topic_expr'. The POSIX expression 'field_expr' 
+            specifies which fields in the Topics to record. Note that a TopicGroup is 
+            not bound to a particular domain yet. In this example, the TopicGroup All 
+            means record all fields in all the matching Topics -->
+        <topic_group name="All">
+            <topics>
+                <topic_expr> * </topic_expr>
+            </topics>
+            <field_expr> * </field_expr>
+        </topic_group>
+        <!-- Create a RecordGroup. A RecordGroup controls which TopicGroups are 
+            recorded for a set of domains. Each recorded Topic is stored in a table with 
+            the format "<RecordGroupName>$<DomainName>$<TopicName>". In this configuration, 
+            we want to record data from topics in TopicGroup "All" from the domain with 
+            name "domain0". -->
+        <record_group name="RecordAll">
+            <!-- specify which domains to record from -->
+            <domain_ref>
+                <element> domain0 </element>
+            </domain_ref>
+            <!-- specify which topics to record (topic group names) -->
+            <topic_ref>
+                <element> All </element>
+            </topic_ref>
+        </record_group>
+    </recorder>
+    
+    <!-- ****************************************************************** -->
+    <!-- Configuration name: defaultIndexing -->
+    <!-- This configuration creates an SQLite index on the reception_timestamp 
+        field of the User Data Tables. This configuration also records all topics 
+        and all fields in the topics, for every topic discovered in domain 0. The 
+        data are always recorded in deserialized mode. Remote administration is disabled. 
+        No distributed logging will happen either. -->
+    <recorder name="defaultIndexing">
+        <annotation>
+            <documentation> 
+                Create an index on reception_timestamp.
+                Record all topics in domain 0.
+                Remote administration is disabled
+            </documentation>
+        </annotation>
+        <verbosity>1</verbosity>
+        <!-- Specify where to store the recorded data. -->
+        <recorder_database>
+            <database_name> rti_recorder_default.dat </database_name>
+        </recorder_database>
+        <!-- Create a DDS DomainParticipant in domain 0 with default QoSs -->
+        <domain name="domain0">
+            <domain_id>0</domain_id>
+            <deserialize_mode>RTIDDS_DESERIALIZEMODE_ALWAYS</deserialize_mode>
+        </domain>
+        <!-- Create a TopicGroup. A TopicGroup is a collection of Topics whose 
+            names match the POSIX expression 'topic_expr'. The POSIX expression 'field_expr' 
+            specifies which fields in the Topics to record. Note that a TopicGroup is 
+            not bound to a particular domain yet. In this example, the TopicGroup All 
+            means record all fields in all the matching Topics -->
+        <topic_group name="All">
+            <topics>
+                <topic_expr> * </topic_expr>
+            </topics>
+            <field_expr> * </field_expr>
+            <!-- We can specify here as many indexes as we need. In this case we are 
+                creating one based on the reception_timestamp of the SampleInfo. You can 
+                create data on any of the stored columns of the database (SampleInfo, MetaData, 
+                or even user-defined data) -->
+            <index>
+                <field> SampleInfo_reception_timestamp </field>
+            </index>
+        </topic_group>
+        <!-- Create a RecordGroup. A RecordGroup controls which TopicGroups are 
+            recorded for a set of domains. Each recorded Topic is stored in a table with 
+            the format "<RecordGroupName>$<DomainName>$<TopicName>". In this configuration, 
+            we want to record data from topics in TopicGroup "All" from the domain with 
+            name "domain0". -->
+        <record_group name="RecordAll">
+            <!-- specify which domains to record from -->
+            <domain_ref>
+                <element> domain0 </element>
+            </domain_ref>
+            <!-- specify which topics to record (topic group names) -->
+            <topic_ref>
+                <element> All </element>
+            </topic_ref>
+        </record_group>
+    </recorder>
+    
+    <!-- ****************************************************************** -->
+    <!-- Configuration name: defaultAllFields -->
+    <!-- This configuration creates an SQLite index on the reception_timestamp 
+        field of the User Data Tables. This configuration also records all topics 
+        and all fields in the topics, for every topic discovered in domain 0. The 
+        data are always recorded in deserialized mode. Remote administration is disabled. 
+        No distributed logging will happen either. -->
+    <recorder name="defaultAllFields">
+        <annotation>
+            <documentation> 
+                Record all topics and all fields (including all Sample Info,
+                metadata fields and complete discovery tables) in domain 0.
+                Remote administration is disabled.
+            </documentation>
+        </annotation>
+
+        <verbosity>1</verbosity>
+
+        <!-- Specify where to store the recorded data. -->
+        <recorder_database>
+            <database_name> rti_recorder_default.dat </database_name>
+            
+            <!-- Define what fields to include for the discovery tables. In this
+                 case we want to record all the fields. -->
+            <builtin_topic_metadata_fields>
+                <DCPSParticipant_topic>
+                    <included>
+                        <field> * </field>
+                    </included>
+                </DCPSParticipant_topic>
+                <DCPSPublication_topic>
+                    <included>
+                        <field> * </field>
+                    </included>
+                </DCPSPublication_topic>
+                <DCPSSubscription_topic>
+                    <included>
+                        <field> * </field>
+                    </included>
+                </DCPSSubscription_topic>
+            </builtin_topic_metadata_fields>
+            
+            <!-- Define what Sample Info and metadata fields to include for the 
+                 user topic tables. In this case we want to include all the
+                 fields. -->
+            <user_topic_metadata_fields>
+                <included>
+                    <field> * </field>
+                </included>
+            </user_topic_metadata_fields>
+        </recorder_database>
+        <!-- Create a DDS DomainParticipant in domain 0 with default QoSs -->
+        <domain name="domain0">
+            <domain_id>0</domain_id>
+            <deserialize_mode>RTIDDS_DESERIALIZEMODE_ALWAYS</deserialize_mode>
+        </domain>
+        <!-- Create a TopicGroup. A TopicGroup is a collection of Topics whose 
+            names match the POSIX expression 'topic_expr'. The POSIX expression 'field_expr' 
+            specifies which fields in the Topics to record. Note that a TopicGroup is 
+            not bound to a particular domain yet. In this example, the TopicGroup All 
+            means record all fields in all the matching Topics -->
+        <topic_group name="All">
+            <topics>
+                <topic_expr> * </topic_expr>
+            </topics>
+            <field_expr> * </field_expr>
+        </topic_group>
+
+        <!-- Create a RecordGroup. A RecordGroup controls which TopicGroups are 
+            recorded for a set of domains. Each recorded Topic is stored in a table with 
+            the format "<RecordGroupName>$<DomainName>$<TopicName>". In this configuration, 
+            we want to record data from topics in TopicGroup "All" from the domain with 
+            name "domain0". -->
+        <record_group name="RecordAll">
+            <!-- specify which domains to record from -->
+            <domain_ref>
+                <element> domain0 </element>
+            </domain_ref>
+            <!-- specify which topics to record (topic group names) -->
+            <topic_ref>
+                <element> All </element>
+            </topic_ref>
+        </record_group>
+    </recorder>
+
+</dds>

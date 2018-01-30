@@ -1,0 +1,21 @@
+{
+  "package_name": "composition",
+  "output_dir": "/home/aust/ros2_ws/build/composition/rosidl_typesupport_introspection_c/composition",
+  "template_dir": "/home/aust/ros2_ws/install/share/rosidl_typesupport_introspection_c/resource",
+  "ros_interface_files": [
+    "/home/aust/ros2_ws/src/ros2/demos/composition/srv/LoadNode.srv",
+    "/home/aust/ros2_ws/build/composition/srv/LoadNode_Request.msg",
+    "/home/aust/ros2_ws/build/composition/srv/LoadNode_Response.msg"
+  ],
+  "target_dependencies": [
+    "/home/aust/ros2_ws/install/lib/rosidl_typesupport_introspection_c/rosidl_typesupport_introspection_c",
+    "/home/aust/ros2_ws/install/lib/python3.5/site-packages/rosidl_typesupport_introspection_c/__init__.py",
+    "/home/aust/ros2_ws/install/share/rosidl_typesupport_introspection_c/resource/msg__rosidl_typesupport_introspection_c.h.em",
+    "/home/aust/ros2_ws/install/share/rosidl_typesupport_introspection_c/resource/msg__type_support.c.em",
+    "/home/aust/ros2_ws/install/share/rosidl_typesupport_introspection_c/resource/srv__rosidl_typesupport_introspection_c.h.em",
+    "/home/aust/ros2_ws/install/share/rosidl_typesupport_introspection_c/resource/srv__type_support.c.em",
+    "/home/aust/ros2_ws/src/ros2/demos/composition/srv/LoadNode.srv",
+    "/home/aust/ros2_ws/build/composition/srv/LoadNode_Request.msg",
+    "/home/aust/ros2_ws/build/composition/srv/LoadNode_Response.msg"
+  ]
+}

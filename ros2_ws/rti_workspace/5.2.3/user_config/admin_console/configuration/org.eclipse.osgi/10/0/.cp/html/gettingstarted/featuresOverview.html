@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Features Overview</title>
+<link rel="stylesheet" href="../acdocs.css" type="text/css" />
+</head>
+
+<body>
+	<div class="centerContent">
+		<div class="docTopBanner" />
+	</div>
+
+	<div class="docPageTitle">RTI Admin Console: Features Overview</div>
+	
+	<br />
+	<div class="docSectionContent">RTI&apos;s Admin Console offers you a
+		centralized tool for monitoring, debugging, and administering your 
+		distributed system. This document provides an overview of the key 
+		features available in Admin Console.
+	</div>
+
+    <br />
+    <div class="docSectionTitle">
+        <a name="matchAnalysesOverview">Match Analysis</a>
+    </div>
+    <div class="docScreenShot">
+        <img src="../images/matchAnalysesView.png" />
+    </div>
+    <div class="docSectionContent">
+        Admin Console proactively checks to ensure that your distributed 
+        system's Quality of Service (QoS) settings are compatible. This analysis
+        happens automatically and in real-time. As QoS changes occur in your 
+        system, Admin Console is notified and updates the analysis to reflect 
+        the most recent settings.
+        
+        <br />
+        <br />
+        <div class="docSectionFootNotes">
+            Relevant reference topics:
+            <a href="../reference/views/matchAnalysesView.xhtml">Match 
+            Analyses</a>.
+        </div>
+    </div>
+
+
+	<br />
+	<div class="docSectionTitle">
+		<a name="systemHealthOverview">System Health</a>
+	</div>
+	<div class="docScreenShot">
+		<img src="../images/systemView_summaryTable.png" />
+	</div>
+	<div class="docSectionContent">
+		Admin Console collects various system health information and
+		summarizes it in one easy-to-read table. You will see the number of
+		hosts participating in your distributed system, the number of RTI
+		services and processes running on those hosts, and whether there
+		are any errors or warnings. <br /> <br />
+
+		<div class="docSectionFootNotes">
+			Relevant reference topics:
+			<a href="../reference/views/systemView.xhtml">System View</a>,
+			<a href="../reference/views/hostView.xhtml">Host View</a>
+		</div>
+	</div>
+
+	<br />
+	<br />
+	<div class="docSectionTitle">
+		<a name="systemMontioringOverview">Service Administration</a>
+	</div>
+	<div class="docScreenShot">
+		<img src="../images/routingService_controls.png" />
+	</div>
+	<div class="docSectionContent">
+		You can use Admin Console to remotely administer RTI services (for
+		those services that support remote administration). You can remotely
+		enable, disable, pause, or resume a service or its components.
+		
+		<br />
+		<br />
+		<div class="docSectionFootNotes">
+			Relevant reference topics: 
+            <a href="../reference/views/routingView.xhtml">Routing Service 
+            View</a>,
+            <a href="../reference/views/persistenceView.xhtml">Persistence 
+            Service View</a>,
+            <a href="../reference/views/recordingView.xhtml">Recording 
+            Service View</a>,
+            <a href="../reference/views/replayView.xhtml">Replay Service
+            View</a>,
+		</div>
+	</div>
+
+	<br />
+	<br />
+	<div class="docSectionTitle">
+		<a name="performanceMonitoringOverview">Performance Monitoring</a>
+	</div>
+    <div class="docScreenShot">
+        <img src="../images/routingService_routingEntitiesOnly.png" />
+    </div>
+    
+    <div class="docSectionContent">
+        For RTI services that provide detailed performance statistics, such as
+        Routing Service, Admin Console will display information such as data
+        throughput and latency for each route.
+        <br />
+        <br />
+        <div class="docSectionFootNotes">
+            Relevant reference topics: 
+                <a href="../reference/views/routingView.xhtml">Routing 
+                Service View</a>.
+        </div>
+    </div>
+    
+    <div class="docScreenShot">
+        <img src="../images/routingService_resourcesChartOnly.png" />
+    </div>
+    
+    <div class="docSectionContent">
+        Routing Service also provides resource consumption data, Admin 
+        Console displays this information in both a table and a chart.
+        <br />
+        <br />
+        <div class="docSectionFootNotes">
+            Relevant reference topics: 
+                <a href="../reference/views/routingView.xhtml">Routing 
+                Service View</a>.
+        </div>
+    </div>
+    
+    <br />
+    <div class="docScreenShot">
+        <img src="../images/hostView_resourcesChartOnly.png" />
+    </div>
+    
+    <div class="docSectionContent">
+        Routing Service also provides resource consumption data for the host
+        that it runs on, Admin Console displays this information in both in a 
+        chart.
+        <br />
+        <br />
+        <div class="docSectionFootNotes">
+            Relevant reference topics: 
+                <a href="../reference/views/hostView.xhtml">Host View</a>.
+        </div>
+    </div>
+
+	<br />
+	<br />
+	<div class="docSectionTitle">
+		<a name="distributedLoggingOverview">Distributed Logging Display</a>
+	</div>
+	<div class="docScreenShot">
+		<img src="../images/distributedLog.png" />
+	</div>
+	<div class="docSectionContent">
+		Log messages contain crucial information for each component in the
+		distributed system. Admin Console provides a Distributed Log view to
+		display log messages from any RTI services or processes that use
+		RTI Distributed Logger. You can also customize the verbosity of the
+		log messages through the Log.
+		<br />
+		<br />
+		<div class="docSectionFootNotes">
+			Relevant reference topics: 
+			<a href="../reference/views/processView.xhtml#distlog">
+			Process View</a>
+		</div>
+	</div>
+
+	<br />
+	<br />
+	<div class="docSectionTitle">
+		<a name="retriveConfigOverview">Retrieving Service Configuration</a>
+	</div>
+	<div class="docScreenShot">
+		<img src="../images/xmlEditor.png" />
+	</div>
+	<div class="docSectionContent">
+		For supported RTI services, Admin Console can retrieve the current
+		configuration remotely at run time.
+		<br />
+		<br />
+		<div class="docSectionFootNotes">
+			Relevant reference topics:
+			<a href="../reference/views/routingView.xhtml">Routing Service 
+			View</a>
+		</div>
+	</div>
+
+	<br />
+	<br />
+	<div class="docSectionTitle">
+		<a name="updateConfigOverview">Updating Service Configuration</a>
+	</div>
+	<div class="docSectionContent">
+		In addition to viewing the latest configuration, you can also modify
+		the configuration and update the service remotely using the Apply
+		button <img style="vertical-align: bottom"
+			src="../../branding/icons/file_send.png" />. <br />
+		<br />
+		<div class="docSectionFootNotes">
+            Relevant reference topics:
+            <a href="../reference/views/routingView.xhtml">Routing Service 
+            View</a>
+		</div>
+	</div>
+
+	<br />
+	<br />
+	<div class="docSectionTitle">
+		<a name="customViewLayoutOverview">Customizable View Layout</a>
+	</div>
+
+	<br />
+	<div class="docSectionContent">Admin Console uses the Eclipse
+		Framework and provides very customizable layouts for all the views.
+		You can easily rearrange the views by opening and closing views as
+		needed, and dragging and docking tabs to various windows. You can also
+		easily maximize a particular tab by simply double-clicking on it.
+    </div>
+
+</body>
+</html>

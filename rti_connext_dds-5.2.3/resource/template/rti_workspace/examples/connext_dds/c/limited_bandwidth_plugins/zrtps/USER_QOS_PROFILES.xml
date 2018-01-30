@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!-- 
+(c) Copyright, Real-Time Innovations, 2012-2016.
+All rights reserved.
+No duplications, whole or partial, manual or electronic, may be made
+without express written permission.  Any such copies, or
+revisions thereof, must display this notice unaltered.
+This code contains trade secrets of Real-Time Innovations, Inc.
+
+Description
+XML QoS Profile for HelloWorld
+
+The QoS configuration of the DDS entities in the generated example is 
+loaded from this file.
+
+This file is used only when it is in the current working directory
+or when the enviroment variable
+NDDS_QOS_PROFILES is defined and points to this file.
+
+For more information about XML QoS Profiles see Chapter 15 in the 
+RTI Data Distribution Service user manual.
+-->
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_dds_qos_profiles.xsd"
+    version="5.2.3">
+    <!-- QoS Library containing the QoS profile used in the generated example.
+
+    A QoS library is a named set of QoS profiles.
+    -->
+    <qos_library name="HelloWorld_Library">
+
+        <!-- QoS profile used to configure reliable communication between the DataWriter 
+        and DataReader created in the example code.
+
+        A QoS profile groups a set of related QoS.
+        -->
+        <qos_profile name="HelloWorld_Profile" is_default_qos="true">
+            <!-- QoS used to configure the data writer created in the example code -->                
+            <participant_qos>
+                <!-- Deactivate all built-in transports -->
+                <transport_builtin>
+                    <mask>MASK_NONE</mask>
+                </transport_builtin>
+                <property>
+                    <value>
+                        <element>
+                            <name>dds.transport.load_plugins</name>
+                            <value>dds.transport.zrtps</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.zrtps.library</name>
+                            <value>rtizrtps</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.zrtps.create_function</name>
+                            <value>ZRTPS_Transport_create_plugin</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.zrtps.aliases</name>
+                            <value>zrtps.udpv4</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.zrtps.subtransport</name>
+                            <value>UDPv4</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.zrtps.compression_library</name>
+                            <value>AUTOMATIC_COMPRESSION</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.zrtps.compression_level</name>
+                            <value>9</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.zrtps.UDPv4.multicast_enabled</name>
+                            <value>1</value>
+                        </element>
+						<element>
+                            <name>dds.transport.zrtps.verbosity</name>
+                            <value>0</value>
+						</element>
+                </value>
+            </property>
+        </participant_qos>
+    </qos_profile>
+</qos_library>
+</dds>

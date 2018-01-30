@@ -1,0 +1,52 @@
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_record.xsd">
+
+    <recorder name="remote_shell">
+
+        <!-- Specify where to store the recorded data. -->
+        <recorder_database>
+            <database_name> remote_shell.dat </database_name>
+        </recorder_database>
+
+        <domain name="domain0">
+            <domain_id> 0 </domain_id>
+            <deserialize_mode>RTIDDS_DESERIALIZEMODE_NEVER</deserialize_mode>
+        </domain>
+
+	<domain name="domain1">
+            <domain_id> 1 </domain_id>
+            <deserialize_mode>RTIDDS_DESERIALIZEMODE_NEVER</deserialize_mode>
+        </domain>
+
+	<remote_access>
+		<enabled> true </enabled>
+		<remote_access_domain> domain1 </remote_access_domain>
+	</remote_access>
+
+        <topic_group name="Square">
+	    <topics>
+            	<topic_expr> Square </topic_expr>
+	    </topics>
+            <field_expr> * </field_expr>
+        </topic_group>
+
+	<topic_group name="Triangle">
+	    <topics>
+            	<topic_expr> Triangle </topic_expr>
+	    </topics>
+            <field_expr> * </field_expr>
+        </topic_group>
+
+        <record_group name="SquareTriangle">
+            <!-- specify which domains to record from -->
+            <domain_ref>
+                <element> domain0 </element>
+            </domain_ref>
+
+            <!-- specify which topics to record -->
+            <topic_ref>
+                <element> Square </element>
+		<element> Triangle </element>
+            </topic_ref>
+        </record_group>
+    </recorder>
+</dds>

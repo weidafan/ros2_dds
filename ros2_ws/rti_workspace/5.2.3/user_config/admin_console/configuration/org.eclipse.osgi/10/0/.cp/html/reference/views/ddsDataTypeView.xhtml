@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>DDS Data Type View</title>
+<link rel="stylesheet" href="../../acdocs.css" type="text/css" />
+</head>
+
+<body>
+	<div class="centerContent">
+		<div class="docTopBanner" />
+	</div>
+
+	<div class="docPageTitle">DDS Data Type View</div>
+
+	<div class="docScreenShot">
+		<img src="../../images/ddsDataTypeView_typeTree.png" align="middle" />
+	</div>
+	<p>The DDS Data TypeView with the Type tree tab showing.</p>
+
+	<div class="docScreenShot">
+		<img src="../../images/ddsDataTypeView_equivalentIdl.png"
+			align="middle" />
+	</div>
+	<p>The DDS Data TypeView with the Equivalent IDL tab showing.</p>
+
+	<div class="docSectionTitle">
+		<a name="DDSDataTypeViewOverview">Overview</a>
+	</div>
+
+	<div class="docSectionContent">The DDS Data Type View presents
+		hierarchical and textual (IDL) views of a data type used by a
+		DataWriter or DataReader.</div>
+
+	<div class="docSectionContent">
+		<ul>
+			<li><strong>Name</strong> - The name of the type or field
+				represented by this row. If the row is a field and the field is part
+				of the type's key, then it will have the key icon <img
+				src="../../../branding/icons/key.png" /> as well as having the text
+				&quot;(key)&quot; following the name.</li>
+
+			<li><strong>Type / Ordinal</strong> - The field's type or
+				enumerate's ordinal.</li>
+
+			<li><strong>Extensibility</strong> - Indicates the field's
+				extensibility status. Note that not every row will have this
+				indication, for example, enumerates inside an enumeration will have
+				no indication here.</li>
+
+			<li><strong>Optional?</strong> - Indicates if the field is
+				optional (true), not optional (false) or blank if this concept is
+				not applicable for the row.</li>
+
+			<li><strong>Min Sample Size</strong> - The minimum size that
+				samples of this type can be when serialized for distribution. Note
+				that this size does not account for protocol overhead.</li>
+
+			<li><strong>Max Sample Size</strong> - The maximum size that
+				samples of this type can be when serialized for distribution. Note
+				that this size does not account for protocol overhead.</li>
+
+			<li><strong>Typecode Size</strong> - The serialized size of the
+				typecode. Note that this is not the size for samples, those are
+				explained above in the Min/Max Sample Sizes. Rather, this is the
+				size needed to transfer information about the data type itself.</li>
+
+			<li><strong>Union Labels</strong> - If the field is part of a
+				union, then the associated labels will be shown here.</li>
+		</ul>
+	</div>
+
+	<div class="docSectionContent">The equivalent IDL view is a
+		read-only textual representation of the data type. The text in this
+		view can be exported to a file or selected and copied to the clipboard
+		through the standard OS shortcuts or through the right-click menu.</div>
+    <div class="docSectionContent"></div>
+
+	<div class="docSectionTitle">Toolbar</div>
+	<div class="docSectionContent">
+		The toolbar in this view contains controls to:
+		<ul>
+			<li><img
+				src="PLUGINS_ROOT/com.rti.tools.console.utils/icons/exportToFile.png" />
+				Export IDL to a file.</li>
+			<li><img src="../../../branding/icons/tree_expand_all.gif" />
+				Expand all tree nodes.</li>
+			<li><img src="../../../branding/icons/tree_collapse_all.gif" />
+				Collapse all tree nodes.</li>
+			<li><img
+				src="PLUGINS_ROOT/com.rti.tools.console.utils/icons/connected.png" />
+				Link with selection - Toggling this button will link/unlink this
+				view to/from displaying information about the current selection. One
+				way to use this feature is to select something and then unlink this
+				view from the selection. Then, a new instance of this view can be
+				created and a populated with a new selection. Data can then be
+				compared between the first and second selection.</li>
+			<li>Minimize and maximize the view.</li>
+		</ul>
+	</div>
+
+</body>
+</html>

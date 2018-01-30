@@ -1,0 +1,42 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/rclcpp.dir/src/rclcpp/any_executable.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/callback_group.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/client.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/context.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/contexts/default_context.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/event.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/exceptions.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/executor.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/executors.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/expand_topic_or_service_name.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/executors/multi_threaded_executor.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/executors/single_threaded_executor.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/graph_listener.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/intra_process_manager.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/intra_process_manager_impl.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/memory_strategies.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/memory_strategy.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/node.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/node_interfaces/node_base.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/node_interfaces/node_graph.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/node_interfaces/node_parameters.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/node_interfaces/node_services.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/node_interfaces/node_timers.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/node_interfaces/node_topics.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/parameter.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/parameter_client.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/parameter_service.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/publisher.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/service.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/subscription.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/timer.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/type_support.cpp.o"
+  "CMakeFiles/rclcpp.dir/src/rclcpp/utilities.cpp.o"
+  "librclcpp.pdb"
+  "librclcpp.so"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/rclcpp.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>DDS QoS View</title>
+<link rel="stylesheet" href="../../acdocs.css" type="text/css" />
+</head>
+
+<body>
+	<div class="centerContent">
+		<div class="docTopBanner" />
+	</div>
+
+	<div class="docPageTitle">DDS QoS View</div>
+
+	<div class="docScreenShot">
+		<img src="../../images/ddsQosView.png" align="middle" />
+	</div>
+
+	<div class="docSectionTitle">
+		<a name="DDSQoSViewOverview">Overview</a>
+	</div>
+
+	<div class="docSectionContent">The DDS quality of service (QoS)
+		view presents hierarchical view of a the QoS settings for the selected
+		entity (currently this view supports Domain Participants, DataWriters,
+		and DataReaders). Most QoS entries and some values are hyperlinks. Click
+		on these hyperlinks to get more information. Note that these hyperlinks
+		go to websites on the internet not local files so this feature is not
+		available unless there is an active internet connection.</div>
+
+	<div class="docSectionContent">
+		<ul>
+			<li><strong>QoS Name</strong> - The name of the QoS field
+				represented by this row. If the row is highlighted as a link,
+				clicking on it will open a web page with a more detailed description
+				of the QoS (Note: this feature requires a connection to the internet
+				as the web pages are retrieved from RTI's Community Portal).</li>
+
+			<li><strong>Value</strong> - The current value of the QoS
+				represented by the row. Note that some QoS are mutable at runtime.
+				If a process changes mutable QoS values, this view will
+				automatically refresh and display the new QoS values.</li>
+		</ul>
+	</div>
+
+	<div class="docSectionTitle">Toolbar</div>
+	<div class="docSectionContent">
+		The toolbar in this view contains controls to:
+		<ul>
+			<li><img src="../../../branding/icons/tree_expand_all.gif" />
+				Expand all tree nodes.</li>
+
+			<li><img src="../../../branding/icons/tree_collapse_all.gif" />
+				Collapse all tree nodes.</li>
+
+			<li><img
+				src="PLUGINS_ROOT/com.rti.tools.console.utils/icons/connected.png" />
+				Link with selection - Toggling this button will link/unlink this
+				view to/from displaying information about the current selection. One
+				way to use this feature is to select something and then unlink this
+				view from the selection. Then, a new instance of this view can be
+				created and a populated with a new selection. Data can then be
+				compared between the first and second selection.</li>
+
+			<li>Minimize and maximize the view.</li>
+		</ul>
+	</div>
+
+</body>
+</html>

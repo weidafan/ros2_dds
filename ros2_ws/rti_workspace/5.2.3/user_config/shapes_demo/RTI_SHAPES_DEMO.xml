@@ -1,0 +1,10 @@
+<dds>
+   <rti_shapes_demo>
+     <domainId>0</domainId>
+     <welcomeScreen>false</welcomeScreen>
+     <popupConfig>false</popupConfig>
+       <qos><file load="true">/home/aust/rti_connext_dds-5.2.3/resource/app/bin/x64Linux2.6gcc4.1.1/../../../../resource/xml/RTI_SHAPES_DEMO_QOS_PROFILES.xml</file>
+<file load="true">/home/aust/rti_workspace/5.2.3/user_config/shapes_demo/USER_RTI_SHAPES_DEMO_QOS_PROFILES.xml</file>
+</qos>
+   </rti_shapes_demo>
+ </dds>

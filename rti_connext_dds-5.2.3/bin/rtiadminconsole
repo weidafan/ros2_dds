@@ -1,0 +1,120 @@
+#!/bin/sh
+#########################################################################
+# (c) 2005-2014 Copyright, Real-Time Innovations. All rights reserved.  #
+# No duplications, whole or partial, manual or electronic, may be made  #
+# without express written permission.  Any such copies, or              #
+# revisions thereof, must display this notice unaltered.                #
+# This code contains trade secrets of Real-Time Innovations, Inc.       #
+#########################################################################
+
+script_location=`cd "\`dirname "$0"\`"; pwd`
+script_version=5.2.3
+needs_shared_libraries=true
+
+# The following four strings will be replace when executing the scrtips/build.xml
+STARTUP_JAR=org.eclipse.equinox.launcher_1.3.0.v20140415-2008.jar
+LAUNCHER_I86LINUX_LIBDIR=org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20150204-1316
+LAUNCHER_X64LINUX_LIBDIR=org.eclipse.equinox.launcher.gtk.linux.x86_64_1.1.200.v20150204-1316
+LAUNCHER_X64DARWIN_LIBDIR=org.eclipse.equinox.launcher.cocoa.macosx.x86_64_1.1.200.v20150204-1316
+
+app_name="admin_console"
+executable_name="RTI_AdminConsole"
+os=`uname -s`
+
+# Running on Linux
+if [ "$os" = "Linux" ]
+then
+    script_dir=$script_location
+    rticommon_script_dir="$script_dir/../resource/scripts"
+    . "$rticommon_script_dir/rticommon.sh"
+
+    if [ "$jre_platform" = "x64Linux" ]
+    then
+        launcher_lib_dir=$LAUNCHER_X64LINUX_LIBDIR
+    else
+        launcher_lib_dir=$LAUNCHER_I86LINUX_LIBDIR
+    fi
+
+    startup_jar="$eclipse_dir/plugins/$STARTUP_JAR"
+    launcher_lib="$eclipse_dir/plugins/$launcher_lib_dir"
+
+    if [ "x$launcher_lib_dir" = "x" ] ||
+	[ ! -f "$startup_jar" ] ||
+	[ ! -d "$launcher_lib" ]; then
+        echo "Required file or folder cannot be found. Please, contact support@rti.com."
+        exit
+    fi
+
+    path_exe="$bin_dir/$platform_name/$executable_name"
+    shared_config="$app_support_dir/$app_name/$jre_platform/configuration"
+
+# Running from within RTI_AdminConsole.app on Darwin
+elif [ "$os" = "Darwin" ] && [ -d "$script_location/../MacOS" ]
+then
+    script_dir=$script_location/../../../../../..
+    rticommon_script_dir="$script_dir/../resource/scripts"
+    . "$rticommon_script_dir/rticommon.sh"
+
+    startup_jar="$eclipse_dir/plugins/$STARTUP_JAR"
+    launcher_lib="$eclipse_dir/plugins/$LAUNCHER_X64DARWIN_LIBDIR"
+
+    if [ ! -d "$app_lib_dir/$platform_name" ] ||
+        [ ! -f "$startup_jar" ] ||
+        [ ! -d "$launcher_lib" ]; then
+        echo "Required file or folder cannot be found. Please, contact support@rti.com."
+        exit
+    fi
+
+    path_exe="$script_location/../../RTI_AdminConsole/Contents/MacOS/RTI_AdminConsole"
+    shared_config="$app_support_dir/$app_name/$jre_platform/configuration"
+    arch_specific_options="-noSplash"
+
+# Running from bin/rtiadminconsole on Darwin
+elif [ "$os" = "Darwin" ]
+then
+    script_dir=$script_location
+    run_open=true
+
+    rticommon_script_dir="$script_dir/../resource/scripts"
+    . "$rticommon_script_dir/rticommon.sh"
+else
+    echo "Platform $os not supported. Please, contact support@rti.com."
+    exit
+fi
+
+if [ "$os" = "Darwin" ] 
+then
+    # check if Admin Console is already running
+    ac_pids=`pgrep $executable_name`
+    if [ "x$ac_pids" != "x" ]
+    then
+        # admin console is already running, activate the existing one
+        touch $home_user_config_dir/$app_name/.activate
+        exit
+        
+    else
+        # remove the lock file if it exists (to avoid a situation where the 
+        # application won't start because it had been killed the last time it 
+        # was run)
+        rm -f $home_user_config_dir/$app_name/.lock
+    fi
+fi
+
+# do not use the SWT GTK3 version as our tree tables do not (currently) display
+# correctly with it
+export SWT_GTK3=0
+
+# Run RTI Admin Console
+if [ "x$run_open" = "xtrue" ]
+then
+    open -g "$bin_dir/$platform_name/$executable_name.app"
+else
+    "$path_exe" -startup "$startup_jar" \
+    --launcher.library "$launcher_lib" \
+    -install "$eclipse_dir" \
+    -configuration "$home_user_config_dir/$app_name/$jreArch/configuration" \
+    -data "$home_user_config_dir/$app_name/$jreArch" \
+    -vm "$JREHOME/bin/java" $arch_specific_options \
+    -vmargs -Dosgi.configuration.cascaded=true \
+    -Dosgi.sharedConfiguration.area="$shared_config" &
+fi

@@ -1,0 +1,36 @@
+file(REMOVE_RECURSE
+  "rosidl_typesupport_introspection_c/diagnostic_msgs/msg/diagnostic_array__rosidl_typesupport_introspection_c.h"
+  "rosidl_typesupport_introspection_c/diagnostic_msgs/msg/diagnostic_status__rosidl_typesupport_introspection_c.h"
+  "rosidl_typesupport_introspection_c/diagnostic_msgs/msg/key_value__rosidl_typesupport_introspection_c.h"
+  "rosidl_typesupport_introspection_c/diagnostic_msgs/msg/diagnostic_array__type_support.c"
+  "rosidl_typesupport_introspection_c/diagnostic_msgs/msg/diagnostic_status__type_support.c"
+  "rosidl_typesupport_introspection_c/diagnostic_msgs/msg/key_value__type_support.c"
+  "rosidl_typesupport_introspection_c/diagnostic_msgs/srv/add_diagnostics__rosidl_typesupport_introspection_c.h"
+  "rosidl_typesupport_introspection_c/diagnostic_msgs/srv/self_test__rosidl_typesupport_introspection_c.h"
+  "rosidl_typesupport_introspection_c/diagnostic_msgs/srv/add_diagnostics__request__rosidl_typesupport_introspection_c.h"
+  "rosidl_typesupport_introspection_c/diagnostic_msgs/srv/add_diagnostics__response__rosidl_typesupport_introspection_c.h"
+  "rosidl_typesupport_introspection_c/diagnostic_msgs/srv/self_test__request__rosidl_typesupport_introspection_c.h"
+  "rosidl_typesupport_introspection_c/diagnostic_msgs/srv/self_test__response__rosidl_typesupport_introspection_c.h"
+  "rosidl_typesupport_introspection_c/diagnostic_msgs/srv/add_diagnostics__type_support.c"
+  "rosidl_typesupport_introspection_c/diagnostic_msgs/srv/self_test__type_support.c"
+  "rosidl_typesupport_introspection_c/diagnostic_msgs/srv/add_diagnostics__request__type_support.c"
+  "rosidl_typesupport_introspection_c/diagnostic_msgs/srv/add_diagnostics__response__type_support.c"
+  "rosidl_typesupport_introspection_c/diagnostic_msgs/srv/self_test__request__type_support.c"
+  "rosidl_typesupport_introspection_c/diagnostic_msgs/srv/self_test__response__type_support.c"
+  "CMakeFiles/diagnostic_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/diagnostic_msgs/msg/diagnostic_array__type_support.c.o"
+  "CMakeFiles/diagnostic_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/diagnostic_msgs/msg/diagnostic_status__type_support.c.o"
+  "CMakeFiles/diagnostic_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/diagnostic_msgs/msg/key_value__type_support.c.o"
+  "CMakeFiles/diagnostic_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/diagnostic_msgs/srv/add_diagnostics__type_support.c.o"
+  "CMakeFiles/diagnostic_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/diagnostic_msgs/srv/self_test__type_support.c.o"
+  "CMakeFiles/diagnostic_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/diagnostic_msgs/srv/add_diagnostics__request__type_support.c.o"
+  "CMakeFiles/diagnostic_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/diagnostic_msgs/srv/add_diagnostics__response__type_support.c.o"
+  "CMakeFiles/diagnostic_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/diagnostic_msgs/srv/self_test__request__type_support.c.o"
+  "CMakeFiles/diagnostic_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/diagnostic_msgs/srv/self_test__response__type_support.c.o"
+  "libdiagnostic_msgs__rosidl_typesupport_introspection_c.pdb"
+  "libdiagnostic_msgs__rosidl_typesupport_introspection_c.so"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang C)
+  include(CMakeFiles/diagnostic_msgs__rosidl_typesupport_introspection_c.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<!-- 
+(c) Copyright, Real-Time Innovations, 2012-2016.
+All rights reserved.
+No duplications, whole or partial, manual or electronic, may be made
+without express written permission.  Any such copies, or
+revisions thereof, must display this notice unaltered.
+This code contains trade secrets of Real-Time Innovations, Inc.
+
+Description
+XML QoS Profile for LBEDiscoveryPluginExample
+
+The QoS configuration of the DDS entities in the generated example is 
+loaded from this file.
+
+This file is used only when it is in the current working directory
+or when the enviroment variable
+NDDS_QOS_PROFILES is defined and points to this file.
+
+For more information about XML QoS Profiles see Chapter 15 in the 
+RTI Data Distribution Service user manual.
+-->
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_dds_qos_profiles.xsd"
+    version="5.2.3">
+    <!-- QoS Library containing the QoS profile used in the generated example.
+
+    A QoS library is a named set of QoS profiles.
+    -->
+    <qos_library name="LBEDiscoveryPluginExample_Library">
+
+        <!-- QoS profile used to configure reliable communication between the DataWriter 
+        and DataReader created in the example code.
+
+        A QoS profile groups a set of related QoS.
+        -->
+        <qos_profile name="LBEDiscoveryPluginExamplePublisher_Profile" is_default_qos="true">
+            <participant_qos>
+                <participant_name>
+                    <name>myParticipant2</name>
+                </participant_name>
+                <discovery_config>
+                    <builtin_discovery_plugins>SPDP</builtin_discovery_plugins>
+                    <participant_liveliness_lease_duration>
+                        <sec>1000</sec>
+                        <nanosec>DURATION_ZERO_NSEC</nanosec>
+                    </participant_liveliness_lease_duration>
+                    <participant_liveliness_assert_period>
+                        <sec>300</sec>
+                        <nanosec>DURATION_ZERO_NSEC</nanosec>
+                    </participant_liveliness_assert_period>
+                    <initial_participant_announcements>1</initial_participant_announcements>
+                    <min_initial_participant_announcement_period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </min_initial_participant_announcement_period>
+                    <max_initial_participant_announcement_period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </max_initial_participant_announcement_period>
+                </discovery_config>
+				<property>
+					<value>
+						<element>
+							<name>dds.discovery.endpoint.lbediscovery.library</name>
+							<value>rtilbedisc</value>
+						</element>
+						<element>
+							<name>dds.discovery.endpoint.lbediscovery.create_function</name>
+							<value>DDS_LBEDiscoveryPlugin_create</value>
+						</element>
+						<element>
+							<name>dds.discovery.endpoint.lbediscovery.config_file</name>
+							<value>LBEDiscoveryPluginExampleSubscriber.xml</value>
+						</element>
+						<element>
+							<name>dds.discovery.endpoint.load_plugins</name>
+							<value>dds.discovery.endpoint.lbediscovery</value>
+						</element>
+						<element>
+                            <name>dds.discovery.endpoint.lbediscovery.verbosity</name>
+                            <value>0</value>
+						</element>
+					</value>
+				</property>
+            </participant_qos>
+            <datawriter_qos>
+                <protocol>
+                    <rtps_object_id>200</rtps_object_id>
+                </protocol>
+            </datawriter_qos>
+        </qos_profile>
+
+        <qos_profile name="LBEDiscoveryPluginExampleSubscriber_Profile">
+            <participant_qos>
+                <participant_name>
+                    <name>myParticipant</name>
+                </participant_name>
+                <discovery_config>
+                    <builtin_discovery_plugins>SPDP</builtin_discovery_plugins>
+                    <participant_liveliness_lease_duration>
+                        <sec>1000</sec>
+                        <nanosec>DURATION_ZERO_NSEC</nanosec>
+                    </participant_liveliness_lease_duration>
+                    <participant_liveliness_assert_period>
+                        <sec>300</sec>
+                        <nanosec>DURATION_ZERO_NSEC</nanosec>
+                    </participant_liveliness_assert_period>
+                    <initial_participant_announcements>1</initial_participant_announcements>
+                    <min_initial_participant_announcement_period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </min_initial_participant_announcement_period>
+                    <max_initial_participant_announcement_period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </max_initial_participant_announcement_period>
+                </discovery_config>
+				<property>
+					<value>
+						<element>
+							<name>dds.discovery.endpoint.lbediscovery.library</name>
+							<value>rtilbedisc</value>
+						</element>
+						<element>
+							<name>dds.discovery.endpoint.lbediscovery.create_function</name>
+							<value>DDS_LBEDiscoveryPlugin_create</value>
+						</element>
+						<element>
+							<name>dds.discovery.endpoint.lbediscovery.config_file</name>
+							<value>LBEDiscoveryPluginExamplePublisher.xml</value>
+						</element>
+						<element>
+							<name>dds.discovery.endpoint.load_plugins</name>
+							<value>dds.discovery.endpoint.lbediscovery</value>
+						</element>
+					</value>
+				</property>
+            </participant_qos>
+            <datareader_qos>
+                <protocol>
+                    <rtps_object_id>100</rtps_object_id>
+                </protocol>
+            </datareader_qos>
+        </qos_profile>
+
+    </qos_library>
+</dds>

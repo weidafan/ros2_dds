@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+	<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+		<listEntry value="1"/>
+	</listAttribute>
+	<mapAttribute key="org.eclipse.debug.core.environmentVariables">
+		<mapEntry key="LD_LIBRARY_PATH" value="/home/build/rti/waveworks/ndds523/ndds.4.1/lib/sparcSol2.10gcc3.4.2"/>
+	</mapAttribute>
+	<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+		<listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
+		<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
+	</listAttribute>
+	<booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
+	<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.rti.hello.idl.HelloWorldSubscriber"/>
+	<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="HelloWorld Example"/>
+</launchConfiguration>

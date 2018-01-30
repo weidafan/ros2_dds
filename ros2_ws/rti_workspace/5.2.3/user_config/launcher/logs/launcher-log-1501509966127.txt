@@ -1,0 +1,12 @@
+[10:06:06] RTI Connext Launcher 5.2.3 started
+[10:06:33] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/dds_2/hello_message.idl -ppDisable -language C++ -create typefiles -create examplefiles -create makefiles -platform armv6vfphLinux3.xgcc4.7.2)
+[10:15:25] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/dds_2/hello_message.idl -ppDisable -language C++ -create typefiles -create examplefiles -create makefiles -platform x64Linux3gcc4.8.2)
+[10:21:44] Run:   rtimonitor  (/home/aust/rti_connext_dds-5.2.3/bin/rtimonitor)
+[10:26:34] Running:   rtiddsspy  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsspy -domainId 0 -qosFile /home/aust/rti_workspace/5.2.3/user_config/spy/USER_RTIDDSSPY_QOS_PROFILES.xml -qosProfile RtiddsspyTransports::UDPv4_AND_SHARED_MEMORY)
+[10:29:51] Running:   rtiddsspy  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsspy -domainId 2 -showHandle -qosFile /home/aust/rti_workspace/5.2.3/user_config/spy/USER_RTIDDSSPY_QOS_PROFILES.xml -qosProfile RtiddsspyTransports::UDPv4_AND_SHARED_MEMORY)
+[10:30:54] Running:   rtiddsping  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsping -domainId 2 -publisher -topic count -type long -qosFile /home/aust/rti_workspace/5.2.3/user_config/ping/USER_RTIDDSPING_QOS_PROFILES.xml -qosProfile RtiddspingTransports::UDPv4_AND_SHARED_MEMORY)
+[10:31:06] Running:   rtiddsping  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsping -domainId 2 -subscriber -topic count -type long -qosFile /home/aust/rti_workspace/5.2.3/user_config/ping/USER_RTIDDSPING_QOS_PROFILES.xml -qosProfile RtiddspingTransports::UDPv4_AND_SHARED_MEMORY)
+[11:00:47] Run:   rtiadminconsole  (/home/aust/rti_connext_dds-5.2.3/bin/rtiadminconsole)
+[11:06:47] Run:   rtimonitor  (/home/aust/rti_connext_dds-5.2.3/bin/rtimonitor)
+[11:06:49] Run:   rtimonitor  (/home/aust/rti_connext_dds-5.2.3/bin/rtimonitor)
+[11:28:42] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/temperature_dds/temperature.idl -ppDisable -language Java -create typefiles -create examplefiles -create makefiles -platform x64Linux3gcc4.8.2)

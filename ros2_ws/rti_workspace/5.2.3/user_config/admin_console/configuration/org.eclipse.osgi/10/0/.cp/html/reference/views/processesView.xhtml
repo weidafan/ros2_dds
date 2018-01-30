@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Processes View</title>
+<link rel="stylesheet" href="../../acdocs.css" type="text/css" />
+</head>
+
+<body>
+	<div class="centerContent">
+		<div class="docTopBanner" />
+	</div>
+
+	<div class="docPageTitle">Processes View</div>
+
+	<div class="docScreenShot">
+		<img src="../../images/processesView.png" align="middle" />
+	</div>
+
+	<div class="docSectionTitle">
+		<a name="ProcessesViewOverview">Overview</a>
+	</div>
+
+	<div class="docSectionContent">
+		The Processes view presents a tabular view of the processes in your
+		distributed system. The table includes these columns:
+
+		<ul>
+			<li><strong>Host</strong> - The host upon which the process
+				represented by this row is running. Click on this cell to open a
+				view focused on the host.</li>
+
+			<li><strong>Process ID</strong> - The ID of the process. This
+				information is specific to the platform and some embedded platforms
+				have different ways to express this id and so may not match exactly
+				what is reported here.</li>
+
+			<li><strong>Process</strong> - The process itself. Click on this
+				cell to open a detailed view of the process.</li>
+
+			<li><strong>State</strong> - The state of the process. This
+				information is only available for RTI service instances.</li>
+
+			<li><strong>Kind</strong> - The process kind. This information
+				is only available for RTI service instances.</li>
+
+			<li><strong>Version</strong> - The version of RTI Connext used
+				by the process.</li>
+
+			<li><strong>Domain(s)</strong> - A list of the DDS domains to
+				which the process is connected.</li>
+
+			<li><strong>Health</strong> - The health state of the process.
+				Clicking on this cell opens the Health View which has a more
+				detailed explanation of the reasons for the processes' health state.</li>
+
+			<li><strong>Uptime</strong> - The total amount of time that this
+				process has been running. <i>This information is currently only
+					available if an instance of Routing Service is running on the host
+					and has monitoring enabled.</i></li>
+
+			<li><strong>CPU (%)</strong> - The CPU consumed by this process
+				(in percentage). <i>This information is currently only available
+					if an instance of Routing Service is running on the host and has
+					monitoring enabled.</i></li>
+
+			<li><strong>Physical Memory</strong> - The amount of physical
+				memory consumed by this process. <i>This information is
+					currently only available if an instance of Routing Service is
+					running on the host and has monitoring enabled.</i></li>
+
+			<li><strong>Total Memory</strong> - The total amount of memory
+				consumed by this process. <i>This information is currently only
+					available if an instance of Routing Service is running on the host
+					and has monitoring enabled.</i></li>
+		</ul>
+	</div>
+
+	<div class="docSectionTitle">Toolbar</div>
+
+	<div class="docSectionContent">
+		contents to a comma-separated-value (CSV) file and buttons to minimize
+		This view's toolbar contains a button <img
+			src="PLUGINS_ROOT/com.rti.tools.console.utils/icons/exportToFile.png" />
+		to export the table and maximize the view.
+	</div>
+
+</body>
+</html>

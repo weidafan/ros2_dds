@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_routing_service.xsd">
+
+    <!-- ********************************************************************** -->
+    <!-- RTI Routing service example                                            -->
+    <!-- ********************************************************************** -->
+    <!-- This example shows how to use monitoring                               -->
+    <!-- ********************************************************************** -->
+
+
+    <routing_service name="example">
+
+        <annotation>
+            <documentation>
+                Enables publication of monitoring information
+            </documentation>
+        </annotation>
+
+        <!-- We want remote administration to be enabled -->
+        <administration>
+            <domain_id>0</domain_id>
+        </administration>
+
+        <!-- This is the Monitoring configuration for 
+             all the entities in this routing service -->
+        <monitoring>
+            <!-- The domain id where to publish the monitoring information -->
+            <domain_id>2</domain_id>
+            <!-- How often to publish it -->
+            <status_publication_period>
+                <sec>5</sec>
+                <nanosec>0</nanosec>
+            </status_publication_period>
+            <!-- How often to compute statistics -->
+            <statistics_sampling_period>
+                <sec>1</sec>
+                <nanosec>0</nanosec>
+            </statistics_sampling_period>
+        </monitoring>
+
+        <!-- This is the monitoring configuration for
+             routing service specific info, such us cpu and memory usage -->
+        <entity_monitoring>
+            <!-- We override the publication period of 5 seconds -->
+            <status_publication_period>
+                <sec>10</sec>
+                <nanosec>0</nanosec>
+            </status_publication_period>
+        </entity_monitoring>
+
+        <domain_route name="DomainRoute" enabled="true">
+
+            <entity_monitoring>
+                <!-- We override the publication period of 5 seconds -->
+                <status_publication_period>
+                    <sec>10</sec>
+                    <nanosec>0</nanosec>
+                </status_publication_period>
+            </entity_monitoring>
+
+            <participant_1>
+                <domain_id>0</domain_id>
+            </participant_1>
+            <participant_2>
+                <domain_id>1</domain_id>
+            </participant_2>
+
+            <session name="Session" enabled="true">
+
+                <!-- No <entity_monitoring> tag for the session, which means
+                     that we will use the configuration in <monitoring> above -->
+
+                <topic_route name="Squares">
+
+                    <entity_monitoring>
+                        <!-- We want to know the status of this topic route more often -->
+                        <status_publication_period>
+                            <sec>2</sec>
+                            <nanosec>0</nanosec>
+                        </status_publication_period>
+                    </entity_monitoring>
+
+                    <input participant="1">
+                        <registered_type_name>ShapeType</registered_type_name>
+                        <topic_name>Square</topic_name>
+                        <datareader_qos>
+                            <history>
+                                <kind>KEEP_ALL_HISTORY_QOS</kind>
+                            </history>
+                        </datareader_qos>
+                    </input>
+                    <output>
+                        <registered_type_name>ShapeType</registered_type_name>
+                        <topic_name>Square</topic_name>
+                    </output>
+                </topic_route>
+
+                <topic_route name="Circles">
+
+                    <input participant="1">
+                        <registered_type_name>ShapeType</registered_type_name>
+                        <topic_name>Circle</topic_name>
+                        <datareader_qos>
+                            <history>
+                                <kind>KEEP_ALL_HISTORY_QOS</kind>
+                            </history>
+                        </datareader_qos>
+                    </input>
+                    <output>
+                        <registered_type_name>ShapeType</registered_type_name>
+                        <topic_name>Circle</topic_name>
+                    </output>
+                </topic_route>
+            </session>
+
+        </domain_route>
+
+    </routing_service>
+
+</dds>

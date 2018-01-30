@@ -1,0 +1,33 @@
+#!gbuild
+macro __BSP_DIR=$__OS_DIR/pcx86
+macro __BUILD_DIR=%expand_path(.)
+macro __OS_DIR= # here your Integrity os directory 
+macro __NDDSHOME = # here your RTI NDDSHOME directory 
+primaryTarget=86_integrity.tgt
+customization=$__OS_DIR/target/integrity.bod
+[Project]
+	-bsp pcx86
+	-G
+	:sourceDir=.
+	:sourceDir=src
+	-os_dir $__OS_DIR
+	:outputDir=objs
+	-object_dir=objs
+	--discretionary_errors
+	-nounknownpragmawarn
+	--std
+	-nowantprototype
+	-tnone
+	-directive_dir=integrity
+	-DRTI_INTY
+	-integrate
+	-dynamic
+	-Iintegrity
+	:sourceDir=integrity
+	-I$__NDDSHOME/include
+	:sourceDir=$__NDDSHOME/include
+	-I$__NDDSHOME/include/ndds
+	:sourceDir=$__NDDSHOME/include/ndds
+	-L$__NDDSHOME/lib/pentiumInty11.pcx86
+RunRouting.gpj			[INTEGRITY Application]
+posix_shm_manager.gpj		[INTEGRITY Application]

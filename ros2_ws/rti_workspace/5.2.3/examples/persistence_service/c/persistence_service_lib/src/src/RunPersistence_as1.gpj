@@ -1,0 +1,14 @@
+#!gbuild
+[Program]
+	-I.
+	:sourceDir=.
+        -lnet
+        -lposix
+        -lshm_client
+        -lsocket
+        -lnddscz
+        -lnddscorez
+        -lrtipersistenceservicez
+RunPersistenceService.c
+shm_area.c
+RunPersistence_INTEGRITY.ld

@@ -1,0 +1,17 @@
+/home/aust/ros2_ws/install/share/rosidl_generator_dds_idl/environment/pythonpath.sh
+/home/aust/ros2_ws/install/lib/python3.5/site-packages/rosidl_generator_dds_idl/__init__.py
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/rosidl_generator_dds_idl
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/rosidl_generator_dds_idl
+/home/aust/ros2_ws/install/share/rosidl_generator_dds_idl/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/rosidl_generator_dds_idl/environment/path.sh
+/home/aust/ros2_ws/install/share/rosidl_generator_dds_idl/local_setup.bash
+/home/aust/ros2_ws/install/share/rosidl_generator_dds_idl/local_setup.sh
+/home/aust/ros2_ws/install/share/rosidl_generator_dds_idl/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/rosidl_generator_dds_idl
+/home/aust/ros2_ws/install/share/rosidl_generator_dds_idl/cmake/rosidl_generator_dds_idl-extras.cmake
+/home/aust/ros2_ws/install/share/rosidl_generator_dds_idl/cmake/rosidl_generator_dds_idlConfig.cmake
+/home/aust/ros2_ws/install/share/rosidl_generator_dds_idl/cmake/rosidl_generator_dds_idlConfig-version.cmake
+/home/aust/ros2_ws/install/share/rosidl_generator_dds_idl/package.xml
+/home/aust/ros2_ws/install/lib/rosidl_generator_dds_idl/rosidl_generator_dds_idl
+/home/aust/ros2_ws/install/share/rosidl_generator_dds_idl/cmake/rosidl_generate_dds_interfaces.cmake
+/home/aust/ros2_ws/install/share/rosidl_generator_dds_idl/resource/msg.idl.em

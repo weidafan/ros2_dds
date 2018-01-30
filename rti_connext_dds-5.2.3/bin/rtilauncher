@@ -1,0 +1,56 @@
+#!/bin/sh
+#########################################################################
+# (c) 2015 Copyright, Real-Time Innovations. All rights reserved.       #
+# No duplications, whole or partial, manual or electronic, may be made  #
+# without express written permission.  Any such copies, or              #
+# revisions thereof, must display this notice unaltered.                #
+# This code contains trade secrets of Real-Time Innovations, Inc.       #
+#########################################################################
+
+filename=$0
+script_dir_location=`cd "\`dirname "$filename"\`"; pwd`
+
+application_name=launcher
+needs_platform_name=false
+
+# On the Mac, the script dir is located farther down in the 
+# directory strucure
+if [ -x "$script_dir_location/../MacOS" ]
+then
+    script_dir=$script_dir_location/../../../bin
+else
+    script_dir=$script_dir_location
+fi
+
+# Call the common script to set up variables
+rticommon_script_dir="$script_dir/../resource/scripts"
+rticommon_script_name=rticommon.sh
+
+if [ -f "$script_dir/../../ndds.4.1/resource/scripts" ]
+then
+    rticommon_script_dir="$script_dir/../../ndds.4.1/resource/scripts"
+fi 
+
+. "$rticommon_script_dir/$rticommon_script_name" 
+
+# Elements that need to be added to the classpath
+rti_launcher_jar=$app_lib_java_dir/rtilauncher.jar
+
+# If the architecture is Darwin we have to run with the XstartOnFirstThread option
+if [ "$os" = "Darwin" ]; then
+    if [ "$#" -ne 1 ]; then
+        "$JREHOME/bin/java" -XstartOnFirstThread -jar "$rti_launcher_jar"
+    else
+        "$JREHOME/bin/java" -DrtipkgFile="$1" -XstartOnFirstThread -jar "$rti_launcher_jar"
+    fi
+else
+    # EDDY-238: there is a bug in SWT 4.4 when integrating with GTK3. It's
+    # affecting our views (no icons). Turning off the integration with GTK3
+    # until we know that's stable again (the bug says fixed in 4.4 M7)
+    SWT_GTK3=0; export SWT_GTK3
+    if [ "$#" -ne 1 ]; then
+        "$JREHOME/bin/java" -jar "$rti_launcher_jar"
+    else
+        "$JREHOME/bin/java" -DrtipkgFile="$1" -jar "$rti_launcher_jar"
+    fi
+fi

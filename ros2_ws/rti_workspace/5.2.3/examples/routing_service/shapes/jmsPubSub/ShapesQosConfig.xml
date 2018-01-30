@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <!-- ================================================================= -->
+    <!-- Configuration for "Shapes" Example                                -->
+    <!-- ================================================================= -->
+
+    <library name="Shapes">
+        <!-- ConnectionFactory has all default settings: -->
+        <connection_factory name="ConnectionFactory">
+            <domain_id>0</domain_id>
+            <connection_name>
+                <name>ShapesExample</name>
+            </connection_name>
+        </connection_factory>
+
+        <!--
+        Topic is configured for strict reliability and for publishers to keep
+        sent messages on behalf of late-joining subscribers.
+        -->
+        <topic name="Square">
+            <!-- Use reliable communications, not best-effort. -->
+            <reliability>
+                <kind>RELIABLE_RELIABILITY_QOS</kind>
+            </reliability>
+            <!-- Retain the last 10 messages published: -->
+            <history>
+                <kind>KEEP_LAST_HISTORY_QOS</kind>
+                <depth>10</depth>
+            </history>
+            <!--
+            Retain the historical messages for late-joining subscribers;
+            don't discard them once they've been acknowledged by current
+            subscribers.
+            -->
+            <durability>
+                <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+            </durability>
+        </topic>
+
+        <topic name="Circle">
+            <!-- Use reliable communications, not best-effort. -->
+            <reliability>
+                <kind>RELIABLE_RELIABILITY_QOS</kind>
+            </reliability>
+            <!-- Retain the last 10 messages published: -->
+            <history>
+                <kind>KEEP_LAST_HISTORY_QOS</kind>
+                <depth>10</depth>
+            </history>
+            <!--
+            Retain the historical messages for late-joining subscribers;
+            don't discard them once they've been acknowledged by current
+            subscribers.
+            -->
+            <durability>
+                <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+            </durability>
+        </topic>
+
+        <topic name="Triangle">
+            <!-- Use reliable communications, not best-effort. -->
+            <reliability>
+                <kind>RELIABLE_RELIABILITY_QOS</kind>
+            </reliability>
+            <!-- Retain the last 10 messages published: -->
+            <history>
+                <kind>KEEP_LAST_HISTORY_QOS</kind>
+                <depth>10</depth>
+            </history>
+            <!--
+            Retain the historical messages for late-joining subscribers;
+            don't discard them once they've been acknowledged by current
+            subscribers.
+            -->
+            <durability>
+                <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+            </durability>
+        </topic>
+    </library>
+</jms>

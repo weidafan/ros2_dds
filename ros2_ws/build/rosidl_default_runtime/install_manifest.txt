@@ -1,0 +1,12 @@
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/rosidl_default_runtime
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/rosidl_default_runtime
+/home/aust/ros2_ws/install/share/rosidl_default_runtime/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/rosidl_default_runtime/environment/path.sh
+/home/aust/ros2_ws/install/share/rosidl_default_runtime/local_setup.bash
+/home/aust/ros2_ws/install/share/rosidl_default_runtime/local_setup.sh
+/home/aust/ros2_ws/install/share/rosidl_default_runtime/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/rosidl_default_runtime
+/home/aust/ros2_ws/install/share/rosidl_default_runtime/cmake/ament_cmake_export_dependencies-extras.cmake
+/home/aust/ros2_ws/install/share/rosidl_default_runtime/cmake/rosidl_default_runtimeConfig.cmake
+/home/aust/ros2_ws/install/share/rosidl_default_runtime/cmake/rosidl_default_runtimeConfig-version.cmake
+/home/aust/ros2_ws/install/share/rosidl_default_runtime/package.xml

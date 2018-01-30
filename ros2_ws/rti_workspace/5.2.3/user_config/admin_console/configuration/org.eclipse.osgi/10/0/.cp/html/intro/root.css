@@ -1,0 +1,89 @@
+img {
+	width: 64px;
+	height: 64px;
+	vertical-align: middle;
+	border-style: none
+	}
+
+/* Give some space for main div.*/	
+.page-style {
+	text-align: left;
+	margin-top:100px;
+	}
+	
+/* satisfy Mozilla */	
+body > div.page-style {
+	/*padding-left:210px;*/
+	padding-left:50px;
+	}
+
+
+#content {
+	text-align:left;
+	/*padding-left:210px;*/
+	padding-left:50px;
+	padding-top:135px;
+	/*width:23em;*/
+	} 
+
+
+.myWelcomeContent {
+	width:1200px;
+	margin-left:auto;
+	margin-right:auto;
+	/*margin-top:0px;*/
+}
+
+.leftBanner {
+  background-color:yellow;
+  background-image:url("./rti_left_banner.jpg"); 
+  background-repeat: no-repeat;  
+  width: 163px;
+  height: 314px;  
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.centerContent {
+  /* background-color: silver;*/
+  /*margin-top: 20px;*/  
+  margin-left:auto;
+  margin-right:auto;
+  width:1200px;
+}
+
+.topBanner {
+  /*background-image:url("./Admin_console_banner.jpg");*/
+  background-image:url("./rti-logounit.gif");
+  background-repeat: no-repeat;
+  width:362px;
+  height:55px;
+  /*margin-top:20px;*/
+  margin-bottom:20px;
+  margin-left:100px;
+  margin-right:auto;
+}
+
+.textLabel {
+  font-weight:bold ;
+  color:rgb(0,105,170);
+}
+
+.textIntro {  
+  color:rgb(0,105,170);
+  font-size: large;
+  margin-top:40px;
+  padding-left:100px;
+  
+}
+
+
+.linkBoxLeft {
+	/*background-color: grey;*/
+	margin-left:auto;
+  margin-right:auto;
+}
+
+
+		
+

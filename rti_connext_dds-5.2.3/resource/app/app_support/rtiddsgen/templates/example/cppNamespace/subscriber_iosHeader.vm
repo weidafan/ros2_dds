@@ -1,0 +1,23 @@
+##/* $Id$
+##
+##   (c) Copyright, Real-Time Innovations, Inc. 2015.  All rights reserved.
+##   No duplications, whole or partial, manual or electronic, may be made
+##   without prior written permission.  Any such copies, or
+##   revisions thereof, must display this notice unaltered.
+##   This code contains trade secrets of Real-Time Innovations, Inc.
+##
+##modification history:
+##---------------------
+##2.2.3,23sep15,djs created 
+##========================================================================*/*#
+${envMap.POUND_CHAR}include "ndds/ndds_cpp.h"
+${envMap.POUND_CHAR}include "${envMap.idlFileName}.h"
+${envMap.POUND_CHAR}include "${envMap.idlFileName}Support.h"
+
+${envMap.POUND_CHAR}include "ndds/ndds_namespace_cpp.h"
+
+using namespace DDS;
+
+extern "C" int subscriber_shutdown(
+    DomainParticipant *participant);
+extern "C" int subscriber_main(int domainId, int sample_count);

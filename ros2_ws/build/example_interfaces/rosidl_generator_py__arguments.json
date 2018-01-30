@@ -1,0 +1,21 @@
+{
+  "package_name": "example_interfaces",
+  "output_dir": "/home/aust/ros2_ws/build/example_interfaces/rosidl_generator_py/example_interfaces",
+  "template_dir": "/home/aust/ros2_ws/install/share/rosidl_generator_py/cmake/../resource",
+  "ros_interface_files": [
+    "/home/aust/ros2_ws/src/ros2/example_interfaces/srv/AddTwoInts.srv",
+    "/home/aust/ros2_ws/build/example_interfaces/srv/AddTwoInts_Request.msg",
+    "/home/aust/ros2_ws/build/example_interfaces/srv/AddTwoInts_Response.msg"
+  ],
+  "target_dependencies": [
+    "/home/aust/ros2_ws/install/share/rosidl_generator_py/cmake/../../../lib/rosidl_generator_py/rosidl_generator_py",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_py/cmake/../../../lib/python3.5/site-packages/rosidl_generator_py/__init__.py",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_py/cmake/../resource/_msg_support.c.em",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_py/cmake/../resource/_msg_support.entry_point.c.em",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_py/cmake/../resource/_msg.py.em",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_py/cmake/../resource/_srv.py.em",
+    "/home/aust/ros2_ws/src/ros2/example_interfaces/srv/AddTwoInts.srv",
+    "/home/aust/ros2_ws/build/example_interfaces/srv/AddTwoInts_Request.msg",
+    "/home/aust/ros2_ws/build/example_interfaces/srv/AddTwoInts_Response.msg"
+  ]
+}

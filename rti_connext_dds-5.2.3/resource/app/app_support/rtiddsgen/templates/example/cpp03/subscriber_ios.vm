@@ -1,0 +1,72 @@
+##/* $Id$
+##
+##   (c) Copyright, Real-Time Innovations, Inc. 2015.  All rights reserved.
+##   No duplications, whole or partial, manual or electronic, may be made
+##   without prior written permission.  Any such copies, or
+##   revisions thereof, must display this notice unaltered.
+##   This code contains trade secrets of Real-Time Innovations, Inc.
+##
+##modification history:
+##---------------------
+##2.2.3,23sep15,djs created 
+##========================================================================*/*#
+${envMap.POUND_CHAR}include "${envMap.idlFileName}_subscriber.hpp"
+
+
+DDS_Entities::DDS_Entities() {
+    participant = NULL;
+    reader = NULL;
+}
+
+DDS_Entities::~DDS_Entities() {
+    if (listener != NULL) {
+        delete(listener);
+    }
+    if (reader != NULL) {
+        delete(reader);
+    }
+    reader = NULL;
+    if (subscriber != NULL) {
+        delete(subscriber);
+    }
+    subscriber = NULL;
+    if (topic != NULL) {
+        delete(topic);
+    }
+    topic = NULL;
+    if (participant != NULL) {
+        delete(participant);
+    }
+    participant = NULL;
+}
+
+void DDS_Entities::dds_subscribe(int domain_id)
+{
+    // Create a DomainParticipant with default Qos
+    participant = new dds::domain::DomainParticipant(domain_id);
+
+    // Create a Topic -- and automatically register the type
+    topic = new dds::topic::Topic<${constructMap.nativeFQName}> (*participant, "Example ${constructMap.nativeCFQName}");
+
+    // Create a Subscriber
+    subscriber = new dds::sub::Subscriber(*participant);
+    
+    // Create a Listener
+    listener = new ${constructMap.nativeFQName}ReaderListener;
+    
+    // Create a DataReader with default Qos
+    reader = new dds::sub::DataReader<${constructMap.nativeFQName}> (
+        *subscriber,
+        *topic,
+        dds::core::QosProvider::Default().datareader_qos(),
+        listener,
+        dds::core::status::StatusMask::data_available());
+
+}
+
+void DDS_Entities::subscriber_shutdown() {
+    // Unset the listener to allow the reader destruction
+    // (rti::core::ListenerBinder can do this automatically)
+    reader->listener(NULL, dds::core::status::StatusMask::none());  
+}
+

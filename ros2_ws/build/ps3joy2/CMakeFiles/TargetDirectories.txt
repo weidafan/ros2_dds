@@ -1,0 +1,8 @@
+/home/aust/ros2_ws/build/ps3joy2/CMakeFiles/install.dir
+/home/aust/ros2_ws/build/ps3joy2/CMakeFiles/list_install_components.dir
+/home/aust/ros2_ws/build/ps3joy2/CMakeFiles/rebuild_cache.dir
+/home/aust/ros2_ws/build/ps3joy2/CMakeFiles/uninstall.dir
+/home/aust/ros2_ws/build/ps3joy2/CMakeFiles/edit_cache.dir
+/home/aust/ros2_ws/build/ps3joy2/CMakeFiles/sixpair.dir
+/home/aust/ros2_ws/build/ps3joy2/CMakeFiles/install/strip.dir
+/home/aust/ros2_ws/build/ps3joy2/CMakeFiles/install/local.dir

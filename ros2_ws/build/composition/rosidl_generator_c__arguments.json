@@ -1,0 +1,23 @@
+{
+  "package_name": "composition",
+  "output_dir": "/home/aust/ros2_ws/build/composition/rosidl_generator_c/composition",
+  "template_dir": "/home/aust/ros2_ws/install/share/rosidl_generator_c/cmake/../resource",
+  "ros_interface_files": [
+    "/home/aust/ros2_ws/src/ros2/demos/composition/srv/LoadNode.srv",
+    "/home/aust/ros2_ws/build/composition/srv/LoadNode_Request.msg",
+    "/home/aust/ros2_ws/build/composition/srv/LoadNode_Response.msg"
+  ],
+  "target_dependencies": [
+    "/home/aust/ros2_ws/install/share/rosidl_generator_c/cmake/../../../lib/rosidl_generator_c/rosidl_generator_c",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_c/cmake/../../../lib/python3.5/site-packages/rosidl_generator_c/__init__.py",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_c/cmake/../resource/msg.h.em",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_c/cmake/../resource/msg__functions.c.em",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_c/cmake/../resource/msg__functions.h.em",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_c/cmake/../resource/msg__struct.h.em",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_c/cmake/../resource/msg__type_support.h.em",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_c/cmake/../resource/srv.h.em",
+    "/home/aust/ros2_ws/src/ros2/demos/composition/srv/LoadNode.srv",
+    "/home/aust/ros2_ws/build/composition/srv/LoadNode_Request.msg",
+    "/home/aust/ros2_ws/build/composition/srv/LoadNode_Response.msg"
+  ]
+}

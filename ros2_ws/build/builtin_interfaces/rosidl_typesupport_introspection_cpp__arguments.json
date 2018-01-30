@@ -1,0 +1,19 @@
+{
+  "package_name": "builtin_interfaces",
+  "output_dir": "/home/aust/ros2_ws/build/builtin_interfaces/rosidl_typesupport_introspection_cpp/builtin_interfaces",
+  "template_dir": "/home/aust/ros2_ws/install/share/rosidl_typesupport_introspection_cpp/resource",
+  "ros_interface_files": [
+    "/home/aust/ros2_ws/src/ros2/common_interfaces/builtin_interfaces/msg/Duration.msg",
+    "/home/aust/ros2_ws/src/ros2/common_interfaces/builtin_interfaces/msg/Time.msg"
+  ],
+  "target_dependencies": [
+    "/home/aust/ros2_ws/install/lib/rosidl_typesupport_introspection_cpp/rosidl_typesupport_introspection_cpp",
+    "/home/aust/ros2_ws/install/lib/python3.5/site-packages/rosidl_typesupport_introspection_cpp/__init__.py",
+    "/home/aust/ros2_ws/install/share/rosidl_typesupport_introspection_cpp/resource/msg__rosidl_typesupport_introspection_cpp.hpp.em",
+    "/home/aust/ros2_ws/install/share/rosidl_typesupport_introspection_cpp/resource/msg__type_support.cpp.em",
+    "/home/aust/ros2_ws/install/share/rosidl_typesupport_introspection_cpp/resource/srv__rosidl_typesupport_introspection_cpp.hpp.em",
+    "/home/aust/ros2_ws/install/share/rosidl_typesupport_introspection_cpp/resource/srv__type_support.cpp.em",
+    "/home/aust/ros2_ws/src/ros2/common_interfaces/builtin_interfaces/msg/Duration.msg",
+    "/home/aust/ros2_ws/src/ros2/common_interfaces/builtin_interfaces/msg/Time.msg"
+  ]
+}

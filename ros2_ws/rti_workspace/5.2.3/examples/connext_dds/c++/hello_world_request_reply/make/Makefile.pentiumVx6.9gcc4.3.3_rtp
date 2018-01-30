@@ -1,0 +1,63 @@
+###############################################################################
+##         (c) Copyright, Real-Time Innovations, All rights reserved.        ##
+##                                                                           ##
+##         Permission to modify and use for internal purposes granted.       ##
+## This software is provided "as is", without warranty, express or implied.  ##
+##                                                                           ##
+###############################################################################
+
+# Note:
+# - To use this Makefile, you must have the 'NDDSHOME' environment variable
+#   set to the location of RTI Data Distribution Service.
+# 
+# - You need to invoke the make command from the root directory of this example.
+#
+# - To enable debugging information, set the Makefile variable 'DEBUG' to '1'.
+# Example:
+#   make -f make/Makefile.pentiumVx6.9gcc4.3.3 DEBUG=1
+
+ifeq ($(findstring Linux,$(OS_ARCH)),Linux)
+export WIND_HOST_TYPE = x86-linux2
+else
+export WIND_HOST_TYPE = sun4-solaris2
+endif
+
+export WIND_HOME      = /local/VxWorks/GPP-3.9
+export WIND_BASE      = /local/VxWorks/GPP-3.9/vxworks-6.9
+export WIND_USR       = /local/VxWorks/GPP-3.9/vxworks-6.9/target/usr
+export WIND_GNU_PATH  = /local/VxWorks/GPP-3.9/gnu/4.3.3-vxworks-6.9
+export LD_LIBRARY_PATH = $(WIND_HOME)/lmapi-5.0/x86-linux2/lib/
+
+
+# Defines required Make variables. They will be used in the Makefile.common
+# to define the rules to define the build process for this application.
+
+# if dynamic linking, indicate to common not to link shared libs
+ifeq ($(SHAREDLIB),1)
+# rtp dynamic needs access to $(WIN_BASE)target/lib/usr/lib/pentium/PENTIUM/common/libc.so at run time
+VX_SHAREDLIB=1
+endif
+
+ARCH=pentiumVx6.9gcc4.3.3_rtp
+
+CXX = $(WIND_GNU_PATH)/$(WIND_HOST_TYPE)/bin/c++pentium
+CXXFLAGS = -mrtp
+CXXLD = $(WIND_GNU_PATH)/$(WIND_HOST_TYPE)/bin/c++pentium
+CXXLDFLAGS = -mrtp # -Bsymbolic-functions
+DEFINES =  -DRTI_VXWORKS -march=pentium -m32 -ansi -DTOOL=gnu -DCPU=PENTIUM -DTOOL_FAMILY=gnu
+
+SYSLIBS = -L$(WIND_BASE)/target/lib/usr/lib/pentium/PENTIUM/common  
+
+#-fPIC -shared -L$(WIND_BASE)/target/lib/usr/lib/pentium/PENTIUM/common/PIC
+
+VX_INCLUDES = -I$(WIND_BASE)/target/usr/h -I$(WIND_BASE)/target/usr/h/wrn/coreip \
+ -D__PROTOTYPE_5_0
+
+#OPTS = -r # -mrtp -Bsymbolic-functions
+#NM = $(WIND_BASE)/host/binutils/$(WIND_HOST_TYPE)/bin/nmpentium
+#MUNCH = ${WIND_FOUNDATION_PATH}/$(WIND_HOST_TYPE)/bin/wtxtcl.ex $(WIND_BASE)/host/resource/hutils/tcl/munch.tcl -c pentium
+#MUNCHFLAGS            = -T $(WIND_BASE)/target/h/tool/gnu/ldscripts/link.OUT
+
+# The rest of the rules are in the 'Makefile.common'
+include make/Makefile.common
+

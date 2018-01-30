@@ -1,0 +1,11 @@
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/rmw_opensplice_cpp
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/rmw_opensplice_cpp
+/home/aust/ros2_ws/install/share/rmw_opensplice_cpp/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/rmw_opensplice_cpp/environment/path.sh
+/home/aust/ros2_ws/install/share/rmw_opensplice_cpp/local_setup.bash
+/home/aust/ros2_ws/install/share/rmw_opensplice_cpp/local_setup.sh
+/home/aust/ros2_ws/install/share/rmw_opensplice_cpp/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/rmw_opensplice_cpp
+/home/aust/ros2_ws/install/share/rmw_opensplice_cpp/cmake/rmw_opensplice_cppConfig.cmake
+/home/aust/ros2_ws/install/share/rmw_opensplice_cpp/cmake/rmw_opensplice_cppConfig-version.cmake
+/home/aust/ros2_ws/install/share/rmw_opensplice_cpp/package.xml

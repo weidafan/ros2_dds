@@ -1,0 +1,101 @@
+/* $Id$
+
+ (c) Copyright, Real-Time Innovations, 2015-2016.
+ All rights reserved.
+ No duplications, whole or partial, manual or electronic, may be made
+ without express written permission.  Any such copies, or
+ revisions thereof, must display this notice unaltered.
+ This code contains trade secrets of Real-Time Innovations, Inc.
+
+modification history
+------------ -------
+5.1.0,16jun14,asn ROUTING-233,QUEUING-167: Created
+==============================================================================*/
+
+/*e \file
+  @brief IDL types used for remote administration
+*/
+
+module RTI {
+module Service {
+    module Admin {
+        
+        const string COMMAND_REQUEST_TOPIC_NAME = 
+            "rti/service/admin/command_request";
+        const string COMMAND_REPLY_TOPIC_NAME = 
+            "rti/service/admin/command_reply";
+        
+        /* Maximum length of an entity name (full qualified)
+        */
+        const long NAME_LENGTH_MAX = 255;      
+
+        /* Maximum length of an URI
+        */
+        const long RESOURCE_IDENTIFIER_LENGTH_MAX = 2048;
+        
+        typedef string<NAME_LENGTH_MAX> EntityName;
+
+        typedef string<RESOURCE_IDENTIFIER_LENGTH_MAX> ResourceIdentifier;
+
+        typedef string StringBody;
+        typedef sequence<octet> OctetBody;
+
+        enum ServiceKind {
+            RTI_SERVICE_OTHER_SERVICE,
+            RTI_SERVICE_ROUTING_SERVICE,
+            RTI_SERVICE_QUEUING_SERVICE
+        }; //@Extensibility EXTENSIBLE_EXTENSIBILITY
+
+        enum CommandActionKind {
+            RTI_SERVICE_COMMAND_ACTION_LOAD = 1,
+            RTI_SERVICE_COMMAND_ACTION_UNLOAD,
+            RTI_SERVICE_COMMAND_ACTION_INSERT,
+            RTI_SERVICE_COMMAND_ACTION_UPDATE,
+            RTI_SERVICE_COMMAND_ACTION_PAUSE,
+            RTI_SERVICE_COMMAND_ACTION_RESUME,
+            RTI_SERVICE_COMMAND_ACTION_ENABLE,
+            RTI_SERVICE_COMMAND_ACTION_DISABLE,
+            RTI_SERVICE_COMMAND_ACTION_ANNOUNCE,
+            RTI_SERVICE_COMMAND_ACTION_CREATE,
+            RTI_SERVICE_COMMAND_ACTION_DELETE,
+            RTI_SERVICE_COMMAND_ACTION_SAVE,
+            RTI_SERVICE_COMMAND_ACTION_GET,
+            RTI_SERVICE_COMMAND_ACTION_ADD_PEER
+        }; //@Extensibility EXTENSIBLE_EXTENSIBILITY
+        
+        enum CommandReplyRetcode {
+            RTI_SERVICE_COMMAND_REPLY_OK = 0,
+            RTI_SERVICE_COMMAND_REPLY_ANNOUNCEMENT,
+            RTI_SERVICE_COMMAND_REPLY_ERROR,
+            RTI_SERVICE_COMMAND_REPLY_UNSUPPORTED,
+            RTI_SERVICE_COMMAND_REPLY_ALREADY_EXISTS,
+            RTI_SERVICE_COMMAND_REPLY_DUPLICATED
+        }; //@Extensibility EXTENSIBLE_EXTENSIBILITY      
+        
+        struct CommandRequest {
+            EntityName service_name;
+            ServiceKind service;
+            CommandActionKind action;
+            ResourceIdentifier resource_identifier;
+            /* String representation of a request body */
+            StringBody string_body;
+            /* Binary representation of a request body */
+            OctetBody octet_body;
+        }; //@top-level true
+           //@Extensibility EXTENSIBLE_EXTENSIBILITY
+
+        struct CommandReply {
+            CommandReplyRetcode retcode;
+            /* Allows specifying additional information describing the return code */
+            long native_retcode; 
+            /* String representation of a response body */
+            StringBody string_body;
+            /* Binary representation of a response body */
+            OctetBody octet_body;
+        }; //@top-level true
+           //@Extensibility EXTENSIBLE_EXTENSIBILITY
+
+    };
+ };
+};
+

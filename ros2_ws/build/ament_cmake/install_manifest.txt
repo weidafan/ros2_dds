@@ -1,0 +1,12 @@
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/ament_cmake
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/ament_cmake
+/home/aust/ros2_ws/install/share/ament_cmake/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/ament_cmake/environment/path.sh
+/home/aust/ros2_ws/install/share/ament_cmake/local_setup.bash
+/home/aust/ros2_ws/install/share/ament_cmake/local_setup.sh
+/home/aust/ros2_ws/install/share/ament_cmake/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/ament_cmake
+/home/aust/ros2_ws/install/share/ament_cmake/cmake/ament_cmake_export_dependencies-extras.cmake
+/home/aust/ros2_ws/install/share/ament_cmake/cmake/ament_cmakeConfig.cmake
+/home/aust/ros2_ws/install/share/ament_cmake/cmake/ament_cmakeConfig-version.cmake
+/home/aust/ros2_ws/install/share/ament_cmake/package.xml

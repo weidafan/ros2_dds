@@ -1,0 +1,1 @@
+/usr/lib/ccache/c++  -fPIC  -fvisibility=hidden -std=c++11 -Wall -Wextra  -O3 -DNDEBUG  -shared -Wl,-soname,libconsole_bridge.so.0.3 -o lib/libconsole_bridge.so.0.3 CMakeFiles/console_bridge.dir/src/console.cpp.o 

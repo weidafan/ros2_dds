@@ -1,0 +1,4 @@
+<launcher xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xsi:noNamespaceSchemaLocation="launcher_panel.xsd">
+    <!-- Add custom menu items here -->             
+</launcher>

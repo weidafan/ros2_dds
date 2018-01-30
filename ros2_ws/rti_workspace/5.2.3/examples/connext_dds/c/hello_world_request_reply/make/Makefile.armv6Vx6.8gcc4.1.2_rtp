@@ -1,0 +1,56 @@
+###############################################################################
+##         (c) Copyright, Real-Time Innovations, All rights reserved.        ##
+##                                                                           ##
+##         Permission to modify and use for internal purposes granted.       ##
+## This software is provided "as is", without warranty, express or implied.  ##
+##                                                                           ##
+###############################################################################
+
+# Note:
+# - To use this Makefile, you must have the 'NDDSHOME' environment variable
+#   set to the location of RTI Data Distribution Service.
+# 
+# - You need to invoke the make command from the root directory of this example.
+#
+# - To enable debugging information, set the Makefile variable 'DEBUG' to '1'.
+# Example:
+#   make -f make/Makefile.armv6Vx6.8gcc4.1.2_rtp DEBUG=1
+
+ifeq ($(findstring Linux,$(OS_ARCH)),Linux)
+export WIND_HOST_TYPE = x86-linux2
+else
+export WIND_HOST_TYPE = sun4-solaris2
+endif
+
+export WIND_HOME      = /local/VxWorks/GPP-3.8
+export WIND_BASE      = /local/VxWorks/GPP-3.8/vxworks-6.8
+export WIND_USR       = /local/VxWorks/GPP-3.8/vxworks-6.8/target/usr
+export WIND_GNU_PATH  = /local/VxWorks/GPP-3.8/gnu/4.1.2-vxworks-6.8
+export WIND_FOUNDATION_PATH = $(WIND_HOME)/workbench-3.2/foundation
+export WIND_FOUNDATION_LIB = ${WIND_FOUNDATION_PATH}/${WIND_HOST_TYPE}/lib
+export LD_LIBRARY_PATH = ${WIND_FOUNDATION_LIB}
+
+
+# Defines required Make variables. They will be used in the Makefile.common
+# to define the rules to define the build process for this application.
+
+# if dynamic linking, indicate to common not to link shared libs
+ifeq ($(SHAREDLIB),1)
+VX_SHAREDLIB=1
+endif
+
+ARCH=armv6Vx6.8gcc4.1.2_rtp
+
+CC = $(WIND_GNU_PATH)/$(WIND_HOST_TYPE)/bin/ccarm
+CFLAGS = -mrtp 
+CLD = $(WIND_GNU_PATH)/$(WIND_HOST_TYPE)/bin/ccarm
+CLDFLAGS = -mrtp -Bsymbolic-functions
+DEFINES =  -DRTI_VXWORKS -t6 -ansi -fno-builtin -mlong-calls -mapcs-frame -DARMEL -DCPU=ARMARCH6 -DTOOL_FAMILY=gnu -DTOOL=gnu -D_VSB_CONFIG_FILE=\"$(WIND_BASE)/target/lib/h/config/vsbConfig.h\" -DINET -DINET6 -DRTI_VFP_TASK
+
+SYSLIBS = -L$(WIND_BASE)/target/lib/usr/lib/arm/ARMARCH6/common
+
+VX_INCLUDES = -I$(WIND_BASE)/target/usr/h -I$(WIND_BASE)/target/usr/h/wrn/coreip -D__PROTOTYPE_5_0
+
+# The rest of the rules are in the 'Makefile.common'
+include make/Makefile.common
+

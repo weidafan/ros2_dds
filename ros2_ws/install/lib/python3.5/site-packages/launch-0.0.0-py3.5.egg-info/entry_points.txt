@@ -1,0 +1,3 @@
+[console_scripts]
+launch = launch.main:main
+

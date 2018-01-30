@@ -1,0 +1,14 @@
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/ament_cmake_python
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/ament_cmake_python
+/home/aust/ros2_ws/install/share/ament_cmake_python/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/ament_cmake_python/environment/path.sh
+/home/aust/ros2_ws/install/share/ament_cmake_python/local_setup.bash
+/home/aust/ros2_ws/install/share/ament_cmake_python/local_setup.sh
+/home/aust/ros2_ws/install/share/ament_cmake_python/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/ament_cmake_python
+/home/aust/ros2_ws/install/share/ament_cmake_python/cmake/ament_cmake_python-extras.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_python/cmake/ament_cmake_pythonConfig.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_python/cmake/ament_cmake_pythonConfig-version.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_python/package.xml
+/home/aust/ros2_ws/install/share/ament_cmake_python/cmake/ament_python_install_module.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_python/cmake/ament_python_install_package.cmake

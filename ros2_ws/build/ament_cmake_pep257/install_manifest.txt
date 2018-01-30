@@ -1,0 +1,14 @@
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/ament_cmake_pep257
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/ament_cmake_pep257
+/home/aust/ros2_ws/install/share/ament_cmake_pep257/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/ament_cmake_pep257/environment/path.sh
+/home/aust/ros2_ws/install/share/ament_cmake_pep257/local_setup.bash
+/home/aust/ros2_ws/install/share/ament_cmake_pep257/local_setup.sh
+/home/aust/ros2_ws/install/share/ament_cmake_pep257/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/ament_cmake_pep257
+/home/aust/ros2_ws/install/share/ament_cmake_pep257/cmake/ament_cmake_pep257-extras.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_pep257/cmake/ament_cmake_pep257Config.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_pep257/cmake/ament_cmake_pep257Config-version.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_pep257/package.xml
+/home/aust/ros2_ws/install/share/ament_cmake_pep257/cmake/ament_cmake_pep257_lint_hook.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_pep257/cmake/ament_pep257.cmake

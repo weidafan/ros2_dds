@@ -1,0 +1,18 @@
+file(REMOVE_RECURSE
+  "rosidl_typesupport_introspection_cpp/example_interfaces/srv/add_two_ints__rosidl_typesupport_introspection_cpp.hpp"
+  "rosidl_typesupport_introspection_cpp/example_interfaces/srv/add_two_ints__request__rosidl_typesupport_introspection_cpp.hpp"
+  "rosidl_typesupport_introspection_cpp/example_interfaces/srv/add_two_ints__response__rosidl_typesupport_introspection_cpp.hpp"
+  "rosidl_typesupport_introspection_cpp/example_interfaces/srv/add_two_ints__type_support.cpp"
+  "rosidl_typesupport_introspection_cpp/example_interfaces/srv/add_two_ints__request__type_support.cpp"
+  "rosidl_typesupport_introspection_cpp/example_interfaces/srv/add_two_ints__response__type_support.cpp"
+  "CMakeFiles/example_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/example_interfaces/srv/add_two_ints__type_support.cpp.o"
+  "CMakeFiles/example_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/example_interfaces/srv/add_two_ints__request__type_support.cpp.o"
+  "CMakeFiles/example_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/example_interfaces/srv/add_two_ints__response__type_support.cpp.o"
+  "libexample_interfaces__rosidl_typesupport_introspection_cpp.pdb"
+  "libexample_interfaces__rosidl_typesupport_introspection_cpp.so"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/example_interfaces__rosidl_typesupport_introspection_cpp.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

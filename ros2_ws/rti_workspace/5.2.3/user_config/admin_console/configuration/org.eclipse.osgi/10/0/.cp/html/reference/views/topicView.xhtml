@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Topic View</title>
+<link rel="stylesheet" href="../../acdocs.css" type="text/css" />
+</head>
+
+<body>
+	<div class="centerContent">
+		<div class="docTopBanner" />
+	</div>
+
+	<div class="docPageTitle">Topic View</div>
+
+	<div class="docSectionContent">The Topic View is a user
+		interface focused on information about a single DDS Topic. It has four
+		tabs: Match Graph, Topic Data, Endpoints Table, and Datatypes.</div>
+
+
+	<br />
+	<div class="docSectionTitle">Match Graph</div>
+
+	<div class="docScreenShot">
+		<img src="../../images/topicView_matchGraph.png" />
+	</div>
+
+	<div class="docSectionContent">The Match Graph is a graphical
+		view of topic. Its main purpose is to convey the match status of the
+		endpoints associated with the topic in a simple, easy to digest
+		format.</div>
+
+	<div class="docSectionContent">
+		At the center of the display is the topic itself. Radiating out from
+		the topic are the associated endpoints. Each endpoint can have one of
+		three match statuses: matched (displayed as a black line with no
+		text), partially matched (a yellow line with text), and not matched (a
+		red line with text). If a DataReader or DataWriter (an endpoint) fully
+		matches its opposing endpoint type for the topic, it is matched. If an
+		endpoint matches some but not all of its opposing endpoint type, it is
+		partially matched. If an endpoint doesn't match any of its opposing
+		endpoint type, it is not matched. Clicking on an endpoint will select
+		it and will trigger other displays to show information about that
+		endpoint (for example, the <a href="../views/ddsDataTypeView.xhtml">DDS
+			Data Type</a>, <a href="../views/ddsQosView.xhtml">DDS QoS</a>, and <a
+			href="../views/matchAnalysesView.xhtml">Match Analyses</a> views).
+	</div>
+
+
+	<br />
+	<div class="docSectionTitle">Topic Data</div>
+	<div class="docSectionContent">
+		This tab provides the ability to subscribe to and visualize data from
+		the DDS system. See the <a
+			href="PLUGINS_ROOT/com.rti.tools.console.visualization/html/toc.html">Data
+			Visualization</a> section for help.
+	</div>
+
+
+	<br />
+	<div class="docSectionTitle">Endpoints Table</div>
+
+	<div class="docScreenShot">
+		<img src="../../images/topicView_endpointsTable.png" />
+	</div>
+
+	<div class="docSectionContent">
+		The Endpoints Table details the DataReaders <img
+			src="../../../branding/icons/datareader.png" /> and DataWriters <img
+			src="../../../branding/icons/datawriter.png" /> associated with a
+		single DDS Topic. Each endpoint is displayed in a single row along
+		with the host and process which contain it. The Instance Handle is
+		also displayed which can be useful as it relates to locating exactly
+		which DataWriter wrote a particular sample (e.g. when inspecting data
+		from a sample in the Sample Inspector).
+	</div>
+
+
+	<br />
+	<div class="docSectionTitle">Datatypes</div>
+
+	<div class="docScreenShot">
+		<img src="../../images/topicView_datatypes.png" />
+	</div>
+
+	<div class="docSectionContent">
+		This tab display a hierarchical view of the data types and endpoints
+		associated with this topic. The tree begins at the top with the topic
+		<img src="../../../branding/icons/domaintopic.png" /> itself. Below
+		that are type name nodes <img
+			src="../../../branding/icons/datatype.png" />. These nodes simply
+		represent name of the type as it was registered with the DDS API.
+		Below the type name nodes are data type <img
+			src="../../../branding/icons/datatype.png" /> nodes (they currently
+		use the same icon). These nodes will trigger the <a
+			href="../views/ddsDataTypeView.xhtml">DDS Data Type</a> view to
+		display their type information. Below the type nodes are DataReaders <img
+			src="../../../branding/icons/datareader.png" /> and DataWriters <img
+			src="../../../branding/icons/datawriter.png" /> which use that data
+		type.
+	</div>
+
+	<div class="docSectionContent">The Max Serialized Size column
+		shows the maximum size, in bytes, required to serialize the associated
+		object.</div>
+
+	<div class="docSectionContent">The Datatypes view is most useful
+		when trying to debug the types used in a distributed system. It is
+		often hard to keep track of who&apos;s using which type in a large
+		system so this view provides a convenient way to discover the types in
+		use and to see if there are match problems perhaps due to conflicting
+		types.</div>
+</body>
+</html>

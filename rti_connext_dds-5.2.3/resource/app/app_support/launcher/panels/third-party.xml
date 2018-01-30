@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+   (c) Copyright, Real-Time Innovations, Inc. 2015.  All rights reserved.
+   No duplications, whole or partial, manual or electronic, may be made
+   without prior written permission.  Any such copies, or
+   revisions thereof, must display this notice unaltered.
+   This code contains trade secrets of Real-Time Innovations, Inc.
+-->
+<launcher xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="launcher_panel.xsd">
+    <button name="simventions">
+        <platform_filter>Windows</platform_filter>
+        <platform_filter>Unix</platform_filter>
+        <icon>Icon_InformeDDS.png</icon>
+        <tooltip>SimVentions InformeDDS:
+            InformeDDS provides insight into components on a DDS network. 
+            It can be used to monitor, inject, record, and validate messages from 
+            all components participating in a DDS domain.
+        </tooltip>
+        <legend>SimVentions InformeDDS</legend>
+        <toolexec>third_party/SimVentions/InformeDDS/RunInformeDDS</toolexec>
+        <downloadable 
+            link="https://www.rti.com/partners/simventions"
+            install_location="third_party/SimVentions">
+            <multi>
+                <rtipkg>https://www.rti.com/swdist/simventions-5.2.3</rtipkg>
+            </multi>
+        </downloadable>
+        <popupmenu>
+            <menuitem>
+                <label>SimVentions Website</label>
+                <url>http://www.simventions.net</url>
+            </menuitem>
+        </popupmenu>
+    </button>
+
+</launcher>

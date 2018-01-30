@@ -1,0 +1,478 @@
+<?xml version="1.0"?>
+<!-- 
+(c) Copyright, Real-Time Innovations, 2012-2016.
+All rights reserved.
+No duplications, whole or partial, manual or electronic, may be made
+without express written permission.  Any such copies, or
+revisions thereof, must display this notice unaltered.
+This code contains trade secrets of Real-Time Innovations, Inc.
+
+Description:
+XML QoS Profile for LBEDiscoveryPluginExample
+
+The QoS configuration of the DDS entities in the generated example is 
+loaded from this file.
+
+This file is used only when it is in the current working directory
+or when the enviroment variable
+NDDS_QOS_PROFILES is defined and points to this file.
+
+For more information about configuring QoS Profiles with XML, see the 
+RTI Core Libraries and Utilities User's Manual.
+-->
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_dds_qos_profiles.xsd"
+    version="5.2.3">
+
+
+    <!-- QoS Library containing the QoS profile used in the generated example.
+
+    A QoS library is a named set of QoS profiles.
+    -->
+    <qos_library name="DILExample_Library">
+
+        <!-- QoS profile used to configure reliable communication between the DataWriter 
+        and DataReader created in the example code.
+
+        A QoS profile groups a set of related QoS.
+        -->
+        <qos_profile name="DILExamplePublisher_Profile" is_default_qos="true">
+            <participant_qos>
+
+                <participant_name>
+                    <name>Publisher</name>
+                </participant_name>
+
+                <discovery_config>
+                    <builtin_discovery_plugins>MASK_NONE</builtin_discovery_plugins>
+                    <participant_liveliness_lease_duration>
+                        <sec>1000</sec>
+                        <nanosec>DURATION_ZERO_NSEC</nanosec>
+                    </participant_liveliness_lease_duration>
+                    <participant_liveliness_assert_period>
+                        <sec>300</sec>
+                        <nanosec>DURATION_ZERO_NSEC</nanosec>
+                    </participant_liveliness_assert_period>
+                    <initial_participant_announcements>1</initial_participant_announcements>
+                    <min_initial_participant_announcement_period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </min_initial_participant_announcement_period>
+                    <max_initial_participant_announcement_period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </max_initial_participant_announcement_period>
+                </discovery_config>
+
+                <!-- Deactivate all built-in transports -->
+                <transport_builtin>
+                    <mask>MASK_NONE</mask>
+                </transport_builtin>
+
+		<resource_limits>
+		    <participant_property_list_max_length>100</participant_property_list_max_length>
+		    <participant_property_string_max_length>3000</participant_property_string_max_length>
+		</resource_limits>
+
+		<property>
+                    <value>
+                        <element>
+                            <name>dds.participant.inter_participant_data_reader.protocol.disable_preemptive_nack</name>
+                            <value>1</value>
+                        </element>
+                        <element>
+                            <name>dds.participant.inter_participant_data_writer.protocol.disable_preemptive_heartbeat</name>
+                            <value>1</value>
+                        </element>
+                        <element>
+                            <name>dds.participant.discovery_config.initial_participant_announcements_on_enable</name>
+                            <value>0</value>
+                        </element>
+				<!-- LBParticipantDiscovery -->
+			<element>
+			    <name>dds.discovery.participant.lbpdiscovery.library</name>
+			    <value>rtilbpdisc</value>
+			</element>
+			<element>
+			    <name>dds.discovery.participant.lbpdiscovery.create_function</name>
+			    <value>DDS_LBPDiscoveryPlugin_create</value>
+			</element>
+			<element>
+			    <name>dds.discovery.participant.lbpdiscovery.config_file</name>
+			    <value>LBPDiscoveryPluginExampleSubscriber.xml</value>
+			</element>
+			<element>
+			    <name>dds.discovery.participant.load_plugins</name>
+			    <value>dds.discovery.participant.lbpdiscovery</value>
+			</element>
+			<element>
+                            <name>dds.discovery.participant.lbpdiscovery.verbosity</name>
+                            <value>0</value>
+			</element>
+				<!-- LBEndpointDiscovery -->
+			<element>
+			    <name>dds.discovery.endpoint.lbediscovery.library</name>
+			    <value>rtilbedisc</value>
+			</element>
+			<element>
+			    <name>dds.discovery.endpoint.lbediscovery.create_function</name>
+			    <value>DDS_LBEDiscoveryPlugin_create</value>
+			</element>
+			<element>
+			    <name>dds.discovery.endpoint.lbediscovery.config_file</name>
+			    <value>LBEDiscoveryPluginExampleSubscriber.xml</value>
+			</element>
+			<element>
+			    <name>dds.discovery.endpoint.load_plugins</name>
+			    <value>dds.discovery.endpoint.lbediscovery</value>
+			</element>
+			<element>
+			    <name>dds.discovery.endpoint.lbediscovery.verbosity</name>
+			    <value>5</value>
+			</element>
+				<!-- LBRTPS transport -->
+                        <element>
+                            <name>dds.transport.load_plugins</name>
+                            <value>dds.transport.lbrtps</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.lbrtps.library</name>
+                            <value>rtilbrtps</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.lbrtps.create_function</name>
+                            <value>LBRTPS_Transport_create_plugin</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.lbrtps.aliases</name>
+                            <value>dil</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.lbrtps.subtransport</name>
+			    <!-- Load the zrtps transport next -->
+                            <value>zrtps</value>
+                        </element>
+                        	<!-- The rtps_header.protocol ("RTPS") is eliminated-->
+                        <element>
+                            <name>dds.transport.lbrtps.rtps_header.eliminate_protocol</name>
+                            <value>true</value>
+                        </element>
+	                        <!-- The rtps_header.version (2.1) is eliminated-->
+                        <element>
+                            <name>dds.transport.lbrtps.rtps_header.eliminate_version</name>
+                            <value>true</value>
+                        </element>
+	                        <!-- The rtps_header.vendorId (11) is eliminated-->
+                        <element>
+                            <name>dds.transport.lbrtps.rtps_header.eliminate_vendorId</name>
+                            <value>true</value>
+                        </element>
+
+       	                <!-- The rtps_header.guidPrefix is reduced. The publisher and the subscriber
+               	        applications must be run on the same machine. The hostId (first value) is set
+               	        to 0, then the participant.rtps_hostId value must set to 1.
+                       
+                        Each application has a participant. The publisher's participant will use 
+			identifier 1 (01) and the subscriber's participant will use identifier 2 (10). 
+			Therefore, two bits are needed. Then the participantId (second value) 
+			is set to 2. Each application creates the participant once. Then the 
+			participant.instanceId is set to 1 and the instanceId (third value) is set to 0.
+       	                Only two bits are needed, so the LBRTPS transport plug-in reduces the 
+               	        rtps_header.guidPrefix to one byte-->
+
+                        <element>
+			    <name>dds.transport.lbrtps.rtps_header.reduce_guidPrefix</name>
+			    <value>0,2,0</value>
+                        </element>
+	                        <!-- submessage_header.submessageId and submessage_header.flags are combined-->
+                        <element>
+			    <name>dds.transport.lbrtps.submessage_header.combine_submessageId_with_flags</name>
+			    <value>true</value>
+                        </element>
+
+                        <!-- Each application has one entity. The publisher application has a writer and 
+			the subscriber application has a reader. The minimum values in this property are 8,8. 
+			These values allow 3 bits for writers and 3 bits for readers, which is enough. 
+			The writer identifier will be set to 1 and the reader identifier will be set to 1.-->
+
+                        <element>
+			    <name>dds.transport.lbrtps.submessages.reduce_entitiesId</name>
+			    <value>8,8</value>
+                        </element>
+
+                        <!-- Reduce the submessages.sequenceNumber of RTPS packages to 32 bits instead of 64 bits.-->
+                        <element>
+			    <name>dds.transport.lbrtps.submessages.reduce_sequenceNumber</name>
+			    <value>32</value>
+                        </element>
+
+			<element>
+			    <name>dds.transport.lbrtps.verbosity</name>
+			    <value>0</value>
+			</element>
+				<!-- ZRTPS Transport -->
+                        <element>
+			    <name>dds.transport.lbrtps.zrtps.library</name>
+			    <value>rtizrtps</value>
+                        </element>
+                        <element>
+			    <name>dds.transport.lbrtps.zrtps.create_function</name>
+			    <value>ZRTPS_Transport_create_plugin</value>
+                        </element>
+                        <element>
+			    <name>dds.transport.lbrtps.zrtps.subtransport</name>
+			    <!-- Load the UDPv4 transport next -->
+			    <value>UDPv4</value>
+                        </element>
+                        <element>
+			    <name>dds.transport.lbrtps.zrtps.compression_library</name>
+			    <value>AUTOMATIC_COMPRESSION</value>
+                        </element>
+                        <element>
+			    <name>dds.transport.lbrtps.zrtps.compression_level</name>
+			    <value>9</value>
+                        </element>
+                        <element>
+			    <name>dds.transport.lbrtps.zrtps.UDPv4.multicast_enabled</name>
+			    <value>1</value>
+                        </element>
+			<element>
+                            <name>dds.transport.lbrtps.zrtps.verbosity</name>
+                            <value>2</value>
+			</element>
+		    </value>					
+		</property>
+
+		<wire_protocol>
+		    <!-- The rtps_header.guidPrefix is reduced to 0,1, 0-->
+		    <rtps_host_id>1</rtps_host_id>
+		    <rtps_app_id>1</rtps_app_id>
+		    <rtps_instance_id>1</rtps_instance_id>
+		</wire_protocol>
+	    </participant_qos>
+
+            <datawriter_qos>
+            	<protocol>
+                    <rtps_object_id>1</rtps_object_id>
+                </protocol>
+            </datawriter_qos>
+        </qos_profile>
+
+        <qos_profile name="DILExampleSubscriber_Profile">
+            <participant_qos>
+
+                <participant_name>
+                    <name>Subscriber</name>
+                </participant_name>
+
+                <discovery_config>
+                    <builtin_discovery_plugins>MASK_NONE</builtin_discovery_plugins>
+                    <participant_liveliness_lease_duration>
+                        <sec>1000</sec>
+                        <nanosec>DURATION_ZERO_NSEC</nanosec>
+                    </participant_liveliness_lease_duration>
+                    <participant_liveliness_assert_period>
+                        <sec>300</sec>
+                        <nanosec>DURATION_ZERO_NSEC</nanosec>
+                    </participant_liveliness_assert_period>
+                    <initial_participant_announcements>1</initial_participant_announcements>
+                    <min_initial_participant_announcement_period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </min_initial_participant_announcement_period>
+                    <max_initial_participant_announcement_period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </max_initial_participant_announcement_period>
+                </discovery_config>
+
+                <!-- Deactivate all built-in transports -->
+                <transport_builtin>
+                    <mask>MASK_NONE</mask>
+                </transport_builtin>
+
+		<resource_limits>
+		    <participant_property_list_max_length>100</participant_property_list_max_length>
+		    <participant_property_string_max_length>3000</participant_property_string_max_length>
+		</resource_limits>
+
+		<property>
+                    <value>
+                        <element>
+                            <name>dds.participant.inter_participant_data_reader.protocol.disable_preemptive_nack</name>
+                            <value>1</value>
+                        </element>
+                        <element>
+                            <name>dds.participant.inter_participant_data_writer.protocol.disable_preemptive_heartbeat</name>
+                            <value>1</value>
+                        </element>
+                        <element>
+                            <name>dds.participant.discovery_config.initial_participant_announcements_on_enable</name>
+                            <value>0</value>
+                        </element>
+				<!-- LBParticipantDiscovery -->
+			<element>
+			    <name>dds.discovery.participant.lbpdiscovery.library</name>
+			    <value>rtilbpdisc</value>
+			</element>
+			<element>
+			    <name>dds.discovery.participant.lbpdiscovery.create_function</name>
+			    <value>DDS_LBPDiscoveryPlugin_create</value>
+			</element>
+			<element>
+			    <name>dds.discovery.participant.lbpdiscovery.config_file</name>
+			    <value>LBPDiscoveryPluginExamplePublisher.xml</value>
+			</element>
+			<element>
+			    <name>dds.discovery.participant.load_plugins</name>
+			    <value>dds.discovery.participant.lbpdiscovery</value>
+			</element>
+			<element>
+                            <name>dds.discovery.participant.lbpdiscovery.verbosity</name>
+                            <value>0</value>
+			</element>
+				<!-- LBEndpointDiscovery -->
+			<element>
+			    <name>dds.discovery.endpoint.lbediscovery.library</name>
+			    <value>rtilbedisc</value>
+			</element>
+			<element>
+			    <name>dds.discovery.endpoint.lbediscovery.create_function</name>
+			    <value>DDS_LBEDiscoveryPlugin_create</value>
+			</element>
+			<element>
+			    <name>dds.discovery.endpoint.lbediscovery.config_file</name>
+			    <value>LBEDiscoveryPluginExamplePublisher.xml</value>
+			</element>
+			<element>
+			    <name>dds.discovery.endpoint.load_plugins</name>
+			    <value>dds.discovery.endpoint.lbediscovery</value>
+			</element>
+				<!-- LBRTPS transport -->
+                        <element>
+                            <name>dds.transport.load_plugins</name>
+                            <value>dds.transport.lbrtps</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.lbrtps.library</name>
+                            <value>rtilbrtps</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.lbrtps.create_function</name>
+                            <value>LBRTPS_Transport_create_plugin</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.lbrtps.aliases</name>
+                            <value>dil</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.lbrtps.subtransport</name>
+			    <!-- Load the zrtps transport next -->
+                            <value>zrtps</value>
+                        </element>
+                        <!-- The rtps_header.protocol ("RTPS") is eliminated-->
+                        <element>
+                            <name>dds.transport.lbrtps.rtps_header.eliminate_protocol</name>
+                            <value>true</value>
+                        </element>
+                        <!-- The rtps_header.version (2.1) is eliminated-->
+                        <element>
+                            <name>dds.transport.lbrtps.rtps_header.eliminate_version</name>
+                            <value>true</value>
+                        </element>
+                        <!-- The rtps_header.vendorId (11) is eliminated-->
+                        <element>
+                            <name>dds.transport.lbrtps.rtps_header.eliminate_vendorId</name>
+                            <value>true</value>
+                        </element>
+
+                        <!-- The rtps_header.guidPrefix is reduced. The publisher and subscriber
+                        applications must be run on the same machine. The hostId (first value) is set
+                        to 0, then the participant.rtps_hostId value must be set to 1.
+                        Each application has a participant. The publisher's participant will use 
+			identifier 1 (01) and the subscriber's participant will use identifier 2 (10). 
+			Therefore, two bits are needed. Then the participantId (second value) is set to 2.
+
+                        Each application creates the participant once. Then the participant.instanceId is
+                        set to 1 and the instanceId (third value) is set to 0. Only two bits are needed,
+			so the LBRTPS transport plug-in reduces the rtps_header.guidPrefix to one byte-->
+
+                        <element>
+                            <name>dds.transport.lbrtps.rtps_header.reduce_guidPrefix</name>
+                            <value>0,2,0</value>
+                        </element>
+
+                        <!-- submessage_header.submessageId and submessage_header.flags are combined-->
+                        <element>
+                            <name>dds.transport.lbrtps.submessage_header.combine_submessageId_with_flags</name>
+                            <value>true</value>
+                        </element>
+
+                        <!-- Each application has one entity. The publisher application has a writer and 
+			the subscriber application has a reader. The minimum values in this property are 8,8. 
+			These values allow 3 bits for writers and 3 bits for readers, which is enough. 
+			The writer identifier will be set to 1 and the reader identifier will be set to 1.-->
+
+                        <element>
+                            <name>dds.transport.lbrtps.submessages.reduce_entitiesId</name>
+                            <value>8,8</value>
+                        </element>
+                        <!-- Reduce the submessages.sequenceNumber of RTPS packages to 32 bits instead of 64 bits.-->
+                        <element>
+                            <name>dds.transport.lbrtps.submessages.reduce_sequenceNumber</name>
+                            <value>32</value>
+                        </element>
+			<element>
+                            <name>dds.transport.lbrtps.verbosity</name>
+                            <value>0</value>
+			</element>
+				<!-- ZRTPS Transport -->
+                        <element>
+                            <name>dds.transport.lbrtps.zrtps.library</name>
+                            <value>rtizrtps</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.lbrtps.zrtps.create_function</name>
+                            <value>ZRTPS_Transport_create_plugin</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.lbrtps.zrtps.subtransport</name>
+			    <!-- Load the UDPv4 transport next -->
+                            <value>UDPv4</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.lbrtps.zrtps.compression_library</name>
+                            <value>AUTOMATIC_COMPRESSION</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.lbrtps.zrtps.compression_level</name>
+                            <value>9</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.lbrtps.zrtps.UDPv4.multicast_enabled</name>
+                            <value>1</value>
+                        </element>
+			<element>
+                            <name>dds.transport.lbrtps.zrtps.verbosity</name>
+                            <value>0</value>
+			</element>
+		    </value>
+		</property>
+
+		<wire_protocol>
+		    <!-- The rtps_header.guidPrefix is reduced to 0,1, 0-->
+		    <rtps_host_id>1</rtps_host_id>
+		    <rtps_app_id>2</rtps_app_id>
+		    <rtps_instance_id>1</rtps_instance_id>
+		</wire_protocol>
+	    </participant_qos>
+
+            <datareader_qos>
+                <protocol>
+                    <rtps_object_id>1</rtps_object_id>
+                </protocol>
+            </datareader_qos>
+        </qos_profile>
+
+    </qos_library>
+</dds>

@@ -1,0 +1,160 @@
+/*****************************************************************************/
+/*   (c) Copyright 2007-2015, Real-Time Innovations, All rights reserved.    */
+/*                                                                           */
+/*         Permission to modify and use for internal purposes granted.       */
+/* This software is provided "as is", without warranty, express or implied.  */
+/*                                                                           */
+/*****************************************************************************/
+
+const long RTI_REMOTECTX_SERVICE_ALL       = 0x0;
+const long RTI_REMOTECTX_SERVICE_RECORDER  = 0x1;
+const long RTI_REMOTECTX_SERVICE_WRITEBACK = 0x2;
+
+const long RTI_RECORDER_INFO_DATABASE_FILE_MAX = 255;
+const long RTI_RECORDER_INFO_CONFIG_FILE_MAX   = 255;
+const long RTI_RECORDER_CONFIG_MAX_STRING      = 512;
+const long RTI_RECORDER_INFO_VERSION_MAX       = 64;
+const long RTI_RECORDER_MESSAGE_MAX_STRING     = 255;
+
+const string RTI_RECORDER_COMMAND_TYPE = 
+    "RTI::RecordingService::Administration";
+    
+const string RTI_RECORDER_COMMAND_REQUEST_TOPIC = 
+    "rti/recorder/administration/command_request";
+const string RTI_RECORDER_COMMAND_RESPONSE_TOPIC    = 
+    "rti/recorder/administration/command_response";
+
+/* Message Types */
+enum RTIRecorderAdminMessageType {
+    RTI_RECORDER_ADMIN_ANNOUNCE,
+    RTI_RECORDER_ADMIN_START,
+    RTI_RECORDER_ADMIN_STOP,
+    RTI_RECORDER_ADMIN_CONFIGURE,
+    RTI_RECORDER_ADMIN_INFO,
+    RTI_RECORDER_ADMIN_SHUTDOWN,
+    RTI_RECORDER_ADMIN_ADD,    
+    RTI_RECORDER_ADMIN_UPDATE, // Not supported
+    RTI_RECORDER_ADMIN_MODIFY, // Not supported
+    RTI_RECORDER_ADMIN_DELETE,
+    RTI_RECORDER_ADMIN_PAUSE,
+    RTI_RECORDER_ADMIN_RESUME,
+    RTI_RECORDER_ADMIN_PING,
+    RTI_RECORDER_ADMIN_RESPONSE,
+    RTI_RECORDER_ADMIN_PARTITION
+};
+
+/* Recorder Response Codes */
+enum RTIRecorderResponseKind {
+    RTI_RECORDER_RESPONSE_OK = 0,
+    RTI_RECORDER_RESPONSE_ERROR,
+    RTI_RECORDER_RESPONSE_ERROR_NOT_IDLE,
+    RTI_RECORDER_RESPONSE_ERROR_DOWNLOAD_BUSY,
+    RTI_RECORDER_RESPONSE_ERROR_UPDATE_BUSY,
+    RTI_RECORDER_RESPONSE_ERROR_UPDATE_FAILED
+};
+
+/* Recorder State */
+enum RTIRecorderState {
+    RTI_RECORDER_STATE_IDLE,
+    RTI_RECORDER_STATE_RECORDING,
+    RTI_RECORDER_STATE_STOPPED,
+    RTI_RECORDER_STATE_RECONFIGURE,
+    RTI_RECORDER_STATE_TIMER_EXPIRED,
+    RTI_RECORDER_STATE_SHUTDOWN,
+    RTI_RECORDER_STATE_RESTART, // Deprecated
+    RTI_RECORDER_STATE_DOWNLOAD,
+    RTI_RECORDER_STATE_UPDATE
+};
+
+struct RTITimeStamp {
+    long sec;
+    long nanosec;
+}; //@top-level false
+   //@Extensibility FINAL_EXTENSIBILITY
+   
+struct RTIRemoteAdminAddress {
+    long host_id;
+    long app_id;
+    long instance_id;
+}; //@top-level false
+   //@Extensibility FINAL_EXTENSIBILITY
+
+struct RTIRecorderDatabaseInfo {
+    unsigned long long received_bytes;
+    unsigned long long saved_bytes;
+}; //@top-level false
+   //@Extensibility MUTABLE_EXTENSIBILITY
+
+struct RTIRecorderInfoMessage {
+    string<RTI_RECORDER_INFO_VERSION_MAX> version;
+    RTIRecorderState state;
+    RTITimeStamp local_timestamp;
+    string<RTI_RECORDER_INFO_CONFIG_FILE_MAX> config_file;
+    string<RTI_RECORDER_INFO_DATABASE_FILE_MAX> database_file;
+    RTIRecorderDatabaseInfo db_info;
+}; //@top-level false
+   //@Extensibility MUTABLE_EXTENSIBILITY
+
+struct RTIRecorderResponse {
+    RTIRemoteAdminAddress destination;
+    RTIRecorderAdminMessageType last_msg;
+    RTIRecorderResponseKind kind;
+    boolean final_response;              
+    boolean model_included;
+    string<RTI_RECORDER_CONFIG_MAX_STRING> recorder_model;
+	string<RTI_RECORDER_MESSAGE_MAX_STRING> messageString;
+}; //@top-level false
+   //@Extensibility MUTABLE_EXTENSIBILITY
+
+struct RTIRecorderConfigMessage {
+    boolean final_config;          /* Final configure message      */
+    boolean config_from_file;      /* Read from the filename below */
+    string<RTI_RECORDER_CONFIG_MAX_STRING> config_from_string;
+    string<RTI_RECORDER_CONFIG_MAX_STRING> config_name;
+}; //@top-level false
+   //@Extensibility MUTABLE_EXTENSIBILITY
+
+
+const long PARTITION_MAX_LENGTH = 256;
+const long MAX_PARTITIONS = 64;
+const long MAX_RECORD_GROUP_EXPRESSIONS = 256;
+const long RECORD_GROUP_EXPRESSION_MAX_LENGTH = 256;
+
+struct RTIRecorderPartitionMessage {
+    sequence<string<PARTITION_MAX_LENGTH>, MAX_PARTITIONS> partitions;
+    sequence<string<RECORD_GROUP_EXPRESSION_MAX_LENGTH>, MAX_RECORD_GROUP_EXPRESSIONS> recordGroupExpressions;
+}; //@top-level false
+   //@Extensibility MUTABLE_EXTENSIBILITY
+
+union RTIRecorderAdminUnion switch(RTIRecorderAdminMessageType) {
+    case RTI_RECORDER_ADMIN_ANNOUNCE:
+        long service_mask;
+    case RTI_RECORDER_ADMIN_START:
+    case RTI_RECORDER_ADMIN_STOP:
+    case RTI_RECORDER_ADMIN_SHUTDOWN:
+    case RTI_RECORDER_ADMIN_PAUSE:
+    case RTI_RECORDER_ADMIN_RESUME:
+        long dummy;
+    case RTI_RECORDER_ADMIN_PARTITION:
+        RTIRecorderPartitionMessage partitions;    
+    case RTI_RECORDER_ADMIN_CONFIGURE:
+    case RTI_RECORDER_ADMIN_ADD:
+    case RTI_RECORDER_ADMIN_UPDATE:
+    case RTI_RECORDER_ADMIN_MODIFY:
+    case RTI_RECORDER_ADMIN_DELETE:
+    case RTI_RECORDER_ADMIN_PING:
+        RTIRecorderConfigMessage config;
+    case RTI_RECORDER_ADMIN_RESPONSE:   
+        RTIRecorderResponse result;
+    case RTI_RECORDER_ADMIN_INFO:
+        RTIRecorderInfoMessage info;
+}; //@top-level false
+   //@Extensibility MUTABLE_EXTENSIBILITY
+
+struct RTIRecorderAdminMessage {
+    long destination_mask;
+    RTIRemoteAdminAddress destination;
+    long msg_id;
+    RTIRecorderAdminUnion msg;
+}; //@Extensibility MUTABLE_EXTENSIBILITY
+

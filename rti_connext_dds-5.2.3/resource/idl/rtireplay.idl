@@ -1,0 +1,137 @@
+/*****************************************************************************/
+/*   (c) Copyright 2007-2015, Real-Time Innovations, All rights reserved.    */
+/*                                                                           */
+/*         Permission to modify and use for internal purposes granted.       */
+/* This software is provided "as is", without warranty, express or implied.  */
+/*                                                                           */
+/*****************************************************************************/
+
+/*e \file
+  @brief IDL types used for remote administration
+*/
+
+module RTI {
+module PlaybackService {
+    module Administration {
+    
+        const string COMMAND_REQUEST_TOPIC_NAME = 
+            "rti/replay/administration/command_request";
+        const string COMMAND_RESPONSE_TOPIC_NAME = 
+            "rti/replay/administration/command_response";
+    
+        /* Maximum length of an entity name (full qualified) */
+        const long NAME_MAX_LENGTH = 255;
+        /* Maximum length of an URL content fragment */
+        const long XML_URL_MAX_LENGTH = 4096;
+        /* Maximum length of the response message */
+        const long RESPONSE_MAX_LENGTH = 2048;
+
+        /* RTI Playback supports two XML URLs:
+
+           1.- String URLs prefixed by the URI schema str:// and enclosed in 
+           double quotes. For example:
+           str://"<dds><qos_library>...</qos_library></dds>"
+
+           2.- File URL prefixed by the URI schema file://.
+           For example:
+           file:///usr/local/default_dds.xml
+
+           If you omit the URL schema name, RTI Replay will assume a file name.
+           For example:
+           /usr/local/default_dds.xml
+
+           If the content of an Xml URL is greater than XML_URL_MAX_LENGTH,
+           it will have to be send as multiple fragments.
+
+           The final flag indicates that the fragment is the last fragment.
+        */
+        struct XmlUrl {
+            boolean is_final;
+            string<XML_URL_MAX_LENGTH> content;
+        }; //@top-level false
+           //@Extensibility EXTENSIBLE_EXTENSIBILITY
+
+        struct EntityDescription {
+            string<NAME_MAX_LENGTH> name;
+            XmlUrl xml_url;
+        }; //@top-level false
+           //@Extensibility EXTENSIBLE_EXTENSIBILITY
+
+        enum CommandKind {
+            RTI_PLAYBACK_SERVICE_COMMAND_LOAD = 1,  // Not supported
+            RTI_PLAYBACK_SERVICE_COMMAND_UNLOAD, // Not supported
+            RTI_PLAYBACK_SERVICE_COMMAND_INSERT, // Not supported
+            RTI_PLAYBACK_SERVICE_COMMAND_DELETE, // Not supported
+            RTI_PLAYBACK_SERVICE_COMMAND_UPDATE, // Not supported
+            RTI_PLAYBACK_SERVICE_COMMAND_PAUSE,
+            RTI_PLAYBACK_SERVICE_COMMAND_RESUME,
+            RTI_PLAYBACK_SERVICE_COMMAND_ENABLE, // Not supported
+            RTI_PLAYBACK_SERVICE_COMMAND_DISABLE, // Not supported
+            RTI_PLAYBACK_SERVICE_COMMAND_ANNOUNCE,
+            RTI_PLAYBACK_SERVICE_COMMAND_START,
+            RTI_PLAYBACK_SERVICE_COMMAND_STOP,
+            RTI_PLAYBACK_SERVICE_COMMAND_STEP,
+            RTI_PLAYBACK_SERVICE_COMMAND_RATE,
+            RTI_PLAYBACK_SERVICE_COMMAND_QUERY_STATUS,
+            RTI_PLAYBACK_SERVICE_COMMAND_QUERY_CONFIG,
+            RTI_PLAYBACK_SERVICE_COMMAND_EXIT,
+            RTI_PLAYBACK_SERVICE_COMMAND_REPOSITION
+        };
+        
+        enum CommandResponseKind {
+            RTI_PLAYBACK_SERVICE_COMMAND_RESPONSE_OK = 0,
+            RTI_PLAYBACK_SERVICE_COMMAND_RESPONSE_ANNOUNCEMENT,
+            RTI_PLAYBACK_SERVICE_COMMAND_RESPONSE_ERROR,
+            RTI_PLAYBACK_SERVICE_COMMAND_RESPONSE_ENTITY_NOT_FOUND
+        };
+        
+        union Command switch(CommandKind) {
+            case RTI_PLAYBACK_SERVICE_COMMAND_LOAD:
+            case RTI_PLAYBACK_SERVICE_COMMAND_INSERT:
+            case RTI_PLAYBACK_SERVICE_COMMAND_UPDATE:
+            case RTI_PLAYBACK_SERVICE_COMMAND_RATE:
+            case RTI_PLAYBACK_SERVICE_COMMAND_REPOSITION:
+                EntityDescription entity_desc;
+
+            case RTI_PLAYBACK_SERVICE_COMMAND_ANNOUNCE:
+            case RTI_PLAYBACK_SERVICE_COMMAND_UNLOAD:
+            case RTI_PLAYBACK_SERVICE_COMMAND_DELETE:
+            case RTI_PLAYBACK_SERVICE_COMMAND_EXIT:
+                long dummy;
+
+            case RTI_PLAYBACK_SERVICE_COMMAND_ENABLE:
+            case RTI_PLAYBACK_SERVICE_COMMAND_DISABLE:
+            case RTI_PLAYBACK_SERVICE_COMMAND_START:
+            case RTI_PLAYBACK_SERVICE_COMMAND_STOP:
+            case RTI_PLAYBACK_SERVICE_COMMAND_PAUSE:
+            case RTI_PLAYBACK_SERVICE_COMMAND_RESUME:
+            case RTI_PLAYBACK_SERVICE_COMMAND_STEP:
+            case RTI_PLAYBACK_SERVICE_COMMAND_QUERY_STATUS:
+            case RTI_PLAYBACK_SERVICE_COMMAND_QUERY_CONFIG:
+                string<NAME_MAX_LENGTH> entity_name;
+        }; //@top-level false
+           //@Extensibility MUTABLE_EXTENSIBILITY
+
+        struct CommandId {
+            long host;
+            long app;
+            long invocation;
+        }; //@top-level false
+           //@Extensibility FINAL_EXTENSIBILITY
+                
+        struct CommandRequest {
+            CommandId id;
+            string<NAME_MAX_LENGTH> target_player;
+            Command command;
+        }; //@Extensibility MUTABLE_EXTENSIBILITY
+           
+        struct CommandResponse {
+            CommandId id;
+            CommandResponseKind kind;
+            string <RESPONSE_MAX_LENGTH> message;
+        }; //@Extensibility EXTENSIBLE_EXTENSIBILITY
+
+    };
+ };
+};
+

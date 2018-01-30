@@ -1,0 +1,12 @@
+/home/aust/ros2_ws/install/lib/joy/joy_node
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/joy
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/joy
+/home/aust/ros2_ws/install/share/joy/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/joy/environment/path.sh
+/home/aust/ros2_ws/install/share/joy/local_setup.bash
+/home/aust/ros2_ws/install/share/joy/local_setup.sh
+/home/aust/ros2_ws/install/share/joy/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/joy
+/home/aust/ros2_ws/install/share/joy/cmake/joyConfig.cmake
+/home/aust/ros2_ws/install/share/joy/cmake/joyConfig-version.cmake
+/home/aust/ros2_ws/install/share/joy/package.xml

@@ -1,0 +1,205 @@
+##/* $Id$
+##
+##   (c) Copyright, Real-Time Innovations, Inc. 2015.  All rights reserved.
+##   No duplications, whole or partial, manual or electronic, may be made
+##   without prior written permission.  Any such copies, or
+##   revisions thereof, must display this notice unaltered.
+##   This code contains trade secrets of Real-Time Innovations, Inc.
+##
+##modification history:
+##---------------------
+##2.2.3,23sep15,djs created 
+##========================================================================*/*#
+${envMap.POUND_CHAR}include "${envMap.idlFileName}_subscriber.h"
+
+
+#set($nativeFQNameArray = $constructMap.nativeFQName.split("::"))
+#foreach ($module in $nativeFQNameArray)
+#*--*##if($velocityCount < $nativeFQNameArray.size())
+#*----*#namespace $module {
+#*--*##end
+#end
+
+class ${constructMap.name}Listener : public DataReaderListener {
+  public:
+    virtual void on_requested_deadline_missed(
+        DataReader* /*reader*/,
+        const RequestedDeadlineMissedStatus& /*status*/) {}
+    
+    virtual void on_requested_incompatible_qos(
+        DataReader* /*reader*/,
+        const RequestedIncompatibleQosStatus& /*status*/) {}
+    
+    virtual void on_sample_rejected(
+        DataReader* /*reader*/,
+        const SampleRejectedStatus& /*status*/) {}
+
+    virtual void on_liveliness_changed(
+        DataReader* /*reader*/,
+        const LivelinessChangedStatus& /*status*/) {}
+
+    virtual void on_sample_lost(
+        DataReader* /*reader*/,
+        const SampleLostStatus& /*status*/) {}
+
+    virtual void on_subscription_matched(
+        DataReader* /*reader*/,
+        const SubscriptionMatchedStatus& /*status*/) {}
+
+    virtual void on_data_available(DataReader* reader);
+};
+
+void ${constructMap.name}Listener::on_data_available(DataReader* reader)
+{
+    ${constructMap.FQName}DataReader *${constructMap.name}_reader = NULL;
+    ${constructMap.FQName}Seq data_seq;
+    SampleInfoSeq info_seq;
+    ReturnCode_t retcode;
+    int i;
+
+    ${constructMap.name}_reader = ${constructMap.FQName}DataReader::narrow(reader);
+    if (${constructMap.name}_reader == NULL) {
+        printf("DataReader narrow error\n");
+        return;
+    }
+
+    retcode = ${constructMap.name}_reader->take(
+        data_seq, info_seq, LENGTH_UNLIMITED,
+        ANY_SAMPLE_STATE, ANY_VIEW_STATE, ANY_INSTANCE_STATE);
+
+    if (retcode == RETCODE_NO_DATA) {
+        return;
+    } else if (retcode != RETCODE_OK) {
+        printf("take error %d\n", retcode);
+        return;
+    }
+
+    for (i = 0; i < data_seq.length(); ++i) {
+        if (info_seq[i].valid_data) {
+            printf("Received data\n");
+            ${constructMap.FQName}TypeSupport::print_data(&data_seq[i]);
+        }
+    }
+
+    retcode = ${constructMap.name}_reader->return_loan(data_seq, info_seq);
+    if (retcode != RETCODE_OK) {
+        printf("return loan error %d\n", retcode);
+    }
+}
+
+#foreach ($module in $nativeFQNameArray)
+#*--*##if($velocityCount < $nativeFQNameArray.size())
+#*----*#}
+#*--*##end
+#end
+
+/* Delete all entities */
+extern "C" int subscriber_shutdown(
+    DomainParticipant *participant)
+{
+    ReturnCode_t retcode;
+    int status = 0;
+
+    if (participant != NULL) {
+        retcode = participant->delete_contained_entities();
+        if (retcode != RETCODE_OK) {
+            printf("delete_contained_entities error %d\n", retcode);
+            status = -1;
+        }
+
+        retcode = TheParticipantFactory->delete_participant(participant);
+        if (retcode != RETCODE_OK) {
+            printf("delete_participant error %d\n", retcode);
+            status = -1;
+        }
+    }
+
+    /* RTI Connext provides the finalize_instance() method on
+       domain participant factory for people who want to release memory used
+       by the participant factory. Uncomment the following block of code for
+       clean destruction of the singleton. */
+/*
+
+
+    retcode = DomainParticipantFactory::finalize_instance();
+    if (retcode != RETCODE_OK) {
+        printf("finalize_instance error %d\n", retcode);
+        status = -1;
+    }
+*/
+    return status;
+}
+
+extern "C" int subscriber_main(int domainId, int sample_count)
+{
+    DomainParticipant *participant = NULL;
+    Subscriber *subscriber = NULL;
+    Topic *topic = NULL;
+    ${constructMap.nativeFQName}Listener *reader_listener = NULL; 
+    DataReader *reader = NULL;
+    ReturnCode_t retcode;
+    const char *type_name = NULL;
+    int count = 0;
+    Duration_t receive_period = {4,0};
+    int status = 0;
+
+    /* To customize the participant QoS, use 
+       the configuration file USER_QOS_PROFILES.xml */
+    participant = TheParticipantFactory->create_participant(
+        domainId, PARTICIPANT_QOS_DEFAULT, 
+        NULL /* listener */, STATUS_MASK_NONE);
+    if (participant == NULL) {
+        printf("create_participant error\n");
+        subscriber_shutdown(participant);
+        return -1;
+    }
+
+    /* To customize the subscriber QoS, use 
+       the configuration file USER_QOS_PROFILES.xml */
+    subscriber = participant->create_subscriber(
+        SUBSCRIBER_QOS_DEFAULT, NULL /* listener */, STATUS_MASK_NONE);
+    if (subscriber == NULL) {
+        printf("create_subscriber error\n");
+        subscriber_shutdown(participant);
+        return -1;
+    }
+
+    /* Register the type before creating the topic */
+    type_name = ${constructMap.FQName}TypeSupport::get_type_name();
+    retcode = ${constructMap.FQName}TypeSupport::register_type(
+        participant, type_name);
+    if (retcode != RETCODE_OK) {
+        printf("register_type error %d\n", retcode);
+        subscriber_shutdown(participant);
+        return -1;
+    }
+
+    /* To customize the topic QoS, use 
+       the configuration file USER_QOS_PROFILES.xml */
+    topic = participant->create_topic(
+        "Example ${constructMap.nativeCFQName}",
+        type_name, TOPIC_QOS_DEFAULT, NULL /* listener */,
+        STATUS_MASK_NONE);
+    if (topic == NULL) {
+        printf("create_topic error\n");
+        subscriber_shutdown(participant);
+        return -1;
+    }
+
+    /* Create a data reader listener */
+    reader_listener = new ${constructMap.nativeFQName}Listener();
+
+    /* To customize the data reader QoS, use 
+       the configuration file USER_QOS_PROFILES.xml */
+    reader = subscriber->create_datareader(
+        topic, DATAREADER_QOS_DEFAULT, reader_listener,
+        STATUS_MASK_ALL);
+    if (reader == NULL) {
+        printf("create_datareader error\n");
+        subscriber_shutdown(participant);
+        delete reader_listener;
+        return -1;
+    }
+
+    return status;
+}

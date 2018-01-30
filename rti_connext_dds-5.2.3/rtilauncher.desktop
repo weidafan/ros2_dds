@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=5.2.3
+Name=RTI Launcher
+GenericName=RTI Launcher
+Exec="/home/aust/rti_connext_dds-5.2.3/bin/rtilauncher" %f
+Terminal=false
+Hidden=false
+Icon=/home/aust/rti_connext_dds-5.2.3/resource/app/app_support/launcher/icons/rti_icon256.png
+Type=Application
+Categories=Development
+MimeType=application/rti-package
+

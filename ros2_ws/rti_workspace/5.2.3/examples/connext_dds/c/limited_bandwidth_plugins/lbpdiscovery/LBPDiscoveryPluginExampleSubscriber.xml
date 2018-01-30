@@ -1,0 +1,23 @@
+<LBPDiscoveryPluginProfile>
+    <participant name="Subscriber">
+        <key>
+            <rtps_host_id>RTPS_AUTO_ID</rtps_host_id> 
+            <rtps_app_id>RTPS_AUTO_ID</rtps_app_id> 
+            <rtps_instance_id>RTPS_AUTO_ID</rtps_instance_id>
+        </key>
+        <rtps_protocol_version>
+            <major>2</major>
+            <minor>1</minor>
+        </rtps_protocol_version>
+        <rtps_vendor_id>
+            <vendorId>1,1</vendorId>
+        </rtps_vendor_id>
+        <product_version>
+            <major>5</major>
+            <minor>2</minor>
+            <release>3</release>
+            <revision>00</revision>
+        </product_version>
+        <dds_builtin_endpoints>60</dds_builtin_endpoints>
+    </participant>
+</LBPDiscoveryPluginProfile>

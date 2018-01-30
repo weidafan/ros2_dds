@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Health</title>
+<link rel="stylesheet" href="../acdocs.css" type="text/css" />
+</head>
+
+<body>
+	<div class="centerContent">
+		<div class="docTopBanner" />
+	</div>
+
+	<div class="docPageTitle">Health</div>
+
+	<div class="docSectionContent">
+		Each entity in the system has an associated health state. Admin
+		Console determines health based on the following reasons:
+		<ul>
+			<li>An error log entry (received through the Distributed
+				Logger).</li>
+
+			<li>A warning log entry (received through the Distributed
+				Logger).</li>
+
+			<li>Requested versus offered Quality of Service.</li>
+
+			<li>The configured value for each transport&apos;s
+				message_size_max field.</li>
+
+			<li>The use of standard and non-standard transport IDs.</li>
+
+			<li>Whether or not there are matching partitions.</li>
+
+			<li>If the DataWriter and DataReader of a given Topic both
+				consider the Topic keyed or not.</li>
+
+			<li>If the data types associated with a Topic are compatible.</li>
+
+			<li>If a Topic has only DataWriters or only DataReaders.</li>
+		</ul>
+		You can adjust the severity of any of these reasons on the <a
+			href="preferences.xhtml#health">preferences</a> page.
+	</div>
+
+	<div class="docSectionContent">Each of above reasons can degrade
+		the health of a system entity to either a warning or error state. The
+		severity of each reason can be adjusted in the preferences to any of
+		the three health states (healthy, warning, or error).</div>
+
+	<div class="docSectionContent">Health is inherited from contained
+		entities. System health is comprised of the health of all of the
+		hosts. Host health is comprised of the health of services/processes
+		running on that host. Therefore, if a service/process changes from
+		Healthy to Error, the health of the host and system will also change
+		to Error.</div>
+
+	<div class="docSectionContent">It is important to note that
+		health is assumed to be healthy unless detected to be otherwise.</div>
+
+</body>
+</html>

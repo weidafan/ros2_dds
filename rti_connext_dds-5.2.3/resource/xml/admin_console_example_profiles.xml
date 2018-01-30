@@ -1,0 +1,451 @@
+<?xml version="1.0"?>
+<!--
+ $Id$
+ (c) Copyright, Real-Time Innovations, 2015-2016.
+ All rights reserved.
+ No duplications, whole or partial, manual or electronic, may be made
+ without express written permission.  Any such copies, or
+ revisions thereof, must display this notice unaltered.
+ This code contains trade secrets of Real-Time Innovations, Inc.
+ 
+ modification history:
+ - - - - - - - - - - -
+-->
+<dds version="5.2.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="rti_dds_qos_profiles.xsd">
+    
+    <qos_library name="ExampleAdminConsole">
+        <qos_profile name="ExampleAdministration">
+        
+            <publisher_qos>
+                <partition>
+                    <name>
+                        <element></element>
+                        <element>*</element>
+                    </name>
+                </partition>
+            </publisher_qos>
+            
+            <subscriber_qos>
+                <partition>
+                    <name>
+                        <element></element>
+                        <element>*</element>
+                    </name>
+                </partition>
+            </subscriber_qos>
+            
+            <participant_qos>
+                <!--transport_builtin>
+                    <mask>UDPv4</mask>
+                </transport_builtin-->
+                <participant_name>
+                    <name>RTI Administration Console</name>
+                    <role_name>Administration</role_name>
+                </participant_name>
+                
+                <discovery_config>
+                    <ignore_default_domain_announcements>false</ignore_default_domain_announcements>
+                    
+                    <participant_liveliness_assert_period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </participant_liveliness_assert_period>
+                    <participant_liveliness_lease_duration>
+                        <sec>10</sec>
+                        <nanosec>0</nanosec>
+                    </participant_liveliness_lease_duration>
+                    
+                    <!-- quickly detect the loss of liveness of remote participants -->
+                    <max_liveliness_loss_detection_period>
+                        <sec>5</sec>
+                        <nanosec>0</nanosec>
+                    </max_liveliness_loss_detection_period>
+                    
+                    <asynchronous_publisher>
+                        <disable_asynchronous_write>false</disable_asynchronous_write>
+                    </asynchronous_publisher>
+                    
+                    <publication_writer_publish_mode>
+                        <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
+                    </publication_writer_publish_mode>
+                    
+                    <subscription_writer_publish_mode>
+                        <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
+                    </subscription_writer_publish_mode>
+                    
+                </discovery_config>
+                
+                <!-- Allow for quicker shutdown times for each participant. -->
+                <database>
+                    <cleanup_period>
+                        <sec>0</sec>
+                        <nanosec>10000000</nanosec>
+                    </cleanup_period>
+                </database>
+                
+                <resource_limits>
+                    <type_code_max_serialized_length>2048</type_code_max_serialized_length>
+                    <deserialized_type_object_dynamic_allocation_threshold>1024</deserialized_type_object_dynamic_allocation_threshold>
+                    <type_object_max_deserialized_length>LENGTH_UNLIMITED</type_object_max_deserialized_length>
+                    <type_object_max_serialized_length>65535</type_object_max_serialized_length>
+                    <participant_property_list_max_length>1024</participant_property_list_max_length>
+                    <participant_property_string_max_length>32768</participant_property_string_max_length>
+                </resource_limits>
+                
+                <property>
+                    <value>
+                        <!-- Increase the receive socket buffer size to improve
+                             performance. -->
+                        <element>
+                            <name>dds.transport.UDPv4.builtin.recv_socket_buffer_size</name>
+                            <value>2097152</value>
+                        </element>
+                        <!-- Increase the shared memory receive buffer size to 
+                             improve performance. -->
+                        <element>
+                            <name>dds.transport.shmem.builtin.receive_buffer_size</name>
+                            <value>2097152</value>
+                        </element>
+                        <!-- Increase the shared memory message count maximum 
+                             size to improve performance. -->
+                        <element>
+                            <name>dds.transport.shmem.builtin.received_message_count_max</name>
+                            <value>65536</value>
+                        </element>
+                        <!--element>
+                            <name>rti.monitor.library</name>
+                            <value>rtimonitoring</value>
+                        </element>
+                        <element>
+                            <name>rti.monitor.create_function</name>
+                            <value>RTIDefaultMonitor_create</value>
+                        </element-->
+                    </value>
+                </property>
+            </participant_qos>
+            
+            <datareader_qos name="BaseDataReader">
+                <resource_limits>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>1</initial_samples>
+                </resource_limits>
+            </datareader_qos>
+            
+            <datawriter_qos name="BaseDataWriter">
+                <resource_limits>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>1</initial_samples>
+                </resource_limits>
+            </datawriter_qos>
+            
+            <!-- Distributed Logger -->
+            <datareader_qos base_name="BaseDataReader" 
+                    topic_filter="rti/distlog">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+
+                <durability>
+                    <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                </durability>
+
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>8192</depth>
+                </history>
+                
+                <protocol>
+                    <rtps_reliable_reader>
+                        <heartbeat_suppression_duration>
+                            <sec>0</sec>
+                            <nanosec>0</nanosec>
+                        </heartbeat_suppression_duration>
+                        
+                        <max_heartbeat_response_delay>
+                            <sec>0</sec>
+                            <nanosec>0</nanosec>
+                        </max_heartbeat_response_delay>
+                        
+                        <min_heartbeat_response_delay>
+                            <sec>0</sec>
+                            <nanosec>0</nanosec>
+                        </min_heartbeat_response_delay>
+                    </rtps_reliable_reader>
+                </protocol>
+                
+                <resource_limits>
+                    <max_samples_per_instance>8192</max_samples_per_instance>
+                    <max_samples>8192</max_samples>
+                </resource_limits>
+            </datareader_qos>
+
+            <datareader_qos base_name="BaseDataReader" 
+                    topic_filter="rti/distlog/administration/state">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+
+                <durability>
+                    <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                </durability>
+
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>1</depth>
+                </history>
+            </datareader_qos>
+
+            <datawriter_qos base_name="BaseDataWriter" 
+                    topic_filter="rti/distlog/administration/command_request">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>10</depth>
+                </history>
+            </datawriter_qos>
+
+            <datareader_qos base_name="BaseDataReader" 
+                    topic_filter="rti/distlog/administration/command_response">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>1</depth>
+                </history>
+            </datareader_qos>
+            
+            <!-- Persistence Service -->
+            <datareader_qos base_name="BaseDataReader" 
+                    topic_filter="rti/persistence_service/administration/command_response">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>64</depth>
+                </history>
+            </datareader_qos>
+            
+            <datawriter_qos base_name="BaseDataWriter"
+                    topic_filter="rti/persistence_service/administration/command_request">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>64</depth>
+                </history>
+            </datawriter_qos>
+            
+            <!-- Recorder Service -->
+            <datareader_qos base_name="BaseDataReader"
+                    topic_filter="com_rti_tools_recorder_status">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>64</depth>
+                </history>
+                <resource_limits>
+                    <max_samples>64</max_samples>
+                    <max_samples_per_instance>64</max_samples_per_instance>
+                    <max_instances>1</max_instances>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>64</initial_samples>
+                </resource_limits>
+            </datareader_qos>
+            
+            <datawriter_qos base_name="BaseDataWriter"
+                    topic_filter="com_rti_tools_remotectx">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <resource_limits>
+                    <max_samples>64</max_samples>
+                    <max_samples_per_instance>64</max_samples_per_instance>
+                    <max_instances>1</max_instances>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>64</initial_samples>
+                </resource_limits>
+            </datawriter_qos>
+            
+            <!-- Replay Service -->
+            <datareader_qos base_name="BaseDataReader"
+                    topic_filter="rti/replay/administration/command_response">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>64</depth>
+                </history>
+                <resource_limits>
+                    <max_samples>64</max_samples>
+                    <max_samples_per_instance>64</max_samples_per_instance>
+                    <max_instances>1</max_instances>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>64</initial_samples>
+                </resource_limits>
+            </datareader_qos>
+            
+            <datawriter_qos base_name="BaseDataWriter"
+                    topic_filter="rti/replay/administration/command_request">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <resource_limits>
+                    <max_samples>64</max_samples>
+                    <max_samples_per_instance>64</max_samples_per_instance>
+                    <max_instances>1</max_instances>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>64</initial_samples>
+                </resource_limits>
+            </datawriter_qos>
+            
+            <!-- Routing Service -->
+            <datareader_qos base_name="BaseDataReader"
+                    topic_filter="rti/routing_service/monitoring/*_data">
+                <durability>
+                    <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                </durability>
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>64</depth>
+                </history>
+                <property>
+                    <value>
+                        <element>
+                            <name>dds.data_reader.state.filter_redundant_samples</name>
+                            <value>0</value>
+                        </element>
+                    </value>
+                </property>
+            </datareader_qos>
+            
+            <datareader_qos base_name="BaseDataReader"
+                    topic_filter="rti/routing_service/administration/command_response">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>64</depth>
+                </history>
+                <resource_limits>
+                    <max_samples>64</max_samples>
+                    <max_samples_per_instance>64</max_samples_per_instance>
+                    <max_instances>1</max_instances>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>64</initial_samples>
+                </resource_limits>
+            </datareader_qos>
+            
+            <datawriter_qos base_name="BaseDataWriter"
+                    topic_filter="rti/routing_service/administration/command_request">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <resource_limits>
+                    <max_samples>64</max_samples>
+                    <max_samples_per_instance>64</max_samples_per_instance>
+                    <max_instances>1</max_instances>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>64</initial_samples>
+                </resource_limits>
+            </datawriter_qos>
+            
+        </qos_profile>
+        
+        <qos_profile name="ExampleAdministration.510TransportCompatibility" 
+            base_name="ExampleAdminConsole::ExampleAdministration">
+            <participant_qos>
+                <property inherit="true">
+                    <value>
+                        <element>
+                            <name>dds.transport.use_510_compatible_locator_kinds</name>
+                            <value>true</value>
+                            <propagate>true</propagate>
+                        </element>
+                    </value>
+                </property>
+            </participant_qos>
+        </qos_profile>
+        
+        <qos_profile name="ExampleDataVisualization">
+            <participant_qos base_name="ExampleAdminConsole::ExampleAdministration">
+                <participant_name>
+                    <name>RTI Administration Console</name>
+                    <role_name>Data Visualization</role_name>
+                </participant_name>
+                <discovery_config>
+                    <ignore_default_domain_announcements>true</ignore_default_domain_announcements>
+                </discovery_config>
+            </participant_qos>
+            
+            <subscriber_qos>
+                <!-- Match all partitions. -->
+                <partition>
+                    <name>
+                        <element></element>
+                        <element>*</element>
+                    </name>
+                </partition>
+            </subscriber_qos>
+            
+            <datareader_qos base_name="BuiltinQosLibExp::Generic.AutoTuning">
+                <reliability>
+                    <kind>BEST_EFFORT_RELIABILITY_QOS</kind>
+                </reliability>
+                
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>4096</depth>
+                </history>
+                
+                <resource_limits>
+                    <!-- Keep resource consumption as low as possible, good for
+                         use cases with large sample sizes. -->
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>1</initial_samples>
+                    
+                    <!-- Using a large max samples here prevents loss of data
+                         when receiving very small sample sizes through batching
+                    -->
+                    <max_samples>4096</max_samples>
+                </resource_limits>
+                
+                <reader_resource_limits>
+                    <!-- Ensure that this QoS is as large as max_samples-->
+                    <max_samples_per_read>4096</max_samples_per_read>
+                </reader_resource_limits>
+            </datareader_qos>
+        </qos_profile>
+        
+        <qos_profile name="ExampleDataVisualization.510TransportCompatibility" 
+            base_name="ExampleAdminConsole::ExampleDataVisualization">
+            <participant_qos>
+                <property inherit="true">
+                    <value>
+                        <element>
+                            <name>dds.transport.use_510_compatible_locator_kinds</name>
+                            <value>true</value>
+                            <propagate>true</propagate>
+                        </element>
+                    </value>
+                </property>
+            </participant_qos>
+        </qos_profile>
+        
+    </qos_library>
+    
+</dds>

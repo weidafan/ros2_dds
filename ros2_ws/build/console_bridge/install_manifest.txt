@@ -1,0 +1,9 @@
+/home/aust/ros2_ws/install/lib/libconsole_bridge.so.0.3
+/home/aust/ros2_ws/install/lib/libconsole_bridge.so
+/home/aust/ros2_ws/install/include/console_bridge/console.h
+/home/aust/ros2_ws/install/include/console_bridge_export.h
+/home/aust/ros2_ws/install/lib/console_bridge/cmake/console_bridge-targets.cmake
+/home/aust/ros2_ws/install/lib/console_bridge/cmake/console_bridge-targets-release.cmake
+/home/aust/ros2_ws/install/lib/console_bridge/cmake/console_bridge-config.cmake
+/home/aust/ros2_ws/install/lib/console_bridge/cmake/console_bridge-config-version.cmake
+/home/aust/ros2_ws/install/lib/pkgconfig/console_bridge.pc

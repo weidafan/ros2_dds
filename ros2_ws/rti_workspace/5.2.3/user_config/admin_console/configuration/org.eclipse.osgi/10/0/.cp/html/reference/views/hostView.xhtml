@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Host View</title>
+    <link rel="stylesheet" href="../../acdocs.css" type="text/css" />   
+</head>
+
+<body>
+    <div class="centerContent">
+        <div class="docTopBanner"/> 
+    </div>
+        
+    <div class="docPageTitle">Host View</div>
+    
+    <br/>
+    <div class="docSectionContent">
+    The Host View shows a summary of the host's general information and
+    provides a chart of the resources (CPU and memory).
+    </div>
+    
+    <br/><br/>
+    <div class="docSectionTitle">
+        IP info
+    </div>
+    <div class="docSectionContent">        
+            All the IP addresses associated with a host are listed. Hover on the text to see the full text in a tooltip.
+    </div>
+    <div class="docScreenShot">
+        <img src="../../images/IPtoolTip.png"/>
+    </div>
+    
+    <br/><br/>
+    <div class="docSectionTitle">Processes Tab</div>
+    <div class="docScreenShot">
+        <img src="../../images/hostView_processesTable.png"/>
+    </div>
+    <div class="docSectionContent">
+        <ul>
+            <li><strong>Process</strong> - Displays the name of the process
+            represented by this row and which is running on this host.
+            Clicking on this cell will bring up an editor for this process.
+            <br/><br />
+            </li>
+            
+            <li><strong>Process ID</strong> - The process id.
+            <br/><br />
+            </li>
+            
+            <li><strong>State</strong> - The state of the RTI service. Note that
+            this information can only be displayed for RTI services.
+            <br/><br />
+            </li>
+            
+            <li><strong>Version</strong> - The version of Connext being used by
+            the process.
+            <br/><br />
+            </li>
+            
+            <li><strong>Health</strong> - The health state of the process.
+            <br/><br />
+            </li>
+            
+            <li><strong>Uptime</strong> - The total time the process has been
+            running. Note that this information is only currently supported by
+            the RTI Routing Service.
+            <br/><br />
+            </li>
+            
+            <li><strong>CPU (%)</strong> - Current CPU usage by the process.
+            Note that this information is only currently supported by the RTI
+            Routing Service.
+            <br/><br />
+            </li>
+            
+            <li><strong>Physical Memory</strong> - Current physical memory
+            consumption by the process. Note that this information is only 
+            currently supported by the RTI Routing Service.
+            <br/><br />
+            </li>
+            
+            <li><strong>Total Memory</strong> - Current total memory
+            consumption by the process. Note that this information is only 
+            currently supported by the RTI Routing Service.
+            <br/><br />
+            </li>
+        </ul>
+    </div>
+    
+    <br/><br/>
+    <div class="docSectionTitle">Resources Chart Tab</div>
+    
+    <div class="docScreenShot">
+        <img src="../../images/hostView_resourcesChart.png"/>
+    </div>
+    
+    <div class="docSectionContent">
+    This tab contains a chart which displays the host CPU, free memory, and free
+    swap memory resources.
+    </div>
+    
+    <div class="docSectionContent">
+    The chart's toolbar contains many useful features including the ability to
+    save the chart as a raster graphic to disk.
+    </div>
+    
+    <br/>
+    <div class="docSectionContent">
+    <strong>Note:</strong> The information in this chart can only be populated
+    if an instance of Routing Service is running on the host and the monitoring
+    capability is enabled.
+    </div>
+</body>
+</html>

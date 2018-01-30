@@ -1,0 +1,8 @@
+/home/aust/ros2_controllers/build/joy/CMakeFiles/install.dir
+/home/aust/ros2_controllers/build/joy/CMakeFiles/list_install_components.dir
+/home/aust/ros2_controllers/build/joy/CMakeFiles/rebuild_cache.dir
+/home/aust/ros2_controllers/build/joy/CMakeFiles/edit_cache.dir
+/home/aust/ros2_controllers/build/joy/CMakeFiles/uninstall.dir
+/home/aust/ros2_controllers/build/joy/CMakeFiles/joy_node.dir
+/home/aust/ros2_controllers/build/joy/CMakeFiles/install/strip.dir
+/home/aust/ros2_controllers/build/joy/CMakeFiles/install/local.dir

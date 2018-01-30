@@ -1,0 +1,16 @@
+Metadata-Version: 1.1
+Name: ament-python
+Version: 0.0.0
+Summary: Python API for ament Python packages.
+Home-page: https://github.com/ament/ament_python
+Author: Dirk Thomas
+Author-email: dthomas@osrfoundation.org
+License: Apache License, Version 2.0
+Download-URL: https://github.com/ament/ament_python/releases
+Description: Python API for ament Python packages.
+Keywords: ROS
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development

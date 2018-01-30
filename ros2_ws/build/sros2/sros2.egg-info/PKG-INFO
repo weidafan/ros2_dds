@@ -1,0 +1,15 @@
+Metadata-Version: 1.1
+Name: sros2
+Version: 0.0.0
+Summary: SROS2 provides tools to help manage security keys.
+Home-page: https://github.com/ros2/sros2
+Author: Morgan Quigley
+Author-email: morgan@osrfoundation.org
+License: Apache License, Version 2.0
+Description: SROS2 provides command-line tools to help generate and distribute keys and certificates which are then used by supported middleware implementations to enhance the security of ROS 2 deployments.
+Keywords: ROS
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development

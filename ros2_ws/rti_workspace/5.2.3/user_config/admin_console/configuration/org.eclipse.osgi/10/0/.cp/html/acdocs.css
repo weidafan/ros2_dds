@@ -1,0 +1,54 @@
+.centerContent {
+  /*background-color: silver;*/
+  margin-top: 20px;  
+  margin-left:auto;
+  margin-right:auto;  
+}
+
+.docTopBanner {
+  background-image:url("images/rti-logounit.gif");
+  background-repeat: no-repeat;
+  width:362px;	
+  height:55px;
+  /*margin-top:20px;*/
+  margin-bottom:40px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.docPageTitle {
+	font-weight:bold;
+	font-family:"Arial",Calibri,sans-serif;
+	font-size:140%;
+}
+
+.docSectionTitle {
+	font-weight:bold;
+	font-family:"Arial",Calibri,sans-serif;
+	padding-left:20px;
+}
+
+.docSectionContent{
+	margin-top:15px;
+	padding-left:40px;
+	font-family:"Arial",Calibri,sans-serif;
+}
+
+.docSectionScreenShot {
+
+}
+
+.docSectionFootNotes {
+
+	font-style:italic;
+	font-size:85%;
+}
+
+.docScreenShot {	
+  background-repeat: no-repeat;
+  padding-left:40px;	
+  margin-top:20px;
+  margin-bottom:20px;
+  margin-left:auto;
+  margin-right:auto;	
+}

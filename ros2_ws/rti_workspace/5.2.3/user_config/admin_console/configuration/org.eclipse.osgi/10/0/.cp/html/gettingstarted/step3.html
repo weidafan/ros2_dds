@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Tutorial - Step 3</title>
+<link rel="stylesheet" href="../acdocs.css" type="text/css" />
+</head>
+
+<body>
+	<div class="centerContent">
+		<div class="docTopBanner" />
+	</div>
+
+	<div class="docPageTitle">Tutorial Step 3: Services Summary</div>
+
+	<div class="docSectionContent">In this step, we will look at the
+		Service Details panel. Click on the Routing Service node in the
+		Physical View or in the Processes View. Near the top you will see a
+		the service's status and buttons to control the service.
+	</div>
+	
+	<br />
+	<div class="docScreenShot">
+		<img src="../images/tut3_serviceConfigLink.png" />
+	</div>
+	
+	<br />
+	<div class="docSectionTitle">
+		<a name="systemHealthOverview"> Service Configuration </a>
+	</div>
+	<div class="docSectionContent">
+		Click on the configuration buton. This will open the current
+		configuration for Routing Service. Browse around the file and you will
+		see that this configuration routes various shapes from domain 0 to
+		domain 1. In the configuration page, you can choose between the
+		&quot;Design&quot; view and the &quot;Source&quot; view through the tabs
+		in the lower left corner.
+		<br />
+		<br /> <img src="../images/tut3_serviceConfigPage.png" /> <br />
+		<br /> Routing service should already be running. Follow the steps
+		below to see Routing Service in action.
+
+		<ul type="i">
+			<li>Publish Squares on Domain 0: <br />
+			<br /> From Step 1 of the tutorial, you should already have two
+				instances of Shapes Demo: one using domain 0 and one using domain 1.
+				In the Shapes Demo instance that uses domain 0, publish squares. We
+				will call this the Publishing Demo. <br />
+			<br /> <img src="../images/tut3_pubSquare.png" /> <br />
+			<li>Subscribe to Squares on Domain 1: <br />
+			<br /> In the Shapes Demo instance that uses domain 1, subscribe to
+				squares. We will call this the Subscribing Demo. <br />
+			<br /> <img src="../images/tut3_subSquare.png" /> <br /> Now you
+				should see the squares published in domain 0 appear in domain 1,
+				because Routing Service is routing the data from domain 0 to domain
+				1. <br />
+			<br /> <img src="../images/tut3_shapesrouting.png" /> <br />
+			</li>
+		</ul>
+		<br />
+	</div>
+
+	<div class="docSectionTitle">
+		<a name="systemHealthOverview"> Controlling a Service using Admin
+			Console </a>
+	</div>
+	<div class="docSectionContent">
+		Now try to pause Routing Service. You should see the squares in the
+		Subscribing Demo (using domain 1) pause. <br />
+		<br />
+	</div>
+	<div class="docScreenShot">
+		<img src="../images/tut3_serviceConfigPause.png" />
+	</div>
+
+
+	<div class="docSectionContent">
+		The Pause button will toggle into the Resume button. Click on Resume,
+		and the shapes in the Subscribing Demo should appear again. <br />
+		<br />
+            Relevant reference topics: 
+            <a href="../reference/views/routingView.xhtml">Routing Service 
+            View</a>.
+		</div>
+	</div>
+
+	<br />
+	<br />
+	<div class="docSectionTitle">
+		<a href="step2.html"> Previous: System Setup </a> &nbsp; &nbsp; &nbsp;
+		<a href="step4.html"> Next Step: Distributed Log View </a>
+	</div>
+
+</body>
+</html>

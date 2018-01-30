@@ -1,0 +1,42 @@
+Determining if the strchr exist failed with the following output:
+Change Dir: /home/aust/ros2_ws/build/uncrustify/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_f8d8d/fast"
+/usr/bin/make -f CMakeFiles/cmTC_f8d8d.dir/build.make CMakeFiles/cmTC_f8d8d.dir/build
+make[1]: Entering directory '/home/aust/ros2_ws/build/uncrustify/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_f8d8d.dir/CheckSymbolExists.cxx.o
+/usr/lib/ccache/c++     -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wcast-align    -o CMakeFiles/cmTC_f8d8d.dir/CheckSymbolExists.cxx.o -c /home/aust/ros2_ws/build/uncrustify/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home/aust/ros2_ws/build/uncrustify/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home/aust/ros2_ws/build/uncrustify/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:17:25: error: address of overloaded function with no contextual type information
+   return ((int*)(&strchr))[argc];
+                         ^
+CMakeFiles/cmTC_f8d8d.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_f8d8d.dir/CheckSymbolExists.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_f8d8d.dir/CheckSymbolExists.cxx.o] Error 1
+make[1]: Leaving directory '/home/aust/ros2_ws/build/uncrustify/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_f8d8d/fast' failed
+make: *** [cmTC_f8d8d/fast] Error 2
+
+File /home/aust/ros2_ws/build/uncrustify/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <inttypes.h>
+#include <memory.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <strings.h>
+#include <string.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <utime.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strchr
+  return ((int*)(&strchr))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+

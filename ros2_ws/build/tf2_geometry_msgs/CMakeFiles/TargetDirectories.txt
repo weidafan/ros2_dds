@@ -1,0 +1,7 @@
+/home/aust/ros2_ws/build/tf2_geometry_msgs/CMakeFiles/install.dir
+/home/aust/ros2_ws/build/tf2_geometry_msgs/CMakeFiles/list_install_components.dir
+/home/aust/ros2_ws/build/tf2_geometry_msgs/CMakeFiles/rebuild_cache.dir
+/home/aust/ros2_ws/build/tf2_geometry_msgs/CMakeFiles/uninstall.dir
+/home/aust/ros2_ws/build/tf2_geometry_msgs/CMakeFiles/install/strip.dir
+/home/aust/ros2_ws/build/tf2_geometry_msgs/CMakeFiles/install/local.dir
+/home/aust/ros2_ws/build/tf2_geometry_msgs/CMakeFiles/edit_cache.dir

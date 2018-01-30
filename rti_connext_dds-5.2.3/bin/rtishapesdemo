@@ -1,0 +1,57 @@
+#!/bin/sh
+#########################################################################
+# (c) 2015 Copyright, Real-Time Innovations. All rights reserved.       #
+# No duplications, whole or partial, manual or electronic, may be made  #
+# without express written permission.  Any such copies, or              #
+# revisions thereof, must display this notice unaltered.                #
+# This code contains trade secrets of Real-Time Innovations, Inc.       #
+#########################################################################
+
+filename=$0
+script_location=`cd "\`dirname "$filename"\`"; pwd`
+executable_name=rtishapesdemo
+application_name=shapes_demo
+script_version=5.2.3
+
+# Running on Mac from within the .app launching script
+if [ -d "$script_location/../MacOS" ]
+then
+    script_dir=$script_location/../../../../../../../bin
+    needs_platform_name=false
+else
+    script_dir=$script_location
+fi
+
+# Configure path to rticommon.sh script
+rticommon_script_dir=$script_dir/../resource/scripts
+rticommon_script_name=rticommon.sh
+
+if [ ! -f "$rticommon_script_dir/$rticommon_script_name" ]
+then
+    rticommon_script_dir=$script_dir/../../ndds.4.1/resource/scripts
+fi
+
+# Running on Mac from bin/rtishapesdemo
+os=`uname -s`
+if [ "x$os" = "xDarwin" ] && [ "x$needs_platform_name" != "xfalse" ]
+then
+    open_cmd="open -n"
+    args_flag="--args" 
+    executable_name=$executable_name.app
+else
+    open_cmd="exec"
+fi
+
+. "$rticommon_script_dir/$rticommon_script_name"
+
+# If running within .app we just run the executable
+if [ "x$needs_platform_name" = "xfalse" ]
+then
+    executable="$script_location/../Resources/$executable_name"
+else
+    executable="$bin_dir/$platform_name/$executable_name"
+fi
+
+$open_cmd "$executable" $args_flag \
+  -templateDir "$resource_user_config_dir/$application_name" \
+  -workspaceDir "$home_user_config_dir/$application_name" "$@"

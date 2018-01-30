@@ -1,0 +1,19 @@
+{
+  "package_name": "composition",
+  "output_dir": "/home/aust/ros2_ws/build/composition/rosidl_typesupport_cpp/composition",
+  "template_dir": "/home/aust/ros2_ws/install/share/rosidl_typesupport_cpp/resource",
+  "ros_interface_files": [
+    "/home/aust/ros2_ws/src/ros2/demos/composition/srv/LoadNode.srv",
+    "/home/aust/ros2_ws/build/composition/srv/LoadNode_Request.msg",
+    "/home/aust/ros2_ws/build/composition/srv/LoadNode_Response.msg"
+  ],
+  "target_dependencies": [
+    "/home/aust/ros2_ws/install/lib/rosidl_typesupport_cpp/rosidl_typesupport_cpp",
+    "/home/aust/ros2_ws/install/lib/python3.5/site-packages/rosidl_typesupport_cpp/__init__.py",
+    "/home/aust/ros2_ws/install/share/rosidl_typesupport_cpp/resource/msg__type_support.cpp.em",
+    "/home/aust/ros2_ws/install/share/rosidl_typesupport_cpp/resource/srv__type_support.cpp.em",
+    "/home/aust/ros2_ws/src/ros2/demos/composition/srv/LoadNode.srv",
+    "/home/aust/ros2_ws/build/composition/srv/LoadNode_Request.msg",
+    "/home/aust/ros2_ws/build/composition/srv/LoadNode_Response.msg"
+  ]
+}

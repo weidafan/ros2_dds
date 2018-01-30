@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_routing_service.xsd">
+
+    <!--
+    ********************************************************************** 
+    RTI Routing service transformation example                                                     
+    ********************************************************************** 
+    This example reads Squares on domain 0 and publishes            
+    points after getting their coordinates                                 
+    ********************************************************************** 
+    -->
+
+    <!--
+    Here we can define our own types. We are going to use a PointType
+    -->
+    <types>
+        <struct name="PointType">
+            <member name="x_coord" type="double"/>
+            <member name="y_coord" type="double"/>
+        </struct>
+    </types>
+
+    <!-- 
+    Here we're loading a transformation class, which comes with RTI Router
+    -->
+    <transformation_library name="Transformations">
+        <!-- 
+        This transformation is implemented in that shared library. It allows
+        copying fields from one dynamic data sample to other dynamic data sample
+        -->
+        <transformation_plugin name="Assign">
+            <!--
+            By specifing this value, RTI Router will search for
+            librtirsassigntransf.so in Unix systems and rtirsassigntransfs.dll in Windows
+            systems. The path to search will be the current directory or if
+            not there, the RTI Route executable directory, which is where it
+            actually is.
+            -->
+            <dll>rtirsassigntransf</dll>
+            <create_function>RTI_RoutingServiceAssignTransformationPlugin_create</create_function>
+        </transformation_plugin>
+    </transformation_library>
+
+    <!-- 
+    This is the router service configuration for this example
+    -->
+    <routing_service name="example">
+
+        <annotation>
+            <documentation>
+                Converts Squares into Points (a different type)
+            </documentation>
+        </annotation>
+
+        <domain_route name="DomainRoute" enabled="true">
+            <participant_1>
+                <domain_id>0</domain_id>
+            </participant_1>
+            <participant_2>
+                <domain_id>1</domain_id>
+                <!-- 
+                We are registering our defined type to be able to use it
+                in the domain route.
+                -->
+                <registered_type name="Point" type_name="PointType"/>
+            </participant_2>
+
+            <!-- 
+            A session with default configuration that contains a single topic route
+            -->
+            <session name="Session" enabled="true">
+
+                <topic_route name="SquareToPosition">
+                    <!-- Reading data from participant_1 -->
+                    <input participant="1">
+                        <!-- 
+                        Reading topic Square
+                        -->
+                        <topic_name>Square</topic_name>
+                        <!-- 
+                        Reading a type whose registered name is ShapeType.
+                        As we don't register ourselves on participant_1, its actual
+                        type code will have to be discovered when the router runs
+                        -->
+                        <registered_type_name>ShapeType</registered_type_name>
+                    </input>
+                    <output>
+                        <!-- Writing points -->
+                        <topic_name>Position</topic_name>
+                        <registered_type_name>Point</registered_type_name>
+                    </output>
+
+                    <!--
+                    We are going to use the transformation we loaded.
+                    We refer to the class using LibraryName::ClassName
+                    -->
+                    <transformation plugin_name="Transformations::Assign">
+                        <!-- 
+                        We will pass some parameters that the modify method will 
+                        receive to configure this instance. This transformation expects
+                        a set of assignments between a field of the output sample 
+                        type and a field of the input sample type.
+                                                
+                        In our case, we are getting the fields we need, the 
+                        coordinates of the input ShapeType sample, and
+                        assigning them to the output PointType sample
+                        -->
+                        <property>
+                            <value>
+                                <element>
+                                    <name>x_coord</name>
+                                    <value>x</value>
+                                </element>
+                                <element>
+                                    <name>y_coord</name>
+                                    <value>y</value>
+                                </element>
+                            </value>
+                        </property>
+                    </transformation>
+
+                </topic_route>
+            </session>
+        </domain_route>
+    </routing_service>
+
+</dds>

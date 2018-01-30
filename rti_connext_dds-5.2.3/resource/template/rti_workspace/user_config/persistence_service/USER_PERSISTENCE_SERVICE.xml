@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_persistence_service.xsd">
+
+    <!-- QoS LIBRARY SECTION -->
+    <qos_library name="UserPersistenceQosLib">
+        <qos_profile name="QosProfile">
+            <datawriter_qos name="WriterQos">
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>100</depth>
+                </history>
+              </datawriter_qos>
+              <datareader_qos name="ReaderQos">
+                  <reliability>
+                      <kind>RELIABLE_RELIABILITY_QOS</kind>
+                  </reliability>
+                  <history>
+                      <kind>KEEP_LAST_HISTORY_QOS</kind>
+                      <depth>100</depth>
+                  </history>
+            </datareader_qos>
+        </qos_profile>
+    </qos_library>
+
+  <!-- ================================================================= -->
+    <!-- Persist all data in disk -->
+    <!-- ================================================================= -->
+    <persistence_service name="defaultUserDisk">
+        <annotation>
+            <documentation>
+                Persists in the file system all topics published with PERSISTENT durability.
+            </documentation>
+        </annotation>        <administration>            <domain_id>0</domain_id>            <distributed_logger>                <enabled>true</enabled>                <filter_level>WARNING</filter_level>            </distributed_logger>        </administration>
+        <persistent_storage>
+            <filesystem>
+                <!-- <directory>MyDirectory</directory> -->
+                <file_prefix>defaultUserDisk_</file_prefix>
+            </filesystem>
+        </persistent_storage>
+        <participant name="defaultParticipant">
+            <!-- <domain_id>0</domain_id> -->
+            <persistence_group name="persistAll">
+                <filter>*</filter>
+                <single_publisher>true</single_publisher>
+                <single_subscriber>true</single_subscriber>
+                <datawriter_qos base_name="UserPersistenceQosLib::QosProfile"/>
+                <datareader_qos base_name="UserPersistenceQosLib::QosProfile"/>
+                <use_durability_service>false</use_durability_service>
+                <propagate_unregister>false</propagate_unregister>
+                <propagate_dispose>true</propagate_dispose>
+            </persistence_group>
+        </participant>
+    </persistence_service>
+
+</dds>

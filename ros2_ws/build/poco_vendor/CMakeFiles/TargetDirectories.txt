@@ -1,0 +1,6 @@
+/home/aust/ros2_ws/build/poco_vendor/CMakeFiles/install.dir
+/home/aust/ros2_ws/build/poco_vendor/CMakeFiles/list_install_components.dir
+/home/aust/ros2_ws/build/poco_vendor/CMakeFiles/install/strip.dir
+/home/aust/ros2_ws/build/poco_vendor/CMakeFiles/install/local.dir
+/home/aust/ros2_ws/build/poco_vendor/CMakeFiles/rebuild_cache.dir
+/home/aust/ros2_ws/build/poco_vendor/CMakeFiles/edit_cache.dir

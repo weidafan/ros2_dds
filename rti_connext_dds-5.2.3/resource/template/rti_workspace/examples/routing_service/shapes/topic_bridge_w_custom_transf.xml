@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_routing_service.xsd">
+
+    <!--
+    **********************************************************************
+    RTI Routing service transformation plugin example
+    **********************************************************************
+    This example reads Squares and uses a custom transformation to
+    write the output. It also demonstrates the use of content filters
+    **********************************************************************
+    -->
+    
+    
+    <!-- 
+    Here we're loading our transformation class, compiled by us
+    -->
+    <transformation_library name="MyTransformationLib">
+        <transformation_plugin name="ShapesTransformation">
+            <dll>$(RTI_EXAMPLES_DIR)/routing_service/shapes/transformation/$(RTI_SHARED_LIB_PREFIX)shapestransf$(RTI_SHARED_LIB_SUFFIX)</dll>
+            <create_function>ShapesTransformationPlugin_create</create_function>
+        </transformation_plugin>
+    </transformation_library>
+
+    <!-- 
+    This service defines two very similar topic routes in the same domain route that
+    transform squares read from the first domain using our transformation.
+    -->
+    <routing_service name="example">
+
+        <annotation>
+            <documentation>
+                Uses a custom transformation loaded from a compiled library
+            </documentation>
+        </annotation>
+
+        <domain_route name="DomainRoute" enabled="true">
+            <participant_1>
+                <domain_id>0</domain_id>
+            </participant_1>
+            <participant_2>
+                <domain_id>1</domain_id>
+            </participant_2>
+
+            <session name="Session" enabled="true">
+                <!-- 
+                This topic route reads squares with a x-coordinate below 100 and
+                using the transformation publishes the same square but with a fixed
+                x-coordinate, set to 50.
+                -->
+                <topic_route name="Squares1">
+                    <input participant="1">
+                        <registered_type_name>ShapeType</registered_type_name>
+                        <topic_name>Square</topic_name>
+                        <!-- 
+                        The content filter that applies to samples received
+                        by this topic route
+                        -->
+                        <content_filter>
+                            <expression>x &lt; 100 </expression>
+                            <parameter></parameter>
+                        </content_filter>
+                    </input>
+                    <output>
+                        <topic_name>Square</topic_name>
+                        <registered_type_name>ShapeType</registered_type_name>
+                    </output>
+                    <!-- 
+                    The instantiation of our transformation. Our transformation expects
+                    a parameter that indicates which value for the x-coordinate of a ShapeType
+                    sample will be set every time.
+                    -->
+                    <transformation plugin_name="MyTransformationLib::ShapesTransformation">
+                        <property>
+                            <value>
+                                <element>
+                                    <name>x</name>
+                                    <value>50</value>
+                                </element>
+                            </value>
+                        </property>
+                    </transformation>
+                </topic_route>
+
+                <!-- 
+                This topic route reads squares with a x-coordinate above 100 and
+                using the transformation publishes the same square but with a fixed
+                x-coordinate, set to 150.
+                -->
+                <topic_route name="Squares2">
+                    <input participant="1">
+                        <topic_name>Square</topic_name>
+                        <registered_type_name>ShapeType</registered_type_name>
+                        <content_filter>
+                            <!-- 
+                            This content filter will make this topic route
+                            receive the samples that the previous one won't receive
+                            -->
+                            <expression>x &gt;= 100 </expression>
+                            <parameter></parameter>
+                        </content_filter>
+                    </input>
+                    <output>
+                        <topic_name>Square</topic_name>
+                        <registered_type_name>ShapeType</registered_type_name>
+                    </output>
+                    <transformation plugin_name="MyTransformationLib::ShapesTransformation">
+                        <property>
+                            <value>
+                                <element>
+                                    <name>x</name>
+                                    <value>150</value>
+                                </element>
+                            </value>
+                        </property>
+                    </transformation>
+                </topic_route>
+            </session>
+        </domain_route>
+    </routing_service>
+</dds>

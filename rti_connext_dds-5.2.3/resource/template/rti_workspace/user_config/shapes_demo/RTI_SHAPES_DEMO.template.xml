@@ -1,0 +1,12 @@
+<dds>
+   <rti_shapes_demo>
+     <domainId>0</domainId>
+     <welcomeScreen>true</welcomeScreen>
+     <popupConfig>false</popupConfig>
+      <qos>
+        <file load="true">RTI_SHAPES_DEMO_QOS_PROFILES.xml</file>
+       </qos>
+   </rti_shapes_demo>
+ </dds>
+
+

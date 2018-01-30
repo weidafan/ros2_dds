@@ -1,0 +1,294 @@
+## $Id$
+##
+## (c) Copyright, Real-Time Innovations, Inc. 2001.  All rights reserved.
+## No duplications, whole or partial, manual or electronic, may be made
+## without prior written permission.  Any such copies, or
+## revisions thereof, must display this notice unaltered.
+## This code contains trade secrets of Real-Time Innovations, Inc.
+##
+## modification history:
+## ---------------------
+## 2.3,13may15,gpc Added setting of NDDSHOME if undefined in environment
+## 2.2,9jun14,vmg created
+##========================================================================
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="${archMap.PROJECT_TOOLSVERSION}" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug DLL|${platform}">
+      <Configuration>Debug DLL</Configuration>
+      <Platform>${platform}</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|${platform}">
+      <Configuration>Debug</Configuration>
+      <Platform>${platform}</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release DLL|${platform}">
+      <Configuration>Release DLL</Configuration>
+      <Platform>${platform}</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|${platform}">
+      <Configuration>Release</Configuration>
+      <Platform>${platform}</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Condition="'$(NDDSHOME)'==''" Label="RTI Connext Home">
+    <NddsHome>${global.nddsHome}</NddsHome>
+  </PropertyGroup>
+  <PropertyGroup Label="RTI Connext Path">
+      <LocalDebuggerEnvironment>PATH=#[[$]]#(NDDSHOME)${libDir}</LocalDebuggerEnvironment>
+  </PropertyGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>${global.idlFileName}_${projectName}</ProjectName>
+    <RootNamespace>${global.idlFileName}_${projectName}</RootNamespace>
+  </PropertyGroup>
+  <Import Project="#[[$]]#(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Release DLL|${platform}'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    ${archMap.PLATFORM_TOOLSET}
+  </PropertyGroup>
+  <PropertyGroup Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Release|${platform}'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    ${archMap.PLATFORM_TOOLSET}   
+  </PropertyGroup>
+  <PropertyGroup Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug DLL|${platform}'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    ${archMap.PLATFORM_TOOLSET}  
+  </PropertyGroup>
+  <PropertyGroup Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug|${platform}'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    ${archMap.PLATFORM_TOOLSET} 
+  </PropertyGroup>
+  <Import Project="#[[$]]#(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Release DLL|${platform}'" Label="PropertySheets">
+    <Import Project="#[[$]]#(UserRootDir)\Microsoft.Cpp.#[[$]]#(Platform).user.props" Condition="exists('#[[$]]#(UserRootDir)\Microsoft.Cpp.#[[$]]#(Platform).user.props')" />
+  </ImportGroup>
+  <ImportGroup Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Release|${platform}'" Label="PropertySheets">
+    <Import Project="#[[$]]#(UserRootDir)\Microsoft.Cpp.#[[$]]#(Platform).user.props" Condition="exists('#[[$]]#(UserRootDir)\Microsoft.Cpp.#[[$]]#(Platform).user.props')" />
+  </ImportGroup>
+  <ImportGroup Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug DLL|${platform}'" Label="PropertySheets">
+    <Import Project="#[[$]]#(UserRootDir)\Microsoft.Cpp.#[[$]]#(Platform).user.props" Condition="exists('#[[$]]#(UserRootDir)\Microsoft.Cpp.#[[$]]#(Platform).user.props')" />
+  </ImportGroup>
+  <ImportGroup Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug|${platform}'" Label="PropertySheets">
+    <Import Project="#[[$]]#(UserRootDir)\Microsoft.Cpp.#[[$]]#(Platform).user.props" Condition="exists('#[[$]]#(UserRootDir)\Microsoft.Cpp.#[[$]]#(Platform).user.props')" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.21006.1</_ProjectFileVersion>
+    <OutDir Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug|${platform}'">${outputDir}\</OutDir>
+    <IntDir Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug|${platform}'">${outputDir}\</IntDir>
+    <LinkIncremental Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug|${platform}'" />
+    <OutDir Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug DLL|${platform}'">${outputDir}\</OutDir>
+    <IntDir Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug DLL|${platform}'">${outputDir}\</IntDir>
+    <LinkIncremental Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug DLL|${platform}'" />
+    <OutDir Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Release|${platform}'">${outputDir}\</OutDir>
+    <IntDir Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Release|${platform}'">${outputDir}\</IntDir>
+    <LinkIncremental Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Release|${platform}'" />
+    <OutDir Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Release DLL|${platform}'">${outputDir}\</OutDir>
+    <IntDir Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Release DLL|${platform}'">${outputDir}\</IntDir>
+    <LinkIncremental Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Release DLL|${platform}'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug|${platform}'">
+    <Midl>
+      <TypeLibraryName>${outputDir}\\${global.idlFileName}_${projectName}.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>#foreach($headersDirectory in ${headerDirectories})$headersDirectory;#end%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;RTI_WIN32;_DEBUG;_CONSOLE;#foreach($preprocessorDefinition in ${additionalDefines})$preprocessorDefinition;#end%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>${outputDir}\</AssemblerListingLocation>
+      <ObjectFileName>${outputDir}\</ObjectFileName>
+      <ProgramDataBaseFileName>${outputDir}\</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>${archMap.DEBUG_INFORMATION_FORMAT}</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>#foreach($debugStaticLib in ${debugStaticLibs})${debugStaticLib}.lib;#end#[[]]#netapi32.lib;advapi32.lib;user32.lib;WS2_32.lib;;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>${outputDir}\\${global.idlFileName}_${projectName}.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>#[[$]]#(NDDSHOME)${libDir};%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>${outputDir}\\${global.idlFileName}_${projectName}.pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>${archMap.TARGET_MACHINE}</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug DLL|${platform}'">
+    <Midl>
+      <TypeLibraryName>${outputDir}\\${global.idlFileName}_${projectName}.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>#foreach($headersDirectory in ${headerDirectories})$headersDirectory;#end%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDDS_DLL_VARIABLE;WIN32_LEAN_AND_MEAN;WIN32;RTI_WIN32;_DEBUG;_CONSOLE;#foreach($preprocessorDefinition in ${additionalDefines})$preprocessorDefinition;#end%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>${outputDir}\</AssemblerListingLocation>
+      <ObjectFileName>${outputDir}\</ObjectFileName>
+      <ProgramDataBaseFileName>${outputDir}\</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>${archMap.DEBUG_INFORMATION_FORMAT}</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>#foreach($debugDynamicLib in${debugDynamicLibs})${debugDynamicLib}.lib;#end#[[]]#netapi32.lib;advapi32.lib;user32.lib;WS2_32.lib;;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>${outputDir}\\${global.idlFileName}_${projectName}.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>#[[$]]#(NDDSHOME)${libDir};%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>${outputDir}\\${global.idlFileName}_${projectName}.pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>${archMap.TARGET_MACHINE}</TargetMachine>
+   </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Release|${platform}'">
+    <Midl>
+      <TypeLibraryName>${outputDir}\\${global.idlFileName}_${projectName}.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>#foreach($headersDirectory in ${headerDirectories})$headersDirectory;#end%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;RTI_WIN32;NDEBUG;_CONSOLE;#foreach($preprocessorDefinition in ${additionalDefines})$preprocessorDefinition;#end%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>${outputDir}\</AssemblerListingLocation>
+      <ObjectFileName>${outputDir}\</ObjectFileName>
+      <ProgramDataBaseFileName>${outputDir}\</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>#foreach($releaseStaticLib in ${releaseStaticLibs})${releaseStaticLib}.lib;#end netapi32.lib;advapi32.lib;user32.lib;WS2_32.lib;;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>${outputDir}\\${global.idlFileName}_${projectName}.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>#[[$]]#(NDDSHOME)${libDir};%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>${outputDir}\\${global.idlFileName}_${projectName}.pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>${archMap.TARGET_MACHINE}</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Release DLL|${platform}'">
+    <Midl>
+      <TypeLibraryName>${outputDir}\\${global.idlFileName}_${projectName}.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>#foreach($headersDirectory in ${headerDirectories})$headersDirectory;#end%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDDS_DLL_VARIABLE;WIN32_LEAN_AND_MEAN;WIN32;RTI_WIN32;NDEBUG;_CONSOLE;#foreach($preprocessorDefinition in ${additionalDefines})$preprocessorDefinition;#end%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>${outputDir}\</AssemblerListingLocation>
+      <ObjectFileName>${outputDir}\</ObjectFileName>
+      <ProgramDataBaseFileName>${outputDir}\</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>#foreach($releaseDynamicLib in ${releaseDynamicLibs})${releaseDynamicLib}.lib;#end#[[]]#netapi32.lib;advapi32.lib;user32.lib;WS2_32.lib;;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>${outputDir}\\${global.idlFileName}_${projectName}.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>#[[$]]#(NDDSHOME)${libDir};%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>${outputDir}\\${global.idlFileName}_${projectName}.pdb</ProgramDatabaseFile>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>${archMap.TARGET_MACHINE}</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+#foreach($sourceFile in ${sourceFiles})
+    <ClCompile Include="${sourceFile}">
+      <Optimization Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug|${platform}'">Disabled</Optimization>
+      <AdditionalIncludeDirectories Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug|${platform}'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug|${platform}'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug|${platform}'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Release|${platform}'">MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Release|${platform}'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Release|${platform}'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+#end
+#foreach($sourceFile in ${additionalSourceFiles})
+    <ClCompile Include="${sourceFile}">
+      <Optimization Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug|${platform}'">Disabled</Optimization>
+      <AdditionalIncludeDirectories Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug|${platform}'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug|${platform}'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Debug|${platform}'">EnableFastChecks</BasicRuntimeChecks>
+      <Optimization Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Release|${platform}'">MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Release|${platform}'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions Condition="'#[[$]]#(Configuration)|#[[$]]#(Platform)'=='Release|${platform}'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+#end     
+   </ItemGroup>
+  <ItemGroup>
+#foreach($headerFile in ${headerFiles})  
+    <ClInclude Include="${headerFile}" />
+#end
+#foreach($headerFile in ${additionalHeaderFiles})  
+    <ClInclude Include="${headerFile}" />
+#end     
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="USER_QOS_PROFILES.xml" />
+  </ItemGroup>
+  <Import Project="#[[$]]#(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

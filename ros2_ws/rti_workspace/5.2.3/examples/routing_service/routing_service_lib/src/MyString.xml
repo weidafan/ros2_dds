@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_routing_service.xsd">
+
+    <!-- ********************************************************************** -->
+    <!--                                                                        -->
+    <!-- RTI Routing service example                                            -->
+    <!--                                                                        -->
+    <!-- ********************************************************************** -->
+
+    <!-- ********************************************************************** -->
+    <!-- (domain 0) => (domain 1)                                               -->
+    <!-- ********************************************************************** -->
+    <routing_service name="RoutingService">
+
+        <domain_route name="RouteName">
+
+            <participant_1>
+                <domain_id>0</domain_id>
+            </participant_1>
+
+            <participant_2>
+                <domain_id>1</domain_id>
+            </participant_2>
+
+            <session name="Session">
+                <auto_topic_route name="AllForward">
+                    <publish_with_original_info>true</publish_with_original_info>
+                    <input participant="1">
+                        <creation_mode>ON_DOMAIN_MATCH</creation_mode>
+                    </input>
+                    <output>
+                        <creation_mode>ON_DOMAIN_OR_ROUTE_MATCH</creation_mode>
+                    </output>
+                </auto_topic_route>
+
+                <auto_topic_route name="AllBackward">
+                    <publish_with_original_info>true</publish_with_original_info>
+                    <input participant="2">
+                        <creation_mode>ON_DOMAIN_OR_ROUTE_MATCH</creation_mode>
+                    </input>
+                    <output>
+                        <creation_mode>ON_DOMAIN_MATCH</creation_mode>
+                    </output>
+                </auto_topic_route>
+            </session>
+
+        </domain_route>
+
+    </routing_service>
+
+</dds>

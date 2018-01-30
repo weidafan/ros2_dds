@@ -1,0 +1,162 @@
+#!/bin/sh
+#########################################################################
+# (c) 2015 Copyright, Real-Time Innovations. All rights reserved.       #
+# No duplications, whole or partial, manual or electronic, may be made  #
+# without express written permission.  Any such copies, or              #
+# revisions thereof, must display this notice unaltered.                #
+# This code contains trade secrets of Real-Time Innovations, Inc.       #
+#########################################################################
+
+filename=$0
+filename_base=`basename "$0"`
+script_dir=`cd "\`dirname "$filename"\`"; pwd`
+script_version=5.2.3
+
+uname_s=`uname -s`
+if [ "x$uname_s" = "xDarwin" ]
+then
+    executable_name="rtipkginstall.app/Contents/MacOS/installbuilder.sh"
+else
+    executable_name="rtipkginstall.run"
+fi
+
+rticommon_script_dir=$script_dir/../resource/scripts
+rticommon_script_name=rticommon.sh
+
+if [ ! -f "$rticommon_script_dir/$rticommon_script_name" ]
+then
+    rticommon_script_dir=$script_dir/../../ndds.4.1/resource/scripts
+fi
+
+. "$rticommon_script_dir/$rticommon_script_name"
+
+print_version()
+{
+    echo "$filename_base version $script_version"
+}
+
+print_help()
+{
+    print_version
+    echo "Usage: $filename /path/to/<package_name>.rtipkg"
+    echo "General Options: "
+    echo "  -h, -help                               Displays the list of valid options"
+    echo "  -v, -version                            Displays product information"
+    echo "  -x, -X                                  Enables graphical install mode"
+    echo "  -u, -unattended                         Enables silent/unattended install mode"
+}
+
+assert_rtipkg_file()
+{
+    new_rtipkg_file=$1
+    if [ "x$new_rtipkg_file" = "x" ]
+    then
+        echo "Error: missing rtipkg input file"
+        return 1
+    fi
+    if [ ! -f "$new_rtipkg_file" ]
+    then
+        echo "Error: $new_rtipkg_file does not exist"
+        return 1
+    fi
+
+    basename_with_extension=`basename "$new_rtipkg_file"`
+    basename_without_extension=`basename "$new_rtipkg_file" .rtipkg`
+    rtipkg_dirname=`dirname "$new_rtipkg_file"`
+    rtipkg_basename=$basename_with_extension
+    if [ "x$basename_without_extension" = "x$basename_with_extension" ]
+    then
+        echo "Error: $new_rtipkg_file is an invalid rtipkg file"
+        return 1
+    fi
+
+    return 0
+}
+
+enable_gui=false
+
+if [ "$#" -eq "0" ]
+then
+   echo "Error: no arguments"
+   print_help
+   exit 1
+fi
+
+while [ $# -gt 0 ]
+do
+    case "$1" in
+        -v | -version)
+            print_version
+            exit 0
+            ;;
+        -h | -help)
+            print_help
+            exit 0
+            ;;
+        -X | -x)
+            enable_gui=true
+            ;;
+        -u | -unattended)
+            enable_unattended=true
+            ;;
+        *)  
+	    if [ "x$rtipkg_file_set" != "xtrue" ]
+	    then
+		rtipkg_file="$1"
+		rtipkg_file_set=true
+	    else
+		echo "Error: $filename_base can process only one rtipkg file at at time."
+		exit 1
+	    fi
+            ;;
+    esac
+    shift
+done
+
+assert_rtipkg_file "$rtipkg_file"
+if [ "$?" -gt "0" ]
+then
+    print_help
+    exit 1
+fi
+
+if [ "x$enable_gui" = "xtrue" ] 
+then
+    if [ "x$enable_unattended" = "xtrue" ]
+    then
+	exec "$bin_dir/$platform_name/$executable_name" --mode unattended --unattendedmodeui minimal --filename "$rtipkg_dirname/$rtipkg_basename"
+    else 
+        exec "$bin_dir/$platform_name/$executable_name" --mode unattended --unattendedmodeui minimalWithDialogs --filename "$rtipkg_dirname/$rtipkg_basename"
+    fi
+else
+    if [ "x$enable_unattended" != "xtrue" ]
+    then
+	echo "Setup is now ready to begin installing $rtipkg_dirname/$rtipkg_basename on your computer."
+	while true
+	do
+	    printf "Do you want to continue? [Y/n]: "
+	    read yn
+	    case "x$yn" in
+		"xy" | "xY" | "x" )
+		    break
+		    ;;
+		"xn" | "xN" )
+		    exit 0
+		    ;;
+		*)
+		    echo "Invalid option"
+	    esac
+	done	
+    fi
+    
+    echo "Installing $basename_with_extension. Please wait, this may take several minutes..."
+    "$bin_dir/$platform_name/$executable_name" --mode unattended --filename "$rtipkg_dirname/$rtipkg_basename"
+    if [ "$?" = "0" ]
+    then
+	echo "Done"
+	exit 0
+    else
+	echo "Error installing $basename_with_extension. Please contact support@rti.com"
+	exit 1
+    fi
+fi

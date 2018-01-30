@@ -1,0 +1,14 @@
+/home/aust/ros2_ws/install/lib/examples_rclcpp_minimal_publisher/publisher_lambda
+/home/aust/ros2_ws/install/lib/examples_rclcpp_minimal_publisher/publisher_member_function
+/home/aust/ros2_ws/install/lib/examples_rclcpp_minimal_publisher/publisher_not_composable
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/examples_rclcpp_minimal_publisher
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/examples_rclcpp_minimal_publisher
+/home/aust/ros2_ws/install/share/examples_rclcpp_minimal_publisher/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/examples_rclcpp_minimal_publisher/environment/path.sh
+/home/aust/ros2_ws/install/share/examples_rclcpp_minimal_publisher/local_setup.bash
+/home/aust/ros2_ws/install/share/examples_rclcpp_minimal_publisher/local_setup.sh
+/home/aust/ros2_ws/install/share/examples_rclcpp_minimal_publisher/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/examples_rclcpp_minimal_publisher
+/home/aust/ros2_ws/install/share/examples_rclcpp_minimal_publisher/cmake/examples_rclcpp_minimal_publisherConfig.cmake
+/home/aust/ros2_ws/install/share/examples_rclcpp_minimal_publisher/cmake/examples_rclcpp_minimal_publisherConfig-version.cmake
+/home/aust/ros2_ws/install/share/examples_rclcpp_minimal_publisher/package.xml

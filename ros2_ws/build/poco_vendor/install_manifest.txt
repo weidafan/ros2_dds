@@ -1,0 +1,3 @@
+/home/aust/ros2_ws/install/share/poco_vendor/cmake/Modules/FindPoco.cmake
+/home/aust/ros2_ws/install/share/poco_vendor/cmake/poco_vendorConfig.cmake
+/home/aust/ros2_ws/install/share/poco_vendor/cmake/poco_vendorConfig-version.cmake

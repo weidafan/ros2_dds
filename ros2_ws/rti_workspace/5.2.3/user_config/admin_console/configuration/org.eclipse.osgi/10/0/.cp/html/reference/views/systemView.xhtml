@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>System View</title>
+    <link rel="stylesheet" href="../../acdocs.css" type="text/css" />   
+</head>
+
+<body>
+        
+    <div class="centerContent">
+        <div class="docTopBanner"/> 
+    </div>
+
+	<div class="docPageTitle">System View</div>
+    
+	<div class="docScreenShot">
+		<img src="../../images/systemView.png" />
+	</div>
+	
+	
+	<br />
+	<div class="docSectionTitle">Connected Domains</div>
+	
+	<div class="docSectionContent">The list of domains currently used
+		for communication is displayed at the top. To join additional domains
+		or leave current domains, click on the link "Connected to domains" to
+		open the Preferences panel.
+    </div>
+
+
+	<br />
+	<div class="docSectionTitle">System Summary Table</div>
+	
+	<div class="docSectionContent">
+		This table provides an overview of what is running in the distributed
+		system and whether any of these components need your attention.
+
+		<ul>
+			<li><strong>Hosts</strong> - The number of hosts connected to
+				Admin Console.<br />
+			<br /></li>
+			<li><strong>Processes</strong> - The number of processes
+				discovered by Admin Console. <br />
+			<br /></li>
+			<li><strong>Processes Reporting Errors</strong> - The number of
+				processes with an error health state.<br />
+			<br /></li>
+			<li><strong>RTI Services</strong> - The number of RTI services
+				discovered by Admin Console. <br />
+			<br /></li>
+			<li><strong>RTI Services Reporting Errors</strong> - The number
+				of RTI services that are reporting errors. <br />
+			<br /></li>
+		</ul>
+	</div>
+
+
+	<br />
+	<div class="docSectionTitle">Hosts Tab</div>
+	
+	<div class="docSectionContent">
+		This table provides an overview of each host that is communicating
+		with Admin Console.
+
+		<ul>
+			<li><strong>Hosts</strong> - Name/IP of the hosts.<br /> <br />
+			</li>
+			
+			<li><strong> Health</strong> - Aggregate of the health value of all
+			the services / processes recognized by Admin Console on this host.
+			<br /> <br /></li>
+			
+			<li><strong> Up-Time</strong> - The time since the system has
+				started until now. <br /> <br /></li>
+			
+			<li><strong>CPU (%) </strong>- Current CPU usage of this host.
+				This value is retrieved using "/proc/stat" on Linux systems and
+				"GetSystemInfo" on Windows systems. <br /> <br /></li>
+				
+			<li><strong>Used Memory</strong> - Current memory usage of this
+				host. This value is retrieved using "sysinfo" on Linux systems 
+				and "GlobalMemoryStatusEx" on Windows systems. <br /> <br /></li>
+			
+			<li><strong>Free Memory</strong> - Current free memory available
+				on this host. This value is retrieved using "sysinfo" on Linux
+				systems and "GlobalMemoryStatusEx" on Windows systems. <br /> <br />
+			</li>
+			
+			<li><strong>Used Swap Memory</strong> - Current swap memory
+				usage of this host. This value is retrieved using "sysinfo" on Linux
+				systems and "GlobalMemoryStatusEx" on Windows systems.<br /> <br />
+			</li>
+			
+			<li><strong>Free Swap Memory</strong> - Current free swap memory
+				available on this host. This value is retrieved using "sysinfo" on
+				Linux systems and "GlobalMemoryStatusEx" on Windows systems. <br />
+				<br /></li>
+		</ul>
+	</div>
+	
+	
+	<br/>
+    <div class="docSectionTitle">System Log Tab</div>
+    
+    <div class="docSectionContent">
+    The System Log is a table that shows log messages (provided by
+    Distributed Logger) aggregated from all of the processes in the entire 
+    distributed system.
+    </div>
+    
+    <div class="docScreenShot">
+        <img src="../../images/systemView_systemLog.png" />
+    </div>
+
+</body>
+</html>

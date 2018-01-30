@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Tutorial - Step 6</title>
+<link rel="stylesheet" href="../acdocs.css" type="text/css" />
+</head>
+
+<body>
+	<div class="centerContent">
+		<div class="docTopBanner" />
+	</div>
+
+	<div class="docPageTitle">Tutorial Step 6: Routing Service
+		Configuration</div>
+
+	<div class="docSectionContent">In this step of the tutorial, we
+		will modify the routing service configuration. Click on the
+		Configuration link and you will see the configuration that is
+		currently being used.</div>
+
+	<br />
+	<br />
+	<div class="docSectionTitle">6.1 Route Participant Info</div>
+	<div class="docSectionContent">
+		The default configuration file for Routing Service routes various
+		shapes from domain 0 to domain 1. In the Design view of the editor,
+		open routing_service -> domain_route node. Open the two participant
+		nodes. Notice that participant 1 specifies domain 0 and participant 2
+		specifies domain 1. <br /> <br /> <img
+			src="../images/tut6_participantInfo.png" /> <br />
+
+	</div>
+
+	<br />
+	<br />
+	<div class="docSectionTitle">6.2 Topic Route Info and
+		Transformation</div>
+	<div class="docSectionContent">
+		Open the session node and explore the content. The default
+		configuration routes all topics from domain 0 to domain 1. <br />
+		<br /> <img src="../images/tut6_sessionInfo.png" /> <br />
+
+	</div>
+
+	<br />
+	<br />
+	<div class="docSectionTitle">6.3 Publish an additional Circle in
+		Domain 0</div>
+	<div class="docSectionContent">
+		In step 3 of the tutorial, we published a square in domain 0. Follow
+		similar steps to publish a red circle. We will apply some filters to
+		these shapes in the next step. <br /> <br /> <img
+			src="../images/tut6_addCircle.png" /> <br />
+
+	</div>
+
+	<br />
+	<br />
+	<div class="docSectionTitle">6.4 Adding Topic filters</div>
+	<div class="docSectionContent">
+		<p>
+			Open the Session -> auto_topic_route -> input node. Change the
+			"allow_stream_name_filter" from "*" to "Square". Do the same for the
+			output node, as shown in the screenshot below. <br /> <br /> <img
+				src="../images/tut6_AddFilter.png" /> <br />
+		</p>
+	</div>
+
+	<br />
+	<br />
+	<div class="docSectionTitle">6.5 Applying Configuration Changes:
+	</div>
+	<div class="docSectionContent">
+		Notice there is an asterisk (*) next to the configuration file's tab
+		name; this means the file's content has been modified. To apply this
+		updated configuration to the running instance of Routing Service,
+		click on the Configuration Apply Button on the toolbar. <br /> <br />
+		<img src="../images/tut6_applyConfig.png" /><br />
+
+	</div>
+	<br />
+	<div class="docSectionContent">
+		Now you should see that the square is still routed to domain 0, but the
+		circle is no longer routed. <br />
+		<br /> <img src="../images/tut6_squareOnly.png" /> <br /> For more
+		details on how Routing Service's configuration works, see the Routing
+		Service User's Manual. For more details on how Admin Console can be
+		used to control Routing Service, see the 
+		<a href="../reference/views/routingView.xhtml">Routing Service 
+		View</a>.
+	</div>
+
+	<br />
+	<br />
+	<div class="docSectionTitle">
+		<a href="step5.html"> Previous: Routing Service Performance </a>
+		&nbsp; &nbsp; &nbsp; <a href="step7.html"> Next: Distributed 
+		Debugging</a>
+	</div>
+
+
+</body>
+</html>

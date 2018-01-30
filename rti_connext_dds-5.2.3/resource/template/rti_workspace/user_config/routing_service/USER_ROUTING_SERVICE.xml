@@ -1,0 +1,364 @@
+<?xml version="1.0"?>
+<!-- 
+ (c) Copyright, Real-Time Innovations, 2013-2016.
+ All rights reserved.
+ No duplications, whole or partial, manual or electronic, may be made
+ without express written permission.  Any such copies, or
+ revisions thereof, must display this notice unaltered.
+ This code contains trade secrets of Real-Time Innovations, Inc.
+-->
+
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_routing_service.xsd">
+
+    <routing_service name="bridge_domain_0_and_domain_1">
+        <annotation>
+            <documentation>
+                Routes all topics from domain 0 to domain 1
+                and the other way around using RELIABLE QoS
+            </documentation>
+        </annotation>
+
+        <!-- The administration tag enables remote administration, and is 
+            required when using Admin Console. -->
+        <administration>
+            <domain_id>0</domain_id>
+            <distributed_logger>
+                <enabled>true</enabled>
+                <filter_level>WARNING</filter_level>
+            </distributed_logger>
+        </administration>
+
+        <!-- This is the Monitoring configuration for all the entities in 
+            this routing service, and is required when using Admin Console. -->
+        <monitoring>
+            <!-- The domain id where to publish the monitoring information -->
+            <domain_id>0</domain_id>
+            <!-- How often to publish it -->
+            <status_publication_period>
+                <sec>5</sec>
+                <nanosec>0</nanosec>
+            </status_publication_period>
+            <!-- How often to compute statistics -->
+            <statistics_sampling_period>
+                <sec>1</sec>
+                <nanosec>0</nanosec>
+            </statistics_sampling_period>
+        </monitoring>
+
+        <domain_route name="TwoWayDomainRoute">
+
+            <participant_1>
+                <domain_id>0</domain_id>
+            </participant_1>
+
+            <participant_2>
+                <domain_id>1</domain_id>
+            </participant_2>
+
+            <session name="Session1">
+                <auto_topic_route name="AllForward">
+                    <publish_with_original_info>true</publish_with_original_info>
+                    <input participant="1">
+                        <allow_topic_name_filter>*</allow_topic_name_filter>
+                        <allow_registered_type_name_filter>*</allow_registered_type_name_filter>
+                        <deny_topic_name_filter>rti/*</deny_topic_name_filter>
+                        <creation_mode>ON_DOMAIN_AND_ROUTE_MATCH</creation_mode>
+                    </input>
+                    <output>
+                        <allow_topic_name_filter>*</allow_topic_name_filter>
+                        <allow_registered_type_name_filter>*</allow_registered_type_name_filter>
+                        <deny_topic_name_filter>rti/*</deny_topic_name_filter>
+                        <creation_mode>ON_DOMAIN_AND_ROUTE_MATCH</creation_mode>
+                    </output>
+                </auto_topic_route>
+            </session>
+
+            <session name="Session2">
+                <auto_topic_route name="AllBackward">
+                    <publish_with_original_info>true</publish_with_original_info>
+                    <input participant="2">
+                        <allow_topic_name_filter>*</allow_topic_name_filter>
+                        <allow_registered_type_name_filter>*</allow_registered_type_name_filter>
+                        <deny_topic_name_filter>rti/*</deny_topic_name_filter>
+                        <creation_mode>ON_DOMAIN_AND_ROUTE_MATCH</creation_mode>
+                        <datareader_qos>
+                            <reliability>
+                                <kind>RELIABLE_RELIABILITY_QOS</kind>
+                            </reliability>
+                        </datareader_qos>
+                    </input>
+                    <output>
+                        <allow_topic_name_filter>*</allow_topic_name_filter>
+                        <allow_registered_type_name_filter>*</allow_registered_type_name_filter>
+                        <deny_topic_name_filter>rti/*</deny_topic_name_filter>
+                        <creation_mode>ON_DOMAIN_AND_ROUTE_MATCH</creation_mode>
+                        <datawriter_qos>
+                            <reliability>
+                                <kind>RELIABLE_RELIABILITY_QOS</kind>
+                            </reliability>
+                        </datawriter_qos>
+                    </output>
+                </auto_topic_route>
+            </session>
+
+        </domain_route>
+    </routing_service>
+
+  <routing_service name="AsymmetricTCPCloudServer">
+    <annotation>
+      <documentation>
+        Accepts TCP connections from clients on port 7400. Relays Ping, Square,
+                Triangle, and Circle topics between connected clients.
+      </documentation>
+    </annotation>
+
+    <domain_route name="AsymmetricTCPDomainRoute">
+        <participant_1>
+            <!-- TCP communications domain (e.g., domain 0) -->
+            <domain_id>0</domain_id>
+            <participant_qos>
+                <!-- Disable built-in transports -->
+                <transport_builtin>
+                    <mask>MASK_NONE</mask>
+                </transport_builtin>
+                <!-- Configure TCP transport -->
+                <property>
+                    <value>
+                        <element>
+                            <name>dds.transport.load_plugins</name>
+                            <value>dds.transport.TCPv4.tcp1</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.TCPv4.tcp1.library</name>
+                            <value>nddstransporttcp</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.TCPv4.tcp1.create_function</name>
+                            <value>NDDS_Transport_TCPv4_create</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.TCPv4.tcp1.parent.classid</name>
+                            <value>NDDS_TRANSPORT_CLASSID_TCPV4_WAN</value>
+                        </element>
+                        <!-- Public IP address that publishers and subscribers 
+                            will connect to including an open port. Note that 
+                            you will need to use an IP address as domain names 
+                            are currently not supported. For instance, we 
+                            pubsub.rti.com as follows: -->
+                        <element>
+                            <name>dds.transport.TCPv4.tcp1.public_address</name>
+                            <value>52.4.19.34:7400</value>
+                        </element>
+                        <!-- In this case the bind port is the same open 
+                            port in the server -->
+                        <element>
+                            <name>dds.transport.TCPv4.tcp1.server_bind_port</name>
+                            <value>7400</value>
+                        </element>
+                    </value>
+                </property>
+            </participant_qos>
+        </participant_1>
+
+        <!-- Built-in transports communication domain (e.g., domain 10) -->
+        <participant_2>
+            <domain_id>10</domain_id>
+        </participant_2>
+
+        <!-- Configure PingForward and PingBackward sessions -->
+        <session name="Forward">
+            <topic_route name="PingTopicForward">
+                <route_types>true</route_types>
+                <publish_with_original_info>true</publish_with_original_info>
+                <publish_with_original_timestamp>true</publish_with_original_timestamp>
+                <!-- Read pings via TCP (domain 0) -->
+                <input participant="1">
+                    <topic_name>PingTopic</topic_name>
+                    <registered_type_name>PingType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                    <datareader_qos>
+                        <durability>
+                            <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                        </durability>
+                    </datareader_qos>
+                </input>
+                <!-- Redirect pings via TCP as well (domain 0) -->
+                <output participant="1">
+                    <topic_name>PingTopic</topic_name>
+                    <registered_type_name>PingType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                    <datawriter_qos>
+                        <durability>
+                            <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                        </durability>
+                    </datawriter_qos>
+                </output>
+                <!-- Redirect pings via built-in transports (domain 10) -->
+                <output participant="2">
+                    <topic_name>PingTopic</topic_name>
+                    <registered_type_name>PingType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                    <datawriter_qos>
+                        <durability>
+                            <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                        </durability>
+                    </datawriter_qos>
+                </output>
+            </topic_route>
+            <topic_route name="SquareTopicForward">
+                <route_types>true</route_types>
+                <publish_with_original_info>true</publish_with_original_info>
+                <publish_with_original_timestamp>true</publish_with_original_timestamp>
+                <!-- Read squares via TCP (domain 0) -->
+                <input participant="1">
+                    <topic_name>Square</topic_name>
+                    <registered_type_name>ShapeType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                </input>
+                <!-- Redirect squares via TCP as well (domain 0) -->
+                <output participant="1">
+                    <topic_name>Square</topic_name>
+                    <registered_type_name>ShapeType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                </output>
+                <!-- Redirect squares via built-in transports (domain 10) -->
+                <output participant="2">
+                    <topic_name>Square</topic_name>
+                    <registered_type_name>ShapeType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                </output>
+            </topic_route>
+            <topic_route name="TriangleTopicForward">
+                <route_types>true</route_types>
+                <publish_with_original_info>true</publish_with_original_info>
+                <publish_with_original_timestamp>true</publish_with_original_timestamp>
+                <!-- Read triangles via TCP (domain 0) -->
+                <input participant="1">
+                    <topic_name>Triangle</topic_name>
+                    <registered_type_name>ShapeType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                </input>
+                <!-- Redirect triangles via TCP as well (domain 0) -->
+                <output participant="1">
+                    <topic_name>Triangle</topic_name>
+                    <registered_type_name>ShapeType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                </output>
+                <!-- Redirect triangles via built-in transports (domain 10) -->
+                <output participant="2">
+                    <topic_name>Triangle</topic_name>
+                    <registered_type_name>ShapeType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                </output>
+            </topic_route>
+            <topic_route name="CircleTopicForward">
+                <route_types>true</route_types>
+                <publish_with_original_info>true</publish_with_original_info>
+                <publish_with_original_timestamp>true</publish_with_original_timestamp>
+                <!-- Read circles via TCP (domain 0) -->
+                <input participant="1">
+                    <topic_name>Circle</topic_name>
+                    <registered_type_name>ShapeType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                </input>
+                <!-- Redirect circles via TCP as well (domain 0) -->
+                <output participant="1">
+                    <topic_name>Circle</topic_name>
+                    <registered_type_name>ShapeType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                </output>
+                <!-- Redirect circles via built-in transports (domain 10) -->
+                <output participant="2">
+                    <topic_name>Circle</topic_name>
+                    <registered_type_name>ShapeType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                </output>
+            </topic_route>
+        </session>
+
+        <session name="Backward">
+            <topic_route name="PingTopicBackward">
+                <route_types>true</route_types>
+                <publish_with_original_info>true</publish_with_original_info>
+                <publish_with_original_timestamp>true</publish_with_original_timestamp>
+                <!-- Read pings via built-in transports (domain 10) -->
+                <input participant="2">
+                    <topic_name>PingTopic</topic_name>
+                    <registered_type_name>PingType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                    <datareader_qos>
+                        <durability>
+                            <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                        </durability>
+                    </datareader_qos>
+                </input>
+                <!-- Redirect pings via TCP (domain 0) -->
+                <output participant="1">
+                    <topic_name>PingTopic</topic_name>
+                    <registered_type_name>PingType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                    <datawriter_qos>
+                        <durability>
+                            <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                        </durability>
+                    </datawriter_qos>
+                </output>
+            </topic_route>
+            <topic_route name="SquareTopicBackward">
+                <route_types>true</route_types>
+                <publish_with_original_info>true</publish_with_original_info>
+                <publish_with_original_timestamp>true</publish_with_original_timestamp>
+                <!-- Read squares via built-in transports (domain 10) -->
+                <input participant="2">
+                    <topic_name>Square</topic_name>
+                    <registered_type_name>ShapeType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                </input>
+                <!-- Redirect squares via TCP (domain 0) -->
+                <output participant="1">
+                    <topic_name>Square</topic_name>
+                    <registered_type_name>ShapeType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                </output>
+            </topic_route>
+            <topic_route name="TriangleTopicBackward">
+                <route_types>true</route_types>
+                <publish_with_original_info>true</publish_with_original_info>
+                <publish_with_original_timestamp>true</publish_with_original_timestamp>
+                <!-- Read triangles via built-in transports (domain 10) -->
+                <input participant="2">
+                    <topic_name>Triangle</topic_name>
+                    <registered_type_name>ShapeType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                </input>
+                <!-- Redirect triangles via TCP (domain 0) -->
+                <output participant="1">
+                    <topic_name>Triangle</topic_name>
+                    <registered_type_name>ShapeType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                </output>
+            </topic_route>
+            <topic_route name="CircleTopicBackward">
+                <route_types>true</route_types>
+                <publish_with_original_info>true</publish_with_original_info>
+                <publish_with_original_timestamp>true</publish_with_original_timestamp>
+                <!-- Read circles via built-in transports (domain 10) -->
+                <input participant="2">
+                    <topic_name>Circle</topic_name>
+                    <registered_type_name>ShapeType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                </input>
+                <!-- Redirect circles via TCP (domain 0) -->
+                <output participant="1">
+                    <topic_name>Circle</topic_name>
+                    <registered_type_name>ShapeType</registered_type_name>
+                    <creation_mode>IMMEDIATE</creation_mode>
+                </output>
+            </topic_route>
+        </session>
+    </domain_route>
+  </routing_service>
+
+</dds>
+

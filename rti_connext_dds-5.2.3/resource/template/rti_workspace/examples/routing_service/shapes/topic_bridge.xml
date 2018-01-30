@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_routing_service.xsd">
+
+    <!--
+    ********************************************************************** 
+    RTI Routing service example                                            
+    ********************************************************************** 
+    This example reads Squares from domain 0 and publish them as           
+    Circles on domain 1.                                                   
+    ********************************************************************** 
+    -->
+
+
+    <!-- 
+    This is the routing service configuration for this example
+    -->
+    <routing_service name="example">
+
+        <annotation>
+            <documentation>
+                Reads Squares on domain 0 and writes Circles on domain 1
+            </documentation>
+        </annotation>
+
+        <domain_route name="DomainRoute" enabled="true">
+            <participant_1>
+                <domain_id>0</domain_id>
+            </participant_1>
+            <participant_2>
+                <domain_id>1</domain_id>
+            </participant_2>
+
+            <!-- 
+            A session with default configuration that contains a single topic route
+            -->
+            <session name="Session" enabled="true">
+
+                <topic_route name="SquaresToCircles">
+                    <!-- Reading data from participant_1 -->
+                    <input participant="1">
+                        <!-- 
+                        Reading a type whose registered name is ShapeType.
+                        As we don't register ourselves on participant_1, its actual
+                        type code will have to be discovered when the router runs
+                        -->
+                        <registered_type_name>ShapeType</registered_type_name>
+                        <!-- 
+                        Reading topic Square
+                        -->
+                        <topic_name>Square</topic_name>
+                    </input>
+                    <output>
+                        <!-- Writing the same type -->
+                        <registered_type_name>ShapeType</registered_type_name>
+                        <!-- But a differnt topic -->
+                        <topic_name>Circle</topic_name>
+                    </output>
+
+                </topic_route>
+
+            </session>
+        </domain_route>
+    </routing_service>
+
+</dds>

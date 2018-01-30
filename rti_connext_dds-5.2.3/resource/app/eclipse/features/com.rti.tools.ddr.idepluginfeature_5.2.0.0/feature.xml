@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.rti.tools.ddr.idepluginfeature"
+      label="RTI DDR IDE Plugin Feature"
+      version="5.2.0.0"
+      provider-name="Real-Time Innovations, Inc.">
+
+   <description url="http://tools.rti.com/ddr">
+      Real-Time Innovations Recording Service UI.
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      All rights reserved to Real-Time Innovations, Inc.
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.swt" version="3.6.2" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="com.rti.tools.replay.remote.dds.interface" version="5.2.0.0" match="greaterOrEqual"/>
+      <import plugin="com.rti.dds" version="5.2.0.0" match="greaterOrEqual"/>
+      <import plugin="com.rti.tools.monitoring.library.remote.dds.interface" version="5.2.0.0" match="greaterOrEqual"/>
+      <import plugin="com.rti.tools.ddsinterface" version="5.2.0.0" match="greaterOrEqual"/>
+      <import plugin="com.rti.tools.recorder.remote.dds.interface" version="5.2.0.0" match="greaterOrEqual"/>
+      <import plugin="com.rti.tools.recorder.config.jaxb" version="5.2.0.0" match="greaterOrEqual"/>
+      <import plugin="com.rti.tools.common" version="5.2.0.0" match="greaterOrEqual"/>
+      <import plugin="com.rti.tools.replay.config.jaxb" version="5.2.0.0" match="greaterOrEqual"/>
+      <import plugin="com.rti.tools.replay.remote.control" version="5.2.0.0" match="greaterOrEqual"/>
+      <import plugin="com.rti.tools.recorder.remote.control" version="5.2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.9.100" match="greaterOrEqual"/>
+      <import plugin="com.rti.tools.recordingconsole.gui" version="5.2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.ui.workbench" version="0.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.core.services" version="0.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.core.contexts" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.core.di" version="1.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.ui.services" version="0.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.swt" version="3.5.0" match="compatible"/>
+      <import plugin="org.eclipse.jface" version="3.5.0" match="compatible"/>
+      <import plugin="org.eclipse.e4.ui.workbench.swt" version="0.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.ui.model.workbench" version="0.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.osgi.services" version="3.2.0" match="compatible"/>
+      <import plugin="org.eclipse.e4.core.commands" version="0.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.ui.bindings" version="0.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.equinox.common" version="3.6.0" match="compatible"/>
+      <import plugin="org.eclipse.core.expressions" version="3.4.200" match="compatible"/>
+      <import plugin="org.eclipse.e4.ui.css.swt.theme" version="0.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.ui.css.core" version="0.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.osgi" version="3.6.0" match="compatible"/>
+      <import plugin="org.eclipse.e4.ui.di" version="0.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore" version="2.7.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.ui.css.swt" version="0.11.0" match="greaterOrEqual"/>
+      <import plugin="javax.annotation"/>
+      <import plugin="javax.inject"/>
+      <import plugin="javax.xml"/>
+      <import plugin="org.eclipse.e4.ui.model.workbench" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.core.contexts" version="0.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.core.di" version="0.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.ui.workbench" version="0.9.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.core.services" version="0.9.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.osgi.services" version="3.2.100" match="compatible"/>
+      <import plugin="org.eclipse.e4.ui.workbench.renderers.swt" version="0.9.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.ui.widgets" version="0.11.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.ui.css.swt" version="0.9.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.swt" version="3.7.0" match="compatible"/>
+      <import plugin="org.eclipse.jface" version="3.7.0" match="compatible"/>
+      <import plugin="org.eclipse.core.runtime" version="3.7.0" match="compatible"/>
+      <import plugin="org.eclipse.e4.ui.di" version="0.10.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.ui.services" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore.xmi" version="2.7.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.ui.workbench" version="1.0.2" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.ui.workbench.addons.swt" version="1.0.2" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.ui.workbench.renderers.swt" version="0.11.2" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.ui.workbench.swt" version="0.12.2" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="com.rti.dds"
+         download-size="529"
+         install-size="603"
+         version="5.2.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.rti.tools.common"
+         download-size="853"
+         install-size="1453"
+         version="5.2.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.rti.tools.ddsinterface"
+         download-size="197"
+         install-size="459"
+         version="5.2.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.rti.tools.monitoring.library.remote.dds.interface"
+         download-size="2068"
+         install-size="2340"
+         version="5.2.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.rti.tools.recorder.config.jaxb"
+         download-size="165"
+         install-size="369"
+         version="5.2.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.rti.tools.recorder.remote.control"
+         download-size="49"
+         install-size="95"
+         version="5.2.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.rti.tools.recorder.remote.dds.interface"
+         download-size="119"
+         install-size="235"
+         version="5.2.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.rti.tools.replay.config.jaxb"
+         download-size="188"
+         install-size="413"
+         version="5.2.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.rti.tools.replay.remote.control"
+         download-size="49"
+         install-size="93"
+         version="5.2.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.rti.tools.replay.remote.dds.interface"
+         download-size="78"
+         install-size="163"
+         version="5.2.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.rti.tools.recordingconsole.gui"
+         download-size="3347"
+         install-size="3598"
+         version="5.2.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.rti.tools.ddr.application"
+         download-size="28"
+         install-size="421"
+         version="5.2.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.e4.ui.workbench.renderers.swt"
+         download-size="348"
+         install-size="759"
+         version="0.12.2.v20150204-1353"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.e4.ui.workbench.addons.swt"
+         download-size="141"
+         install-size="293"
+         version="1.1.2.v20141126-1310"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.log4j"
+         download-size="417"
+         install-size="809"
+         version="1.2.15.v201012070815"
+         unpack="false"/>
+
+</feature>

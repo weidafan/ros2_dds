@@ -1,0 +1,29 @@
+##/* $Id$
+##
+##   (c) Copyright, Real-Time Innovations, Inc. 2015.  All rights reserved.
+##   No duplications, whole or partial, manual or electronic, may be made
+##   without prior written permission.  Any such copies, or
+##   revisions thereof, must display this notice unaltered.
+##   This code contains trade secrets of Real-Time Innovations, Inc.
+##
+##modification history:
+##---------------------
+##2.2.3,23sep15,djs created 
+##========================================================================*/*#
+${envMap.POUND_CHAR}include "ndds/ndds_c.h"
+${envMap.POUND_CHAR}include "${envMap.idlFileName}.h"
+${envMap.POUND_CHAR}include "${envMap.idlFileName}Support.h"
+
+struct DDS_Entities {
+    DDS_DomainParticipant *participant;
+    DDS_Publisher *publisher;
+    DDS_Topic *topic;
+    DDS_DataWriter *writer;
+    ${constructMap.nativeFQName}DataWriter *${constructMap.nativeFQName}_writer;
+    ${constructMap.nativeFQName} *instance;
+    DDS_InstanceHandle_t instance_handle;
+};
+
+extern int dds_setup(struct DDS_Entities* self, int domainId);
+extern void dds_publish(const struct DDS_Entities* self, const int count);
+extern int publisher_shutdown(const struct DDS_Entities* self);

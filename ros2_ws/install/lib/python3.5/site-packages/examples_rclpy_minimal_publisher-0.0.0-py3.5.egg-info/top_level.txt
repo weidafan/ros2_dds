@@ -1,0 +1,3 @@
+publisher_local_function
+publisher_member_function
+publisher_old_school

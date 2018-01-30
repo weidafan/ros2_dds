@@ -1,0 +1,19 @@
+{
+  "package_name": "example_interfaces",
+  "output_dir": "/home/aust/ros2_ws/build/example_interfaces/rosidl_typesupport_c/example_interfaces",
+  "template_dir": "/home/aust/ros2_ws/install/share/rosidl_typesupport_c/resource",
+  "ros_interface_files": [
+    "/home/aust/ros2_ws/src/ros2/example_interfaces/srv/AddTwoInts.srv",
+    "/home/aust/ros2_ws/build/example_interfaces/srv/AddTwoInts_Request.msg",
+    "/home/aust/ros2_ws/build/example_interfaces/srv/AddTwoInts_Response.msg"
+  ],
+  "target_dependencies": [
+    "/home/aust/ros2_ws/install/lib/rosidl_typesupport_c/rosidl_typesupport_c",
+    "/home/aust/ros2_ws/install/lib/python3.5/site-packages/rosidl_typesupport_c/__init__.py",
+    "/home/aust/ros2_ws/install/share/rosidl_typesupport_c/resource/msg__type_support.cpp.em",
+    "/home/aust/ros2_ws/install/share/rosidl_typesupport_c/resource/srv__type_support.cpp.em",
+    "/home/aust/ros2_ws/src/ros2/example_interfaces/srv/AddTwoInts.srv",
+    "/home/aust/ros2_ws/build/example_interfaces/srv/AddTwoInts_Request.msg",
+    "/home/aust/ros2_ws/build/example_interfaces/srv/AddTwoInts_Response.msg"
+  ]
+}

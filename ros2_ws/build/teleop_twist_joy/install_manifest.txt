@@ -1,0 +1,17 @@
+/home/aust/ros2_ws/install/lib/libteleop_twist_joy.so
+/home/aust/ros2_ws/install/lib/teleop_twist_joy/teleop_node
+/home/aust/ros2_ws/install/include/teleop_twist_joy.h
+/home/aust/ros2_ws/install/share/teleop_twist_joy/environment/library_path.sh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/teleop_twist_joy
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/teleop_twist_joy
+/home/aust/ros2_ws/install/share/teleop_twist_joy/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/teleop_twist_joy/environment/path.sh
+/home/aust/ros2_ws/install/share/teleop_twist_joy/local_setup.bash
+/home/aust/ros2_ws/install/share/teleop_twist_joy/local_setup.sh
+/home/aust/ros2_ws/install/share/teleop_twist_joy/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/teleop_twist_joy
+/home/aust/ros2_ws/install/share/teleop_twist_joy/cmake/ament_cmake_export_include_directories-extras.cmake
+/home/aust/ros2_ws/install/share/teleop_twist_joy/cmake/ament_cmake_export_libraries-extras.cmake
+/home/aust/ros2_ws/install/share/teleop_twist_joy/cmake/teleop_twist_joyConfig.cmake
+/home/aust/ros2_ws/install/share/teleop_twist_joy/cmake/teleop_twist_joyConfig-version.cmake
+/home/aust/ros2_ws/install/share/teleop_twist_joy/package.xml

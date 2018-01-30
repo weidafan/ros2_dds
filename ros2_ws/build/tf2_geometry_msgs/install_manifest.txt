@@ -1,0 +1,14 @@
+/home/aust/ros2_ws/install/include/tf2_geometry_msgs/tf2_geometry_msgs.h
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/tf2_geometry_msgs
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/tf2_geometry_msgs
+/home/aust/ros2_ws/install/share/tf2_geometry_msgs/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/tf2_geometry_msgs/environment/path.sh
+/home/aust/ros2_ws/install/share/tf2_geometry_msgs/local_setup.bash
+/home/aust/ros2_ws/install/share/tf2_geometry_msgs/local_setup.sh
+/home/aust/ros2_ws/install/share/tf2_geometry_msgs/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/tf2_geometry_msgs
+/home/aust/ros2_ws/install/share/tf2_geometry_msgs/cmake/ament_cmake_export_dependencies-extras.cmake
+/home/aust/ros2_ws/install/share/tf2_geometry_msgs/cmake/ament_cmake_export_include_directories-extras.cmake
+/home/aust/ros2_ws/install/share/tf2_geometry_msgs/cmake/tf2_geometry_msgsConfig.cmake
+/home/aust/ros2_ws/install/share/tf2_geometry_msgs/cmake/tf2_geometry_msgsConfig-version.cmake
+/home/aust/ros2_ws/install/share/tf2_geometry_msgs/package.xml

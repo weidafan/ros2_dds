@@ -1,0 +1,24 @@
+<LowBandwidthSimulationManagerProfile>
+	<lbsm>
+		<listener_port>5012</listener_port>
+		<event_port>5011</event_port>
+		<verbosity>5</verbosity>
+	</lbsm>
+	<station>
+		<overflow>true</overflow>	
+		<buffer_max_size>102400</buffer_max_size>
+	</station>
+	<channel type="ADVANCE_CHANNEL_LAYER">
+		<bandwidth>12000</bandwidth>
+		<packet_loss>0</packet_loss>
+		<propagation_delay>0</propagation_delay>
+		<frame_size>410</frame_size>
+		<burst_frame_size>530</burst_frame_size>
+		<normal_pretransmission_guard>400</normal_pretransmission_guard>
+		<normal_posttransmission_guard>200</normal_posttransmission_guard>
+		<burst_pretransmission_guard>0</burst_pretransmission_guard>
+		<burst_posttransmission_guard>200</burst_posttransmission_guard>
+		<burst_length>3</burst_length>
+		<retransmissions>6</retransmissions>
+	</channel>
+</LowBandwidthSimulationManagerProfile>

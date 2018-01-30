@@ -1,0 +1,215 @@
+/* $Id$
+
+ (c) Copyright, Real-Time Innovations, 2015-2016.
+ All rights reserved.
+ No duplications, whole or partial, manual or electronic, may be made
+ without express written permission.  Any such copies, or
+ revisions thereof, must display this notice unaltered.
+ This code contains trade secrets of Real-Time Innovations, Inc.
+
+modification history
+------------ -------
+5.2.0,11nov14,jpm Added statistics information to SharedReaderQueueStatus (QUEUEING-384)
+5.2.0,05sep14,fcs Fixed type definition
+5.1.0,03jun14,asn QUEUING-150: Created
+==============================================================================*/
+
+/*i \file
+  @brief IDL test types for RTI Queuing Service
+ */
+module RTI {
+    module QueuingService {
+
+        const long NAME_MAX_LENGTH = 255;
+
+        struct SampleBuffer_t {
+            sequence<octet> value;
+        }; //@top-level false
+        //@Extensibility FINAL_EXTENSIBILITY
+
+        struct SequenceNumber_t {
+            long high;
+            unsigned long low;
+        }; //@top-level false
+        //@Extensibility FINAL_EXTENSIBILITY
+
+        struct GUID_t {
+            octet value[16];
+        };//@top-level false
+        //@Extensibility FINAL_EXTENSIBILITY
+
+        enum UndeliveredReasonKind {
+            LIFESPAN_EXPIRED_UNDELIVERED_REASON, 
+            MAX_RETRIES_UNDELIVERED_REASON
+        }; //@Extensibility EXTENSIBLE_EXTENSIBILITY
+
+        struct SampleIdentity_t {
+            GUID_t writer_guid;
+            SequenceNumber_t sequence_number;
+        }; //@top-level false
+        //@Extensibility FINAL_EXTENSIBILITY
+
+        struct DeadLetter_t {
+            string<NAME_MAX_LENGTH> queue_name;
+            SampleIdentity_t sample_identity;
+            UndeliveredReasonKind undelivered_reason;
+            SampleBuffer_t sample_buffer;
+        }; //@Extensibility EXTENSIBLE_EXTENSIBILITY
+
+        struct ConsumerAvailability_t {
+            GUID_t consumer_guid; //@key
+            boolean reception_enabled;
+            long unacked_threshold;
+        }; //@Extensibility EXTENSIBLE_EXTENSIBILITY  
+
+        enum MessageStatusKind {
+            UNDELIVERED_MESSAGE_STATUS,
+            SENT_MESSAGE_STATUS,
+            DELIVERED_MESSAGE_STATUS
+        };
+
+        struct Message {
+            MessageStatusKind status;
+            SampleIdentity_t original_virtual_sample_identity;
+            /* CDR-serialized content of the application message */
+            SampleBuffer_t sample_buffer;
+        }; //@Extensibility EXTENSIBLE_EXTENSIBILITY 
+
+
+        enum ProducerUpdateEventKind {
+            MESSAGE_ENQUEUED_KIND, 
+            MESSAGE_ASSIGNED_KIND,
+            MESSAGE_DEQUEUED_KIND,
+            PERIODIC_EVENT_KIND
+        }; //@Extensibility EXTENSIBLE_EXTENSIBILITY
+
+        struct ProducerUpdate_t {
+            GUID_t producer_guid;   
+            ProducerUpdateEventKind  update_kind;   
+            SequenceNumber_t lowest_sequence_number;
+            SequenceNumber_t highest_sequence_number;
+            SequenceNumber_t last_message_assigned_sequence_number;
+            SequenceNumber_t last_publication_sequence_number;
+            GUID_t assigned_consumer_guid;
+            SequenceNumber_t last_message_dequeued_sequence_number;
+            SequenceNumber_t highest_enqueued_message_sequence_number;
+        }; //@Extensibility EXTENSIBLE_EXTENSIBILITY 
+
+        struct MasterElection_t {
+            GUID_t instance_guid;   
+            string<NAME_MAX_LENGTH> application_name;
+            GUID_t update_reader_guid;  
+            long long election_epoch;
+            GUID_t suggested_master_vote;
+            long long first_participating_epoch;
+            long preference_order_for_voted_instance;
+        }; //@Extensibility EXTENSIBLE_EXTENSIBILITY 
+
+        struct ServiceConfiguration_t {
+            string dom;
+            string<255> configuration_name;
+            SequenceNumber_t last_update_sn;
+        }; //@Extensibility EXTENSIBLE_EXTENSIBILITY        
+
+        const string SYNCHRONIZED_CONFIGURATION_TOPIC_NAME =  
+                "rti/queuingservice/synchronized_config";
+
+        module Monitoring {            
+            const long MAX_HISTORICAL_METRICS = 5;
+
+            struct StatisticMetrics {
+                unsigned long long period_ms;
+                long long count;
+                float mean;
+                float minimum;
+                float maximum;
+                float std_dev;
+            };
+
+            struct StatisticVariable {
+                StatisticMetrics publication_period_metrics;
+                sequence<StatisticMetrics, MAX_HISTORICAL_METRICS> historical_metrics;
+            };
+
+            struct SharedReaderQueueStatus {
+                /** fully qualified name of the SharedReaderQueue within the XML file **/
+                string<NAME_MAX_LENGTH> queue_name; //@key
+
+                /** Statistics counters since the service started **/
+                unsigned long long received_message_count; 
+                unsigned long long sent_message_count;
+                /* Number of messages AppACKed from QueueConsumer */
+                unsigned long long acknowledged_message_count;             
+                unsigned long long failed_delivery_message_count;
+                unsigned long long late_acknowledgment_message_count;
+                unsigned long long bounced_message_count;
+                unsigned long long redelivered_message_count;
+                unsigned long long expired_message_count;            
+                unsigned long long timeout_message_count;  
+                unsigned long long high_watermark_count;
+                unsigned long long low_watermark_count;
+                unsigned long long queue_full_count; 
+
+                /* Statistics counters since the status was last retrieved
+                 * using the remote administration command 
+                 * Get SharedReaderQueue Status
+                 */  
+                unsigned long long received_message_count_change; 
+                unsigned long long sent_message_count_change;
+                unsigned long long acknowledged_message_count_change;                
+                unsigned long long failed_delivery_message_count_change;
+                unsigned long long late_acknowledgment_message_count_change;
+                unsigned long long bounced_message_count_change;
+                unsigned long long redelivered_message_count_change;
+                unsigned long long expired_message_count_change;            
+                unsigned long long timeout_message_count_change; 
+                unsigned long long high_watermark_count_change;
+                unsigned long long low_watermark_count_change;
+                unsigned long long queue_full_count_change;                 
+
+                /* Snapshot statistic counters reflecting current status of the
+                 * SharedReaderQueue.
+                 */
+                unsigned long long current_message_count;
+                unsigned long long current_acknowledged_message_count;
+                unsigned long long current_unacknowledged_message_count;
+                unsigned long long current_sent_message_count;            
+
+                /** Performance statistics **/
+                
+                /* Latency from the moment a sample is received by QS
+                 * to the moment is sent the first time to a
+                 * QueueConsumer
+                 */
+                StatisticVariable sending_latency;
+                
+                /* Number of samples that are added to the 
+                 * SharedReaderQueue per second
+                 */
+                StatisticVariable enqueue_throughput;
+
+                /* Number of samples that are deleted from the 
+                 * SharedReaderQueue per second
+                 */
+                StatisticVariable dequeue_throughput;
+                
+                /* Number of samples that are sent to 
+                 * QueueConsumers per second including
+                 * redelivery
+                 */                
+                StatisticVariable sending_throughput;
+            }; //@Extensibility MUTABLE_EXTENSIBILITY
+
+            struct SharedReaderQueueData {
+                /* fully qualified name */
+                string<NAME_MAX_LENGTH> queue_name; //@key
+                string<NAME_MAX_LENGTH> topic_name;
+            }; //@Extensibility MUTABLE_EXTENSIBILITY
+
+            struct ServiceData {
+                sequence<SharedReaderQueueData> shared_reader_queue_data_list;
+            }; //@Extensibility MUTABLE_EXTENSIBILITY
+
+        };
+    };
+};

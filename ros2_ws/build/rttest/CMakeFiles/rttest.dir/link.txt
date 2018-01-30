@@ -1,0 +1,1 @@
+/usr/lib/ccache/c++  -fPIC   -shared -Wl,-soname,librttest.so -o librttest.so CMakeFiles/rttest.dir/src/rttest.cpp.o -lm -lstdc++ -lpthread 

@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_routing_service.xsd">
+
+    <!-- ********************************************************************** -->
+    <!--                                                                        -->
+    <!-- RTI Routing service examples for TCP over LAN                          -->
+    <!--                                                                        -->
+    <!-- ********************************************************************** -->
+
+    <!-- ********************************************************************** -->
+    <!-- (UDP/Shared memory (domain 0) => TCP (domain 1)                        -->
+    <!-- ********************************************************************** -->
+    <routing_service name="TCP_1">
+
+        <annotation>
+            <documentation>
+                In a LAN, Routes from UDP or shared memory to TCP
+            </documentation>
+        </annotation>
+
+        <domain_route name="DR_UDPLAN_TCPLAN">
+
+            <participant_1>
+                <domain_id>0</domain_id>
+            </participant_1>
+
+            <participant_2>
+                <domain_id>1</domain_id>
+                <participant_qos>
+                    <transport_builtin>
+                        <mask>MASK_NONE</mask>
+                    </transport_builtin>
+                    <property>
+                        <value>
+                            <element>
+                                <name>dds.transport.load_plugins</name>
+                                <value>dds.transport.TCPv4.tcp1</value>
+                            </element>
+                            <element>
+                                <name>dds.transport.TCPv4.tcp1.library</name>
+                                <value>nddstransporttcp</value>
+                            </element>
+                            <element>
+                                <name>dds.transport.TCPv4.tcp1.create_function</name>
+                                <value>NDDS_Transport_TCPv4_create</value>
+                            </element>
+                            <element>
+                                <name>
+                                    dds.transport.TCPv4.tcp1.parent.classid
+                                </name>
+                                <value>
+                                    NDDS_TRANSPORT_CLASSID_TCPV4_LAN
+                                </value>
+                            </element>
+                            <element>
+                                <name>
+                                    dds.transport.TCPv4.tcp1.server_bind_port
+                                </name>
+                                <value>7400</value>
+                            </element>
+                            <element>
+                                <name>
+                                    dds.transport.TCPv4.tcp1.disable_nagle
+                                </name>
+                                <value>1</value>
+                            </element>
+                        </value>
+                    </property>
+                </participant_qos>
+            </participant_2>
+
+            <session name="Session">
+                <auto_topic_route name="AllForward">
+                    <publish_with_original_info>true</publish_with_original_info>
+                    <input participant="1">
+                        <creation_mode>ON_DOMAIN_MATCH</creation_mode>
+                        <deny_topic_name_filter>rti/*</deny_topic_name_filter>
+                    </input>
+                    <output>
+                        <creation_mode>ON_DOMAIN_OR_ROUTE_MATCH</creation_mode>
+                        <deny_topic_name_filter>rti/*</deny_topic_name_filter>
+                    </output>
+                </auto_topic_route>
+
+                <auto_topic_route name="AllBackward">
+                    <publish_with_original_info>true</publish_with_original_info>
+                    <input participant="2">
+                        <creation_mode>ON_DOMAIN_OR_ROUTE_MATCH</creation_mode>
+                        <deny_topic_name_filter>rti/*</deny_topic_name_filter>
+                    </input>
+                    <output>
+                        <creation_mode>ON_DOMAIN_MATCH</creation_mode>
+                        <deny_topic_name_filter>rti/*</deny_topic_name_filter>
+                    </output>
+                </auto_topic_route>
+            </session>
+
+        </domain_route>
+
+    </routing_service>
+
+    <!-- ********************************************************************** -->
+    <!-- TCP (domain 1) => UDP/Shared memory (domain 2)                         -->
+    <!-- ********************************************************************** -->
+    <routing_service name="TCP_2">
+
+        <annotation>
+            <documentation>
+                In a LAN, Routes from TCP to UDP or shared memory
+            </documentation>
+        </annotation>
+
+        <domain_route name="DR_TCPLAN_UPDLAN">
+
+            <participant_1>
+                <domain_id>1</domain_id>
+                <participant_qos>
+                    <transport_builtin>
+                        <mask>MASK_NONE</mask>
+                    </transport_builtin>
+                    <property>
+                        <value>
+                            <element>
+                                <name>dds.transport.load_plugins</name>
+                                <value>dds.transport.TCPv4.tcp1</value>
+                            </element>
+                            <element>
+                                <name>dds.transport.TCPv4.tcp1.library</name>
+                                <value>nddstransporttcp</value>
+                            </element>
+                            <element>
+                                <name>dds.transport.TCPv4.tcp1.create_function</name>
+                                <value>NDDS_Transport_TCPv4_create</value>
+                            </element>
+                            <element>
+                                <name>
+                                    dds.transport.TCPv4.tcp1.parent.classid
+                                </name>
+                                <value>
+                                    NDDS_TRANSPORT_CLASSID_TCPV4_LAN
+                                </value>
+                            </element>
+                            <element>
+                                <name>
+                                    dds.transport.TCPv4.tcp1.server_bind_port
+                                </name>
+                                <value>7400</value>
+                            </element>
+                            <element>
+                                <name>
+                                    dds.transport.TCPv4.tcp1.disable_nagle
+                                </name>
+                                <value>1</value>
+                            </element>
+                        </value>
+                    </property>
+                </participant_qos>
+            </participant_1>
+
+            <participant_2>
+                <domain_id>2</domain_id>
+
+            </participant_2>
+
+            <session name="Session">
+                <auto_topic_route name="AllForward">
+                    <publish_with_original_info>true</publish_with_original_info>                    
+                    <input participant="1">
+                        <creation_mode>ON_DOMAIN_AND_ROUTE_MATCH</creation_mode>
+                        <deny_topic_name_filter>rti/*</deny_topic_name_filter>
+                    </input>
+                    <output>
+                        <creation_mode>ON_DOMAIN_MATCH</creation_mode>
+                        <deny_topic_name_filter>rti/*</deny_topic_name_filter>
+                    </output>
+                </auto_topic_route>
+
+                <auto_topic_route name="AllBackward">
+                    <publish_with_original_info>true</publish_with_original_info>
+                    <input participant="2">
+                        <creation_mode>ON_DOMAIN_MATCH</creation_mode>
+                        <deny_topic_name_filter>rti/*</deny_topic_name_filter>
+                    </input>
+                    <output>
+                        <creation_mode>ON_DOMAIN_AND_ROUTE_MATCH</creation_mode>
+                        <deny_topic_name_filter>rti/*</deny_topic_name_filter>
+                    </output>
+                </auto_topic_route>
+            </session>
+
+        </domain_route>
+
+    </routing_service>
+
+</dds>

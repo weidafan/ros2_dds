@@ -1,0 +1,7 @@
+[11:20:46] RTI Connext Launcher 5.2.3 started
+[11:23:06] Run:   rtiadminconsole  (/home/aust/rti_connext_dds-5.2.3/bin/rtiadminconsole)
+[14:39:11] Run:   rtiadminconsole  (/home/aust/rti_connext_dds-5.2.3/bin/rtiadminconsole)
+[15:26:00] Run:   rtiadminconsole  (/home/aust/rti_connext_dds-5.2.3/bin/rtiadminconsole)
+[16:36:37] Parse: /home/aust/rti_connext_dds-5.2.3/resource/xml/RTI_ROUTING_SERVICE.xml
+[16:36:37] Parse: /home/aust/rti_workspace/5.2.3/user_config/routing_service/USER_ROUTING_SERVICE.xml
+[16:36:50] Running:   rtiroutingservice  (/home/aust/rti_connext_dds-5.2.3/bin/rtiroutingservice -cfgName bridge_domain_0_and_domain_1)

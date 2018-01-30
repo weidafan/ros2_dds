@@ -1,0 +1,8 @@
+/home/aust/ros2_ws/build/uncrustify/CMakeFiles/install.dir
+/home/aust/ros2_ws/build/uncrustify/CMakeFiles/list_install_components.dir
+/home/aust/ros2_ws/build/uncrustify/CMakeFiles/rebuild_cache.dir
+/home/aust/ros2_ws/build/uncrustify/CMakeFiles/edit_cache.dir
+/home/aust/ros2_ws/build/uncrustify/CMakeFiles/uninstall.dir
+/home/aust/ros2_ws/build/uncrustify/CMakeFiles/uncrustify.dir
+/home/aust/ros2_ws/build/uncrustify/CMakeFiles/install/strip.dir
+/home/aust/ros2_ws/build/uncrustify/CMakeFiles/install/local.dir

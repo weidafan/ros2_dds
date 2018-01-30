@@ -1,0 +1,376 @@
+<?xml version="1.0"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_routing_service.xsd">
+
+    <!--
+    ********************************************************************** 
+    RTI Routing service jms adapter example                                            
+    **********************************************************************                           
+    Reads DDS samples and sends them as JMS messages and                    
+    reads JMS messages and sends them as DDS samples.                                                 
+    ********************************************************************** 
+    -->
+    
+    <!-- JMS Adapter Library name -->
+    <adapter_library name="adapters">
+        <!-- JMS Adapter Plugin name -->
+        <java_adapter_plugin name="jms">
+            <!-- JMS Adapter Class name -->
+            <class_name>com.rti.routingservice.adapter.jms.JMSAdapter</class_name>
+        </java_adapter_plugin>
+    </adapter_library>
+
+    <!-- Routing service configuration is defined here -->
+    <routing_service name="jmsdds">
+        <!-- Annotations -->
+        <annotation>
+            <documentation>
+                JMS-DDS bidirectional bridge for Shape topics
+            </documentation>
+        </annotation>
+
+        <!-- Java Virtual Machine configuration -->
+        <jvm>
+            <!-- Classpath elements -->
+            <class_path>
+                <!-- Add path where the JMSAdapter classes are located -->
+                <element>
+                    $(RTI_EXAMPLES_DIR)/routing_service/adapters/jms/objs/jmsadapter.jar
+                </element>
+                <!-- Add path where the Vendor JMS classes are located -->
+                <element>
+                    $(JAVAEEJAR)
+                </element>
+                <!-- Add path where the Vendor JNDI classes are located -->
+                <element>
+                    $(JMS_CLASSPATH)
+                </element>
+            </class_path>
+        </jvm>
+
+
+        <!-- Domain Route to translate ShapeType DDS Samples to
+             ShapeType JMS Messages -->
+        <domain_route name="dds2jms">
+            <!-- First Participant: DDS Samples on Domain 0 -->
+            <participant_1>
+                <domain_id>0</domain_id>
+            </participant_1>
+
+            <!-- Second Connection: JMS Messages from DDS Samples -->
+            <connection_2 plugin_name="adapters::jms">
+                <!-- JMS Connection Properties (used by JMSAdapter) -->
+                <property>
+                    <value>
+                        <!-- Connection Factory Name -->
+                        <element>
+                            <name>ConnectionFactoryName</name>
+                            <value>Shapes/ConnectionFactory</value>
+                        </element>
+                        <!-- JNDI Initial Context Factory -->
+                        <element>
+                            <name>java.naming.factory.initial</name>
+                            <value>com.rti.jms.JmsConfigContextFactory</value>
+                        </element>
+                        <!-- JNDI Provider URL -->
+                        <element>
+                            <name>java.naming.provider.url</name>
+                            <value>
+                                $(RTI_EXAMPLES_DIR)/routing_service/shapes/jmsPubSub/ShapesQosConfig.xml
+                            </value>
+                        </element>
+                        <!-- JNDI Factory Packages -->
+                        <element>
+                            <name>java.naming.factory.url.pkgs</name>
+                            <value></value>
+                        </element>
+                    </value>
+                </property>
+            </connection_2>
+
+            <!-- Session that receives ShapeType DDS Samples and sends them
+                 as ShapeType JMS Messages -->
+            <session name="session">
+                <!-- Route that receives ShapeType DDS Samples on topic Square
+                     and sends them as JMS Messages -->
+                <route name="square">
+                    <!-- Discover the ShapeType type representation from
+                         input, because it's not defined in this file -->
+                    <route_types>true</route_types>
+
+                    <!-- Preserve original Timestamp -->
+                    <publish_with_original_timestamp>
+                        true
+                    </publish_with_original_timestamp>
+
+                    <!-- Input: DDS Samples -->
+                    <dds_input participant="1">
+                        <!-- Create this DataReader when the topic
+                    is available in the DDS domain -->
+                        <creation_mode>ON_DOMAIN_MATCH</creation_mode>
+                        <!-- Topic for ShapeType DDS Samples -->
+                        <topic_name>Square</topic_name>
+                        <!-- Type Name for ShapeType DDS Samples -->
+                        <registered_type_name>ShapeType</registered_type_name>
+                    </dds_input>
+                    <!-- Output: JMS Messages from DDS Samples -->
+                    <output>
+                        <!-- Create the JMS writer when the DDS input
+                             is created -->
+                        <creation_mode>ON_ROUTE_MATCH</creation_mode>
+                        <!-- Stream name for ShapeType JMS Messages -->
+                        <stream_name>Shapes/Square</stream_name>
+                        <!-- Type Name for ShapeType JMS Messages -->
+                        <registered_type_name>ShapeType</registered_type_name>
+                        <!-- 
+                           Use this property to customize the translation of
+                           DynamicData samples to JMS messages with your
+                           implementation of the interface
+                           com.rti.routingservice.adapter.jms.DynamicDataToJMSTranslation
+                           
+                           <property>
+                               <value>
+                                <element>
+                                    <name>DynamicDataJMSTranslator</name>
+                                    <value>mypackage.MyDynamicDataToJMS</value>
+                                </element>
+                               </value>
+                           </property>
+                        -->
+                    </output>
+                </route>
+
+                <!-- Route that receives ShapeType DDS Samples on topic Circle
+                     and sends them as JMS Messages -->
+                <route name="circle">
+                    <!-- Discover the ShapeType type representation from
+                         input, because it's not defined in this file -->
+                    <route_types>true</route_types>
+
+                    <!-- Preserve original Timestamp -->
+                    <publish_with_original_timestamp>
+                        true
+                    </publish_with_original_timestamp>
+                    <!-- Input: DDS Samples -->
+                    <dds_input participant="1">
+                        <!-- Create this DataReader when the topic
+                             is available in the DDS domain -->
+                        <creation_mode>ON_DOMAIN_MATCH</creation_mode>
+                        <!-- Topic for ShapeType DDS Samples -->
+                        <topic_name>Circle</topic_name>
+                        <!-- Type Name for ShapeType DDS Samples -->
+                        <registered_type_name>ShapeType</registered_type_name>
+                    </dds_input>
+                    <!-- Output: JMS Messages from DDS Samples -->
+                    <output>
+                        <!-- Create the JMS writer when the DDS input
+                             is created -->
+                        <creation_mode>ON_ROUTE_MATCH</creation_mode>
+                        <!-- Stream name for ShapeType JMS Messages -->
+                        <stream_name>Shapes/Circle</stream_name>
+                        <!-- Type Name for ShapeType JMS Messages -->
+                        <registered_type_name>ShapeType</registered_type_name>
+                    </output>
+                </route>
+
+                <!-- Route that receives ShapeType DDS Samples on topic
+                     Triangle and sends them as JMS Messages -->
+                <route name="triangle">
+                    <!-- Discover the ShapeType type representation from
+                         input, because it's not defined in this file -->
+                    <route_types>true</route_types>
+
+                    <!-- Preserve original Timestamp -->
+                    <publish_with_original_timestamp>
+                        true
+                    </publish_with_original_timestamp>
+
+                    <!-- Input: DDS Samples -->
+                    <dds_input participant="1">
+                        <!-- Create this DataReader as soon as its type
+                            becomes available -->
+                        <creation_mode>IMMEDIATE</creation_mode>
+                        <!-- Topic for ShapeType DDS Samples -->
+                        <topic_name>Triangle</topic_name>
+                        <!-- Type Name for ShapeType DDS Samples -->
+                        <registered_type_name>ShapeType</registered_type_name>
+                    </dds_input>
+                    <!-- Output: JMS Messages from DDS Samples -->
+                    <output>
+                        <!-- Create the JMS writer when the DDS input
+                             is created -->
+                        <creation_mode>ON_ROUTE_MATCH</creation_mode>
+                        <!-- Stream name for ShapeType JMS Messages -->
+                        <stream_name>Shapes/Triangle</stream_name>
+                        <!-- Type Name for ShapeType JMS Messages -->
+                        <registered_type_name>ShapeType</registered_type_name>
+                    </output>
+                </route>
+            </session>
+        </domain_route>
+
+
+        <!-- Domain Route to translate ShapeType JMS Messages to
+             ShapeType DDS Samples -->
+        <domain_route name="jms2dds">
+            <!-- First Connection: JMS Messages -->
+            <connection_1 plugin_name="adapters::jms">
+                <!-- JMS Connection Properties (used by JMSAdapter) -->
+                <property>
+                    <value>
+                        <!-- Connection Factory Name -->
+                        <element>
+                            <name>ConnectionFactoryName</name>
+                            <value>Shapes/ConnectionFactory</value>
+                        </element>
+                        <!-- JNDI Initial Context Factory -->
+                        <element>
+                            <name>java.naming.factory.initial</name>
+                            <value>com.rti.jms.JmsConfigContextFactory</value>
+                        </element>
+                        <!-- JNDI Provider URL -->
+                        <element>
+                            <name>java.naming.provider.url</name>
+                            <value>
+                                $(RTI_EXAMPLES_DIR)/routing_service/shapes/jmsPubSub/ShapesQosConfig.xml
+                            </value>
+                        </element>
+                        <!-- JNDI Factory Packages -->
+                        <element>
+                            <name>java.naming.factory.url.pkgs</name>
+                            <value></value>
+                        </element>
+                    </value>
+                </property>
+            </connection_1>
+
+            <!-- Second Participant: DDS Samples from JMS Messages
+                 on Domain 0 -->
+            <participant_2>
+                <domain_id>0</domain_id>
+            </participant_2>
+
+            <!-- Session that receives ShapeType JMS Messages and sends them
+                 as ShapeType DDS Samples -->
+            <session name="session">
+                <!-- Route that receives ShapeType JMS Messages and sends them
+                     as DDS Samples on topic Square -->
+                <route name="square">
+                    <!-- Discover the ShapeType type representation from
+                         input, because it's not defined in this file -->
+                    <route_types>true</route_types>
+
+                    <!-- Preserve original Timestamp -->
+                    <publish_with_original_timestamp>
+                        true
+                    </publish_with_original_timestamp>
+
+                    <!-- Input: JMS Messages -->
+                    <input connection="1">
+                        <!-- Create the JMS reader when the DDS output
+                    is created -->
+                        <creation_mode>ON_ROUTE_MATCH</creation_mode>
+                        <!-- Stream name for ShapeType JMS Messages -->
+                        <stream_name>Shapes/Square</stream_name>
+                        <!-- Type Name for ShapeType JMS Messages -->
+                        <registered_type_name>ShapeType</registered_type_name>
+                        <!-- 
+                           Use this property to customize the translation of
+                           JMS messages to DynamicData samples with your
+                           implementation of the interface
+                           com.rti.routingservice.adapter.jms.JMSToDynamicDataTranslation
+                           
+                           <property>
+                               <value>
+                                <element>
+                                    <name>JMSDynamicDataTranslator</name>
+                                    <value>mypackage.MyJMSToDynamicData</value>
+                                </element>
+                               </value>
+                           </property>
+                         -->
+                    </input>
+                    <!-- Output: DDS Samples from JMS Messages -->
+                    <dds_output>
+                        <!-- Create this DataWriter when the topic
+                             is available in the DDS domain-->
+                        <creation_mode>ON_DOMAIN_MATCH</creation_mode>
+                        <!-- Topic for ShapeType DDS Samples -->
+                        <topic_name>Square</topic_name>
+                        <!-- Type Name for ShapeType DDS Samples -->
+                        <registered_type_name>ShapeType</registered_type_name>
+                    </dds_output>
+                </route>
+
+                <!-- Route that receives ShapeType JMS Messages and sends them
+                     as DDS Samples on topic Circle -->
+                <route name="circle">
+                    <!-- Discover the ShapeType type representation from
+                         input, because it's not defined in this file -->
+                    <route_types>true</route_types>
+
+                    <!-- Preserve original Timestamp -->
+                    <publish_with_original_timestamp>
+                        true
+                    </publish_with_original_timestamp>
+
+                    <!-- Input: JMS Messages -->
+                    <input connection="1">
+                        <!-- Create the JMS reader when the DDS output
+                             is created -->
+                        <creation_mode>ON_ROUTE_MATCH</creation_mode>
+                        <!-- Stream name for ShapeType JMS Messages -->
+                        <stream_name>Shapes/Circle</stream_name>
+                        <!-- Type Name for ShapeType JMS Messages -->
+                        <registered_type_name>ShapeType</registered_type_name>
+                    </input>
+                    <!-- Output: DDS Samples from JMS Messages -->
+                    <dds_output>
+                        <!-- Create this DataWriter when the topic
+                             is available in the DDS domain-->
+                        <creation_mode>ON_DOMAIN_MATCH</creation_mode>
+                        <!-- Topic for ShapeType DDS Samples -->
+                        <topic_name>Circle</topic_name>
+                        <!-- Type Name for ShapeType DDS Samples -->
+                        <registered_type_name>ShapeType</registered_type_name>
+                    </dds_output>
+                </route>
+
+                <!-- Route that receives ShapeType JMS Messages and sends them
+                     as DDS Samples on topic Triangle -->
+                <route name="triangle">
+                    <!-- Discover the ShapeType type representation from
+                         input, because it's not defined in this file -->
+                    <route_types>true</route_types>
+
+                    <!-- Preserve original Timestamp -->
+                    <publish_with_original_timestamp>
+                        true
+                    </publish_with_original_timestamp>
+
+                    <!-- Input: JMS Messages -->
+                    <input connection="1">
+                        <!-- Create the JMS reader when the DDS output
+                             is created -->
+                        <creation_mode>ON_ROUTE_MATCH</creation_mode>
+                        <!-- Stream name for ShapeType JMS Messages -->
+                        <stream_name>Shapes/Triangle</stream_name>
+                        <!-- Type Name for ShapeType JMS Messages -->
+                        <registered_type_name>ShapeType</registered_type_name>
+                    </input>
+                    <!-- Output: DDS Samples from JMS Messages -->
+                    <dds_output>
+                        <!-- Create this DataWriter when the topic
+                             is available in the DDS domain-->
+                        <creation_mode>ON_DOMAIN_MATCH</creation_mode>
+                        <!-- Topic for ShapeType DDS Samples -->
+                        <topic_name>Triangle</topic_name>
+                        <!-- Type Name for ShapeType DDS Samples -->
+                        <registered_type_name>ShapeType</registered_type_name>
+                    </dds_output>
+                </route>
+            </session>
+        </domain_route>
+    </routing_service>
+
+
+</dds>

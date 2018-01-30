@@ -1,0 +1,255 @@
+##/* $Id$
+##
+##   (c) Copyright, Real-Time Innovations, Inc. 2001.  All rights reserved.
+##   No duplications, whole or partial, manual or electronic, may be made
+##   without prior written permission.  Any such copies, or
+##   revisions thereof, must display this notice unaltered.
+##   This code contains trade secrets of Real-Time Innovations, Inc.
+
+##modification history:
+##---------------------
+##2.2,10feb15,ajm CODEGENII-427 adding from_cdr and to_cdr apis
+##2.2,03sep14,ajm Fixes from CR-402
+##2.2,01sep14,ajm CODEGENII-219 Support C++11 features
+##2.2,12aug14,ajm CODEGENII-232 C++ PSM Swap function
+##2.2,07aug14,ajm CODEGENII-362 Removing generated destructor
+##2.2,21jul14,ajm CODEGENII-304 Removing references to nativeTypeFQName
+##2.2,25jun14,ajm CODEGENII-209 Type registration C++PSM without C TypeSupport
+##2.2,10jun14,ajm CODEGENII-166 Adding variable to generateCcodeforCpp03 to use real inheritance
+##            in the C++PSM 
+##2.2,28may14,ajm CODEGENII-166 C++PSM Constructor with params with inheritance
+##2.2,27may14,ajm CODEGENII-225 Use of StreamFlagSaver
+##2.2,21may14,ajm CODEGENII-173 Support for alias in C++PSM
+##2.2,08may14,ajm CODEGENII-171 Adding support for sequence C++PSM
+##2.2,30apr14,ajm CODEGENII-170 and CODEGENII-186 adding arrays and long dobule support for C++PSM
+##2.2,21apr4,ajm CODEGENII-209 Adding check retcode to topic_type_support
+##2.2,11apr4,ajm CODEGENII-172 Fixes from CR-247
+##2.2,3abr14,ajm CODEGENII-172 Support for unions
+##2.2,20feb14,ajm CODEGENII-165 Enums  CODEGENII-169:String CODEGENII-173:Alias 
+##2.2,20feb14,ajm CODEGENII-167: Copy&Include, CODEGENII-168:Constant and CR-226 
+##2.2,19feb14,ajm CODEGENII-166 Modules & inheritance
+##2.2,17feb14,ajm CODEGENII-164 Operators override
+##2.2,03feb14,ajm CODEGENII-166 Modules C++PSM code generation
+##2.2,28jan14,ajm created
+##
+##========================================================================*/
+##-----------------------------------------------------------------
+##               
+##             Template for the main C body file
+## 
+##------------------------------------------------------------------
+##------------------------------------------------------------------
+
+/*
+  WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
+
+  This file was generated from ${envMap.idlFileName}.idl using "rtiddsgen".
+  The rtiddsgen tool is part of the RTI Connext distribution.
+  For more information, type 'rtiddsgen -help' at a command shell
+  or consult the RTI Connext manual.
+*/
+
+
+${envMap.POUND_CHAR}include <iosfwd>
+${envMap.POUND_CHAR}include <iomanip>
+${envMap.POUND_CHAR}include "${envMap.idlFileName}.hpp"
+${envMap.POUND_CHAR}include "${envMap.idlFileName}${envMap.cSuffixFile}Plugin.h"
+
+#foreach($node in $constructMapList)
+#*--*##if($node.constructKind.equals("directive")) ##if it is a directive we print its value
+#*----*##if($node.directiveKind.equals("copy-c")||$node.directiveKind.equals("copy")) ##we avoid to copy the declaration directives
+$node.value
+#*----*##end
+#*--*##elseif($node.constructKind.equals("module"))
+namespace $node.name {
+#*--*##elseif($node.constructKind.equals("moduleClose")) 
+} // namespace $node.name  
+#*--*##elseif($node.constructKind.equals("enum"))
+#outOperatorBodyEnum($node)
+#*--*##elseif($node.isAggregationType)
+#*--Constructor--*#
+// ---- $node.name: 
+#*----*##assignTypeVariables($node.memberFieldMapList $node)
+
+
+#if(!$node.constructKind.equals("union"))
+$node.name::${node.name}() #initialize($node){
+#initializeArraysAndTypedef($node)
+}   
+#*--Copy Constructor-- Using default*#
+
+#*--Params Constructor--*#
+$node.name::${node.name} (#paramConstructorHeader($node))#paramConstructorBody($node) {
+}
+
+${envMap.POUND_CHAR}ifdef RTI_CXX11_RVALUE_REFERENCES
+${envMap.POUND_CHAR}ifdef RTI_CXX11_NO_IMPLICIT_MOVE_OPERATIONS
+  $node.name::${node.name}(${node.name}&& other_) OMG_NOEXCEPT #move($node)  {
+  } 
+  
+  ${node.name}& $node.name::operator=(${node.name}&&  other_) OMG_NOEXCEPT {
+      ${node.name} tmp(std::move(other_));
+      swap(tmp); 
+      return *this;
+  }
+${envMap.POUND_CHAR}endif
+${envMap.POUND_CHAR}endif   
+
+#else 
+${envMap.POUND_CHAR}ifdef RTI_CXX11_RVALUE_REFERENCES
+${envMap.POUND_CHAR}ifdef RTI_CXX11_NO_IMPLICIT_MOVE_OPERATIONS
+$node.name::${node.name}(${node.name}&& other_) OMG_NOEXCEPT 
+  {
+#moveUnion
+  }
+   
+${node.name}& $node.name::operator=(${node.name}&&  other_) OMG_NOEXCEPT {
+      ${node.name} tmp(std::move(other_));
+      swap(tmp); 
+      return *this;
+  }
+${envMap.POUND_CHAR}endif
+${envMap.POUND_CHAR}endif 
+#*we generate the constructors & destructor for the struct type*#
+$node.name::${node.unionStructName}::${node.unionStructName}() #initialize($node){
+}
+#* Using default copy constructor *#
+##$node.name::${node.unionStructName}::${node.unionStructName}(const $node.name::${node.unionStructName}& other_) #copy($node) {
+##}
+
+$node.name::${node.unionStructName}::${node.unionStructName}(#paramConstructorHeader($node))#paramConstructorBody($node) {
+}
+
+$node.name::${node.name}() #initializeUnion($node){
+}
+
+#end
+
+void $node.name::swap($node.name& other_)  OMG_NOEXCEPT 
+{
+    using std::swap;
+    #swap($node)
+}  
+
+
+
+
+#operatorBody($node) 
+
+// --- Getters and Setters: -------------------------------------------------
+#getterAndSettersBody($node)
+
+#outOperatorBody($node)
+       
+#end
+#if($node.constructKind.equals("union"))       
+$node.unionDiscriminatorMap.specTypeName ${node.name}::default_discriminator(){
+#if ($node.unionDiscriminatorMap.isEnum)
+return ${node.unionDiscriminatorMap.specTypeName}(static_cast<${node.unionDiscriminatorMap.specTypeName}::type>($node.unionDiscriminatorMap.defaultValue));
+#else
+return $node.unionDiscriminatorMap.defaultValue;
+#end   
+}  
+#end   
+#end
+
+// --- Type traits: -------------------------------------------------
+
+namespace rti { 
+    namespace topic {
+#foreach($node in $constructMapList)
+#*----*##if(($envMap.typeCode)
+            && (($node.constructKind=="enum")
+                ||($node.constructKind=="alias")
+                ||($node.isAggregationType)))
+
+#if($node.constructKind=="alias")
+    const #getDynamicType($node)& dynamic_type<${node.nativeFQName}${aliasTag}>::get()
+#else
+    const #getDynamicType($node)& dynamic_type<${node.nativeFQName}>::get()
+#end    
+    {
+        return static_cast<const #getDynamicType($node)&>(
+            rti::core::native_conversions::cast_from_native<dds::core::xtypes::DynamicType>(
+            *(${node.nativeCFQName}_c_get_typecode())));
+    }
+    
+#*--*##end
+#end
+  }
+}  
+
+namespace dds { 
+    namespace topic {
+#foreach($node in $constructMapList)
+#*--*##if($node.isAggregationType && $node.topLevel)    
+        void topic_type_support<${node.nativeFQName}>:: register_type(
+                    dds::domain::DomainParticipant& participant,
+                    const std::string& type_name){
+            
+            rti::domain::register_type_plugin(
+                participant,
+                type_name,
+                ${node.nativeCFQNameInModule}Plugin_new,
+                ${node.nativeCFQNameInModule}Plugin_delete);
+        }
+        
+       void topic_type_support<${node.nativeFQName}>::initialize_sample(${node.nativeFQName}& sample){
+   
+          ${node.nativeCFQNameInModule}* native_sample=reinterpret_cast<${node.nativeCFQNameInModule}*> (&sample);
+          
+          struct DDS_TypeDeallocationParams_t deAllocParams = {RTI_FALSE, RTI_FALSE};
+          ${node.nativeCFQNameInModule}_finalize_w_params(native_sample,&deAllocParams);
+           
+          struct DDS_TypeAllocationParams_t allocParams = {RTI_FALSE, RTI_FALSE, RTI_TRUE}; 
+          RTIBool ok=${node.nativeCFQNameInModule}_initialize_w_params(native_sample,&allocParams);
+          rti::core::check_return_code(
+            ok ? DDS_RETCODE_OK : DDS_RETCODE_ERROR,
+            "Failed to initialize_w_params");
+       
+       } 
+        
+       std::vector<char>& topic_type_support<${node.nativeFQName}>::to_cdr_buffer(
+                    std::vector<char>& buffer, const ${node.nativeFQName}& sample)
+        {
+        // First get the length of the buffer
+        unsigned int length = 0;
+        RTIBool ok = ${node.nativeCFQNameInModule}Plugin_serialize_to_cdr_buffer(
+            NULL, &length,reinterpret_cast<const ${node.nativeCFQNameInModule}*>(&sample));
+        rti::core::check_return_code(
+            ok ? DDS_RETCODE_OK : DDS_RETCODE_ERROR,
+            "Failed to calculate cdr buffer size");
+        
+        // Create a vector with that size and copy the cdr buffer into it
+        buffer.resize(length);
+        ok = ${node.nativeCFQNameInModule}Plugin_serialize_to_cdr_buffer(
+             &buffer[0], &length, reinterpret_cast<const ${node.nativeCFQNameInModule}*>(&sample));
+        rti::core::check_return_code(
+            ok ? DDS_RETCODE_OK : DDS_RETCODE_ERROR,
+            "Failed to copy cdr buffer");
+
+        return buffer;
+        
+        }
+
+
+        void topic_type_support<${node.nativeFQName}>::from_cdr_buffer(${node.nativeFQName}& sample, 
+            const std::vector<char>& buffer)
+        {
+                   
+          RTIBool ok  = ${node.nativeCFQNameInModule}Plugin_deserialize_from_cdr_buffer(
+              reinterpret_cast<${node.nativeCFQNameInModule}*> (&sample), &buffer[0], 
+              static_cast<unsigned int>(buffer.size()));
+          rti::core::check_return_code(
+                ok ? DDS_RETCODE_OK : DDS_RETCODE_ERROR,
+                "Failed to create ${node.nativeFQName} from cdr buffer");
+        }
+
+        
+#*--*##end
+#end        
+    }
+}  
+
+
+

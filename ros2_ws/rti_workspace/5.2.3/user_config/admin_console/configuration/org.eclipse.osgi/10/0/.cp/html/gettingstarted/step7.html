@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Tutorial - Step 7</title>
+<link rel="stylesheet" href="../acdocs.css" type="text/css" />
+</head>
+
+<body>
+	<div class="centerContent">
+		<div class="docTopBanner" />
+	</div>
+
+	<div class="docPageTitle">Tutorial Step 7: Distributed Debugging</div>
+
+	<div class="docSectionContent">Admin Console provides insight and details
+	about your distributed system which can be used for debugging. In this step
+	of the tutorial we will see these views and how they can be used to debug
+	your system.</div>
+
+    <br />
+    <br />
+    <div class="docSectionTitle">Topic View:</div>
+    <div class="docSectionContent">
+        The <a href="../reference/views/topicView.xhtml">Topic View</a>
+        provides three distinct sets of information relating to a single DDS
+        Topic in the distributed system. To best understand this information,
+        let&apos;s first create a new instances of the Shapes Demo. Follow the
+        same directions as in Step 3 but this time, choose the &quot;Shape&quot;
+        Data Type rather than &quot;Shape Extended.&quot;
+        
+        <br /><br />
+        <img src="../images/tut7_ShapesConfigDialog.png" />
+        <br /><br />
+        
+        This time, let&apos;s create an orange square with exclusive ownership.
+        
+        <br /><br />
+        <img src="../images/tut7_ShapesSquarePub.png" />
+        <br /><br />
+        
+        From the <a href="../reference/views/ddsLogicalView.xhtml">DDS Logical 
+        View</a>, select the &quot;Square&quot; Topic under &quot;Domain 
+        1.&quot; The Topic View is now displaying the Endpoints Table.
+        
+        <br />
+        <br /><img src="../images/tut7_Endpoints.png" />
+        <br />
+        <br />
+        
+        All of the DataWriters and DataReaders associated with this topic can
+        now be seen in the the Endpoints Table tab. This table shows the host 
+        and process that contains the endpoint. These two facts alone are often
+        very helpful in understanding what is running where. When you select 
+        rows from this table, you will get detailed information about the data
+        type, QoS, and match status of the endpoint.
+        
+        Select the DataWriter associated with the Shapes Demo (use the icon 
+        <img src="../../branding/icons/datawriter.png"/> in the Endpoint column
+        and the process name from the Process column to find it). Now, you can
+        see the data type associated with this DataWriter in the <a 
+        href="../reference/views/ddsDataTypeView.xhtml">DDS Data Type View</a>.
+        
+        <br /><br />
+        <img src="../images/tut7_ShapeType.png" />
+        <br /><br />
+        
+        Select the DataReader associated with the Shapes Demo created earlier.
+        Notice that the DDS Data Type view changes and now has this content:
+        
+        <br /><br />
+        <img src="../images/tut7_ShapeTypeExtended.png" />
+        <br /><br />
+        
+        This reveals that the system has multiple type definitions for the same
+        Topic. This is often a critical piece of information, so much so that 
+        another tab in this editor is dedicated to making this information easy
+        to find. Select the &quot;Datatypes&quot; tab from the bottom right of
+        the Topic View.
+        
+        <br /><br />
+        <img src="../images/tut7_Datatypes.png" />
+        <br /><br />
+        
+        This tab shows which endpoint is associated with each of the two 
+        datatypes currently being used in the system for this Topic. It also
+        shows the serialized TypeCode and sample size for each of the two
+        datatypes. This information is important when tuning DDS QoS. Select the
+        DataWriter listed under the &quot;ShapeType&quot; datatype. Now click on
+        the <a href="../reference/views/ddsQosView.xhtml">DDS QoS View</a>.
+        
+        <br /><br />
+        <img src="../images/tut7_ddsQoSView.png" />
+        <br /><br />
+        
+        Want to find out more information about a particular QoS? Click on a
+        hyperlinked row in the QoS Name column and the documentation for that
+        QoS will be displayed (active internet connection required).
+        
+        <br /><br />
+        The exclusive ownership setting can be seen right at the bottom of the
+        DDS QoS View. This setting, however, is in conflict with the 
+        previously-created DataReader. How can this be debugged? Select the 
+        Match Graph tab in the Topic View.
+        
+        <br /><br />
+        <img src="../images/tut7_MatchGraph.png" />
+        <br /><br />
+        
+        This tab shows that the newly-created DataWriter with exclusive 
+        ownership is not matched to any DataReader associated with this Topic.
+        This tab can also be used to drive other displays by selecting 
+        endpoints. But why does the Shapes Demo DataReader show that it is
+        partially matched? Go ahead and select it and then turn your attention
+        to the <a href="../reference/views/matchAnalysesView.xhtml">Match 
+        Analyses View</a>.
+        
+        <br /><br />
+        <img src="../images/tut7_MatchAnalysesMismatch.png" />
+        <br /><br />
+        
+        The Match Analyses view provides a comprehensive view into each match
+        analysis criterion as it pertains to each potential match for an entity
+        in the system. In our case, the mismatched ownership QoS is obvious.
+        But how can we see all of the criteria being checked in the match
+        analysis? Go to the view&apos;s menu (
+        <img src="../images/viewmenu.png"/> in the upper-right corner of the 
+        view). Select the menu item &quot;Show only mismatches&quot; to deselect
+        it. Now, each criterion is visible whether it is a match or not.
+        
+        <br /><br />
+        <img src="../images/tut7_MatchAnalysesMatches.png" />
+        <br /><br />
+        
+        Want more information about how a match is determined for a particular
+        row? Click on a hyperlinked entry in the Name column and the associated
+        documentation will be displayed (active internet connection required).
+    </div>
+
+
+    <br />
+    <br />
+    <div class="docSectionContent">
+        <div class="docSectionFootNotes">
+            Relevant reference topics: 
+            <a href="../reference/views/topicView.xhtml">Topic View</a>,
+            &nbsp;<a href="../reference/views/ddsLogicalView.xhtml">DDS Logical
+            View</a>, 
+            &nbsp;<a href="../reference/views/ddsDataTypeView.xhtml">DDS Data  
+            Type View</a>,
+            &nbsp;<a href="../reference/views/ddsQosView.xhtml">DDS QoS View</a>,
+            &nbsp;<a href="../reference/views/matchAnalysesView.xhtml">Match 
+            Analyses View</a>
+        </div>
+    </div>
+
+    <br /><br />
+    <div class="docSectionTitle">
+        <a href="step6.html"> Previous: Routing Service Configuration </a>
+        &nbsp; &nbsp; &nbsp; <a href="step8.html"> Next: Customizing Layout</a>
+    </div>
+
+</body>
+</html>

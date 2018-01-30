@@ -1,0 +1,12 @@
+/home/aust/ros2_ws/install/lib/depthimage_to_pointcloud2/depthimage_to_pointcloud2_node
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/depthimage_to_pointcloud2
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/depthimage_to_pointcloud2
+/home/aust/ros2_ws/install/share/depthimage_to_pointcloud2/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/depthimage_to_pointcloud2/environment/path.sh
+/home/aust/ros2_ws/install/share/depthimage_to_pointcloud2/local_setup.bash
+/home/aust/ros2_ws/install/share/depthimage_to_pointcloud2/local_setup.sh
+/home/aust/ros2_ws/install/share/depthimage_to_pointcloud2/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/depthimage_to_pointcloud2
+/home/aust/ros2_ws/install/share/depthimage_to_pointcloud2/cmake/depthimage_to_pointcloud2Config.cmake
+/home/aust/ros2_ws/install/share/depthimage_to_pointcloud2/cmake/depthimage_to_pointcloud2Config-version.cmake
+/home/aust/ros2_ws/install/share/depthimage_to_pointcloud2/package.xml

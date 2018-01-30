@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ $Id$
+ (c) Copyright, Real-Time Innovations, 2011-2016.
+ All rights reserved.
+ No duplications, whole or partial, manual or electronic, may be made
+ without express written permission.  Any such copies, or
+ revisions thereof, must display this notice unaltered.
+ This code contains trade secrets of Real-Time Innovations, Inc.
+ 
+ modification history:
+ - - - - - - - - - - -
+-->
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>com.rti.tools.ddr</artifactId>
+    <groupId>rtirecordingconsole</groupId>
+    <version>5.2.0.0</version>
+    <relativePath>../com.rti.tools.ddr/pom.xml</relativePath>
+  </parent>
+  <artifactId>com.rti.tools.ddr.idepluginfeature</artifactId>
+  <packaging>eclipse-feature</packaging>
+</project>

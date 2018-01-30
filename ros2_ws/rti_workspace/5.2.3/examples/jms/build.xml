@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!-- 
+/* $Id$
+ 
+   (c) Copyright, Real-Time Innovations, 2008-2016.
+   All rights reserved.
+
+   No duplications, whole or partial, manual or electronic, may be made
+   without express written permission.  Any such copies, or
+   revisions thereof, must display this notice unaltered.
+   This code contains trade secrets of Real-Time Innovations, Inc.
+ 
+Modification history:
+- - - - - - - - - - -
+1.6b,10nov10,rbw Eliminated obsolete XML libs. Fixed broken relative paths.
+1.0a,07aug08,rbw Created
+-->
+
+<!--
+Build file for jms_java implementation.
+TODO: 1) Remove the .svn exclude before uploading as this is not required in the final CVS repository. 
+      2) Do this exclude:  <exclude name="**/example/*.class"/> In case we add examples to srcExamples. 
+-->
+
+<project name="jms_java" default="compile">
+
+    <target name="init-variables">
+        <property environment="env"/>
+    </target>
+
+    <target name="compile" depends="init-variables">
+        <echo message="Compiling with ${env.JAVA_HOME} against ${nddsjava.lib}"/>
+
+        <!-- Compile with javac 1.5  -->
+        <javac fork="yes"
+               compiler="javac1.5"
+               executable="${javac.path}"
+               source="1.5"
+               target="1.5"
+
+               debug="${debug}"
+               deprecation="${deprecation}"
+               optimize="${optimize}"
+
+               srcdir="."
+               destdir="${objs.dir}"
+               excludes="**/CVS/*,**/.svn/**"
+
+               failonerror="true">
+
+            <classpath>
+                <!--
+                ${jms.objs.dir} should contain the class files already built
+                from the interface/ and srcJava/ directories.
+                -->
+                <pathelement location="${jms.objs.dir}"/>
+                <!--  Reference to Java Enterprise Edition jar. It contains
+                      JMS interfaces.
+                -->
+                <pathelement location="${javaEE.lib}"/>
+                <!-- DDS classes used by JMS Java classes  -->
+                <pathelement location="${nddsjava.lib}"/>
+            </classpath>
+
+            <sourcepath>
+                <pathelement location="../../interface"/>
+                <pathelement location="../../srcJava"/>
+            </sourcepath>
+        </javac>
+    </target>
+
+</project>

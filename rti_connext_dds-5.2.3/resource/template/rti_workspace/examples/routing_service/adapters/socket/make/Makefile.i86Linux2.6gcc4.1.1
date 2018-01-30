@@ -1,0 +1,33 @@
+######################################################################
+# makefile_router_transf
+#
+# (c) Copyright, Real-Time Innovations, 2007.  All rights reserved.
+# No duplications, whole or partial, manual or electronic, may be made
+# without express written permission.  Any such copies, or
+# revisions thereof, must display this notice unaltered.
+# This code contains trade secrets of Real-Time Innovations, Inc.
+#
+#
+# To compile, type:
+# 	gmake -f <makefile_file_name>
+#
+# Note: This makefile is only meant to build our example applications and
+#       may require alterations to build on your system.
+#
+# This makefile assumes that your build environment is already correctly
+# configured. (For example, the correct version of your compiler and
+# linker should be on your PATH.)
+######################################################################
+
+DEFINES_ARCH_SPECIFIC = -DRTI_UNIX -DRTI_LINUX
+
+ARCH = i86Linux2.6gcc4.1.1
+
+c_cc = gcc
+c_cc_flags = -m32 -g
+c_ld = gcc
+c_ld_flags = -g -m32 -static-libgcc
+syslibs = -ldl -lnsl -lm -lpthread
+
+
+include Makefile.Common

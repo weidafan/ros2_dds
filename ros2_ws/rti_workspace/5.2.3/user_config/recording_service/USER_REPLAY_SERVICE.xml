@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_replay.xsd">
+    <!-- ****************************************************************** -->
+    <!-- Default user configuration file for RTI Replay Service             -->
+    <!-- ****************************************************************** -->
+
+    <!-- Default user configuration for Replay used by Launcher. This file will be
+         shown by Launcher in the Replay Service launch dialog. Users may add more
+         configurations to this file or modify this configuration as they wish.
+         By default, this configuration is set to replay every field of every table
+         in the database. 
+         Remote administration of the service is enabled on domain 0. To remotely 
+         control the service, please use RTI Admin Console or RTI Replay Shell 
+         connecting to domain 0. -->
+         
+    <replay_service name="defaultUser">
+        <annotation>
+            <documentation>
+            Replay service configuration to replay everything at the recorded rate
+            in domain 0. Remote administration of the service is enabled on domain
+            1, with Distributed Logger enabled and set to warning level.
+            </documentation>
+        </annotation>
+        <!-- Configuration for remote administration --> 
+        <administration>
+            <domain_id>0</domain_id>
+            <distributed_logger>
+                <enabled>true</enabled>
+                <filter_level>WARNING</filter_level>
+            </distributed_logger>
+        </administration>
+        <!-- Time control parameters -->
+        <time_control>
+            <!-- Optional Rate Multiplier -->
+            <rate>1</rate>
+            <start_mode>AUTO</start_mode>
+            <start_offset>
+                <sec>0</sec>
+            </start_offset>
+        </time_control>
+        <!-- Source Database, Required -->
+        <replay_database name="SimpleConfig">
+            <filename>rti_recorder_default.dat_0_0</filename>
+            <readonly>false</readonly>
+            <!-- Configuration for Output Participant, Optional -->
+            <participant>
+                <domain_id>0</domain_id>
+            </participant>
+            <!-- Main replay session -->
+            <session name="Session">
+                <replay_topic name="AnyTopic">
+                    <input>
+                    <topic_name>*</topic_name>
+                    <type_name>*</type_name>
+                    <record_group_name>*</record_group_name>
+                    <domain_name>*</domain_name>
+                </input>
+            </replay_topic>
+          </session>
+        </replay_database>
+      </replay_service>
+    </dds>

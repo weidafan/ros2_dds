@@ -1,0 +1,6 @@
+[15:23:10] RTI Connext Launcher 5.2.3 started
+[15:23:10] Opening RTI Package Installer for file: /home/aust/Downloads/rti_connext_dds-5.2.3-core-target-armv6vfphLinux3.xgcc4.7.2.rtipkg
+[15:23:13] Output for command /home/aust/rti_connext_dds-5.2.3/bin/rtipkginstall -u /home/aust/Downloads/rti_connext_dds-5.2.3-core-target-armv6vfphLinux3.xgcc4.7.2.rtipkg
+[15:23:13] Installing rti_connext_dds-5.2.3-core-target-armv6vfphLinux3.xgcc4.7.2.rtipkg. Please wait, this may take several minutes...
+[15:23:25] Done
+[15:23:25] Output for command /home/aust/rti_connext_dds-5.2.3/resource/scripts/rticommon.sh

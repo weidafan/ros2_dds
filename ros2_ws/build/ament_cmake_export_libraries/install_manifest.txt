@@ -1,0 +1,16 @@
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/ament_cmake_export_libraries
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/ament_cmake_export_libraries
+/home/aust/ros2_ws/install/share/ament_cmake_export_libraries/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/ament_cmake_export_libraries/environment/path.sh
+/home/aust/ros2_ws/install/share/ament_cmake_export_libraries/local_setup.bash
+/home/aust/ros2_ws/install/share/ament_cmake_export_libraries/local_setup.sh
+/home/aust/ros2_ws/install/share/ament_cmake_export_libraries/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/ament_cmake_export_libraries
+/home/aust/ros2_ws/install/share/ament_cmake_export_libraries/cmake/ament_cmake_export_libraries-extras.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_export_libraries/cmake/ament_cmake_export_librariesConfig.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_export_libraries/cmake/ament_cmake_export_librariesConfig-version.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_export_libraries/package.xml
+/home/aust/ros2_ws/install/share/ament_cmake_export_libraries/cmake/ament_export_library_names.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_export_libraries/cmake/ament_cmake_export_libraries-extras.cmake.in
+/home/aust/ros2_ws/install/share/ament_cmake_export_libraries/cmake/ament_cmake_export_libraries_package_hook.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_export_libraries/cmake/ament_export_libraries.cmake

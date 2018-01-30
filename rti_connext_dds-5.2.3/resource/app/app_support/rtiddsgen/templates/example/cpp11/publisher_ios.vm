@@ -1,0 +1,65 @@
+##/* $Id$
+##
+##   (c) Copyright, Real-Time Innovations, Inc. 2015.  All rights reserved.
+##   No duplications, whole or partial, manual or electronic, may be made
+##   without prior written permission.  Any such copies, or
+##   revisions thereof, must display this notice unaltered.
+##   This code contains trade secrets of Real-Time Innovations, Inc.
+##modification history:
+##---------------------
+##2.3,11sep15,djs created 
+##========================================================================*/*#
+${envMap.POUND_CHAR}include "${envMap.idlFileName}_publisher.hpp"
+
+DDS_Entities::DDS_Entities() {
+    participant = NULL;
+    writer = NULL;
+    sample = NULL;
+}
+
+DDS_Entities::~DDS_Entities() {
+    if (sample != NULL) {
+        delete(sample);
+    }
+    sample = NULL;
+    if (writer != NULL) {
+        delete(writer);
+    }
+    writer = NULL;
+    if (participant != NULL) {
+        delete(participant);
+    }
+    participant = NULL;
+}
+
+int DDS_Entities::dds_setup(int domain_id)
+{
+    // Create a DomainParticipant with default Qos
+    participant = new dds::domain::DomainParticipant(domain_id);
+    if (participant == NULL) {
+        return -1;
+    }
+
+    // Create a Topic -- and automatically register the type
+    topic = new dds::topic::Topic<${constructMap.nativeFQName}> (*participant, "Example ${constructMap.nativeCFQName}");
+    if (topic == NULL) {
+        return -1;
+    }
+    // Create a DataWriter with default Qos
+    dds::pub::Publisher publisher(*participant);
+    writer = new dds::pub::DataWriter<${constructMap.nativeFQName}>(publisher, *topic);
+    if (writer == NULL) {
+        return -1;
+    }
+    sample = new ${constructMap.nativeFQName}();
+
+    return 1;
+}
+
+void DDS_Entities::dds_publish(const int count) {
+
+    // Modify the data to be written here
+
+    std::cout << "Writing ${constructMap.nativeFQName}, count " << count << std::endl;
+    writer->write(*sample);
+}		     

@@ -1,0 +1,122 @@
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_record.xsd">
+
+	<recorder name="remote_example">
+		<!-- This enables remote access to RTI Recorder. RTI Recorder creates one 
+			DataReader and one DataWriter in the domain specified with the <domain> tag. 
+			In addition, the communication shall use the partition "Recorder". -->
+		<remote_access>
+			<enabled>true</enabled>
+			<remote_access_domain> domain0 </remote_access_domain>
+		</remote_access>
+
+		<!-- Base name for the set of files in which recorded data will be stored -->
+		<recorder_database>
+			<database_name> remote_example.dat </database_name>
+			<overwrite>true</overwrite>
+		</recorder_database>
+
+		<!-- Record data from two different domains -->
+		<domain name="domain0">
+			<domain_id>0</domain_id>
+			<deserialize_mode>RTIDDS_DESERIALIZEMODE_ALWAYS</deserialize_mode>
+		</domain>
+
+		<domain name="domain1">
+			<domain_id>1</domain_id>
+			<deserialize_mode>RTIDDS_DESERIALIZEMODE_ALWAYS</deserialize_mode>
+		</domain>
+
+		<!-- Create a TopicGroup that only records the Square topic, and from that 
+			topic, only fields x and y -->
+		<topic_group name="Square">
+			<topics>
+				<topic_expr> Square </topic_expr>
+			</topics>
+			<field_expr> x,y </field_expr>
+		</topic_group>
+
+		<!-- Create a TopicGroup that only records the color field from all topics -->
+		<topic_group name="Color">
+			<topics>
+				<topic_expr> * </topic_expr>
+                <exemption> Square </exemption>
+			</topics>
+			<field_expr> color </field_expr>
+		</topic_group>
+
+		<!-- Create a RecordGroup -->
+		<record_group name="RecordAll">
+			<!-- Specify which domains to record from -->
+			<domain_ref>
+				<element> domain0 </element>
+				<element> domain1 </element>
+			</domain_ref>
+
+			<!-- Specify which TopicGroups to record -->
+			<topic_ref>
+				<element> Square </element>
+				<element> Color  </element>
+			</topic_ref>
+		</record_group>
+	</recorder>
+
+	<recorder name="advanced_example">
+		<!-- This enables remote access to RTI Recorder. RTI Recorder creates one 
+			DataReader and one DataWriter in the domain specified with the <domain> tag. -->
+		<remote_access>
+			<enabled>true</enabled>
+			<remote_access_domain> domain0 </remote_access_domain>
+		</remote_access>
+
+		<!-- Base name for the set of files in which recorded data will be stored -->
+		<recorder_database>
+			<database_name> advanced_example.dat </database_name>
+			<overwrite>true</overwrite>
+		</recorder_database>
+
+		<!-- Record data from two different domains -->
+		<domain name="domain0">
+			<domain_id>0</domain_id>
+			<deserialize_mode>RTIDDS_DESERIALIZEMODE_ALWAYS</deserialize_mode>
+		</domain>
+
+		<domain name="domain1">
+			<domain_id>1</domain_id>
+			<deserialize_mode>RTIDDS_DESERIALIZEMODE_ALWAYS</deserialize_mode>
+		</domain>
+
+		<!-- Create a TopicGroup that only records the Square topic, and from that 
+			topic, only fields x and y -->
+		<topic_group name="Square">
+			<topics>
+				<topic_expr> Square </topic_expr>
+				<exemption> Square </exemption>
+			</topics>
+			<field_expr> x,y </field_expr>
+		</topic_group>
+
+		<!-- Create a TopicGroup that only records the color field from all topics -->
+		<topic_group name="Color">
+			<topics>
+				<topic_expr> * </topic_expr>
+			</topics>
+			<field_expr> color </field_expr>
+		</topic_group>
+
+		<!-- Create a RecordGroup -->
+		<record_group name="RecordAll">
+			<!-- Specify which domains to record from -->
+			<domain_ref>
+				<element> domain0 </element>
+				<element> domain1 </element>
+			</domain_ref>
+
+			<!-- Specify which TopicGroups to record -->
+			<topic_ref>
+				<element> Square </element>
+				<element> Color  </element>
+			</topic_ref>
+		</record_group>
+	</recorder>
+</dds>

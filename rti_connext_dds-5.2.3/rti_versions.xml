@@ -1,0 +1,241 @@
+<rti>
+    <!-- General -->
+    <host>
+        <platform>x64Linux</platform>
+        <base_version>5.2.3</base_version>
+        <installation_type>RTI Connext DDS Eval</installation_type>
+    </host>
+
+                    
+    <admin_console>
+        <installation>
+            <architecture>x64Linux2.6gcc4.1.1</architecture>
+            <version>5.2.3</version>
+            <licensed>licensed</licensed>
+        </installation>
+    </admin_console>
+                            
+    <core_api_docs>
+        <installation>
+            <architecture>x64Linux</architecture>
+            <version>5.2.3</version>
+            <licensed>unlicensed</licensed>
+        </installation>
+    </core_api_docs>
+                            
+    <core_jars>
+        <installation>
+            <architecture>java</architecture>
+            <version>5.2.3</version>
+            <licensed>unlicensed</licensed>
+        </installation>
+    </core_jars>
+                            
+    <core_release_docs>
+        <installation>
+            <architecture>x64Linux</architecture>
+            <version>5.2.3</version>
+            <licensed>unlicensed</licensed>
+        </installation>
+    </core_release_docs>
+                            
+    <examples>
+        <installation>
+            <architecture>x64Linux</architecture>
+            <version>5.2.3</version>
+            <licensed>unlicensed</licensed>
+        </installation>
+    </examples>
+                            
+    <header_files>
+        <installation>
+            <architecture>x64Linux</architecture>
+            <version>5.2.3</version>
+            <licensed>unlicensed</licensed>
+        </installation>
+    </header_files>
+                            
+    <host_files>
+        <installation>
+            <architecture>x64Linux</architecture>
+            <version>5.2.3</version>
+            <licensed>unlicensed</licensed>
+        </installation>
+    </host_files>
+                            
+    <host_jre>
+        <installation>
+            <architecture>x64Linux</architecture>
+            <version>5.2.3</version>
+            <licensed>unlicensed</licensed>
+        </installation>
+    </host_jre>
+                            
+    <jms>
+        <installation>
+            <architecture>x64Linux</architecture>
+            <version>5.2.3</version>
+            <licensed>unlicensed</licensed>
+        </installation>
+    </jms>
+                            
+    <launcher>
+        <installation>
+            <architecture>x64Linux</architecture>
+            <version>5.2.3</version>
+            <licensed>unlicensed</licensed>
+        </installation>
+    </launcher>
+                            
+    <monitor>
+        <installation>
+            <architecture>x64Linux</architecture>
+            <version>5.2.3</version>
+            <licensed>licensed</licensed>
+        </installation>
+    </monitor>
+                            
+    <persistence_service_host>
+        <installation>
+            <architecture>x64Linux2.6gcc4.1.1</architecture>
+            <version>5.2.3</version>
+            <licensed>licensed</licensed>
+        </installation>
+    </persistence_service_host>
+                            
+    <persistence_service>
+        <installation>
+            <architecture>x64Linux2.6gcc4.1.1</architecture>
+            <version>5.2.3</version>
+            <licensed>licensed</licensed>
+        </installation>
+    </persistence_service>
+                            
+    <recording_console>
+        <installation>
+            <architecture>x64Linux</architecture>
+            <version>5.2.3</version>
+            <licensed>unlicensed</licensed>
+        </installation>
+    </recording_console>
+                            
+    <recording_service_host>
+        <installation>
+            <architecture>x64Linux2.6gcc4.1.1</architecture>
+            <version>5.2.3</version>
+            <licensed>licensed</licensed>
+        </installation>
+    </recording_service_host>
+                            
+    <recording_service>
+        <installation>
+            <architecture>x64Linux2.6gcc4.1.1</architecture>
+            <version>5.2.3</version>
+            <licensed>licensed</licensed>
+        </installation>
+    </recording_service>
+                            
+    <request_reply_host>
+        <installation>
+            <architecture>x64Linux</architecture>
+            <version>5.2.3</version>
+            <licensed>unlicensed</licensed>
+        </installation>
+    </request_reply_host>
+                            
+    <request_reply>
+        <installation>
+            <architecture>x64Linux3gcc4.8.2</architecture>
+            <version>5.2.3</version>
+            <licensed>licensed</licensed>
+        </installation>
+    </request_reply>
+                            
+    <routing_service_host>
+        <installation>
+            <architecture>x64Linux2.6gcc4.1.1</architecture>
+            <version>5.2.3</version>
+            <licensed>licensed</licensed>
+        </installation>
+    </routing_service_host>
+                            
+    <routing_service_sdk>
+        <installation>
+            <architecture>x64Linux3gcc4.8.2</architecture>
+            <version>5.2.3</version>
+            <licensed>licensed</licensed>
+        </installation>
+    </routing_service_sdk>
+                            
+    <routing_service>
+        <installation>
+            <architecture>x64Linux2.6gcc4.1.1</architecture>
+            <version>5.2.3</version>
+            <licensed>licensed</licensed>
+        </installation>
+    </routing_service>
+                            
+    <rtiddsgen>
+        <installation>
+            <architecture>x64Linux</architecture>
+            <version>5.2.3</version>
+            <licensed>unlicensed</licensed>
+        </installation>
+    </rtiddsgen>
+                            
+    <shapes_demo>
+        <installation>
+            <architecture>x64Linux2.6gcc4.1.1</architecture>
+            <version>5.2.3</version>
+            <licensed>unlicensed</licensed>
+        </installation>
+    </shapes_demo>
+                            
+    <shared_tools_libraries>
+        <installation>
+            <architecture>x64Linux2.6gcc4.1.1</architecture>
+            <version>5.2.3</version>
+            <licensed>licensed</licensed>
+        </installation>
+    </shared_tools_libraries>
+                            
+    <target_libraries>
+        <installation>
+            <architecture>x64Linux3gcc4.8.2</architecture>
+            <version>5.2.3</version>
+            <licensed>licensed</licensed>
+        </installation>
+        <installation>
+            <architecture>armv6vfphLinux3.xgcc4.7.2</architecture>
+            <version>5.2.3</version>
+            <licensed>unlicensed</licensed>
+        </installation>
+    </target_libraries>
+                            
+    <utilities>
+        <installation>
+            <architecture>x64Linux2.6gcc4.1.1</architecture>
+            <version>5.2.3</version>
+            <licensed>unlicensed</licensed>
+        </installation>
+        <installation>
+            <architecture>armv6vfphLinux3.xgcc4.7.2</architecture>
+            <version>5.2.3</version>
+            <licensed>unlicensed</licensed>
+        </installation>
+    </utilities>
+                            
+    <!-- Installation log -->
+    <installation_log>
+        <stardate>2017-07-27T15:23:14</stardate>
+        <kind>RTI Connext DDS Core Target Package Installed</kind>
+        <architecture>armv6vfphLinux3.xgcc4.7.2</architecture>
+    </installation_log>
+    <installation_log>
+        <stardate>2017-07-20T12:50:16</stardate>
+        <kind>RTI Connext DDS Eval 5.2.3 Installation</kind>
+        <architecture>x64Linux</architecture>
+        <license_accepted>Accepted with UI</license_accepted>
+    </installation_log>
+</rti>
+                    

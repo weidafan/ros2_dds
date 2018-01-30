@@ -1,0 +1,15 @@
+autojoin/autojoin=true
+domains/0/domainId=0
+domains/1/domainId=1
+domains/2/domainId=7
+domains/autoJoin=true
+domains/count=2
+domains/qosLibrary=AdminConsole
+domains/qosProfile=Administration
+eclipse.preferences.version=1
+listeners/count=5
+listeners/listener0=com.rti.tools.console.entitymodel.impl.distlog.DistributedLoggerDdsEntitiesManager
+listeners/listener1=com.rti.tools.console.entitymodel.impl.routing.RoutingServiceDdsEntitiesManager
+listeners/listener2=com.rti.tools.console.entitymodel.impl.recorder.RecorderDdsEntitiesManager
+listeners/listener3=com.rti.tools.console.entitymodel.impl.replay.ReplayDdsEntitiesManager
+listeners/listener4=com.rti.tools.console.entitymodel.impl.persistence.PersistenceDdsEntitiesManager

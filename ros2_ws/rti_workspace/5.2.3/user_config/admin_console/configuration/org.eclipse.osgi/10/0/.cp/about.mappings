@@ -1,0 +1,3 @@
+0=$com.rti.tools.console.product.name$
+1=$com.rti.tools.console.product.version$
+2=$com.rti.dds.version$

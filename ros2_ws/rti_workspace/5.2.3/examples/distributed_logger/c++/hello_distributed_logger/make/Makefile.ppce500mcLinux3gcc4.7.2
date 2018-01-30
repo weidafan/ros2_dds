@@ -1,0 +1,37 @@
+###############################################################################
+##         (c) Copyright, Real-Time Innovations, All rights reserved.        ##
+##                                                                           ##
+##         Permission to modify and use for internal purposes granted.       ##
+## This software is provided "as is", without warranty, express or implied.  ##
+##                                                                           ##
+###############################################################################
+
+# Note:
+# - To use this Makefile, you must have the 'NDDSHOME' environment variable
+#   set to the location of RTI Connext.
+# 
+# - You need to invoke the make command from the root directory of this example.
+#
+# - To enable debugging information, set the Makefile variable 'DEBUG' to '1'.
+# Example:
+#   make -f make/Makefile.i86Linux3gcc4.7.2 DEBUG=1
+
+
+# Defines required Make variables. They will be used in the Makefile.common
+# to define the rules to define the build process for this application.
+ARCH=ppce500mcLinux3gcc4.7.2
+
+gnuBase   = /local/applications/freescale/v1.4/x86_64/sysroots/
+gnuHost   = x86_64-fsl_networking_sdk-linux
+gnuTarget = ppce500mc-fsl_networking-linux
+gnuPrefix    = powerpc-fsl_networking-linux
+gnuBin           = $(gnuBase)/$(gnuHost)/usr/bin
+
+CXX = $(gnuBin)/$(gnuTarget)/$(gnuPrefix)-g++
+CXXFLAGS = -DRTI_UNIX -DRTI_LINUX -DRTI_32BIT -m32 --sysroot=$(gnuBase)/$(gnuTarget) -mhard-float  -mcpu=e500mc --sysroot=$(gnuBase)/$(gnuTarget) -O2 -pipe -feliminate-unused-debug-types
+CXXLD = $(gnuBin)/$(gnuTarget)/$(gnuPrefix)-g++
+CXXLDFLAGS = -m32 -mhard-float  -mcpu=e500mc --sysroot=$(gnuBase)/$(gnuTarget) -O2 -pipe -feliminate-unused-debug-types -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
+SYSLIBS = -ldl -lnsl -lm -lpthread -lrt
+
+# The rest of the rules are in the 'Makefile.common'
+include make/Makefile.common

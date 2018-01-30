@@ -1,0 +1,51 @@
+## $Id$
+##
+## (c) Copyright, Real-Time Innovations, Inc. 2001.  All rights reserved.
+## No duplications, whole or partial, manual or electronic, may be made
+## without prior written permission.  Any such copies, or
+## revisions thereof, must display this notice unaltered.
+## This code contains trade secrets of Real-Time Innovations, Inc.
+##
+## modification history:
+## ---------------------
+## 2.2,9jun14,vmg created
+##========================================================================
+Microsoft Visual Studio Solution File, Format Version ${archMap.SOL_FORMAT_VERSION}
+# Visual Studio ${vsNumber}
+#foreach($project in $projects)
+Project("{${project.id1}}") = "${project.name}", "${project.file}", "{${project.id2}}"
+EndProject
+#end
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+#foreach($mode in $modes)
+		${mode}|Any CPU = ${mode}|Any CPU
+		${mode}|Mixed Platforms = ${mode}|Mixed Platforms
+		${mode}|Win32 = ${mode}|Win32
+#end
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+#foreach($project in $projects)
+#*--*##if($project.type.equals("type"))
+#*----*##foreach($mode in $modes)
+        {${project.id2}}.${mode}|Any CPU.ActiveCfg = ${mode}|Win32
+        {${project.id2}}.${mode}|Mixed Platforms.ActiveCfg = ${mode}|Win32
+        {${project.id2}}.${mode}|Mixed Platforms.Build.0 = ${mode}|Win32
+        {${project.id2}}.${mode}|Win32.ActiveCfg = ${mode}|Win32
+        {${project.id2}}.${mode}|Win32.Build.0 = ${mode}|Win32
+#*------*##end		
+#*--*##else
+#*----*##foreach($mode in $modes)
+        {${project.id2}}.${mode}|Any CPU.ActiveCfg = ${mode}|Any CPU
+        {${project.id2}}.${mode}|Any CPU.Build.0 = ${mode}|Any CPU
+        {${project.id2}}.${mode}|Mixed Platforms.ActiveCfg = ${mode}|Any CPU
+        {${project.id2}}.${mode}|Mixed Platforms.Build.0 = ${mode}|Any CPU
+        {${project.id2}}.${mode}|Win32.ActiveCfg = ${mode}|Any CPU
+#*----*##end
+#*--*##end
+#end
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,1 @@
+/usr/lib/ccache/cc     CMakeFiles/sixpair.dir/src/sixpair.c.o  -o sixpair -rdynamic -lusb 

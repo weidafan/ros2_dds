@@ -1,0 +1,173 @@
+##/* $Id$
+##
+##   (c) Copyright, Real-Time Innovations, Inc. 2001.  All rights reserved.
+##   No duplications, whole or partial, manual or electronic, may be made
+##   without prior written permission.  Any such copies, or
+##   revisions thereof, must display this notice unaltered.
+##   This code contains trade secrets of Real-Time Innovations, Inc.
+
+##modification history:
+##2.2,08apr15,ajm EDDY-433: Intializing long double 
+##2.2,5nov14,ajm CODEGENII-395 Changing long long generation
+##2.2,24jun14,ajm CODEGENII-174 Pointers C++PSM Code generation
+##2.2,28may14,ajm CODEGENII-166 C++PSM Constructor with params with inheritance
+##2.2,08may14,ajm CODEGENII-171 Adding support for sequence C++PSM
+##2.2,11apr4,ajm CODEGENII-172 Fixes from CR-247
+##2.2,3abr14,ajm CODEGENII-172 Support for unions
+##2.2,20mar14,ajm CODEGENII-172 union 
+##2.2,20feb14,ajm CODEGENII-165 Enums  CODEGENII-169:String CODEGENII-173:Alias 
+##2.2,20feb14,ajm CODEGENII-167: Copy&Include, CODEGENII-168:Constant and CR-226 
+##2.2.0,19feb12,ajm created  
+##========================================================================*/*#
+
+#* --------------------------------------------------- *#
+#* --------------------------------------------------- *#
+#* This file contains macros used by more than one     *#
+#* template.                                           *#
+#* --------------------------------------------------- *#
+
+#macro(assignTypeVariables $node)
+#*--*##foreach($member in $node.baseTypeMembers)
+#*----*##if (!$member.directive)
+#*------*##assignMemberVariables ($member $velocityCount)
+#*----*##end
+#*--*##end##foreach
+#*--*##foreach ($member in $node.memberFieldMapList)
+#*----*##if (!$member.directive)
+#*------*##assignMemberVariables ($member $velocityCount)
+#*----*##end
+#*--*##end##foreach
+#if($node.constructKind.equals("union"))
+#*----*##assignMemberVariables($node.unionDiscriminatorMap)
+#*--We change the cName to not have two __ together so it is just d_*#
+#set($node.unionDiscriminatorMap.cName="m${node.unionDiscriminatorMap.name}_")
+#set($node.unionMemberCName="m_u_")
+#set($node.unionStructName="Union_")
+#end  
+#end##macro
+
+
+#macro(assignMemberVariables $member $index)
+#*--*##if (!$member.initialized)
+##We check that this set is only done once
+#*----*##set($member.initialized="true") 
+#*--*##end
+#*----*##set($member.index=$index)
+#*----*##set($member.cName="m_${member.name}_")
+#*--*##if($member.typeKind=="user")
+#*------*##set($member.specTypeName=$member.nativeTypeFQName)
+#*--*##elseif($member.nativeTypeFQName=="DDS_Char")
+#*------*##set($member.specTypeName="char")
+#*------*##set($member.initialValue="0")
+#*----*##elseif($member.nativeTypeFQName=="DDS_Wchar")
+#*------*##set($member.specTypeName="DDS_Wchar")
+#*------*##set($member.initialValue="0")
+#*----*##elseif($member.nativeTypeFQName=="DDS_Octet")
+#*------*##set($member.specTypeName="uint8_t")
+#*------*##set($member.initialValue="0")
+#*----*##elseif($member.nativeTypeFQName=="DDS_Short") 
+#*------*##set($member.specTypeName="int16_t")
+#*------*##set($member.initialValue="0")
+#*----*##elseif($member.nativeTypeFQName=="DDS_Long")
+#*------*##set($member.specTypeName="int32_t")
+#*------*##set($member.initialValue="0")
+#*----*##elseif($member.nativeTypeFQName=="DDS_LongLong")
+#*------*##set($member.specTypeName="rti::core::int64")
+#*------*##set($member.initialValue="0ll") 
+#*----*##elseif($member.nativeTypeFQName=="DDS_Float") 
+#*------*##set($member.specTypeName="float")
+#*------*##set($member.initialValue="0.0f")
+#*----*##elseif($member.nativeTypeFQName=="DDS_Double")
+#*------*##set($member.specTypeName="double")
+#*------*##set($member.initialValue="0.0")
+#*----*##elseif($member.nativeTypeFQName=="DDS_Boolean")
+#*------*##set($member.specTypeName="bool") 
+#*------*##set($member.initialValue="false") 
+#*----*##elseif($member.nativeTypeFQName=="DDS_UnsignedLongLong")
+#*------*##set($member.specTypeName="rti::core::uint64")
+#*------*##set($member.initialValue="0ull")
+#*----*##elseif($member.nativeTypeFQName=="DDS_UnsignedLong")
+#*------*##set($member.specTypeName="uint32_t")
+#*------*##set($member.initialValue="0u") 
+#*----*##elseif($member.nativeTypeFQName=="DDS_UnsignedShort") 
+#*------*##set($member.specTypeName="uint16_t")
+#*------*##set($member.initialValue="0")
+#*----*##elseif($member.nativeTypeFQName=="rti::core::LongDouble") 
+#*------*##set($member.specTypeName="rti::core::LongDouble")
+#*------*##set($member.initialValue="0.0")
+#*----*##elseif($member.nativeTypeFQName=="dds::core::string") 
+#*------*##set($member.specTypeName="dds::core::string")
+#*------*##set($member.initialValue="")
+#*----*##elseif($member.nativeTypeFQName=="dds::core::wstring")
+#*------*##set($member.specTypeName="dds::core::wstring") 
+#*------*##set($member.initialValue="") 
+#*--*##end
+
+#*--*##if($member.seqSize)
+#*----*##set($member.completeSpecTypeName="dds::core::vector<$member.specTypeName>")
+#*--*##else
+#*----*##set($member.completeSpecTypeName="$member.specTypeName")
+#*--*##end
+#*--*##if($member.isPointer)
+#*----*##if($member.completeSpecTypeName.endsWith(">"))
+#*-----*##set($member.pointerType="rti::core::pointer<${member.completeSpecTypeName} >")
+#*-----*##else
+#*-----*##set($member.pointerType="rti::core::pointer<${member.completeSpecTypeName}>")
+#*-----*##end
+#*-----*##set($member.completeSpecTypeName="${member.completeSpecTypeName} *")
+#*--*##end
+#*--*##if($member.dimensionList)
+#*--*##set($member.completeSpecTypeName="#declareSpecArrayType($member)")
+#*--*##end
+#*--*##if($member.isOptional)
+#*----*##if($member.completeSpecTypeName.endsWith(">"))
+#** If the spectTypeNamealready contains a > we need to introduce a space **#
+#*------*##set($member.completeSpecTypeName="dds::core::optional<$member.completeSpecTypeName >")
+#*----*##else
+#*------*##set($member.completeSpecTypeName="dds::core::optional<$member.completeSpecTypeName>")
+#*----*##end
+#*--*##end
+
+#*--*##if((($member.seqSize) ||($member.strSize) || ($member.typeKind.equals("user")) 
+ || ($member.dimensionList) || ($member.nativeTypeFQName.equals("rti::core::LongDouble")) 
+ ||($member.isOptional))&& (!$member.isPointer || $member.dimensionList))
+#*------*##set($member.complexType="true")
+#*--*##end
+#end
+
+#macro(declareSpecArrayType $member)
+#foreach($dim in $member.dimensionList)dds::core::array<#end#*
+*##if($member.pointerType)$member.pointerType#else$member.completeSpecTypeName#end#*
+*##foreach($dim in $member.dimensionList)#set($i = $member.dimensionList.size() - $velocityCount )
+, $member.dimensionList.get($i)>#end 
+#end
+
+
+#* This macro prints all the directives that are in the array but the ones that contains the word "declaration",
+this is used for the Type File*#
+
+#macro (copyDirectiveNoDeclaration $element)
+#if($element.directive!="copy-c-declaration" && $element.directive!="copy-declaration")
+$element.value
+#end
+#end
+
+#macro (copyAllDirectives $element)
+$element.value
+#end
+
+#macro(commaIfNeeded $index $v)
+#if( $index < $v.size()), #end 
+#end
+
+#macro(initCases $member)
+#foreach($l in $member.labelList)    
+#if($l=="default")
+          default:
+#else
+          case $l:
+#end
+#end
+          {  
+#end
+

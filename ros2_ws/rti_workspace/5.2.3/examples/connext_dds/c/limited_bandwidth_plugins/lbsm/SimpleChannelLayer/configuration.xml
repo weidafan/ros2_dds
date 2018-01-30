@@ -1,0 +1,16 @@
+<LowBandwidthSimulationManagerProfile>
+	<lbsm>
+		<listener_port>5012</listener_port>
+		<event_port>5011</event_port>
+		<verbosity>3</verbosity>
+	</lbsm>
+	<station>
+		<overflow>true</overflow>	
+		<buffer_max_size>102400</buffer_max_size>
+	</station>
+	<channel type="SIMPLE_CHANNEL_LAYER">
+		<bandwidth>1200</bandwidth>
+		<packet_loss>3</packet_loss>
+		<propagation_delay>0</propagation_delay>
+	</channel>
+</LowBandwidthSimulationManagerProfile>

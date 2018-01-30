@@ -1,0 +1,14 @@
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/opensplice_cmake_module
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/opensplice_cmake_module
+/home/aust/ros2_ws/install/share/opensplice_cmake_module/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/opensplice_cmake_module/environment/path.sh
+/home/aust/ros2_ws/install/share/opensplice_cmake_module/local_setup.bash
+/home/aust/ros2_ws/install/share/opensplice_cmake_module/local_setup.sh
+/home/aust/ros2_ws/install/share/opensplice_cmake_module/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/opensplice_cmake_module
+/home/aust/ros2_ws/install/share/opensplice_cmake_module/cmake/opensplice_cmake_module-extras.cmake
+/home/aust/ros2_ws/install/share/opensplice_cmake_module/cmake/opensplice_cmake_moduleConfig.cmake
+/home/aust/ros2_ws/install/share/opensplice_cmake_module/cmake/opensplice_cmake_moduleConfig-version.cmake
+/home/aust/ros2_ws/install/share/opensplice_cmake_module/package.xml
+/home/aust/ros2_ws/install/share/opensplice_cmake_module/cmake/Modules/FindOpenSplice.cmake
+/home/aust/ros2_ws/install/share/opensplice_cmake_module/config/ros_ospl.xml

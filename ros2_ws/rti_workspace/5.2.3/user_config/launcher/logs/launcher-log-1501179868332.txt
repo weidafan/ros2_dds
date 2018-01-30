@@ -1,0 +1,2 @@
+[14:24:28] RTI Connext Launcher 5.2.3 started
+[14:28:20] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/temperature_dds/temperature.idl -ppDisable -language Java -create typefiles -create examplefiles -create makefiles -platform x64Linux3gcc4.8.2)

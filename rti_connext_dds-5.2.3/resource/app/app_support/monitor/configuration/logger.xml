@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d : %p : %l : - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="ROLLING_MESSAGES_FILE" class="org.apache.log4j.RollingFileAppender">
+        <!--
+            NOTE: The 'File' parameter is used to establish the logging
+            directory. Most applications will overwrite the log file name (which
+            is necessary since there isn't a way to share a configuration file
+            and have application-specific names for the log files).
+        -->
+        <!--param name="File" value="${RTI_MONITOR_DIR}/logs/log.log"/-->
+        <param name="File" value="${RTI_MONITOR_LOG_DIR}/RTIMonitor.log"/>
+        <param name="MaxBackupIndex" value="3"/>
+        <param name="MaxFileSize" value="10MB"/>
+        <param name="Append" value="false"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <!-- %t to print the current thread name -->
+            <param name="ConversionPattern" value="%d : %p : %l : - %m%n"/>
+        </layout>
+    </appender>
+
+    <root>
+        <level value="warn"/>
+        <!-- 
+            Uncomment the next line to see messages in the console.
+            This is only useful if you change the script file to use java rather
+            than javaw as there is no console output with javaw.
+         -->
+        <!--appender-ref ref="CONSOLE"/-->
+        <appender-ref ref="ROLLING_MESSAGES_FILE"/>
+    </root>
+</log4j:configuration>

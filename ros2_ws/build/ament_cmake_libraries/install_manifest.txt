@@ -1,0 +1,15 @@
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/ament_cmake_libraries
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/ament_cmake_libraries
+/home/aust/ros2_ws/install/share/ament_cmake_libraries/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/ament_cmake_libraries/environment/path.sh
+/home/aust/ros2_ws/install/share/ament_cmake_libraries/local_setup.bash
+/home/aust/ros2_ws/install/share/ament_cmake_libraries/local_setup.sh
+/home/aust/ros2_ws/install/share/ament_cmake_libraries/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/ament_cmake_libraries
+/home/aust/ros2_ws/install/share/ament_cmake_libraries/cmake/ament_cmake_libraries-extras.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_libraries/cmake/ament_cmake_librariesConfig.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_libraries/cmake/ament_cmake_librariesConfig-version.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_libraries/package.xml
+/home/aust/ros2_ws/install/share/ament_cmake_libraries/cmake/ament_libraries_unpack_build_configuration.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_libraries/cmake/ament_libraries_deduplicate.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_libraries/cmake/ament_libraries_pack_build_configuration.cmake

@@ -1,0 +1,1 @@
+[10:50:55] RTI Connext Launcher 5.2.3 started

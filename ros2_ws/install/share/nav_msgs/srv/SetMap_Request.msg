@@ -1,0 +1,3 @@
+# Set a new map together with an initial pose
+nav_msgs/OccupancyGrid map
+geometry_msgs/PoseWithCovarianceStamped initial_pose

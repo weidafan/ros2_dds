@@ -1,0 +1,7 @@
+#!gbuild
+[INTEGRITY Application]
+	-I.
+	:sourceDir=.
+	-no_kernel
+RunPersistence_as1.gpj		[Program]
+RunPersistence.int

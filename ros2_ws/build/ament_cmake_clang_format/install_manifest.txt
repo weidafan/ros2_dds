@@ -1,0 +1,14 @@
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/ament_cmake_clang_format
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/ament_cmake_clang_format
+/home/aust/ros2_ws/install/share/ament_cmake_clang_format/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/ament_cmake_clang_format/environment/path.sh
+/home/aust/ros2_ws/install/share/ament_cmake_clang_format/local_setup.bash
+/home/aust/ros2_ws/install/share/ament_cmake_clang_format/local_setup.sh
+/home/aust/ros2_ws/install/share/ament_cmake_clang_format/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/ament_cmake_clang_format
+/home/aust/ros2_ws/install/share/ament_cmake_clang_format/cmake/ament_cmake_clang_format-extras.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_clang_format/cmake/ament_cmake_clang_formatConfig.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_clang_format/cmake/ament_cmake_clang_formatConfig-version.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_clang_format/package.xml
+/home/aust/ros2_ws/install/share/ament_cmake_clang_format/cmake/ament_cmake_clang_format_lint_hook.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_clang_format/cmake/ament_clang_format.cmake

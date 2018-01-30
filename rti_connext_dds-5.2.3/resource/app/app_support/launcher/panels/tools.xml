@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+   (c) Copyright, Real-Time Innovations, Inc. 2015.  All rights reserved.
+   No duplications, whole or partial, manual or electronic, may be made
+   without prior written permission.  Any such copies, or
+   revisions thereof, must display this notice unaltered.
+   This code contains trade secrets of Real-Time Innovations, Inc.
+-->
+<launcher xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xsi:noNamespaceSchemaLocation="launcher_panel.xsd">
+    <button name="adminconsole">
+        <icon>AdminConsole2_90.png</icon>
+        <tooltip>RTI Admin Console:
+            Central administrative console for all DDS Services.
+            View running services and their configuration.
+            Start/Stop services. Change service configurations.
+            Centralized message console.
+        </tooltip>
+        <legend>Admin Console</legend>
+        <toolexec>bin/rtiadminconsole</toolexec>
+        <popupmenu>
+            <menuitem>
+                <label>Introduction Video</label>
+                <url>http://www.youtube.com/watch?v=pQtOP28K094</url>
+            </menuitem>
+            <menuitem>
+                <label>Release Notes (PDF, local)</label>
+                <doc>manuals/admin_console/RTI_Admin_Console_ReleaseNotes.pdf</doc>
+            </menuitem>
+            <menuitem>
+                <label>Release Notes (PDF, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/admin_console/RTI_Admin_Console_ReleaseNotes.pdf</url>
+            </menuitem>
+        </popupmenu>
+    </button>
+    <button name="monitor">
+        <icon>Monitor3_90.png</icon>
+        <tooltip>RTI Monitor:
+            Monitor of DDS Entities, traffic, and internal state.
+            Replay in real time, faster, or slower.
+            Statistics on messages, sent, received, and protocol behavior
+            by each DDS Entity in the Domain.
+        </tooltip>
+        <legend>Monitor</legend>
+        <toolexec>bin/rtimonitor</toolexec>
+        <popupmenu>
+            <menuitem>
+                <label>Introduction Video</label>
+                <url>http://www.youtube.com/watch?v=CCHz0xiOJ0M</url>
+            </menuitem>
+            <menuitem>
+                <label>Getting Started Guide (PDF, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/monitor/RTI_Monitor_GettingStarted.pdf</url>
+            </menuitem>
+            <menuitem>
+                <label>Getting Started Guide (PDF, local)</label>
+                <doc>manuals/monitor/RTI_Monitor_GettingStarted.pdf</doc>
+            </menuitem>
+            <menuitem>
+                <label>User's Manual (PDF, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/monitor/RTI_Monitor_UsersManual.pdf</url>
+            </menuitem>
+            <menuitem>
+                <label>User's Manual (PDF, local)</label>
+                <doc>manuals/monitor/RTI_Monitor_UsersManual.pdf</doc>
+            </menuitem>
+            <menuitem>
+                <label>Release Notes (PDF, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/monitor/RTI_Monitor_ReleaseNotes.pdf</url>
+            </menuitem>
+            <menuitem>
+                <label>Release Notes (PDF, local)</label>
+                <doc>manuals/monitor/RTI_Monitor_ReleaseNotes.pdf</doc>
+            </menuitem>
+        </popupmenu>
+    </button>
+    <button name="recordingconsole">
+        <icon>RecorderConsole90.gif</icon>
+        <tooltip>RTI Recording Console:
+            Record and replay data, schedule recording,
+            select topics for playback, scan and skip playback to the
+            time intervals of interest.
+        </tooltip>
+        <legend>Recording Console</legend>
+        <toolexec>bin/rtirecordingconsole</toolexec>
+        <popupmenu>
+            <menuitem>
+                <label>Getting Started Guide (PDF, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/recording_service/RTI_Recording_Service_GettingStarted.pdf</url>
+            </menuitem>
+            <menuitem>
+                <label>Getting Started Guide (PDF, local)</label>
+                <doc>manuals/recording_service/RTI_Recording_Service_GettingStarted.pdf</doc>
+            </menuitem>
+            <menuitem>
+                <label>User's Manual (PDF, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/recording_service/RTI_Recording_Service_UsersManual.pdf</url>
+            </menuitem>
+            <menuitem>
+                <label>User's Manual (PDF, local)</label>
+                <doc>manuals/recording_service/RTI_Recording_Service_UsersManual.pdf</doc>
+            </menuitem>
+            <menuitem>
+                <label>Release Notes (PDF, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/recording_service/RTI_Recording_Service_ReleaseNotes.pdf</url>
+            </menuitem>
+            <menuitem>
+                <label>Release Notes (PDF, local)</label>
+                <doc>manuals/recording_service/RTI_Recording_Service_ReleaseNotes.pdf</doc>
+            </menuitem>
+        </popupmenu>
+    </button>
+    <button name="rtishapesdemo">
+        <icon>Shapes90.gif</icon>
+        <tooltip>RTI Shapes Demo:
+            Graphical utility to experiment and learn the different QoS
+            and the use of the development, analysis, and monitoring tools.
+        </tooltip>
+        <legend>Shapes Demo</legend>
+        <toolexec>bin/rtishapesdemo</toolexec>
+        <popupmenu>
+            <menuitem>
+                <label>User's Manual (PDF, local)</label>
+                <doc>manuals/shapes_demo/RTI_Shapes_UsersManual.pdf</doc>
+            </menuitem>
+            <menuitem>
+                <label>User's Manual (PDF, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/shapes_demo/RTI_Shapes_UsersManual.pdf</url>
+            </menuitem>
+        </popupmenu>
+    </button>
+    <button name="wireshark">
+        <icon>Wireshark90.gif</icon>
+        <tooltip>Wireshark:
+            Network packet analyzer.
+            Inspect network packets, discovery and reliability protocol.
+            For downloading the product and to get more information, visit:
+            https://community.rti.com/downloads/rti-wireshark
+        </tooltip>
+        <legend>Wireshark</legend>
+        <findexecutable>Wireshark</findexecutable>
+        <popupmenu>
+            <menuitem>
+                <label>RTPS Protocol DDS-RTPS (PDF, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/wireshark/RTPS_Protocol_v2.2.pdf</url>
+            </menuitem>
+            <menuitem>
+                <label>Getting Started (PDF, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/wireshark/RTI_Wireshark_GettingStarted.pdf</url>
+            </menuitem>
+            <menuitem>
+                <label>Release Notes (PDF, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/wireshark/RTI_Wireshark_ReleaseNotes.pdf</url>
+            </menuitem>
+        </popupmenu>
+    </button>
+    
+    <button name="spreadsheet_addin">
+        <platform_filter>Windows</platform_filter>
+        <icon>SpreadsheetAddin90.gif</icon>
+        <tooltip>RTI Add-In for Microsoft Excel&#174;:
+            Read and write DDS from Microsoft Excel&#174;.
+            Automatically place DDS data in Microsoft Excel&#174;, update the Microsoft Excel&#174; data in real-time.
+            Perform computations and graphical views of the live data.
+        </tooltip>
+        <legend>Spreadsheet Add-in for Microsoft Excel&#174;</legend>
+        <findexecutable>Excel</findexecutable>
+        <detection>
+            <file relative_path="resource/app/lib/i86Win32VS2008/DDS2Excel.dll" />
+        </detection>
+        <popupmenu>
+            <menuitem>
+                <label>Getting Started (PDF, local)</label>
+                <doc>manuals/spreadsheet_addin/RTI_Spreadsheet_Addin_GettingStarted.pdf</doc>
+            </menuitem>
+            <menuitem>
+                <label>User's Manual (PDF, local)</label>
+                <doc>manuals/spreadsheet_addin/RTI_Spreadsheet_Addin_UsersManual.pdf</doc>
+            </menuitem>
+            <menuitem>
+                <label>Release Notes (PDF, local)</label>
+                <doc>manuals/spreadsheet_addin/RTI_Spreadsheet_Addin_ReleaseNotes.pdf</doc>
+            </menuitem>
+        </popupmenu>
+    </button>
+</launcher>

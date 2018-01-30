@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!-- 
+ (c) Copyright, Real-Time Innovations, 2012-2016.
+ All rights reserved.
+ No duplications, whole or partial, manual or electronic, may be made
+ without express written permission.  Any such copies, or
+ revisions thereof, must display this notice unaltered.
+ This code contains trade secrets of Real-Time Innovations, Inc.
+
+Description:
+This file defines the default QoS profiles that the rtishapesdemo will use.
+
+For more information about XML QoS Profiles see Chapter 15 in the 
+RTI Data Distribution Service user manual.
+-->
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_dds_qos_profiles.xsd">
+    <qos_library name="User_RTI_Shapes_Lib">
+        <qos_profile name="User_Shapes_Default_Profile" is_default_qos="true">
+            <datawriter_qos>
+                <writer_data_lifecycle>
+                    <autodispose_unregistered_instances>false</autodispose_unregistered_instances>
+                </writer_data_lifecycle>
+            </datawriter_qos>
+            <datareader_qos>
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>6</depth>
+                </history>
+            </datareader_qos>
+        </qos_profile>
+        <qos_profile name="Asymmetric_TCP_Cloud_Client">
+            <participant_qos>
+                <transport_builtin>
+                <mask>MASK_NONE</mask>
+                </transport_builtin>
+                <discovery>
+                    <initial_peers>
+                        <!-- -->
+                        <!-- CHANGE THIS TO THE MACHINE YOU WANT TO CONTACT -->
+                        <!-- NOTE: Both the IP address and port MUST MATCH -->
+                        <!-- the public address used by the other -->
+                        <!-- configuration -->
+                        <!-- -->
+                        <element>tcpv4_wan://pubsub.rti.com:7400</element>
+                    </initial_peers>
+                </discovery>
+                <property>
+                    <value>
+                        <element>
+                            <name>dds.transport.load_plugins</name>
+                            <value>dds.transport.TCPv4.tcp1</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.TCPv4.tcp1.library</name>
+                            <value>nddstransporttcp</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.TCPv4.tcp1.create_function</name>
+                            <value>NDDS_Transport_TCPv4_create</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.TCPv4.tcp1.parent.classid</name>
+                            <value>NDDS_TRANSPORT_CLASSID_TCPV4_WAN</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.TCPv4.tcp1.public_address</name>
+                            <value>0.0.0.0</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.TCPv4.tcp1.server_bind_port</name>
+                            <value>0</value>
+                        </element>
+                    </value>
+                </property>
+            </participant_qos>
+        </qos_profile>
+    </qos_library>
+</dds>

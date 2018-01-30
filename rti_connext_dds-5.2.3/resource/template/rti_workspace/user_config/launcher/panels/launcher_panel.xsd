@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+   (c) Copyright, Real-Time Innovations, Inc. 2015.  All rights reserved.
+   No duplications, whole or partial, manual or electronic, may be made
+   without prior written permission.  Any such copies, or
+   revisions thereof, must display this notice unaltered.
+   This code contains trade secrets of Real-Time Innovations, Inc.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+        elementFormDefault="qualified"
+        attributeFormDefault="unqualified">
+
+    <xsd:element name="launcher">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="button" type="ButtonType" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            The main elements composing a Launcher panel are
+                            buttons. A launcher panel file can have none to any
+                            number of buttons. These buttons can represent 
+                            tools, services, utilities and almost any type of
+                            application that can be launched.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <xsd:complexType name="ButtonType">
+        <xsd:sequence>
+            <xsd:element name="platform_filter" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Allows the definition of a platform regular expression
+                        to be matched (specifically, the expression is matched 
+                        against, "Unix", "Windows" and "Mac"). If the current 
+                        platform doesn't match this expression the button won't 
+                        be created.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="icon" type="xsd:string" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Path to the button's main icon to be shown in the panel.
+                        The image should be 90x90 pixels. If it isn't, it will
+                        be scaled to this size. Icons are looked for in several
+                        locations: 1) in the user's launcher home directory 
+                        (rti_workspace/user_config/launcher); 2) in the install
+                        directory, in the 
+                        resource/app/app_support/launcher/icons directory; 3) 
+                        treated as an absolute path.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="icon32" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Path to a 32x32 icon for the tool. This may be used by
+                        dialogs for the dialog shell or other utilities. It's
+                        optional. Same rules for finding the main icon apply to
+                        this icon path.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="tooltip" type="xsd:string" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Required field. Provides a title and a brief description
+                        for the tool, that will be shown as a balloon tool-tip
+                        when the user hovers over the button.
+                        The format of this the following: {Title}:{Body}. The
+                        colon character is required or Launcher may fail to
+                        parse the panel.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="legend" type="xsd:string" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The name to be shown for the tool in the label right 
+                        below the icon.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="dialog" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        When this application uses a SWT dialog to get more 
+                        settings from the user for its execution, these settings
+                        allow to define the Java class to be used, the title of
+                        the application, the class of any advanced (secondary)
+                        dialog to be used, and so forth.
+                        
+                        There are two dialog types supported: 
+                        1) a standard RTI dialog. These dialogs inherit from 
+                        'com.rti.tools.launcher.dialog.BaseDialog'.
+                        2) dialogs that inherit from 
+                        'org.eclipse.jface.dialogs.Dialog'. These dialogs must
+                        also implement the interface 
+                        'com.rti.tools.launcher.dialog.ICommandsProvider'.
+                        
+                        The standard RTI dialog is divided in three sections: 
+                        1) a header (containing the title, the icon image and a 
+                        button that pops up the context-menu for the tool, the
+                        same as the main panel); 
+                        2)the main area where specific widgets can be used to 
+                        obtain information from the user; and 
+                        3) a footer component, with a "Run" button, a "Confirm 
+                        command" checkbox, used to show a confirmation
+                        dialog for the execution command, and if an advanced
+                        (secondary) dialog is used, a "Advanced settings" button
+                        to access it.
+                        
+                        JFace-based dialogs are custom. The only restriction is 
+                        that one of the buttons has to return 
+                        IDialogConstats.ID_OK as its result. In case they return
+                        this value, the commands to be executed will be 
+                        extracted by using the implementation of the 
+                        ICommandsProvider interface.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="DialogType">
+                            <xsd:attribute name="kind" use="optional">
+                                <xsd:annotation>
+                                    <xsd:documentation>
+                                        The kind of the dialog is optional, and
+                                        when not specified, the RTI base dialog
+                                        model is assumed.
+                                        The possible values for this attribute
+                                        are:
+                                        JFace: to specify that a JFace dialog
+                                        will be provided.
+                                        RTIBase (default): the base class for 
+                                        RTI dialogs will be used.
+                                    </xsd:documentation>
+                                </xsd:annotation>
+                                <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                        <xsd:enumeration value="JFace" />
+                                        <xsd:enumeration value="RTIBase" />
+                                    </xsd:restriction>
+                                </xsd:simpleType>
+                            </xsd:attribute>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="toolexec" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Specify that the tool is run by executing an executable,
+                        directly. This setting specifies the path to that tool.
+                        First, the path is checked to see if it's an absolute
+                        path. If it is, it's executed directly. If it's not, 
+                        it's considered to be a path relative to the RTI 
+                        installation directory.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:simpleContent>
+                        <xsd:extension base="xsd:string">
+                            <xsd:attribute name="terminal" use="optional">
+                                <xsd:annotation>
+                                    <xsd:documentation>
+                                        Set to "true" if the command should be 
+                                        executed on a terminal window 
+                                        (e.g. 'cmd' on Windows).
+                                    </xsd:documentation>
+                                </xsd:annotation>
+                                <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                        <xsd:pattern value="true|false" />
+                                    </xsd:restriction>
+                                </xsd:simpleType>
+                            </xsd:attribute>
+                            <xsd:attribute name="elevate" use="optional">
+                                <xsd:annotation>
+                                    <xsd:documentation>
+                                        Set to "true" if the command should be 
+                                        executed with elevated privileges.
+                                    </xsd:documentation>
+                                </xsd:annotation>
+                                <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                        <xsd:pattern value="true|false" />
+                                    </xsd:restriction>
+                                </xsd:simpleType>
+                            </xsd:attribute>
+                        </xsd:extension>
+                    </xsd:simpleContent>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="macapp" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        If the tool can be executed on Mac and provides a Mac OS
+                        X app directory to be executed, it can be specified with
+                        this tag. If this tag is present, the tool, when running
+                        on Mac OS X, will be executed using the .app directory.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="findexecutable" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Specify that the tool's executable has to be found.
+                        On Windows systems, the application is looked for in the
+                        Windows registry, under the 
+                        "SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths"
+                        key.
+                        For Mac OS X and Unix-based systems, the "which" command
+                        is used to provide paths to be tested.
+                        In Mac OS X, the string is also used to test in the
+                        Applications folder in the user's home.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="detection" type="DetectionListType" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Optional tag that can be used to specify key files that
+                        have to be present for the execution of the application.
+                        To consider the application as installed, the executable
+                        has to be found, plus any contents of this tag.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="downloadable" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        This option tells Launcher that the product is not 
+                        installed by default, but that it can be downloaded and
+                        installed automatically.
+                        The button will detect if the product is installed or 
+                        not. When not installed, it will show a decoration that
+                        can be clicked, and the user will be prompted. If they
+                        choose to install, Launcher will automatically download
+                        and extract the zip file into the location specified
+                        with the attribute "install_location".
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="DownloadableType">
+                            <xsd:attribute name="link" type="xsd:string">
+                                <xsd:annotation>
+                                    <xsd:documentation>
+                                        This is a link to the product's main
+                                        page. Informational.
+                                    </xsd:documentation>
+                                </xsd:annotation>
+                            </xsd:attribute>
+                            <xsd:attribute name="install_location" 
+                                    type="xsd:string" use="optional">
+                                <xsd:annotation>
+                                    <xsd:documentation>
+                                        The default location of the installed
+                                        product. This is a path relative to the
+                                        RTI Connext installation directory.
+                                        Some download types don't require 
+                                        this parameter (e.g. the RTI 
+                                        Package Installer knows where to
+                                        install the contents)
+                                    </xsd:documentation>
+                                </xsd:annotation>
+                            </xsd:attribute>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="popupmenu" type="PopupMenuType" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        This element is necessary, even if it contains no 
+                        context-menu entries, as it's the creation point for the
+                        button. All contained menu items will be processed by an
+                        internal MenuItem factory and created attached to the
+                        created button.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string" />
+    </xsd:complexType>
+    
+    <xsd:complexType name="DetectionListType">
+        <xsd:sequence>
+            <xsd:element name="file" minOccurs="1" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Used to express that the element to be detected is a 
+                        file.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:attribute name="relative_path" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                Path of the file, relative to the Connext 
+                                installation directory.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="LinkType">
+        <xsd:choice>
+            <xsd:element name="zip">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        To include download links as ZIP files.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value=".*\.zip"></xsd:pattern>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="dmg">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        To include download links as DMG files.
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value=".*\.dmg"></xsd:pattern>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="rtipkg" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        To include download links as RTI Package Installer 
+                        files.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:choice>
+    </xsd:complexType>
+        
+    <xsd:complexType name="DownloadableType">
+        <xsd:choice>
+            <xsd:element name="multi" type="LinkType" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        This tag is used to express download links that are 
+                        multi-platform.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:sequence>
+                <xsd:element name="linux" type="LinkType" minOccurs="0" maxOccurs="1">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Download link for the Linux version of the product.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="win" type="LinkType" minOccurs="0" maxOccurs="1">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Download link for the Windows version of the product.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="macos" type="LinkType" minOccurs="0" maxOccurs="1">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Download link for the Mac OS X version of the product.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:choice>
+    </xsd:complexType>
+    
+    <xsd:complexType name="DialogType">
+        <xsd:sequence>
+            <xsd:element name="class" type="xsd:string" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The Java class to be used with the execution of the 
+                        tool. If the dialog class element is present, none of
+                        the "toolexec" and "findexecutable" tags take effect, as
+                        the dialog will be used to launch the tool.
+                        This setting has to specify the full name of the Java
+                        class extending the BaseDialog class provided by RTI
+                        Launcher, this is, including the package name (e.g. 
+                        "com.company.module.ToolDialog").
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="title" type="xsd:string" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The title to be shown in the dialog if the standard RTI
+                        header is used. Even if this standard header component 
+                        is not used, the title will be accessible by using
+                        the DialogSettings class.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="advanced_dialog" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        If the application has a secondary dialog (advanced 
+                        dialog in Launcher terms), this field allows specifying
+                        the SWT class implementing the advanced dialog 
+                        functionality.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="service_name" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        This setting is intended to be used by RTI service 
+                        dialog implementations.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="service_dirname" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        This setting is intended to be used by RTI service 
+                        dialog implementations.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="workdir_init" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        This setting is intended to be used by RTI service 
+                        dialog implementations.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="service_xml_tag" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        This setting is intended to be used by RTI service 
+                        dialog implementations.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="service_library_xml_tag" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        This setting is intended to be used by RTI service 
+                        dialog implementations.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="config_path" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        This setting is intended to be used by RTI service 
+                        dialog implementations.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="user_config_filename" type="xsd:string" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        This setting is intended to be used by RTI service 
+                        dialog implementations.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="PopupMenuType">
+        <xsd:sequence>
+            <xsd:element name="menuitem" type="MenuItemType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Menu items are entries in the tool button's context 
+                        menu. There can be as many as necessary. There can also
+                        be no menu items, although the parent tag "popupmenu"
+                        must exist.
+                        Menu items can be used to open documents, links or 
+                        execute commands, e.g. to show help ("tool.exe -help").
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="MenuItemType">
+        <xsd:sequence>
+            <xsd:element name="label" type="xsd:string" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The label to be shown in the context menu item.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:choice>
+                <xsd:sequence>
+                    <xsd:element name="exec" type="xsd:string" minOccurs="0" maxOccurs="1">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                The executable to run. The executable looked for
+                                in the same way as the "toolexec" tag: first the
+                                path is checked to be absolute or relative. If 
+                                it's absolute, it's executed as is. If not, it's
+                                looked for in the RTI installation directory.
+                                This tag can be omitted, meaning that the 
+                                default executable for the tool will be used 
+                                (the tool defined in the "toolexec" setting).
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="options" type="xsd:string" minOccurs="0" maxOccurs="1">
+                        <xsd:annotation>
+                            <xsd:documentation>
+                                The command-line arguments to be passed to the
+                                executable defined in the "exec" tag or in the
+                                "toolexec" setting if "exec" is omitted.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:element name="doc" type="xsd:string" minOccurs="1" maxOccurs="1">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            This setting can be used to provide document links.
+                            Documents can either be relative to the RTI 'doc'
+                            directory, or an absolute path to a document file.
+                            The document will be opened with the default 
+                            application to open the document.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="url" type="xsd:string" minOccurs="1" maxOccurs="1">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Specify a HTML or File URL (URI) to be opened by the 
+                            tool. It will be opened by using the default browser 
+                            or application in the system.
+                            File URIs are specified with format 
+                            "file://hostname/filename". Hostname can be left 
+                            empty, meaning that localhost will be implied.
+                            The file name path, even on Windows, has to be
+                            specified with "/" separators.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+</xsd:schema>

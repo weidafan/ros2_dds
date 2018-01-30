@@ -1,0 +1,5 @@
+[11:48:20] RTI Connext Launcher 5.2.3 started
+[11:50:07] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/temperature_dds/temperature.idl -ppDisable -d /home/aust/temp_C -language C++ -create typefiles -create examplefiles -create makefiles -platform armv6vfphLinux3.xgcc4.7.2)
+[13:12:17] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/temperature_dds/temperature.idl -ppDisable -d /home/aust/temp_C -language C++ -create typefiles -create examplefiles -create makefiles -platform armv6vfphLinux3.xgcc4.7.2)
+[13:12:43] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/temperature_dds/temperature.idl -ppDisable -d /home/aust/temp_C -language C++ -create typefiles -create examplefiles -create makefiles -platform x64Linux3gcc4.8.2)
+[13:14:36] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/temperature_dds/temperature.idl -ppDisable -d /home/aust/temp_C -language C++ -create typefiles -create examplefiles -create makefiles -platform armv6vfphLinux3.xgcc4.7.2)

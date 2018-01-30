@@ -1,0 +1,86 @@
+## $Id$
+##
+## (c) Copyright, Real-Time Innovations, Inc. 2001.  All rights reserved.
+## No duplications, whole or partial, manual or electronic, may be made
+## without prior written permission.  Any such copies, or
+## revisions thereof, must display this notice unaltered.
+## This code contains trade secrets of Real-Time Innovations, Inc.
+##
+## modification history:
+## ---------------------
+## 2.3,13may15,gpc Added setting of NDDSHOME if undefined in environment
+## 2.2,9jun14,vmg created
+##========================================================================
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="${archMap.PROJECT_TOOLSVERSION}" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(NDDSHOME)'==''" Label="RTI Connext Home">
+    <NddsHome>${global.nddsHome}</NddsHome>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>${projectName}</RootNamespace>
+    <AssemblyName>${projectName}</AssemblyName>
+    <TargetFrameworkVersion>v${archMap.DOTNET_VERSION}</TargetFrameworkVersion>
+    ${archMap.FRAMEWORK_PROFILE}
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <PlatformTarget>${processorArchitecture}</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>${debugOutputPath}</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    ${archMap.PLATFORM_TOOLSET}
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <PlatformTarget>${processorArchitecture}</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>${releaseOutputPath}</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    ${archMap.PLATFORM_TOOLSET}
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="${archMap.DOTNET_DLL_NAME}">
+    <HintPath>$(NDDSHOME)\lib\\${global.architectureName}\\${archMap.DOTNET_DLL_NAME}.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="${referencedProjectFile}">
+      <Project>{${referencedProjectId}}</Project>
+      <Name>${referencedProjectName}</Name>
+    </ProjectReference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="${projectName}.cs" />
+  #foreach($sourceFile in ${additionalSourceFiles})
+    <Compile Include="${sourceFile}" />
+  #end
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="USER_QOS_PROFILES.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,15 @@
+#!gbuild
+[Program]
+	-I.
+	:sourceDir=.
+        -lnet
+        -lposix
+        -lshm_client
+        -lsocket
+        -lnddscz
+        -lnddscorez
+        -lrticonnextmsgcz
+        -lrtiroutingservicez
+RunRoutingService.c
+shm_area.c
+RunRouting_INTEGRITY.ld

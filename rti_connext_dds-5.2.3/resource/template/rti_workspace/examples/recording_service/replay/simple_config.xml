@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_replay.xsd">
+
+    <!-- ****************************************************************** -->
+    <!-- Simple example configuration for RTI Replay Service 2.0          -->
+    <!-- ****************************************************************** -->
+
+    <replay_service name="simple_example">
+        <annotation>
+            <documentation>Replay service example</documentation>
+        </annotation>
+
+        <time_control>
+            <rate>1</rate>      <!-- Optional Rate Multiplier -->
+            <start_mode>AUTO</start_mode>
+            <start_offset>
+                <sec>5</sec>
+            </start_offset>
+        </time_control>
+
+        <!-- Source Database, Required -->
+        <replay_database name="simple_config">
+            <filename>replay_database.dat_0_0</filename>
+            <readonly>false</readonly>
+
+            <!-- Configuration for Output Participant, Optional --> 
+            <participant>
+                <domain_id>0</domain_id>
+                <participant_qos>
+                    <!-- Optional ParticipantQos --> 
+                    <resource_limits>
+                        <type_code_max_serialized_length>
+                            8192
+                        </type_code_max_serialized_length>
+                    </resource_limits>
+                </participant_qos>
+            </participant>
+
+            <session name="A_Session">
+
+                <!-- default values for < time_control > *-->
+
+                <replay_topic name="All_Topic">
+                    <input>
+                        <topic_name>*</topic_name>
+                        <type_name>*</type_name>
+                        <record_group_name>*</record_group_name>
+                        <domain_name>*</domain_name>
+                    </input>
+                </replay_topic>
+                
+            </session>
+            
+        </replay_database>
+
+    </replay_service>
+
+
+    <!-- ****************************************************************** -->
+    <!-- Fast Replay example configuration for RTI Replay Service 2.0     -->
+    <!-- ****************************************************************** -->
+
+    <replay_service name="fast_replay">
+        <annotation>
+            <documentation>Replay service example</documentation>
+        </annotation>
+
+        <!-- Configuration for remote administration, Optional --> 
+        <administration>
+            <name>example</name>
+            <domain_id>1</domain_id>
+        </administration>
+
+        <time_control>
+            <rate>4</rate>      <!-- Optional Rate Multiplier -->
+            <start_mode>AUTO</start_mode>
+            <start_offset>
+                <sec>5</sec>
+            </start_offset>
+        </time_control>
+
+        <!-- Source Database, Required -->
+        <replay_database name="simple_config">
+            <filename>replay_database.dat_0_0</filename>
+            <readonly>false</readonly>
+
+            <!-- Configuration for Output Participant, Optional --> 
+            <participant>
+                <domain_id>0</domain_id>
+                <participant_qos>
+                    <!-- Optional ParticipantQos --> 
+                    <resource_limits>
+                        <type_code_max_serialized_length>
+                            8192
+                        </type_code_max_serialized_length>
+                    </resource_limits>
+                </participant_qos>
+            </participant>
+
+            <session name="A_Session">
+                
+                <replay_topic name="A_Topic">
+                    <time_control>
+                        <start_mode>LOOP</start_mode>
+                    </time_control>
+                    <input>
+                        <topic_name>Square</topic_name>
+                        <type_name>ShapeType</type_name>
+                        <record_group_name>*</record_group_name>
+                        <domain_name>domain*</domain_name>
+                    </input>
+                </replay_topic>
+                <replay_topic name="B_Topic">
+                    <time_control>
+                        <start_mode>LOOP</start_mode>
+                    </time_control>
+                    <input>
+                        <topic_name>Circle</topic_name>
+                        <type_name>ShapeType</type_name>
+                        <record_group_name>*</record_group_name>
+                        <domain_name>domain*</domain_name>
+                    </input>
+                </replay_topic>
+                
+            </session>
+            
+        </replay_database>
+
+    </replay_service>
+
+
+    <!-- ****************************************************************** -->
+    <!--  Advanced example configuration for RTI Replay Service 2.0       -->
+    <!-- ****************************************************************** -->
+
+    <replay_service name="advanced_example">
+        <annotation>
+            <documentation>Replay service example</documentation>
+        </annotation>
+
+        <time_control>
+            <rate>1</rate>      <!-- Optional Rate Multiplier -->
+            <start_mode>AUTO</start_mode>
+            <start_offset>
+                <sec>5</sec>
+            </start_offset>
+        </time_control>
+
+        <!-- Source Database, Required -->
+        <replay_database name="simple_config">
+            <filename>replay_database.dat_0_0</filename>
+            <readonly>false</readonly>
+
+            <!-- Configuration for Output Participant, Optional --> 
+            <participant>
+                <domain_id>0</domain_id>
+                <participant_qos>
+                    <!-- Optional ParticipantQos --> 
+                    <resource_limits>
+                        <type_code_max_serialized_length>
+                            8192
+                        </type_code_max_serialized_length>
+                    </resource_limits>
+                </participant_qos>
+            </participant>
+
+            <session name="A_Session">
+                <publisher_qos>
+                    <!-- Optional PublisherQos --> 
+                </publisher_qos>
+
+                <replay_topic name="A_Topic">
+                    <time_control>
+                        <start_mode>LOOP</start_mode>
+                    </time_control>
+                    <input>
+                        <topic_name>Square</topic_name>
+                        <type_name>ShapeType</type_name>
+                        <record_group_name>*</record_group_name>
+                        <domain_name>domain*</domain_name>
+                    </input>
+                    <output>
+                        <topic_name>Circle</topic_name>
+                        <datawriter_qos>
+                            <!-- Optional DataWriterQos --> 
+                        </datawriter_qos>
+                    </output>
+                </replay_topic>
+                <replay_topic name="B_Topic">
+                    <time_control>
+                        <start_mode>LOOP</start_mode>
+                    </time_control>
+                    <input>
+                        <topic_name>Circle</topic_name>
+                        <type_name>ShapeType</type_name>
+                        <record_group_name>*</record_group_name>
+                        <domain_name>domain*</domain_name>
+                    </input>
+                    <output>
+                        <topic_name>Square</topic_name>
+                        <datawriter_qos>
+                            <!-- Optional DataWriterQos --> 
+                        </datawriter_qos>
+                    </output>
+                </replay_topic>
+
+            </session>
+
+        </replay_database>
+
+    </replay_service>
+
+</dds>

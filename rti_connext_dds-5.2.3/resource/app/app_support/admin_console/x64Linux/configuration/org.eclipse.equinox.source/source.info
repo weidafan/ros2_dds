@@ -1,0 +1,4 @@
+#encoding=UTF-8
+#version=1
+org.eclipse.nebula.visualization.widgets.source,1.0.0.201604151927,plugins/org.eclipse.nebula.visualization.widgets.source_1.0.0.201604151927.jar,-1,false
+org.eclipse.nebula.visualization.xygraph.source,2.0.0.201604151927,plugins/org.eclipse.nebula.visualization.xygraph.source_2.0.0.201604151927.jar,-1,false

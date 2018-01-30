@@ -1,0 +1,13 @@
+/home/aust/ros2_ws/install/lib/dummy_sensors/dummy_joint_states
+/home/aust/ros2_ws/install/lib/dummy_sensors/dummy_laser
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/dummy_sensors
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/dummy_sensors
+/home/aust/ros2_ws/install/share/dummy_sensors/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/dummy_sensors/environment/path.sh
+/home/aust/ros2_ws/install/share/dummy_sensors/local_setup.bash
+/home/aust/ros2_ws/install/share/dummy_sensors/local_setup.sh
+/home/aust/ros2_ws/install/share/dummy_sensors/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/dummy_sensors
+/home/aust/ros2_ws/install/share/dummy_sensors/cmake/dummy_sensorsConfig.cmake
+/home/aust/ros2_ws/install/share/dummy_sensors/cmake/dummy_sensorsConfig-version.cmake
+/home/aust/ros2_ws/install/share/dummy_sensors/package.xml

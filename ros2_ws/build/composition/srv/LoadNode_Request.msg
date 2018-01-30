@@ -1,0 +1,2 @@
+string package_name
+string plugin_name

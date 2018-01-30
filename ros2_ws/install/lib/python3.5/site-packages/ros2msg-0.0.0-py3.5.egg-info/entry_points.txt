@@ -1,0 +1,12 @@
+[ros2cli.command]
+msg = ros2msg.command.msg:MsgCommand
+
+[ros2cli.extension_point]
+ros2msg.verb = ros2msg.verb:VerbExtension
+
+[ros2msg.verb]
+list = ros2msg.verb.list:ListVerb
+package = ros2msg.verb.package:PackageVerb
+packages = ros2msg.verb.packages:PackagesVerb
+show = ros2msg.verb.show:ShowVerb
+

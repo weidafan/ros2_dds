@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+   (c) Copyright, Real-Time Innovations, Inc. 2015.  All rights reserved.
+   No duplications, whole or partial, manual or electronic, may be made
+   without prior written permission.  Any such copies, or
+   revisions thereof, must display this notice unaltered.
+   This code contains trade secrets of Real-Time Innovations, Inc.
+-->
+<launcher xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xsi:noNamespaceSchemaLocation="launcher_panel.xsd">
+    <button name="rtiddsgen">
+        <icon>codegen90.gif</icon>
+        <icon32>codegen_32x32.gif</icon32>
+        <tooltip>RTI DDS Code Generator (rtiddsgen):
+             Generate DDS code from the IDL or XML description of your data.
+             Generate example code, makefiles and IDE projects.
+        </tooltip>
+        <legend>Code Generator</legend>
+        <dialog>
+            <class>com.rti.tools.launcher.dialog.CodeGenUtilityDialog</class>    
+            <title>RTI DDS Code Generator (rtiddsgen)</title>
+            <advanced_dialog>com.rti.tools.launcher.dialog.CodeGenAdvancedDialog</advanced_dialog>
+        </dialog>
+        <toolexec>bin/rtiddsgen</toolexec>
+        <popupmenu>
+            <menuitem>
+                <label>Command help</label>
+                <options>-help</options>
+            </menuitem>
+            <menuitem>
+                <label>User's Manual (PDF, local)</label>
+                <doc>manuals/connext_dds/code_generator/RTI_CodeGenerator_UsersManual.pdf</doc>
+            </menuitem>
+            <menuitem>
+                <label>Release Notes (PDF, local)</label>
+                <doc>manuals/connext_dds/code_generator/RTI_CodeGenerator_ReleaseNotes.pdf</doc>
+            </menuitem>
+            <menuitem>
+                <label>Manual Page (HTML, local)</label>
+                <doc>api/connext_dds/api_cpp/group__DDSNddsgenModule.html</doc>
+            </menuitem>
+            <menuitem>
+                <label>Manual Page (HTML, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/api/connext_dds/api_cpp/group__DDSNddsgenModule.html</url>
+            </menuitem>
+        </popupmenu>
+    </button>
+    
+    <button name="rtiddsping">
+        <icon>Ping90.gif</icon>
+        <icon32>ddsping_32x32.gif</icon32>
+        <tooltip>RTI DDS Ping (rtiddsping) utility:
+            Command-line utility to test the connectivity of the system.
+        </tooltip>
+        <legend>DDS Ping</legend>
+        <dialog>
+            <class>com.rti.tools.launcher.dialog.PingUtilityDialog</class>    
+            <title>RTI DDS Ping</title>
+            <advanced_dialog>com.rti.tools.launcher.dialog.PingAdvancedDialog</advanced_dialog>
+        </dialog>
+        <toolexec>bin/rtiddsping</toolexec>    
+        <popupmenu>
+            <menuitem>
+                <label>Command help</label>
+                <options>-help</options>
+            </menuitem>
+            <menuitem>
+                <label>Manual Page (HTML, local)</label>
+                <doc>api/connext_dds/api_cpp/group__DDSNddspingModule.html</doc>
+            </menuitem>
+            <menuitem>
+                <label>Manual Page (HTML, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/api/connext_dds/api_cpp/group__DDSNddspingModule.html</url>
+            </menuitem>
+        </popupmenu>
+    </button>
+    
+    <button name="rtiddsspy">
+        <icon>Spy90.gif</icon>
+        <icon32>ddsspy_32x32.gif</icon32>
+        <tooltip>RTI DDS Spy (rtiddsspy) utility:
+            Command-line utility to view what is being published and subscribed.
+            See the entities discovered. Watch the data values published.
+        </tooltip>       
+        <legend>DDS Spy</legend>
+        <dialog>
+            <class>com.rti.tools.launcher.dialog.SpyUtilityDialog</class>    
+            <title>RTI DDS Spy</title>
+            <advanced_dialog>com.rti.tools.launcher.dialog.SpyAdvancedDialog</advanced_dialog>
+        </dialog>
+        <toolexec>bin/rtiddsspy</toolexec>    
+        <popupmenu>
+            <menuitem>
+                <label>Command help</label>
+                <options>-help</options>
+            </menuitem>
+            <menuitem>
+                <label>Help on output format</label>
+                <options>-hOutput</options>
+            </menuitem>
+            <menuitem>
+                <label>Manual Page (HTML, local)</label>
+                <doc>api/connext_dds/api_cpp/group__DDSNddsspyModule.html</doc>
+            </menuitem>
+            <menuitem>
+                <label>Manual Page (HTML, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/api/connext_dds/api_cpp/group__DDSNddsspyModule.html</url>
+            </menuitem>
+        </popupmenu>
+    </button>
+    
+    <button name="rtiddstypeconvert">
+        <icon>typeformatconverter90.gif</icon>
+        <icon32>typeformatconverter_32x32.gif</icon32>
+        <tooltip>RTI DDS Code Generator - Type Format conversion:
+             Convert between IDL, XML, and XSD data-type descriptions.
+        </tooltip>
+        <legend>Type Convert</legend>
+        <dialog>
+            <class>com.rti.tools.launcher.dialog.TypeConvertUtilityDialog</class>
+            <title>RTI DDS Gen - Type Converter</title>
+        </dialog>
+        <toolexec>bin/rtiddsgen</toolexec>
+        <popupmenu>
+            <menuitem>
+                <label>Command help</label>
+                <options>-help</options>
+            </menuitem>
+            <menuitem>
+                <label>Manual Page (HTML, local)</label>
+                <doc>api/connext_dds/api_cpp/group__DDSNddsgenModule.html</doc>
+            </menuitem>
+            <menuitem>
+                <label>Manual Page (HTML, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/api/connext_dds/api_cpp/group__DDSNddsgenModule.html</url>
+            </menuitem>
+        </popupmenu>
+    </button>
+    
+    <button name="rtirecordconvert">
+        <icon>RecConv90.gif</icon>
+        <icon32>recorderdataconverter_32x32.gif</icon32>
+        <tooltip>RTI Recorder Database Converter:
+             Convert/export recorded files to XML, HTML, or CSV.
+             Deserialize files recorded in serialized format for easier inspection.
+        </tooltip>
+        <legend>Record Convert</legend>
+        <dialog>
+            <class>com.rti.tools.launcher.dialog.RecordConvertUtilityDialog</class>
+            <title>RTI Recorder Database Converter</title>
+        </dialog>
+        <toolexec>bin/rtirecconv</toolexec>
+        <popupmenu>
+            <menuitem>
+                <label>Command help</label>
+                <options>-help</options>
+            </menuitem>
+            <menuitem>
+                <label>Getting Started Guide (PDF, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/recording_service/RTI_Recording_Service_GettingStarted.pdf</url>
+            </menuitem>
+            <menuitem>
+                <label>Getting Started Guide (PDF, local)</label>
+                <doc>manuals/recording_service/RTI_Recording_Service_GettingStarted.pdf</doc>
+            </menuitem>
+            <menuitem>
+                <label>User's Manual (PDF, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/recording_service/RTI_Recording_Service_UsersManual.pdf</url>
+            </menuitem>
+            <menuitem>
+                <label>User's Manual (PDF, local)</label>
+                <doc>manuals/recording_service/RTI_Recording_Service_UsersManual.pdf</doc>
+            </menuitem>
+            <menuitem>
+                <label>Release Notes (PDF, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/recording_service/RTI_Recording_Service_ReleaseNotes.pdf</url>
+            </menuitem>
+            <menuitem>
+                <label>Release Notes (PDF, local)</label>
+                <doc>manuals/recording_service/RTI_Recording_Service_ReleaseNotes.pdf</doc>
+            </menuitem>
+        </popupmenu>
+    </button>
+    
+    <button name="rtipackageinstall">
+        <icon>RTIPackageInstall.png</icon>
+        <tooltip>RTI Package Installer:
+             Install new platforms and targets for RTI Connext.
+        </tooltip>
+        <legend>RTI Package Installer</legend>
+        <dialog kind="JFace">
+            <class>com.rti.tools.launcher.dialog.PackageManagerDialog</class>
+            <title>RTI Package Installer</title>
+        </dialog>
+        <toolexec>bin/rtipkginstall</toolexec>
+        <popupmenu>
+            <menuitem>
+                <label>Support Portal (download contents)</label>
+                <url>http://www.rti.com/support</url>
+            </menuitem>
+        </popupmenu>
+    </button>
+    
+</launcher>    

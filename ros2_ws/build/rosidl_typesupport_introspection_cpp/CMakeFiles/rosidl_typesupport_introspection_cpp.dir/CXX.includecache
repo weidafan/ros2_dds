@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/aust/ros2_ws/src/ros2/rosidl/rosidl_typesupport_introspection_cpp/include/rosidl_typesupport_introspection_cpp/visibility_control.h
+
+/home/aust/ros2_ws/src/ros2/rosidl/rosidl_typesupport_introspection_cpp/src/identifier.cpp
+rosidl_typesupport_introspection_cpp/visibility_control.h
+/home/aust/ros2_ws/src/ros2/rosidl/rosidl_typesupport_introspection_cpp/src/rosidl_typesupport_introspection_cpp/visibility_control.h
+

@@ -1,0 +1,13 @@
+publisher_local_function.py
+publisher_member_function.py
+publisher_old_school.py
+setup.py
+/home/aust/ros2_ws/build/examples_rclpy_minimal_publisher/examples_rclpy_minimal_publisher.egg-info/PKG-INFO
+/home/aust/ros2_ws/build/examples_rclpy_minimal_publisher/examples_rclpy_minimal_publisher.egg-info/SOURCES.txt
+/home/aust/ros2_ws/build/examples_rclpy_minimal_publisher/examples_rclpy_minimal_publisher.egg-info/dependency_links.txt
+/home/aust/ros2_ws/build/examples_rclpy_minimal_publisher/examples_rclpy_minimal_publisher.egg-info/entry_points.txt
+/home/aust/ros2_ws/build/examples_rclpy_minimal_publisher/examples_rclpy_minimal_publisher.egg-info/requires.txt
+/home/aust/ros2_ws/build/examples_rclpy_minimal_publisher/examples_rclpy_minimal_publisher.egg-info/top_level.txt
+test/test_copyright.py
+test/test_flake8.py
+test/test_pep257.py

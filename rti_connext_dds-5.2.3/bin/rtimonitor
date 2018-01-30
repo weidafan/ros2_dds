@@ -1,0 +1,75 @@
+#!/bin/sh
+#########################################################################
+# (c) 2005-2014 Copyright, Real-Time Innovations. All rights reserved.  #
+# No duplications, whole or partial, manual or electronic, may be made  #
+# without express written permission.  Any such copies, or              #
+# revisions thereof, must display this notice unaltered.                #
+# This code contains trade secrets of Real-Time Innovations, Inc.       #
+#########################################################################
+
+filename=$0
+script_dir=`dirname "$filename"`
+app_name=monitor
+script_version=5.2.3
+
+rticommon_script_dir=$script_dir/../resource/scripts
+rticommon_script_name=rticommon.sh
+needs_shared_libraries="false"
+
+if [ -f "$rticommon_script_dir/$rticommon_script_name" ]
+then
+    . "$rticommon_script_dir/$rticommon_script_name"
+    ndds_java=$lib_java_dir/nddsjava.jar
+    distlog=$lib_java_dir/distlogdatamodel.jar
+    monitor_app=$app_lib_java_dir/rtimonitor.jar
+    monitor_lib=$app_lib_java_dir/rtiddsmonitorlib.jar
+    jcommon=$app_lib_java_dir/jcommon-1.0.16.jar
+    jfreechart=$app_lib_java_dir/jfreechart-1.0.13.jar
+    log4j=$app_lib_java_dir/log4j-1.2.16.jar
+    swingx=$app_lib_java_dir/swingx-1.6.jar
+    logger_path=$script_dir/../resource/app/app_support/$app_name/configuration/logger.xml
+    monitor_profile_path=$script_dir/../resource/xml/RTI_MONITOR_QOS_PROFILES.xml
+else
+    rticommon_script_dir=$script_dir/../../ndds.4.1/resource/scripts
+    lib_dir=$script_dir/../../ndds.4.1/lib
+    jre_dir=$script_dir/../../ndds.4.1/resource/app/jre
+    copy_workspace=false
+    . "$rticommon_script_dir/$rticommon_script_name"
+    ndds_java=$script_dir/../../ndds.4.1/lib/java/nddsjava.jar
+    distlog=$app_lib_java_dir/distlogdatamodel.jar
+    monitor_app=$app_lib_java_dir/rtimonitor.jar
+    monitor_lib=$script_dir/../lib/rtiddsmonitorlib.jar
+    jcommon=$script_dir/../lib/jcommon-1.0.16.jar
+    jfreechart=$script_dir/../lib/jfreechart-1.0.13.jar
+    log4j=$script_dir/../lib/log4j-1.2.16.jar
+    swingx=$script_dir/../lib/swingx-1.6.jar
+    logger_path=$script_dir/../config/logger.xml
+    monitor_profile_path=$script_dir/../config/rtimonitor_qos_profiles.xml
+fi
+
+java_classpath=$monitor_app:$monitor_lib:$jcommon:$jfreechart:$log4j:$swingx:$distlog:$ndds_java
+
+if [ "x$RTI_MONITOR_QOS_PROFILES" = "x" ]
+then
+    export NDDS_QOS_PROFILES="$monitor_profile_path"
+else
+    export NDDS_QOS_PROFILES=$RTI_MONITOR_QOS_PROFILES
+fi
+
+if [ "x$os" = "xDarwin" ]
+then
+    "$JREHOME/bin/java" -Xmx500m -Xdock:name="RTI Monitor" \
+        -DRTI_MONITOR_DIR="$script_dir/.." \
+        -DRTI_MONITOR_LOG_DIR="$home_user_config_dir/$app_name" \
+        -Dlog4j.configuration="$logger_path" \
+        -classpath "$java_classpath" \
+        com.rti.dds.monitor.ui.DdsMonitorManager "$@"
+else
+    "$JREHOME/bin/java" -Xmx500m \
+        -DRTI_MONITOR_DIR="$script_dir/.." \
+        -DRTI_MONITOR_LOG_DIR="$home_user_config_dir/$app_name" \
+        -Dlog4j.configuration="$logger_path" \
+        -classpath "$java_classpath" \
+        com.rti.dds.monitor.ui.DdsMonitorManager "$@"
+fi
+

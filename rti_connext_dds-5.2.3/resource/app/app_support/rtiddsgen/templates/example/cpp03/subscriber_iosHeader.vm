@@ -1,0 +1,62 @@
+##/* $Id$
+##
+##   (c) Copyright, Real-Time Innovations, Inc. 2015.  All rights reserved.
+##   No duplications, whole or partial, manual or electronic, may be made
+##   without prior written permission.  Any such copies, or
+##   revisions thereof, must display this notice unaltered.
+##   This code contains trade secrets of Real-Time Innovations, Inc.
+##
+##modification history:
+##---------------------
+##2.2.3,23sep15,djs created 
+##========================================================================*/*#
+${envMap.POUND_CHAR}include <dds/dds.hpp> 
+${envMap.POUND_CHAR}include "${envMap.idlFileName}.hpp"
+
+class ${constructMap.nativeFQName}ReaderListener : public dds::sub::NoOpDataReaderListener<${constructMap.nativeFQName}> {
+public:
+   
+    ${constructMap.nativeFQName}ReaderListener() : count_ (0)
+    {
+    }
+
+    void on_data_available(dds::sub::DataReader<${constructMap.nativeFQName}>& reader)
+    {
+        // Take all samples
+        dds::sub::LoanedSamples<${constructMap.nativeFQName}> samples = reader.take();
+        
+        for ( dds::sub::LoanedSamples<${constructMap.nativeFQName}>::iterator sample_it = samples.begin();
+                sample_it != samples.end(); sample_it++) {
+        
+            if (sample_it->info().valid()){
+                 count_++;
+                 std::cout << sample_it->data() << std::endl; 
+            }        
+         }      
+    }
+   
+    int count() const
+    {
+        return count_;
+    }
+
+private:
+    int count_;
+};
+
+class DDS_Entities
+{
+public:
+    DDS_Entities();
+    ~DDS_Entities();
+    void dds_subscribe(int domainId);
+    void subscriber_shutdown();
+
+private:
+    dds::domain::DomainParticipant *participant;
+    dds::topic::Topic<${constructMap.nativeFQName}> *topic;
+    ${constructMap.nativeFQName}ReaderListener *listener;
+    dds::sub::Subscriber *subscriber;
+    dds::sub::DataReader<${constructMap.nativeFQName}> *reader;
+};
+

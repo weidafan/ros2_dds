@@ -1,0 +1,21 @@
+<!-- 
+ (c) Copyright, Real-Time Innovations, 2012-2016.
+ All rights reserved.
+ Permission to modify and use for internal purposes granted.
+ This software is provided "as is", without warranty, express or implied.
+-->
+
+<!-- distributed_logger -->
+<!ELEMENT distributed_logger (filter_level?,enabled,thread?,queue_size?,echo_to_stdout?,log_infrastructure_messages?)>
+
+<!-- filter_level -->
+<!ELEMENT filter_level (#PCDATA)> 
+
+<!-- queue_size -->
+<!ELEMENT queue_size (#PCDATA)> 
+
+<!-- echo_to_stdout -->
+<!ELEMENT echo_to_stdout (#PCDATA)> 
+
+<!-- log_infrastructure_messages -->
+<!ELEMENT log_infrastructure_messages (#PCDATA)> 

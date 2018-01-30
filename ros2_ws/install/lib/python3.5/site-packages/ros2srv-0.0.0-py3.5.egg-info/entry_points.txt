@@ -1,0 +1,12 @@
+[ros2cli.command]
+srv = ros2srv.command.srv:SrvCommand
+
+[ros2cli.extension_point]
+ros2srv.verb = ros2srv.verb:VerbExtension
+
+[ros2srv.verb]
+list = ros2srv.verb.list:ListVerb
+package = ros2srv.verb.package:PackageVerb
+packages = ros2srv.verb.packages:PackagesVerb
+show = ros2srv.verb.show:ShowVerb
+

@@ -1,0 +1,16 @@
+/home/aust/ros2_ws/install/lib/lifecycle/lifecycle_talker
+/home/aust/ros2_ws/install/lib/lifecycle/lifecycle_listener
+/home/aust/ros2_ws/install/lib/lifecycle/lifecycle_service_client
+/home/aust/ros2_ws/install/lib/lifecycle/lifecycle_service_client_py.py
+/home/aust/ros2_ws/install/share/lifecycle//launch/lifecycle_demo_launch.py
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/lifecycle
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/lifecycle
+/home/aust/ros2_ws/install/share/lifecycle/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/lifecycle/environment/path.sh
+/home/aust/ros2_ws/install/share/lifecycle/local_setup.bash
+/home/aust/ros2_ws/install/share/lifecycle/local_setup.sh
+/home/aust/ros2_ws/install/share/lifecycle/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/lifecycle
+/home/aust/ros2_ws/install/share/lifecycle/cmake/lifecycleConfig.cmake
+/home/aust/ros2_ws/install/share/lifecycle/cmake/lifecycleConfig-version.cmake
+/home/aust/ros2_ws/install/share/lifecycle/package.xml

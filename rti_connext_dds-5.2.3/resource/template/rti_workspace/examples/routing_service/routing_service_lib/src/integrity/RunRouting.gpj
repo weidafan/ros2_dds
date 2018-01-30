@@ -1,0 +1,7 @@
+#!gbuild
+[INTEGRITY Application]
+	-I.
+	:sourceDir=.
+	-no_kernel
+RunRouting_as1.gpj		[Program]
+RunRouting.int

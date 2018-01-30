@@ -1,0 +1,17 @@
+eclipse.preferences.version=1
+repositories/file\:_ssd_atlassian_RTI_TOOLBRAN-ADMINCONSOLE3-JOB1_adminconsole.1.0_srcJava_com.rti.tools.console.product_target/description=
+repositories/file\:_ssd_atlassian_RTI_TOOLBRAN-ADMINCONSOLE3-JOB1_adminconsole.1.0_srcJava_com.rti.tools.console.product_target/enabled=true
+repositories/file\:_ssd_atlassian_RTI_TOOLBRAN-ADMINCONSOLE3-JOB1_adminconsole.1.0_srcJava_com.rti.tools.console.product_target/isSystem=false
+repositories/file\:_ssd_atlassian_RTI_TOOLBRAN-ADMINCONSOLE3-JOB1_adminconsole.1.0_srcJava_com.rti.tools.console.product_target/name=module-metadata-repository@/ssd/atlassian/RTI/TOOLBRAN-ADMINCONSOLE3-JOB1/adminconsole.1.0/srcJava/com.rti.tools.console.product/target
+repositories/file\:_ssd_atlassian_RTI_TOOLBRAN-ADMINCONSOLE3-JOB1_adminconsole.1.0_srcJava_com.rti.tools.console.product_target/provider=
+repositories/file\:_ssd_atlassian_RTI_TOOLBRAN-ADMINCONSOLE3-JOB1_adminconsole.1.0_srcJava_com.rti.tools.console.product_target/suffix=p2content.xml
+repositories/file\:_ssd_atlassian_RTI_TOOLBRAN-ADMINCONSOLE3-JOB1_adminconsole.1.0_srcJava_com.rti.tools.console.product_target/type=org.eclipse.tycho.repository.module.ModuleMetadataRepository
+repositories/file\:_ssd_atlassian_RTI_TOOLBRAN-ADMINCONSOLE3-JOB1_adminconsole.1.0_srcJava_com.rti.tools.console.product_target/uri=file\:/ssd/atlassian/RTI/TOOLBRAN-ADMINCONSOLE3-JOB1/adminconsole.1.0/srcJava/com.rti.tools.console.product/target/
+repositories/file\:_ssd_atlassian_RTI_TOOLBRAN-ADMINCONSOLE3-JOB1_adminconsole.1.0_srcJava_com.rti.tools.console.product_target/version=1.0.0
+repositories/file\:_ssd_atlassian_RTI_TOOLBRAN-ADMINCONSOLE3-JOB1_adminconsole.1.0_srcJava_com.rti.tools.console.product_target_targetPlatformRepository/enabled=true
+repositories/file\:_ssd_atlassian_RTI_TOOLBRAN-ADMINCONSOLE3-JOB1_adminconsole.1.0_srcJava_com.rti.tools.console.product_target_targetPlatformRepository/isSystem=false
+repositories/file\:_ssd_atlassian_RTI_TOOLBRAN-ADMINCONSOLE3-JOB1_adminconsole.1.0_srcJava_com.rti.tools.console.product_target_targetPlatformRepository/name=TychoTargetPlatform
+repositories/file\:_ssd_atlassian_RTI_TOOLBRAN-ADMINCONSOLE3-JOB1_adminconsole.1.0_srcJava_com.rti.tools.console.product_target_targetPlatformRepository/suffix=content.xml
+repositories/file\:_ssd_atlassian_RTI_TOOLBRAN-ADMINCONSOLE3-JOB1_adminconsole.1.0_srcJava_com.rti.tools.console.product_target_targetPlatformRepository/type=org.eclipse.equinox.internal.p2.metadata.repository.LocalMetadataRepository
+repositories/file\:_ssd_atlassian_RTI_TOOLBRAN-ADMINCONSOLE3-JOB1_adminconsole.1.0_srcJava_com.rti.tools.console.product_target_targetPlatformRepository/uri=file\:/ssd/atlassian/RTI/TOOLBRAN-ADMINCONSOLE3-JOB1/adminconsole.1.0/srcJava/com.rti.tools.console.product/target/targetPlatformRepository/
+repositories/file\:_ssd_atlassian_RTI_TOOLBRAN-ADMINCONSOLE3-JOB1_adminconsole.1.0_srcJava_com.rti.tools.console.product_target_targetPlatformRepository/version=0.0.1

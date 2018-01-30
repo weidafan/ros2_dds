@@ -1,0 +1,13 @@
+# Target labels
+ astra_openni2
+# Source files and their labels
+/home/aust/ros2_ws/build/astra_camera/CMakeFiles/astra_openni2
+/home/aust/ros2_ws/build/astra_camera/CMakeFiles/astra_openni2.rule
+/home/aust/ros2_ws/build/astra_camera/CMakeFiles/astra_openni2-complete.rule
+/home/aust/ros2_ws/build/astra_camera/astra_openni2/src/astra_openni2-stamp/astra_openni2-install.rule
+/home/aust/ros2_ws/build/astra_camera/astra_openni2/src/astra_openni2-stamp/astra_openni2-mkdir.rule
+/home/aust/ros2_ws/build/astra_camera/astra_openni2/src/astra_openni2-stamp/astra_openni2-download.rule
+/home/aust/ros2_ws/build/astra_camera/astra_openni2/src/astra_openni2-stamp/astra_openni2-update.rule
+/home/aust/ros2_ws/build/astra_camera/astra_openni2/src/astra_openni2-stamp/astra_openni2-patch.rule
+/home/aust/ros2_ws/build/astra_camera/astra_openni2/src/astra_openni2-stamp/astra_openni2-configure.rule
+/home/aust/ros2_ws/build/astra_camera/astra_openni2/src/astra_openni2-stamp/astra_openni2-build.rule

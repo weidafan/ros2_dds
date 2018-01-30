@@ -1,0 +1,15 @@
+/home/aust/ros2_ws/install/lib/libcomposition_nodes.so
+/home/aust/ros2_ws/install/lib/examples_rclcpp_minimal_composition/composition_publisher
+/home/aust/ros2_ws/install/lib/examples_rclcpp_minimal_composition/composition_subscriber
+/home/aust/ros2_ws/install/lib/examples_rclcpp_minimal_composition/composition_composed
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/examples_rclcpp_minimal_composition
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/examples_rclcpp_minimal_composition
+/home/aust/ros2_ws/install/share/examples_rclcpp_minimal_composition/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/examples_rclcpp_minimal_composition/environment/path.sh
+/home/aust/ros2_ws/install/share/examples_rclcpp_minimal_composition/local_setup.bash
+/home/aust/ros2_ws/install/share/examples_rclcpp_minimal_composition/local_setup.sh
+/home/aust/ros2_ws/install/share/examples_rclcpp_minimal_composition/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/examples_rclcpp_minimal_composition
+/home/aust/ros2_ws/install/share/examples_rclcpp_minimal_composition/cmake/examples_rclcpp_minimal_compositionConfig.cmake
+/home/aust/ros2_ws/install/share/examples_rclcpp_minimal_composition/cmake/examples_rclcpp_minimal_compositionConfig-version.cmake
+/home/aust/ros2_ws/install/share/examples_rclcpp_minimal_composition/package.xml

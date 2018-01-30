@@ -1,0 +1,198 @@
+
+	<!--
+		(c) Copyright, Real-Time Innovations, 2011-2016.
+		All rights reserved. No duplications, whole or partial, manual or
+		electronic, may be made without express written permission. Any such
+		copies, or revisions thereof, must display this notice unaltered. This
+		code contains trade secrets of Real-Time Innovations, Inc. Description
+		RTI Data Distribution Service QoS Profiles
+	-->
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="rti_dds_qos_profiles.xsd" version="5.1.0">
+
+	<qos_library name="DDSInterfaceQosLibrary">
+		<qos_profile name="DDSInterfaceQosProfile">
+
+			<participant_qos>
+			    <resource_limits>
+                    <!-- uncomment the following if your user data type has
+			 large type code. You will also need to uncomment the
+			 lines in property to enable large data for UDPv4 and
+			 shared memory -->
+                    <!--type_code_max_serialized_length>30000</type_code_max_serialized_length-->
+			        <participant_property_list_max_length>64</participant_property_list_max_length>
+			        <participant_property_string_max_length>2048</participant_property_string_max_length>
+			    </resource_limits>
+				<!-- change the mask to SHMEM if you have no network connection -->
+				<transport_builtin>
+                    <mask>SHMEM</mask>
+				</transport_builtin>
+				<participant_name>
+					<name>RTI Recording Console</name>
+				</participant_name>
+                
+                <discovery_config>
+                    <!-- Keep this period short to reduce the time to detect failure of remote participants. -->
+                    <max_liveliness_loss_detection_period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </max_liveliness_loss_detection_period>
+                </discovery_config>
+                
+				<discovery>
+				    <initial_peers>
+                        <element>50@builtin.shmem://</element>
+				    </initial_peers>
+                    <multicast_receive_addresses/>
+				</discovery>
+			</participant_qos>
+            
+            <datareader_qos name="BaseReaderProfile"/>
+            
+            <datareader_qos name="KeepLast1DurableReader" 
+                base_name="DDSInterfaceQosProfile::BaseReaderProfile">
+				<durability>
+					<kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+				</durability>
+
+				<reliability>
+					<kind>RELIABLE_RELIABILITY_QOS</kind>
+				</reliability>
+
+				<history>
+					<kind>KEEP_LAST_HISTORY_QOS</kind>
+					<depth>1</depth>
+				</history>
+			</datareader_qos>
+            
+            <datareader_qos base_name="KeepLast1DurableReader" 
+                topic_filter="rti/dds/monitoring/*Description"/>
+
+            <datareader_qos topic_filter="rti/dds/monitoring/*Statistics"
+                base_name="DDSInterfaceQosProfile::BaseReaderProfile">
+                <reliability>
+                    <kind>BEST_EFFORT_RELIABILITY_QOS</kind>
+                </reliability>
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>2</depth>
+                </history>
+            </datareader_qos>
+            
+            <datawriter_qos name="KeepLast1DurableWriter">
+                <durability>
+                    <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                </durability>
+
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>1</depth>
+                </history>
+            </datawriter_qos>
+            
+            <datareader_qos base_name="KeepLast1DurableReader" 
+                topic_filter="rti/dds/monitoring/*Status">
+                <!-- keep more history for this topic -->
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>10</depth>
+                </history>
+            </datareader_qos>
+            
+            <datawriter_qos base_name="KeepLast1DurableWriter" 
+                topic_filter="rti/dds/monitoring/*Status">
+                <!-- keep more history for this topic -->
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>10</depth>
+                </history>
+            </datawriter_qos>
+            
+            
+            <!-- Logging -->
+            <datareader_qos topic_filter="rti/distlog">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                
+                <durability>
+                    <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                </durability>
+                
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>150</depth>
+                </history>
+                <resource_limits>
+                    <max_samples_per_instance>150</max_samples_per_instance>
+                    <max_samples>150</max_samples>
+                </resource_limits>
+            </datareader_qos>
+            
+            <datareader_qos topic_filter="rti/distlog/administration/state">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                
+                <durability>
+                    <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                </durability>
+                
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>1</depth>
+                </history>
+                <!--resource_limits>
+                    <max_samples_per_instance>1</max_samples_per_instance>
+                    <max_samples>150</max_samples>
+                </resource_limits-->
+            </datareader_qos>
+            
+            <datawriter_qos topic_filter="rti/distlog/administration/command_request">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>10</depth>
+                </history>
+            </datawriter_qos>
+            
+            <datareader_qos topic_filter="rti/distlog/administration/command_response">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>1</depth>
+                </history>
+            </datareader_qos>
+            
+            <datareader_qos topic_filter="rti/replay/administration/command_response">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <durability>
+                    <kind>VOLATILE_DURABILITY_QOS</kind>
+                </durability>
+            </datareader_qos>
+            
+            <datawriter_qos topic_filter="rti/replay/administration/command_request">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <durability>
+                    <kind>VOLATILE_DURABILITY_QOS</kind>
+                </durability>
+            </datawriter_qos>
+            
+		</qos_profile>
+        
+	</qos_library>
+</dds>

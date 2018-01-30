@@ -1,0 +1,129 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_56e4c/fast"
+/usr/bin/make -f CMakeFiles/cmTC_56e4c.dir/build.make CMakeFiles/cmTC_56e4c.dir/build
+make[1]: Entering directory '/home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_56e4c.dir/CheckSymbolExists.c.o
+/usr/lib/ccache/cc     -o CMakeFiles/cmTC_56e4c.dir/CheckSymbolExists.c.o   -c /home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_56e4c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_56e4c.dir/link.txt --verbose=1
+/usr/lib/ccache/cc       CMakeFiles/cmTC_56e4c.dir/CheckSymbolExists.c.o  -o cmTC_56e4c -rdynamic 
+CMakeFiles/cmTC_56e4c.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_56e4c.dir/build.make:97: recipe for target 'cmTC_56e4c' failed
+make[1]: *** [cmTC_56e4c] Error 1
+make[1]: Leaving directory '/home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_56e4c/fast' failed
+make: *** [cmTC_56e4c/fast] Error 2
+
+File /home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_c11bf/fast"
+/usr/bin/make -f CMakeFiles/cmTC_c11bf.dir/build.make CMakeFiles/cmTC_c11bf.dir/build
+make[1]: Entering directory '/home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c11bf.dir/CheckFunctionExists.c.o
+/usr/lib/ccache/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_c11bf.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_c11bf
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c11bf.dir/link.txt --verbose=1
+/usr/lib/ccache/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_c11bf.dir/CheckFunctionExists.c.o  -o cmTC_c11bf -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_c11bf.dir/build.make:97: recipe for target 'cmTC_c11bf' failed
+make[1]: *** [cmTC_c11bf] Error 1
+make[1]: Leaving directory '/home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_c11bf/fast' failed
+make: *** [cmTC_c11bf/fast] Error 2
+
+
+Determining if the include file unordered_map exists failed with the following output:
+Change Dir: /home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_4ad73/fast"
+/usr/bin/make -f CMakeFiles/cmTC_4ad73.dir/build.make CMakeFiles/cmTC_4ad73.dir/build
+make[1]: Entering directory '/home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_4ad73.dir/CheckIncludeFile.cxx.o
+/usr/lib/ccache/c++     -fopenmp    -o CMakeFiles/cmTC_4ad73.dir/CheckIncludeFile.cxx.o -c /home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx
+In file included from /usr/include/c++/5/unordered_map:35:0,
+                 from /home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx:1:
+/usr/include/c++/5/bits/c++0x_warning.h:32:2: error: #error This file requires compiler and library support for the ISO C++ 2011 standard. This support must be enabled with the -std=c++11 or -std=gnu++11 compiler options.
+ #error This file requires compiler and library support \
+  ^
+CMakeFiles/cmTC_4ad73.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_4ad73.dir/CheckIncludeFile.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_4ad73.dir/CheckIncludeFile.cxx.o] Error 1
+make[1]: Leaving directory '/home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_4ad73/fast' failed
+make: *** [cmTC_4ad73/fast] Error 2
+
+
+Performing C++ SOURCE FILE Test HAVE_SHARED_PTR_IN_STD_NAMESPACE failed with the following output:
+Change Dir: /home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_cbe4f/fast"
+/usr/bin/make -f CMakeFiles/cmTC_cbe4f.dir/build.make CMakeFiles/cmTC_cbe4f.dir/build
+make[1]: Entering directory '/home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_cbe4f.dir/src.cxx.o
+/usr/lib/ccache/c++     -fopenmp -DHAVE_SHARED_PTR_IN_STD_NAMESPACE   -o CMakeFiles/cmTC_cbe4f.dir/src.cxx.o -c /home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp/src.cxx
+/home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp/src.cxx: In function ‘int main()’:
+/home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp/src.cxx:3:34: error: ‘shared_ptr’ is not a member of ‘std’
+                                  std::shared_ptr<int> int_ptr;
+                                  ^
+/home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp/src.cxx:3:50: error: expected primary-expression before ‘int’
+                                  std::shared_ptr<int> int_ptr;
+                                                  ^
+CMakeFiles/cmTC_cbe4f.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_cbe4f.dir/src.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_cbe4f.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_cbe4f/fast' failed
+make: *** [cmTC_cbe4f/fast] Error 2
+
+Source file was:
+#include <memory>
+                               int main() {
+                                 std::shared_ptr<int> int_ptr;
+                                 return 0;
+                               }
+Performing C++ SOURCE FILE Test HAVE_SHARED_PTR_IN_TR1_NAMESPACE failed with the following output:
+Change Dir: /home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_15eb4/fast"
+/usr/bin/make -f CMakeFiles/cmTC_15eb4.dir/build.make CMakeFiles/cmTC_15eb4.dir/build
+make[1]: Entering directory '/home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_15eb4.dir/src.cxx.o
+/usr/lib/ccache/c++     -fopenmp -DHAVE_SHARED_PTR_IN_TR1_NAMESPACE   -o CMakeFiles/cmTC_15eb4.dir/src.cxx.o -c /home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp/src.cxx
+/home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp/src.cxx: In function ‘int main()’:
+/home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp/src.cxx:3:41: error: ‘std::tr1’ has not been declared
+                                    std::tr1::shared_ptr<int> int_ptr;
+                                         ^
+/home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp/src.cxx:3:57: error: expected primary-expression before ‘int’
+                                    std::tr1::shared_ptr<int> int_ptr;
+                                                         ^
+CMakeFiles/cmTC_15eb4.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_15eb4.dir/src.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_15eb4.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/aust/ros2_ws/build/ceres_solver/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_15eb4/fast' failed
+make: *** [cmTC_15eb4/fast] Error 2
+
+Source file was:
+#include <memory>
+                                 int main() {
+                                   std::tr1::shared_ptr<int> int_ptr;
+                                   return 0;
+                                 }

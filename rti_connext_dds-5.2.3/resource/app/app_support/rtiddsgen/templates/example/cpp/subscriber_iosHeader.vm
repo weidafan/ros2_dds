@@ -1,0 +1,36 @@
+##/* $Id$
+##
+##   (c) Copyright, Real-Time Innovations, Inc. 2015.  All rights reserved.
+##   No duplications, whole or partial, manual or electronic, may be made
+##   without prior written permission.  Any such copies, or
+##   revisions thereof, must display this notice unaltered.
+##   This code contains trade secrets of Real-Time Innovations, Inc.
+##
+##modification history:
+##---------------------
+##2.2.3,23sep15,djs created 
+##========================================================================*/*#
+${envMap.POUND_CHAR}include "ndds/ndds_cpp.h"
+${envMap.POUND_CHAR}include "${envMap.idlFileName}.h"
+${envMap.POUND_CHAR}include "${envMap.idlFileName}Support.h"
+
+extern "C" int subscriber_shutdown(
+    DDSDomainParticipant *participant);
+extern "C" int subscriber_main(int domainId, int sample_count);
+    
+#ifdef NOT_YET
+class DDS_Entities
+{
+public:
+    DDS_Entities();
+    int dds_setup(int domainId);
+    void dds_subscribe(const int sample_count, const struct DDS_Duration_t send_period);
+    int subscriber_shutdown();
+
+private:
+    DDSDomainParticipant *participant;
+    DDSSubscriber *subscriber;
+    DDSTopic *topic;
+    DDSDataReader *reader;
+};
+#endif

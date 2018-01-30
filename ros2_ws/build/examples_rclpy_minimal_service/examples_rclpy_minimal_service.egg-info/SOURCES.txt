@@ -1,0 +1,12 @@
+service.py
+service_member_function.py
+setup.py
+/home/aust/ros2_ws/build/examples_rclpy_minimal_service/examples_rclpy_minimal_service.egg-info/PKG-INFO
+/home/aust/ros2_ws/build/examples_rclpy_minimal_service/examples_rclpy_minimal_service.egg-info/SOURCES.txt
+/home/aust/ros2_ws/build/examples_rclpy_minimal_service/examples_rclpy_minimal_service.egg-info/dependency_links.txt
+/home/aust/ros2_ws/build/examples_rclpy_minimal_service/examples_rclpy_minimal_service.egg-info/entry_points.txt
+/home/aust/ros2_ws/build/examples_rclpy_minimal_service/examples_rclpy_minimal_service.egg-info/requires.txt
+/home/aust/ros2_ws/build/examples_rclpy_minimal_service/examples_rclpy_minimal_service.egg-info/top_level.txt
+test/test_copyright.py
+test/test_flake8.py
+test/test_pep257.py

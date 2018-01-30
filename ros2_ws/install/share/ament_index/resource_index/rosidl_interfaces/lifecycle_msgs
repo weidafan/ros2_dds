@@ -1,0 +1,8 @@
+ChangeState.srv
+GetAvailableStates.srv
+GetAvailableTransitions.srv
+GetState.srv
+State.msg
+Transition.msg
+TransitionDescription.msg
+TransitionEvent.msg

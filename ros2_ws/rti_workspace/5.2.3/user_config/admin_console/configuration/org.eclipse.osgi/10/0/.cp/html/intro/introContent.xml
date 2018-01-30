@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ $Id$
+ (c) Copyright, Real-Time Innovations, 2013-2016.
+ All rights reserved.
+ No duplications, whole or partial, manual or electronic, may be made
+ without express written permission.  Any such copies, or
+ revisions thereof, must display this notice unaltered.
+ This code contains trade secrets of Real-Time Innovations, Inc.
+ 
+ modification history:
+ - - - - - - - - - - -
+-->
+<introContent>
+    <page id="root" content="root.xhtml"/>    
+</introContent>

@@ -1,0 +1,664 @@
+<?xml version="1.0"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_queuing_service.xsd">
+
+  <qos_library name="HelloWorldQS_Library">
+    <qos_profile name="HelloWorldQS_Profile" is_default_qos="true">
+      <participant_qos base_name="BuiltinQosLibExp::Generic.Participant.LargeData">
+        <transport_builtin>
+          <mask>UDPv4</mask>
+        </transport_builtin>
+
+        <discovery_config>
+          <participant_liveliness_assert_period>
+            <sec>1</sec>
+            <nanosec>0</nanosec>
+          </participant_liveliness_assert_period>
+          <participant_liveliness_lease_duration>
+            <sec>10</sec>
+            <nanosec>0</nanosec>
+          </participant_liveliness_lease_duration>
+          <max_liveliness_loss_detection_period>
+            <sec>6</sec>
+            <nanosec>0</nanosec>
+          </max_liveliness_loss_detection_period>
+        </discovery_config>
+
+        <resource_limits>
+          <participant_property_list_max_length>64</participant_property_list_max_length>
+        </resource_limits>
+
+        <property>
+          <value>
+            <element>
+              <name>dds.transport.load_plugins</name>
+              <value>dds.transport.tcp</value>
+            </element>
+            <element>
+              <name>dds.transport.tcp.library</name>
+              <value>nddstransporttcp</value>
+            </element>
+            <element>
+              <name>dds.transport.tcp.create_function</name>
+              <value>NDDS_Transport_TCPv4_create</value>
+            </element>
+            <element>
+              <name>dds.transport.tcp.server_bind_port</name>
+              <value>15000</value>
+            </element>
+            <element>
+              <!-- They may have to change this property and replace
+                   127.0.0.1 with their real IP address -->
+              <name>dds.transport.tcp.public_address</name>
+              <value>127.0.0.1:15000</value>
+            </element>
+            <element>
+              <name>dds.transport.tcp.parent.message_size_max</name>
+              <value>65536</value>
+            </element>
+            <element>
+              <name>dds.transport.tcp.parent.classid</name>
+              <value>NDDS_TRANSPORT_CLASSID_TCPV4_WAN</value>
+            </element>
+            <element>
+              <name>dds.transport.tcp.socket_monitoring_kind</name>
+              <value>WINDOWS_IOCP</value>
+            </element>
+            <element>
+              <name>dds.transport.tcp.negotiate_session_id</name>
+              <value>1</value>
+            </element>
+            <element>
+              <name>dds.transport.tcp.send_max_wait_sec</name>
+              <value>-1</value>
+            </element>
+          </value>
+        </property>
+      </participant_qos>
+
+      <datareader_qos>
+        <history>
+          <kind>KEEP_ALL_HISTORY_QOS</kind>
+        </history>
+        <protocol>
+          <rtps_reliable_reader>
+            <min_heartbeat_response_delay>
+              <sec>0</sec>
+              <nanosec>0</nanosec>
+            </min_heartbeat_response_delay>
+            <max_heartbeat_response_delay>
+              <sec>0</sec>
+              <nanosec>0</nanosec>
+            </max_heartbeat_response_delay>
+            <app_ack_period>
+              <sec>0</sec>
+              <nanosec>100000000</nanosec>
+            </app_ack_period>
+          </rtps_reliable_reader>
+        </protocol>
+      </datareader_qos>
+
+      <datawriter_qos>
+        <reliability>
+          <kind>RELIABLE_RELIABILITY_QOS</kind>
+          <max_blocking_time>
+            <sec>10</sec>
+            <nanosec>0</nanosec>
+          </max_blocking_time>
+        </reliability>
+        <history>
+          <kind>KEEP_ALL_HISTORY_QOS</kind>
+        </history>
+        <protocol>
+          <rtps_reliable_writer>
+            <max_send_window_size>50</max_send_window_size>
+            <min_send_window_size>50</min_send_window_size>
+            <heartbeats_per_max_samples>10</heartbeats_per_max_samples>
+            <heartbeat_period>
+              <sec>0</sec>
+              <nanosec>100000000</nanosec>
+            </heartbeat_period>
+            <fast_heartbeat_period>
+              <sec>0</sec>
+              <nanosec>100000000</nanosec>
+            </fast_heartbeat_period>
+            <late_joiner_heartbeat_period>
+              <sec>0</sec>
+              <nanosec>100000000</nanosec>
+            </late_joiner_heartbeat_period>
+            <max_nack_response_delay>
+              <sec>0</sec>
+              <nanosec>0</nanosec>
+            </max_nack_response_delay>
+            <min_nack_response_delay>
+              <sec>0</sec>
+              <nanosec>0</nanosec>
+            </min_nack_response_delay>
+            <max_heartbeat_retries>50</max_heartbeat_retries>
+          </rtps_reliable_writer>
+        </protocol>
+      </datawriter_qos>
+    </qos_profile>
+
+    <qos_profile name="HelloWorldQS_ProfileLargeData" base_name="HelloWorldQS_Profile">
+      <datawriter_qos>
+        <publish_mode>
+          <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
+          <!-- <flow_controller_name>dds.flow_controller.token_bucket.fast_flow</flow_controller_name>-->
+        </publish_mode>
+      </datawriter_qos>
+      <datareader_qos>
+        <reader_resource_limits>
+            <dynamically_allocate_fragmented_samples>true
+            </dynamically_allocate_fragmented_samples>
+            <max_fragments_per_sample>LENGTH_UNLIMITED</max_fragments_per_sample>
+        </reader_resource_limits>
+      </datareader_qos>
+    </qos_profile>
+  </qos_library>
+
+  <queuing_service name="HelloWorldQS">
+    <domain_participant name="DomainParticipant">
+      <domain_id>0</domain_id>
+      <participant_qos base_name="HelloWorldQS_Library::HelloWorldQS_Profile"/>
+
+      <shared_subscriber name="SharedSubscriber">
+        <session_settings>
+          <session name="RequestSession"/>
+          <session name="ReplySession"/>
+        </session_settings>
+
+        <shared_reader_queue session="RequestSession" name="RequestSharedReaderQueue">
+          <topic_name>HelloWorldTopic</topic_name>
+          <!--<type_name>HelloWorldRequest</type_name>-->
+          <type_name>DDS::Octets</type_name>
+
+          <datawriter_qos base_name="HelloWorldQS_Library::HelloWorldQS_ProfileLargeData"/>
+          <datareader_qos base_name="HelloWorldQS_Library::HelloWorldQS_ProfileLargeData"/>
+          <queue_qos>
+            <resource_limits>
+              <queue_allocation_settings>
+                <max_count>10000</max_count>
+              </queue_allocation_settings>
+            </resource_limits>
+            <distribution>
+              <kind>ROUND_ROBIN</kind>
+              <property>
+                <value>
+                  <element>
+                    <name>UNACKED_THRESHOLD</name>
+                    <value>5</value>
+                  </element>
+                </value>
+              </property>
+            </distribution>
+            <reliability>
+              <app_ack_sample_to_producer>1</app_ack_sample_to_producer>
+            </reliability>
+            <redelivery>
+              <max_delivery_retries>6</max_delivery_retries>
+              <response_timeout>
+                <duration>
+                  <sec>30</sec>
+                  <nanosec>0</nanosec>
+                </duration>
+              </response_timeout>
+            </redelivery>
+          </queue_qos>
+        </shared_reader_queue>
+
+        <shared_reader_queue session="ReplySession" name="ReplySharedReaderQueue">
+          <topic_name>HelloWorldTopicReply</topic_name>
+          <!--<type_name>HelloWorldReply</type_name>-->
+          <type_name>DDS::Octets</type_name>
+
+          <datawriter_qos base_name="HelloWorldQS_Library::HelloWorldQS_ProfileLargeData"/>
+          <datareader_qos base_name="HelloWorldQS_Library::HelloWorldQS_ProfileLargeData"/>
+          <queue_qos>
+            <resource_limits>
+              <queue_allocation_settings>
+                <max_count>10000</max_count>
+              </queue_allocation_settings>
+            </resource_limits>
+            <distribution>
+              <kind>ROUND_ROBIN</kind>
+              <property>
+                <value>
+                  <element>
+                    <name>UNACKED_THRESHOLD</name>
+                    <value>10</value>
+                  </element>
+                </value>
+              </property>
+            </distribution>
+            <reliability>
+              <app_ack_sample_to_producer>0</app_ack_sample_to_producer>
+            </reliability>
+            <redelivery>
+              <max_delivery_retries>6</max_delivery_retries>
+              <response_timeout>
+                <duration>
+                  <sec>30</sec>
+                  <nanosec>0</nanosec>
+                </duration>
+              </response_timeout>
+            </redelivery>
+          </queue_qos>
+        </shared_reader_queue>
+
+      </shared_subscriber>
+    </domain_participant>
+  </queuing_service>
+
+  <queuing_service name="HelloWorldQSPersistence">
+    <persistence_settings>
+      <filesystem>
+        <journal_mode>WAL</journal_mode>
+        <synchronization>OFF</synchronization>
+        <vacuum>FULL</vacuum>
+      </filesystem>
+    </persistence_settings>
+
+    <domain_participant name="DomainParticipant">
+      <domain_id>0</domain_id>
+      <participant_qos base_name="HelloWorldQS_Library::HelloWorldQS_Profile"/>
+
+      <shared_subscriber name="SharedSubscriber">
+        <session_settings>
+          <session name="RequestSession"/>
+          <session name="ReplySession"/>
+        </session_settings>
+
+        <shared_reader_queue session="RequestSession" name="RequestSharedReaderQueue">
+          <topic_name>HelloWorldTopic</topic_name>
+          <!--<type_name>HelloWorldRequest</type_name>-->
+          <type_name>DDS::Octets</type_name>
+
+          <datawriter_qos base_name="HelloWorldQS_Library::HelloWorldQS_ProfileLargeData"/>
+          <datareader_qos base_name="HelloWorldQS_Library::HelloWorldQS_ProfileLargeData"/>
+          <queue_qos>
+            <persistence>
+              <kind>PERSISTENT</kind>
+            </persistence>
+            <resource_limits>
+              <queue_allocation_settings>
+                <max_count>10000</max_count>
+              </queue_allocation_settings>
+            </resource_limits>
+            <distribution>
+              <kind>ROUND_ROBIN</kind>
+              <property>
+                <value>
+                  <element>
+                    <name>UNACKED_THRESHOLD</name>
+                    <value>5</value>
+                  </element>
+                </value>
+              </property>
+            </distribution>
+            <reliability>
+              <app_ack_sample_to_producer>1</app_ack_sample_to_producer>
+            </reliability>
+            <redelivery>
+              <max_delivery_retries>6</max_delivery_retries>
+              <response_timeout>
+                <duration>
+                  <sec>30</sec>
+                  <nanosec>0</nanosec>
+                </duration>
+              </response_timeout>
+            </redelivery>
+          </queue_qos>
+        </shared_reader_queue>
+
+        <shared_reader_queue session="ReplySession" name="ReplySharedReaderQueue">
+          <topic_name>HelloWorldTopicReply</topic_name>
+          <!--<type_name>HelloWorldReply</type_name>-->
+          <type_name>DDS::Octets</type_name>
+
+          <datawriter_qos base_name="HelloWorldQS_Library::HelloWorldQS_ProfileLargeData"/>
+          <datareader_qos base_name="HelloWorldQS_Library::HelloWorldQS_ProfileLargeData"/>
+          <queue_qos>
+            <persistence>
+              <kind>PERSISTENT</kind>
+            </persistence>
+            <resource_limits>
+              <queue_allocation_settings>
+                <max_count>10000</max_count>
+              </queue_allocation_settings>
+            </resource_limits>
+            <distribution>
+              <kind>ROUND_ROBIN</kind>
+              <property>
+                <value>
+                  <element>
+                    <name>UNACKED_THRESHOLD</name>
+                    <value>10</value>
+                  </element>
+                </value>
+              </property>
+            </distribution>
+            <reliability>
+              <app_ack_sample_to_producer>0</app_ack_sample_to_producer>
+            </reliability>
+            <redelivery>
+              <max_delivery_retries>6</max_delivery_retries>
+              <response_timeout>
+                <duration>
+                  <sec>30</sec>
+                  <nanosec>0</nanosec>
+                </duration>
+              </response_timeout>
+            </redelivery>
+          </queue_qos>
+        </shared_reader_queue>
+
+      </shared_subscriber>
+    </domain_participant>
+  </queuing_service>
+
+  <queuing_service name="HelloWorldQSReplication">
+    <replication_settings>
+      <queue_instances>2</queue_instances>
+      <synchronize_consumer_assignment>false</synchronize_consumer_assignment>
+      <master_timeout>
+        <sec>3</sec>
+        <nanosec>0</nanosec>
+      </master_timeout>
+    </replication_settings>
+
+    <service_qos>
+      <shared_reader_queue_replication>
+        <enabled>true</enabled>
+      </shared_reader_queue_replication>
+    </service_qos>
+
+    <domain_participant name="DomainParticipant">
+      <domain_id>0</domain_id>
+      <participant_qos base_name="HelloWorldQS_Library::HelloWorldQS_Profile"/>
+
+      <shared_subscriber name="SharedSubscriber">
+        <session_settings>
+          <session name="RequestSession"/>
+          <session name="ReplySession"/>
+        </session_settings>
+
+        <shared_reader_queue session="RequestSession" name="RequestSharedReaderQueue">
+          <topic_name>HelloWorldTopic</topic_name>
+          <!--<type_name>HelloWorldRequest</type_name>-->
+          <type_name>DDS::Octets</type_name>
+
+          <datawriter_qos base_name="HelloWorldQS_Library::HelloWorldQS_ProfileLargeData"/>
+          <datareader_qos base_name="HelloWorldQS_Library::HelloWorldQS_ProfileLargeData"/>
+          <update_datawriter_qos base_name="HelloWorldQS_Library::HelloWorldQS_Profile">
+            <resource_limits>
+              <max_samples>50</max_samples>
+              <initial_samples>50</initial_samples>
+            </resource_limits>
+          </update_datawriter_qos>
+          <update_datareader_qos base_name="HelloWorldQS_Library::HelloWorldQS_Profile"/>
+          <redistribution_datawriter_qos base_name="HelloWorldQS_Library::HelloWorldQS_ProfileLargeData"/>
+
+          <queue_qos>
+            <resource_limits>
+              <queue_allocation_settings>
+                <max_count>10000</max_count>
+              </queue_allocation_settings>
+            </resource_limits>
+            <distribution>
+              <kind>ROUND_ROBIN</kind>
+              <property>
+                <value>
+                  <element>
+                    <name>UNACKED_THRESHOLD</name>
+                    <value>5</value>
+                  </element>
+                </value>
+              </property>
+            </distribution>
+            <reliability>
+              <app_ack_sample_to_producer>1</app_ack_sample_to_producer>
+            </reliability>
+            <redelivery>
+              <max_delivery_retries>6</max_delivery_retries>
+              <response_timeout>
+                <duration>
+                  <sec>30</sec>
+                  <nanosec>0</nanosec>
+                </duration>
+              </response_timeout>
+            </redelivery>
+          </queue_qos>
+        </shared_reader_queue>
+
+        <shared_reader_queue session="ReplySession" name="ReplySharedReaderQueue">
+          <topic_name>HelloWorldTopicReply</topic_name>
+          <!--<type_name>HelloWorldReply</type_name>-->
+          <type_name>DDS::Octets</type_name>
+
+          <datawriter_qos base_name="HelloWorldQS_Library::HelloWorldQS_ProfileLargeData"/>
+          <datareader_qos base_name="HelloWorldQS_Library::HelloWorldQS_ProfileLargeData"/>
+          <update_datawriter_qos base_name="HelloWorldQS_Library::HelloWorldQS_Profile">
+            <resource_limits>
+              <max_samples>50</max_samples>
+              <initial_samples>50</initial_samples>
+            </resource_limits>
+          </update_datawriter_qos>
+          <update_datareader_qos base_name="HelloWorldQS_Library::HelloWorldQS_Profile"/>
+          <redistribution_datawriter_qos base_name="HelloWorldQS_Library::HelloWorldQS_ProfileLargeData"/>
+
+          <queue_qos>
+            <resource_limits>
+              <queue_allocation_settings>
+                <max_count>10000</max_count>
+              </queue_allocation_settings>
+            </resource_limits>
+            <distribution>
+              <kind>ROUND_ROBIN</kind>
+              <property>
+                <value>
+                  <element>
+                    <name>UNACKED_THRESHOLD</name>
+                    <value>10</value>
+                  </element>
+                </value>
+              </property>
+            </distribution>
+            <reliability>
+              <app_ack_sample_to_producer>0</app_ack_sample_to_producer>
+            </reliability>
+            <redelivery>
+              <max_delivery_retries>6</max_delivery_retries>
+              <response_timeout>
+                <duration>
+                  <sec>30</sec>
+                  <nanosec>0</nanosec>
+                </duration>
+              </response_timeout>
+            </redelivery>
+          </queue_qos>
+        </shared_reader_queue>
+
+      </shared_subscriber>
+    </domain_participant>
+  </queuing_service>
+
+  <queuing_service name="HelloWorldQSPersistenceReplication">
+    <persistence_settings>
+      <filesystem>
+        <journal_mode>WAL</journal_mode>
+        <synchronization>OFF</synchronization>
+        <vacuum>FULL</vacuum>
+      </filesystem>
+    </persistence_settings>
+
+    <replication_settings>
+      <queue_instances>2</queue_instances>
+      <synchronize_consumer_assignment>false</synchronize_consumer_assignment>
+      <master_timeout>
+        <sec>3</sec>
+        <nanosec>0</nanosec>
+      </master_timeout>
+    </replication_settings>
+
+    <service_qos>
+      <shared_reader_queue_replication>
+        <enabled>true</enabled>
+      </shared_reader_queue_replication>
+    </service_qos>
+
+    <domain_participant name="DomainParticipant">
+      <domain_id>0</domain_id>
+      <participant_qos base_name="HelloWorldQS_Library::HelloWorldQS_Profile"/>
+
+      <shared_subscriber name="SharedSubscriber">
+        <session_settings>
+          <session name="RequestSession"/>
+          <session name="ReplySession"/>
+        </session_settings>
+
+        <shared_reader_queue session="RequestSession" name="RequestSharedReaderQueue">
+          <topic_name>HelloWorldTopic</topic_name>
+          <!--<type_name>HelloWorldRequest</type_name>-->
+          <type_name>DDS::Octets</type_name>
+
+          <datawriter_qos base_name="HelloWorldQS_Library::HelloWorldQS_ProfileLargeData"/>
+          <datareader_qos base_name="HelloWorldQS_Library::HelloWorldQS_ProfileLargeData"/>
+          <update_datawriter_qos base_name="HelloWorldQS_Library::HelloWorldQS_Profile">
+            <resource_limits>
+              <max_samples>50</max_samples>
+              <initial_samples>50</initial_samples>
+            </resource_limits>
+          </update_datawriter_qos>
+          <update_datareader_qos base_name="HelloWorldQS_Library::HelloWorldQS_Profile"/>
+
+          <queue_qos>
+            <persistence>
+              <kind>PERSISTENT</kind>
+            </persistence>
+            <resource_limits>
+              <queue_allocation_settings>
+                <max_count>10000</max_count>
+              </queue_allocation_settings>
+            </resource_limits>
+            <distribution>
+              <kind>ROUND_ROBIN</kind>
+              <property>
+                <value>
+                  <element>
+                    <name>UNACKED_THRESHOLD</name>
+                    <value>5</value>
+                  </element>
+                </value>
+              </property>
+            </distribution>
+            <reliability>
+              <app_ack_sample_to_producer>1</app_ack_sample_to_producer>
+            </reliability>
+            <redelivery>
+              <max_delivery_retries>6</max_delivery_retries>
+              <response_timeout>
+                <duration>
+                  <sec>30</sec>
+                  <nanosec>0</nanosec>
+                </duration>
+              </response_timeout>
+            </redelivery>
+          </queue_qos>
+        </shared_reader_queue>
+
+        <shared_reader_queue session="ReplySession" name="ReplySharedReaderQueue">
+          <topic_name>HelloWorldTopicReply</topic_name>
+          <!--<type_name>HelloWorldReply</type_name>-->
+          <type_name>DDS::Octets</type_name>
+
+          <datawriter_qos base_name="HelloWorldQS_Library::HelloWorldQS_ProfileLargeData"/>
+          <datareader_qos base_name="HelloWorldQS_Library::HelloWorldQS_ProfileLargeData"/>
+          <update_datawriter_qos base_name="HelloWorldQS_Library::HelloWorldQS_Profile">
+            <resource_limits>
+              <max_samples>50</max_samples>
+              <initial_samples>50</initial_samples>
+            </resource_limits>
+          </update_datawriter_qos>
+          <update_datareader_qos base_name="HelloWorldQS_Library::HelloWorldQS_Profile"/>
+
+          <queue_qos>
+            <persistence>
+              <kind>PERSISTENT</kind>
+            </persistence>
+            <resource_limits>
+              <queue_allocation_settings>
+                <max_count>10000</max_count>
+              </queue_allocation_settings>
+            </resource_limits>
+            <distribution>
+              <kind>ROUND_ROBIN</kind>
+              <property>
+                <value>
+                  <element>
+                    <name>UNACKED_THRESHOLD</name>
+                    <value>10</value>
+                  </element>
+                </value>
+              </property>
+            </distribution>
+            <reliability>
+              <app_ack_sample_to_producer>0</app_ack_sample_to_producer>
+            </reliability>
+            <redelivery>
+              <max_delivery_retries>6</max_delivery_retries>
+              <response_timeout>
+                <duration>
+                  <sec>30</sec>
+                  <nanosec>0</nanosec>
+                </duration>
+              </response_timeout>
+            </redelivery>
+          </queue_qos>
+        </shared_reader_queue>
+
+      </shared_subscriber>
+    </domain_participant>
+  </queuing_service>
+
+  <!--
+  Example that shows how to enable remote administration.
+  This Queing Service contains only one shared subscriber that is empty. Through
+  remote commands, new queues can be added to the existing shared subscriber.
+  -->
+  <queuing_service name="RemoteConfigQS">
+    <administration>
+      <domain_id>1</domain_id>
+      <participant_qos base_name="HelloWorldQS_Library::HelloWorldQS_Profile">
+        <property>
+          <value>
+            <element>
+              <name>dds.transport.tcp.server_bind_port</name>
+              <value>15001</value>
+            </element>
+            <element>
+              <name>dds.transport.tcp.public_address</name>
+              <value>127.0.0.1:15001</value>
+            </element>
+          </value>
+        </property>       
+      </participant_qos>
+    </administration>
+
+    <domain_participant name="DomainParticipant">
+      <domain_id>0</domain_id>
+      <participant_qos base_name="HelloWorldQS_Library::HelloWorldQS_Profile"/>
+
+      <!--
+        Empty shared subscriber with only one session.
+        -->
+      <shared_subscriber name="SharedSubscriber">
+        <session_settings>
+          <session name="Session"/>
+        </session_settings>
+      </shared_subscriber>
+
+    </domain_participant>
+  </queuing_service>
+
+</dds>

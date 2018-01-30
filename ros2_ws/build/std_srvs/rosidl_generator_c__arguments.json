@@ -1,0 +1,35 @@
+{
+  "package_name": "std_srvs",
+  "output_dir": "/home/aust/ros2_ws/build/std_srvs/rosidl_generator_c/std_srvs",
+  "template_dir": "/home/aust/ros2_ws/install/share/rosidl_generator_c/cmake/../resource",
+  "ros_interface_files": [
+    "/home/aust/ros2_ws/src/ros2/common_interfaces/std_srvs/srv/Empty.srv",
+    "/home/aust/ros2_ws/src/ros2/common_interfaces/std_srvs/srv/SetBool.srv",
+    "/home/aust/ros2_ws/src/ros2/common_interfaces/std_srvs/srv/Trigger.srv",
+    "/home/aust/ros2_ws/build/std_srvs/srv/Empty_Request.msg",
+    "/home/aust/ros2_ws/build/std_srvs/srv/Empty_Response.msg",
+    "/home/aust/ros2_ws/build/std_srvs/srv/SetBool_Request.msg",
+    "/home/aust/ros2_ws/build/std_srvs/srv/SetBool_Response.msg",
+    "/home/aust/ros2_ws/build/std_srvs/srv/Trigger_Request.msg",
+    "/home/aust/ros2_ws/build/std_srvs/srv/Trigger_Response.msg"
+  ],
+  "target_dependencies": [
+    "/home/aust/ros2_ws/install/share/rosidl_generator_c/cmake/../../../lib/rosidl_generator_c/rosidl_generator_c",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_c/cmake/../../../lib/python3.5/site-packages/rosidl_generator_c/__init__.py",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_c/cmake/../resource/msg.h.em",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_c/cmake/../resource/msg__functions.c.em",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_c/cmake/../resource/msg__functions.h.em",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_c/cmake/../resource/msg__struct.h.em",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_c/cmake/../resource/msg__type_support.h.em",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_c/cmake/../resource/srv.h.em",
+    "/home/aust/ros2_ws/src/ros2/common_interfaces/std_srvs/srv/Empty.srv",
+    "/home/aust/ros2_ws/src/ros2/common_interfaces/std_srvs/srv/SetBool.srv",
+    "/home/aust/ros2_ws/src/ros2/common_interfaces/std_srvs/srv/Trigger.srv",
+    "/home/aust/ros2_ws/build/std_srvs/srv/Empty_Request.msg",
+    "/home/aust/ros2_ws/build/std_srvs/srv/Empty_Response.msg",
+    "/home/aust/ros2_ws/build/std_srvs/srv/SetBool_Request.msg",
+    "/home/aust/ros2_ws/build/std_srvs/srv/SetBool_Response.msg",
+    "/home/aust/ros2_ws/build/std_srvs/srv/Trigger_Request.msg",
+    "/home/aust/ros2_ws/build/std_srvs/srv/Trigger_Response.msg"
+  ]
+}

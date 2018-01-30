@@ -1,0 +1,17 @@
+setup.py
+/home/aust/ros2_ws/build/ros2service/ros2service.egg-info/PKG-INFO
+/home/aust/ros2_ws/build/ros2service/ros2service.egg-info/SOURCES.txt
+/home/aust/ros2_ws/build/ros2service/ros2service.egg-info/dependency_links.txt
+/home/aust/ros2_ws/build/ros2service/ros2service.egg-info/entry_points.txt
+/home/aust/ros2_ws/build/ros2service/ros2service.egg-info/requires.txt
+/home/aust/ros2_ws/build/ros2service/ros2service.egg-info/top_level.txt
+ros2service/__init__.py
+ros2service/api/__init__.py
+ros2service/command/__init__.py
+ros2service/command/service.py
+ros2service/verb/__init__.py
+ros2service/verb/call.py
+ros2service/verb/list.py
+test/test_copyright.py
+test/test_flake8.py
+test/test_pep257.py

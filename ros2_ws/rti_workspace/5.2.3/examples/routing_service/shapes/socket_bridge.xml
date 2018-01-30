@@ -1,0 +1,476 @@
+<?xml version="1.0"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_routing_service.xsd">
+
+    <!-- ****************************************************************** -->
+    <!-- RTI Routing Service                                                -->
+    <!-- ****************************************************************** -->
+    <!--                                                                    -->
+    <!-- Socket adapter configuration example                               -->
+    <!--                                                                    -->
+    <!-- ****************************************************************** -->
+    <!--                                                                    -->
+    <!-- There are four configurations in this file:                        -->
+    <!--                                                                    -->
+    <!--   * socket_to_dds:     Connects a TCP socket and parses the data   -->
+    <!--                        as ShapeType samples publishing them to DDS -->
+    <!--   * dds_to_socket:     Every route subscribes to a DDS Shape topic -->
+    <!--                        forwarding the data to a different TCP      -->
+    <!--                        server                                      -->
+    <!--   * socket_to_socket:  Without DDS on any side, it just parses     -->
+    <!--                        samples from an input TCP connection and    -->
+    <!--                        sends them through a TCP server.            -->
+    <!--   * socket_test:       Tests the socket adapter input capabilities -->
+    <!--                        using a TestAdapter on the output that      -->
+    <!--                        checks that samples are received correctly  -->
+    <!--                                                                    -->
+    <!-- To use your own hosts and ports find and change                    -->
+    <!-- the properties Host and Port                                       -->
+    <!--                                                                    -->
+    <!-- ****************************************************************** -->
+
+    <!-- Adapter plugins are declared here here -->
+
+    <adapter_library name="adapters">
+        <adapter_plugin name="socket">
+            <dll>$(RTI_EXAMPLES_DIR)/routing_service/adapters/socket/$(RTI_SHARED_LIB_PREFIX)socketadapter$(RTI_SHARED_LIB_SUFFIX)</dll>
+            <create_function>RTI_RoutingServiceSocketAdapterPlugin_create</create_function>
+        </adapter_plugin>
+
+        <java_adapter_plugin name="tester">
+            <class_name>com.rti.routingservice.adapter.test.TestAdapter</class_name>
+        </java_adapter_plugin>
+    </adapter_library>
+
+    <!-- ****************************************************************** -->
+    <!-- ****************************************************************** -->
+
+    <types>
+        <struct name="TestType">
+            <member name="member1" type="long" key="1"/>
+            <member name="member2" type="string" stringMaxLength="128"/>
+        </struct>
+    </types>
+
+    <!-- ****************************************************************** -->
+    <!-- ****************************************************************** -->
+
+    <routing_service name="socket_to_dds">
+
+        <annotation>
+            <documentation>
+                Connects a TCP socket and parses the data as ShapeType samples publishing them to DDS
+            </documentation>
+        </annotation>
+
+        <administration>
+            <domain_id>1</domain_id>
+        </administration>
+        
+        <domain_route name="socketdds">
+
+            <connection_1 plugin_name="adapters::socket">
+                <!-- No configuration needed in this connection -->
+            </connection_1>
+
+            <participant_2>
+                <domain_id>0</domain_id>
+            </participant_2>
+
+            <session name="s">
+
+                <!-- This route gets ShapeType samples from the socket
+               and publishes them in DDS -->
+                <route name="square_socket">
+                    <route_types>true</route_types>
+                    <input connection="1">
+                        <!-- We only start reading when the output
+                            is ready to write. This way we don't try
+                            to connect a TCP socket until we are ready
+                            to send data to the DDS output -->
+                        <creation_mode>ON_ROUTE_MATCH</creation_mode>
+                        <stream_name>Square</stream_name>
+                        <registered_type_name>ShapeType</registered_type_name>
+                        <property>
+                            <value>
+                                <!-- Host to connect to -->
+                                <element>
+                                    <name>Host</name>
+                                    <value>MyHost</value>
+                                </element>
+                                <!-- Port -->
+                                <element>
+                                    <name>Port</name>
+                                    <value>8111</value>
+                                </element>
+                                <!-- The maximum size in bytes of 
+                                     a serialized sample received from the socket -->
+                                <element>
+                                    <name>MaxSampleSize</name>
+                                    <value>1024</value>
+                                </element>
+                            </value>
+                        </property>
+                    </input>
+
+                    <dds_output>
+                        <!-- We only start writing when we have a DDS data reader
+                             expecting our topic -->
+                        <creation_mode>ON_DOMAIN_MATCH</creation_mode>
+                        <topic_name>Square</topic_name>
+                        <registered_type_name>ShapeType</registered_type_name>
+                    </dds_output>
+
+                </route>
+
+            </session>
+
+        </domain_route>
+
+    </routing_service>
+
+
+    <!-- ****************************************************************** -->
+    <!-- ****************************************************************** -->
+
+
+    <routing_service name="dds_to_socket">
+
+        <annotation>
+            <documentation>
+                Every route subscribes to a DDS Shape topic
+                forwarding the data to a different TCP server
+            </documentation>
+        </annotation>
+
+
+        <domain_route name="ddssocket">
+
+            <participant_1>
+                <domain_id>0</domain_id>
+            </participant_1>
+
+            <connection_2 plugin_name="adapters::socket">
+                <!-- No configuration needed in this connection.
+              
+                  Although an alternative implementation of the socket
+                  adapter could create the TCP server at this level and
+                  all the contained routes would send to the same port
+                  even for different input streams and types.
+                  
+                  In that case we would have the TCP server config here
+                  instead of on every <route>/<output> as we do now (see below)
+                  
+                  <property>
+                    <value>
+                       <element>
+                         <name>Port</name>
+                         <value>8112</value>
+                       </element>
+                    </value>
+                  </property>
+            -->
+            </connection_2>
+
+            <session name="s">
+
+                <!-- Create a TCP server to send Squares 
+               received from DDS -->
+                <route name="square_socket">
+                    <route_types>true</route_types>
+
+                    <dds_input participant="1">
+                        <creation_mode>ON_DOMAIN_MATCH</creation_mode>
+                        <topic_name>Square</topic_name>
+                        <registered_type_name>ShapeType</registered_type_name>
+                    </dds_input>
+
+                    <output>
+                        <!-- We only create the StreamWriter (the TCP server)
+                             when the input has been created -->
+                        <creation_mode>ON_ROUTE_MATCH</creation_mode>
+                        <!-- Stream name (not relevant for this adapter) 
+                             and type -->
+                        <stream_name>Square</stream_name>
+                        <registered_type_name>ShapeType</registered_type_name>
+                        <property>
+                            <value>
+                                <!-- Port to bind the TCP server to -->
+                                <element>
+                                    <name>Port</name>
+                                    <value>8112</value>
+                                </element>
+                                <!-- The maximum size in bytes of 
+                                     a serialized sample. If a sample
+                                     represented in bytes exceeds this
+                                     length it won't be sent on the socket -->
+                                <element>
+                                    <name>MaxSampleSize</name>
+                                    <value>1024</value>
+                                </element>
+                            </value>
+                        </property>
+                    </output>
+
+
+                </route>
+
+
+                <!-- Create another TCP server on another port
+                     to send circles -->
+                <route name="circle_socket">
+                    <route_types>true</route_types>
+
+                    <dds_input participant="1">
+                        <!-- We only start reading when there is at least one
+                             DDS publication of this topic in 
+                             our domain -->
+                        <creation_mode>ON_DOMAIN_MATCH</creation_mode>
+                        <!-- The topic and type we will subscribe to -->
+                        <topic_name>Circle</topic_name>
+                        <registered_type_name>ShapeType</registered_type_name>
+                    </dds_input>
+
+                    <output>
+                        <!-- We only create the StreamWriter (the TCP server)
+                             when the input has been created -->
+                        <creation_mode>ON_ROUTE_MATCH</creation_mode>
+                        <!-- Stream name (not relevant for this adapter) 
+                             and type -->
+                        <stream_name>Circle</stream_name>
+                        <registered_type_name>ShapeType</registered_type_name>
+                        <property>
+                            <value>
+                                <!-- Port to bind the TCP server to -->
+                                <element>
+                                    <name>Port</name>
+                                    <value>8113</value>
+                                </element>
+                                <!-- The maximum size in bytes of 
+                                     a serialized sample. If a sample
+                                     represented in bytes exceeds this
+                                     length it won't be sent on the socket -->
+                                <element>
+                                    <name>MaxSampleSize</name>
+                                    <value>1024</value>
+                                </element>
+                            </value>
+                        </property>
+                    </output>
+                </route>
+            </session>
+
+        </domain_route>
+
+    </routing_service>
+
+    <!-- ****************************************************************** -->
+    <!-- ****************************************************************** -->
+
+    <routing_service name="socket_to_socket">
+
+        <annotation>
+            <documentation>
+                Forward samples from one port to another port
+            </documentation>
+        </annotation>
+
+
+        <domain_route name="ddssocket">
+
+            <connection_1 plugin_name="adapters::socket">
+                <registered_type name="TestType" type_name="TestType"/>
+            </connection_1>
+
+
+            <connection_2 plugin_name="adapters::socket">
+                <registered_type name="TestType" type_name="TestType"/>
+            </connection_2>
+
+            <session name="s">
+
+                <route name="square_socket">
+                    <route_types>true</route_types>
+
+                    <input connection="1">
+                        <!-- We only start reading when the output
+                    is ready to write -->
+                        <creation_mode>IMMEDIATE</creation_mode>
+                        <stream_name>Test</stream_name>
+                        <registered_type_name>TestType</registered_type_name>
+                        <property>
+                            <value>
+                                <!-- Host to connect to -->
+                                <element>
+                                    <name>Host</name>
+                                    <value>MyHost</value>
+                                </element>
+                                <!-- Port -->
+                                <element>
+                                    <name>Port</name>
+                                    <value>8111</value>
+                                </element>
+                                <!-- The maximum size in bytes of 
+                                     a serialized sample received from the socket -->
+                                <element>
+                                    <name>MaxSampleSize</name>
+                                    <value>1024</value>
+                                </element>
+                            </value>
+                        </property>
+                    </input>
+
+                    <output>
+                        <!-- We only start reading when the output
+                             is ready to write -->
+                        <creation_mode>IMMEDIATE</creation_mode>
+                        <stream_name>Test</stream_name>
+                        <registered_type_name>TestType</registered_type_name>
+                        <property>
+                            <value>
+                                <!-- Port to bind the TCP server to -->
+                                <element>
+                                    <name>Port</name>
+                                    <value>8112</value>
+                                </element>
+                                <!-- The maximum size in bytes of 
+                                     a serialized sample received from the socket -->
+                                <element>
+                                    <name>MaxSampleSize</name>
+                                    <value>1024</value>
+                                </element>
+                            </value>
+                        </property>
+                    </output>
+
+
+                </route>
+
+            </session>
+
+        </domain_route>
+
+    </routing_service>
+
+    <!-- ****************************************************************** -->
+    <!-- ****************************************************************** -->
+
+    <routing_service name="socket_test">
+
+        <annotation>
+            <documentation>
+                Use the test adapter to test the socket adapter
+            </documentation>
+        </annotation>
+
+
+        <domain_route name="test">
+
+            <connection_1 plugin_name="adapters::socket">
+                <registered_type name="TestType" type_name="TestType"/>
+            </connection_1>
+
+            <connection_2 plugin_name="adapters::tester">
+                <registered_type name="TestType" type_name="TestType"/>
+                <property>
+                    <!-- We indicate that we are expecting two writers (see the two routes below).
+                        Otherwise the test will fail. -->
+                    <value>
+                        <element>
+                            <name>ExpectedWriterCount</name>
+                            <value>1</value>
+                        </element>
+                    </value>
+                </property>
+            </connection_2>
+
+            <session name="s">
+
+                <!-- This route gets ShapeType samples from the socket MySquare.txt
+                     and publishes them in DDS -->
+                <route name="square_socket">
+                    <route_types>true</route_types>
+                    <input connection="1">
+                        <!-- We only start reading when the output
+                             is ready to write -->
+                        <creation_mode>IMMEDIATE</creation_mode>
+                        <stream_name>Test1</stream_name>
+                        <registered_type_name>TestType</registered_type_name>
+                        <property>
+                            <value>
+                                <!-- Host to connect to -->
+                                <element>
+                                    <name>Host</name>
+                                    <value>MyHost</value>
+                                </element>
+                                <!-- Port -->
+                                <element>
+                                    <name>Port</name>
+                                    <value>8111</value>
+                                </element>
+                                <!-- The maximum size in bytes of 
+                                     a serialized sample received from the socket -->
+                                <element>
+                                    <name>MaxSampleSize</name>
+                                    <value>1024</value>
+                                </element>
+                            </value>
+                        </property>
+                    </input>
+
+                    <output>
+                        <creation_mode>IMMEDIATE</creation_mode>
+                        <stream_name>Test1</stream_name>
+                        <registered_type_name>TestType</registered_type_name>
+                        <property>
+                            <value>
+                                <!-- Indicate how many samples we need to 
+                                     receive to pass -->
+                                <element>
+                                    <name>MinExpectedSamples</name>
+                                    <value>1</value>
+                                </element>
+                                <element>
+                                    <name>MaxExpectedSamples</name>
+                                    <value>10</value>
+                                </element>
+                                <!-- We will count only the samples
+                                     that match this value for the field member2 -->
+                                <element>
+                                    <name>TestStringField</name>
+                                    <value>member2</value>
+                                </element>
+                                <element>
+                                    <name>TestStringValue</name>
+                                    <value>hi</value>
+                                </element>
+
+                                <element>
+                                    <name>TestLongField</name>
+                                    <value>member1</value>
+                                </element>
+                                <element>
+                                    <name>TestLongValue</name>
+                                    <value>1</value>
+                                </element>
+                                <!-- And this property can simulate
+                                     some processing time for every matching
+                                     sample written here (milliseconds)
+                                    <element>
+                                        <name>SleepPerSample</name>
+                                        <value>100</value>
+                                    </element>                    
+                                -->
+                            </value>
+                        </property>
+                    </output>
+
+                </route>
+
+            </session>
+
+        </domain_route>
+
+    </routing_service>
+
+</dds>
+

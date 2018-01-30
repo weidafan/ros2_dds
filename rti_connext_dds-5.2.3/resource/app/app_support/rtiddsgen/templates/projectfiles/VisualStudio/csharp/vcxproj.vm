@@ -1,0 +1,172 @@
+## $Id$
+##
+## (c) Copyright, Real-Time Innovations, Inc. 2001.  All rights reserved.
+## No duplications, whole or partial, manual or electronic, may be made
+## without prior written permission.  Any such copies, or
+## revisions thereof, must display this notice unaltered.
+## This code contains trade secrets of Real-Time Innovations, Inc.
+##
+## modification history:
+## ---------------------
+## 2.3,13may15,gpc Added setting of NDDSHOME if undefined in environment
+## 2.2,8sep14,ajm CODEGENII-348 Adding support for -dllExportMacroSuffix in .Net
+## 2.2,9jun14,vmg created
+##========================================================================
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="${archMap.PROJECT_TOOLSVERSION}" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|${platform}">
+      <Configuration>Debug</Configuration>
+      <Platform>${platform}</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|${platform}">
+      <Configuration>Release</Configuration>
+      <Platform>${platform}</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Condition="'$(NDDSHOME)'==''" Label="RTI Connext Home">
+    <NddsHome>${global.nddsHome}</NddsHome>
+  </PropertyGroup>
+  <PropertyGroup Label="RTI Connext Path">
+      <LocalDebuggerEnvironment>PATH=#[[$]]#(NDDSHOME)${libDir}</LocalDebuggerEnvironment>
+  </PropertyGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>${projectName}</ProjectName>
+    <RootNamespace>${projectName}</RootNamespace>
+    <Keyword>ManagedCProj</Keyword>
+    <ProjectGuid>{${projectGuid}}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|${platform}'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <CLRSupport>true</CLRSupport>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    ${archMap.PLATFORM_TOOLSET}
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|${platform}'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <CLRSupport>true</CLRSupport>
+    ${archMap.PLATFORM_TOOLSET}
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|${platform}'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|${platform}'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <ReferencePath Condition="'$(Configuration)|$(Platform)'=='Debug|${platform}'">$(NDDSHOME)\lib\\${global.architectureName};$(ReferencePath)</ReferencePath>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|${platform}'">$(SolutionDir)bin${platformDir}\$(Configuration)-${vsVersion}\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|${platform}'">obj${platformDir}\$(Configuration)-${vsVersion}\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|${platform}'">true</LinkIncremental>
+    <ReferencePath Condition="'$(Configuration)|$(Platform)'=='Release|${platform}'">$(NDDSHOME)\lib\\${global.architectureName};$(ReferencePath)</ReferencePath>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|${platform}'">$(SolutionDir)bin${platformDir}\$(Configuration)-${vsVersion}\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|${platform}'">obj${platformDir}\$(Configuration)-${vsVersion}\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|${platform}'">false</LinkIncremental>
+    ${archMap.PLATFORM_TOOLSET}
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|${platform}'">
+#if($platform.equals("x64"))
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+#end
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>#foreach($headerDir in ${headerDirectories})${headerDir};#end%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDDS_USER_DLL_EXPORT${global.dllExportMacroSuffix};NDDS_DLL_VARIABLE;RTI_WIN32;WIN32_LEAN_AND_MEAN;WIN32;_DEBUG;#foreach($preprocessorDefinition in ${additionalDefines})$preprocessorDefinition;#end%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>#foreach($debugLib in ${debugLibraries})${debugLib}.lib;#end</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(NDDSHOME)\lib\\${global.architectureName};%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <TargetMachine>${archMap.TARGET_MACHINE}</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Message>Copying required DLLs to target directory...</Message>
+      <Command>copy &quot;$(NDDSHOME)\lib\\${global.architectureName}\*.dll&quot;  &quot;$(TargetDir)&quot;</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|${platform}'">
+#if($platform.equals("x64"))
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+#end
+    <ClCompile>
+      <AdditionalIncludeDirectories>#foreach($headerDir in ${headerDirectories})${headerDir};#end%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDDS_USER_DLL_EXPORT${global.dllExportMacroSuffix};NDDS_DLL_VARIABLE;RTI_WIN32;WIN32_LEAN_AND_MEAN;WIN32;NDEBUG;#foreach($preprocessorDefinition in ${additionalDefines})$preprocessorDefinition;#end%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>#foreach($releaseLib in ${releaseLibraries})${releaseLib}.lib;#end</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(NDDSHOME)\lib\\${global.architectureName};%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <TargetMachine>${archMap.TARGET_MACHINE}</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Message>Copying required DLLs to target directory...</Message>
+      <Command>copy &quot;$(NDDSHOME)\lib\\${global.architectureName}\*.dll&quot;  &quot;$(TargetDir)&quot;</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+      <Reference Include="${archMap.DOTNET_DLL_NAME}">
+      <HintPath>$(NDDSHOME)\lib\\${global.architectureName}\\${archMap.DOTNET_DLL_NAME}.dll</HintPath>
+#if($platform.equals("x64"))      
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+#end      
+    </Reference>
+    <Reference Include="System">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="System.Data">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="System.Xml">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+     </Reference>  
+  </ItemGroup>
+  <ItemGroup>
+#foreach($sourceFile in ${sourceFiles})
+    <ClCompile Include="${sourceFile}" />
+#end
+#foreach($sourceFile in ${additionalSourceFiles})
+    <ClCompile Include="${sourceFile}" />
+#end
+  </ItemGroup>
+  <ItemGroup>
+#foreach($headerFile in ${headerFiles})
+    <ClInclude Include="${headerFile}" />
+#end
+#foreach($headerFile in ${additionalHeaderFiles})
+    <ClInclude Include="${headerFile}" />
+#end
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="USER_QOS_PROFILES.xml" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

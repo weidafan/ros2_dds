@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Process View</title>
+  <link rel="stylesheet" href="../../acdocs.css" type="text/css" />   
+</head>
+
+<body>
+	<div class="centerContent">
+		<div class="docTopBanner"/> 
+	</div>
+	
+    <div class="docPageTitle">Process View</div>
+    
+    <div class="docSectionTitle">
+        <a name="ProcessViewOverview">Overview</a>
+    </div>
+    
+    <div class="docSectionContent">
+    The Process View provides three information panels which display the DDS
+    entities contained within a process, the processes' log (populated through
+    the use of Distributed Logger), and a basic information panel. 
+    </div>
+    
+    <br/>
+    <div class="docSectionTitle"><a name="ddsentities">DDS Entities</a></div>
+    
+    <div class="docSectionContent">
+    The DDS Entities tab displays a hierarchical view of the DDS entities that
+    were created by that process. The tree starts with the process 
+    <img src="../../../branding/icons/running_process.png"/> itself which
+    then contains 
+    DomainParticipants <img src="../../../branding/icons/participant.png"/>, 
+    Publishers <img src="../../../branding/icons/publisher.png"/>, 
+    DataWriters <img src="../../../branding/icons/datawriter.png"/>, 
+    Subscribers <img src="../../../branding/icons/subscriber.png"/>,
+    and DataReaders <img src="../../../branding/icons/datareader.png"/>. Health  
+    badges for error <img src="../../../branding/icons/error.png"/> and warning
+    <img src="../../../branding/icons/warning.png"/> are also used to convey 
+    health state information.
+    </div>
+    
+    <div class="docScreenShot">
+        <img src="../../images/processView_ddsEntities.png" />
+    </div>
+    
+    <br/>
+    <div class="docSectionTitle"><a name="distLog">Log</a></div>
+    
+    <div class="docSectionContent">
+    The Log tab displays the processes&apos; log messages. This display requires that
+    the process is using Distributed Logger.
+    </div>
+    
+    <div class="docScreenShot">
+        <img src="../../images/distributedLog.png"/>
+    </div>
+    
+    <div class="docSectionContent">
+    The Distributed Logger table consists of these columns:
+    <ul>
+        <li><strong>Time</strong> - The time the log message was written.</li>
+        
+        <li><strong>Level</strong> - The level of the message.</li>
+        
+        <li><strong>Category</strong> - The logger category name.</li>
+        
+        <li><strong>Message</strong> - The message.</li>
+    </ul>
+    <br/>
+    There are also buttons to pause the updates to the table, export the 
+    contents of the table to a file, and adjust the settings used by the
+    remote process' Distributed Logger library.
+    </div>
+    
+    
+    <br/>
+    <div class="docSectionTitle"><a name="distLogSettings">Remote Settings 
+    Dialog</a></div>
+    
+    <div class="docScreenShot">
+        <img src="../../images/distributedLog_settingsDialog.png"/>
+    </div>
+    
+    <div class="docSectionContent">
+    The Distributed Logger remote settings dialog controls the instance of the
+    Distributed Logger library being used by the remote process. You can adjust
+    the filter level, print format, and verbosity of the individual log 
+    categories. This dialog also displays the state, and last update time.
+    </div>
+    
+    <br/>
+    <div class="docSectionTitle"><a name="processinfo">Process Information</a></div>
+    
+    <div class="docScreenShot">
+        <img src="../../images/processView_processInfo.png" />
+    </div>
+    
+    <div class="docSectionContent">
+    The Process Information tab displays some basic information about the 
+    processes such as the Connext version being used, who is running the 
+    process, and some relevant timestamps.
+    Note that the RTI Architecture Name reflects the <strong>native</strong>
+    architecture and not that of a layered API binding. In particular, don't be
+    confused when Java and .Net processes are reported as OS-native 
+    architectures.
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,270 @@
+## $Id$
+##
+## (c) Copyright, Real-Time Innovations, Inc. 2001.  All rights reserved.
+## No duplications, whole or partial, manual or electronic, may be made
+## without prior written permission.  Any such copies, or
+## revisions thereof, must display this notice unaltered.
+## This code contains trade secrets of Real-Time Innovations, Inc.
+##
+## modification history:
+## ---------------------
+##2.2,8sep14,ajm CODEGENII-348 Adding support for -dllExportMacroSuffix in .Net
+## 2.2,9jun14,vmg created
+##========================================================================
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="${archMap.PROJECT_FORMAT_VERSION}"
+	Name="${global.idlFileName}_${projectName}"
+	RootNamespace="${global.idlFileName}_${projectName}"
+	Keyword="ManagedCProj"
+	AssemblyReferenceSearchPaths="&quot;$(NDDSHOME)\lib\\${global.architectureName}&quot;"
+	>
+	<Platforms>
+		<Platform
+			Name="${platform}"
+		/>
+	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
+	<Configurations>
+		<Configuration
+			Name="Debug|${platform}"
+			OutputDirectory="$(SolutionDir)\bin${platformDir}\$(ConfigurationName)"
+			IntermediateDirectory="obj${platformDir}\$(ConfigurationName)"
+			ConfigurationType="1"
+			CharacterSet="1"
+			ManagedExtensions="1"
+    		BuildLogFile="$(IntDir)\\${projectName}\$(ConfigurationName)\BuildLog.html"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+#if($platform.equals("x64"))                
+                TargetEnvironment="3"
+#end    
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="#foreach($headerDir in ${headerDirectories})${headerDir};#end"
+				PreprocessorDefinitions="NDDS_USER_DLL_EXPORT${global.dllExportMacroSuffix};NDDS_DLL_VARIABLE;RTI_WIN32;WIN32_LEAN_AND_MEAN;WIN32;_DEBUG;#foreach($preprocessorDefinition in ${additionalDefines})$preprocessorDefinition;#end"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="0"
+				ObjectFile="$(IntDir)\\${projectName}\"
+				ProgramDataBaseFileName="$(IntDir)\\${projectName}\vc80.pdb"
+				XMLDocumentationFileName="$(IntDir)\\${projectName}\"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="$(NoInherit) #foreach($debugLib in ${debugLibraries})${debugLib}.lib #end"
+				OutputFile="$(SolutionDir)\bin${platformDir}\$(ConfigurationName)\\${global.idlFileName}_${projectName}.exe"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="$(NDDSHOME)\lib\\${global.architectureName}"
+				GenerateDebugInformation="true"
+				AssemblyDebug="1"
+				TargetMachine="${archMap.TARGET_MACHINE}"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+				DependencyInformationFile="$(IntDir)\$(TargetFileName).mt.dep"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				Description="Copying required DLLs to target directory..."
+                CommandLine="copy &quot;$(NDDSHOME)\lib\\${global.architectureName}\*.dll&quot;  &quot;$(TargetDir)&quot;"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|${platform}"
+			OutputDirectory="$(SolutionDir)\bin${platformDir}\$(ConfigurationName)"
+			IntermediateDirectory="obj${platformDir}\$(ConfigurationName)"
+			ConfigurationType="1"
+			CharacterSet="1"
+			ManagedExtensions="1"
+			WholeProgramOptimization="1"
+			BuildLogFile="$(IntDir)\\${projectName}\$(ConfigurationName)\BuildLog.html"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+#if($platform.equals("x64"))                
+                TargetEnvironment="3"
+#end   				
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="#foreach($headerDir in ${headerDirectories})${headerDir};#end"
+				PreprocessorDefinitions="NDDS_USER_DLL_EXPORT${global.dllExportMacroSuffix};NDDS_DLL_VARIABLE;RTI_WIN32;WIN32_LEAN_AND_MEAN;WIN32;NDEBUG;#foreach($preprocessorDefinition in ${additionalDefines})$preprocessorDefinition;#end"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="0"
+				ObjectFile="$(IntDir)\\${projectName}\"
+				ProgramDataBaseFileName="$(IntDir)\\${projectName}\vc80.pdb"
+				XMLDocumentationFileName="$(IntDir)\\${projectName}\"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="$(NoInherit) #foreach($releaseLib in ${releaseLibraries})${releaseLib}.lib #end"
+				OutputFile="$(SolutionDir)\bin${platformDir}\$(ConfigurationName)\\${global.idlFileName}_${projectName}.exe"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="$(NDDSHOME)\lib\\${global.architectureName}"
+				GenerateDebugInformation="true"
+				TargetMachine="${archMap.TARGET_MACHINE}"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+				DependencyInformationFile="$(IntDir)\$(TargetFileName).mt.dep"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				Description="Copying required DLLs to target directory..."
+                CommandLine="copy &quot;$(NDDSHOME)\lib\\${global.architectureName}\*.dll&quot;  &quot;$(TargetDir)&quot;"
+			/>
+		</Configuration>
+	</Configurations>
+	<References>
+		<AssemblyReference
+			RelativePath="System.dll"
+			AssemblyName="System, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+		/>
+		<AssemblyReference
+			RelativePath="System.Data.dll"
+			AssemblyName="System.Data, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=x86"
+		/>
+		<AssemblyReference
+			RelativePath="System.XML.dll"
+			AssemblyName="System.Xml, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+		/>
+		<AssemblyReference
+			RelativePath="nddsdotnet.dll"
+			AssemblyName="nddsdotnet, Version=1.0.2987.33357, processorArchitecture=${assemblyProcessorArchitecture}"
+		/>
+	</References>
+	<Files>
+		<Filter
+			Name="Source Files"
+			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
+			>
+#foreach($sourceFile in ${sourceFiles})
+			<File
+				RelativePath=".\\${sourceFile}"
+				>
+			</File>
+#end
+#foreach($sourceFile in ${additionalSourceFiles})
+            <File
+                RelativePath=".\\${sourceFile}"
+                >
+            </File>
+#end
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="h;hpp;hxx;hm;inl;inc;xsd"
+			>
+#foreach($headerFile in ${headerFiles})
+			<File
+				RelativePath=".\\${headerFile}"
+				>
+			</File>
+#end
+#foreach($headerFile in ${additionalHeaderFiles})
+            <File
+                RelativePath=".\\${headerFile}"
+                >
+            </File>
+#end
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
+			>
+			<File
+				RelativePath="USER_QOS_PROFILES.xml"
+				>
+			</File>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

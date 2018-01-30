@@ -1,0 +1,93 @@
+#!/bin/sh
+#########################################################################
+# (c) 2005-2014 Copyright, Real-Time Innovations. All rights reserved.  #
+# No duplications, whole or partial, manual or electronic, may be made  #
+# without express written permission.  Any such copies, or              #
+# revisions thereof, must display this notice unaltered.                #
+# This code contains trade secrets of Real-Time Innovations, Inc.       #
+#########################################################################
+
+filename=$0
+script_dir=`cd "\`dirname "$filename"\`"; pwd`
+application_name=rtiddsgen
+script_version=5.2.3
+needs_shared_libraries="false"
+needs_platform_name="false"
+
+if [ -f "$script_dir/../resource/scripts/rticommon.sh" ]
+then
+    rticommon_script_dir=$script_dir/../resource/scripts
+    . "$rticommon_script_dir/rticommon.sh"
+    ant_jar=$app_lib_java_dir/ant-contrib-1.0b3.jar
+    antlr_jar=$app_lib_java_dir/antlr-3.4-complete.jar
+    log4j_jar=$app_lib_java_dir/log4j-1.2.16.jar
+    velocity_jar=$app_lib_java_dir/velocity-1.7-dep.jar
+    rtiddsgen2_jar=$app_lib_java_dir/rtiddsgen2.jar
+    rtiddsgen1_jar=$app_lib_java_dir/rtiddsgen.jar
+    rtiddsgen1_resource_dir=$app_support_dir
+else
+    rticommon_script_dir=$script_dir/../../ndds.4.1/resource/scripts
+    . "$rticommon_script_dir/rticommon.sh"
+    app_support_dir=$script_dir/../resource
+    ant_jar=$script_dir/../class/ant-contrib-1.0b3.jar
+    antlr_jar=$script_dir/../class/antlr-3.4-complete.jar
+    log4j_jar=$script_dir/../class/log4j-1.2.16.jar
+    velocity_jar=$script_dir/../class/velocity-1.7-dep.jar
+    rtiddsgen2_jar=$script_dir/../class/rtiddsgen2.jar
+    rtiddsgen1_jar=$script_dir/../../nddsgen.1.0/class/rtiddsgen.jar
+    rtiddsgen1_resource_dir=$script_dir/../../nddsgen.1.0/resource
+fi
+
+# Decide whether to run rtiddsgen1 based on unsupported arguments
+rtiddsgen1_arguments="-metp -corba -orb -typeSequenceSuffix -dataReaderSuffix -dataWriterSuffix"
+
+for arg in "$@"
+do
+    for rtiddsgen1_arg in $rtiddsgen1_arguments
+    do
+	if [ "x$rtiddsgen1_arg" = "x$arg" ]
+	then
+	    run_rtiddsgen1=true
+	    break
+	fi
+    done
+done
+
+if [ "x$JREHOME" = "x" ] || [ ! -x "$JREHOME" ]
+then
+    echo "Warning: OS $os may not be supported. Be sure JREHOME is set."
+    echo $JREHOME
+    exit 1
+fi
+
+if [ "x$run_rtiddsgen1" = "x" ]
+then
+    # Run rtiddsgen2
+    java_classpath=$ant_jar:$antlr_jar:$log4j_jar:$velocity_jar:$rtiddsgen2_jar
+
+    "$JREHOME/bin/java" \
+	-classpath "$java_classpath" \
+	-DNDDS_RESOURCE_DIR="$app_support_dir/$application_name" \
+	-DNDDSHOME="$NDDSHOME" \
+	-jar "$rtiddsgen2_jar" \
+	"$@"
+	
+else
+    # Run rtiddsgen1
+    if [ "x$XALANHOME" != "x" ] && [ -x "$XALANHOME" ]
+    then
+	java_endorsed_dirs="-Djava.endorsed.dirs=$XALANHOME"
+    fi
+   
+    if [ ! -f "$rtiddsgen1_jar" ]
+    then
+        echo "Corba support requires a different version of rtiddsgen. Please contact" 
+        echo "support@rti.com for more information."
+        exit 1
+    fi
+    "$JREHOME/bin/java" \
+	-DNDDS_RESOURCE_DIR=\"$rtiddsgen1_resource_dir\" \
+	-DNDDSHOME="$NDDSHOME" $java_endorsed_dirs \
+	-jar "$rtiddsgen1_jar" \
+	"$@"
+fi

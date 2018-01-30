@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!-- 
+ (c) Copyright, Real-Time Innovations, 2015-2016.
+ All rights reserved.
+ No duplications, whole or partial, manual or electronic, may be made
+ without express written permission.  Any such copies, or
+ revisions thereof, must display this notice unaltered.
+ This code contains trade secrets of Real-Time Innovations, Inc.
+-->
+
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.3/rti_dds_profiles.xsd">
+    <!-- Qos Library -->
+    <qos_library name="RtiddsspyTransports">
+        <qos_profile name="UDPv4_AND_SHARED_MEMORY">
+            <participant_qos>
+                <transport_builtin>
+                    <mask>UDPv4 | SHMEM</mask>
+                </transport_builtin>
+            </participant_qos>
+        </qos_profile>
+        <qos_profile name="UDPv6_AND_SHARED_MEMORY">
+            <participant_qos>
+                <transport_builtin>
+                    <mask>UDPv6 | SHMEM</mask>
+                </transport_builtin>
+            </participant_qos>
+        </qos_profile>
+        <qos_profile name="UDPv4_AND_UDPv6_AND_SHARED_MEMORY">
+            <participant_qos>
+                <transport_builtin>
+                    <mask>UDPv4 | UDPv6 | SHMEM</mask>
+                </transport_builtin>
+            </participant_qos>
+        </qos_profile>        
+        <qos_profile name="SHARED_MEMORY">
+            <participant_qos>
+                <transport_builtin>
+                    <mask>SHMEM</mask>
+                </transport_builtin>
+            </participant_qos>
+        </qos_profile>
+        <qos_profile name="UDPv4">
+            <participant_qos>
+                <transport_builtin>
+                    <mask>UDPv4</mask>
+                </transport_builtin>
+            </participant_qos>
+        </qos_profile>
+        <qos_profile name="UDPv6">
+            <participant_qos>
+                <transport_builtin>
+                    <mask>UDPv6</mask>
+                </transport_builtin>
+            </participant_qos>
+        </qos_profile>        
+        <qos_profile name="ASYMMETRIC_TCP_CLOUD_CLIENT">
+            <participant_qos>
+                <transport_builtin>
+                <mask>MASK_NONE</mask>
+                </transport_builtin>
+                <discovery>
+                    <initial_peers>
+                        <!-- -->
+                        <!-- CHANGE THIS TO THE MACHINE YOU WANT TO CONTACT -->
+                        <!-- NOTE: Both the IP address and port MUST MATCH -->
+                        <!-- the public address used by the other -->
+                        <!-- configuration -->
+                        <!-- -->
+                        <element>tcpv4_wan://pubsub.rti.com:7400</element>
+                    </initial_peers>
+                </discovery>
+                <property>
+                    <value>
+                        <element>
+                            <name>dds.transport.load_plugins</name>
+                            <value>dds.transport.TCPv4.tcp1</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.TCPv4.tcp1.library</name>
+                            <value>nddstransporttcp</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.TCPv4.tcp1.create_function</name>
+                            <value>NDDS_Transport_TCPv4_create</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.TCPv4.tcp1.parent.classid</name>
+                            <value>NDDS_TRANSPORT_CLASSID_TCPV4_WAN</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.TCPv4.tcp1.public_address</name>
+                            <value>0.0.0.0</value>
+                        </element>
+                        <element>
+                            <name>dds.transport.TCPv4.tcp1.server_bind_port</name>
+                            <value>0</value>
+                        </element>
+                    </value>
+                </property>
+            </participant_qos>
+        </qos_profile>
+    </qos_library>
+</dds>

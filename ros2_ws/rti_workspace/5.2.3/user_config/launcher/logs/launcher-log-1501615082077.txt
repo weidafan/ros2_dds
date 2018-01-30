@@ -1,0 +1,3 @@
+[15:18:02] RTI Connext Launcher 5.2.3 started
+[15:18:26] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/LED_dds/led.idl -ppDisable -language Java -create typefiles -create examplefiles -create makefiles -platform x64Linux3gcc4.8.2)
+[15:51:14] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/LED_dds/led.idl -ppDisable -language Java -create typefiles -create examplefiles -create makefiles -platform armv6vfphLinux3.xgcc4.7.2)

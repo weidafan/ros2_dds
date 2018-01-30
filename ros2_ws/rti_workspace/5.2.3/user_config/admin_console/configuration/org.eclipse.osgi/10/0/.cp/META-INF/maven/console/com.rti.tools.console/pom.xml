@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ $Id$
+ (c) Copyright, Real-Time Innovations, 2012-2016.
+ All rights reserved.
+ No duplications, whole or partial, manual or electronic, may be made
+ without express written permission.  Any such copies, or
+ revisions thereof, must display this notice unaltered.
+ This code contains trade secrets of Real-Time Innovations, Inc.
+ 
+ modification history:
+ - - - - - - - - - - -
+--><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>top-level</artifactId>
+        <groupId>console</groupId>
+        <version>5.2.3.0</version>
+    </parent>
+    <groupId>console</groupId>
+    <artifactId>com.rti.tools.console</artifactId>
+    <packaging>eclipse-plugin</packaging>
+</project>

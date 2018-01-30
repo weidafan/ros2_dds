@@ -1,0 +1,12 @@
+/*Below style is to fix this issue:
+http://stackoverflow.com/questions/22415602/eclipse-sdk4-ugly-perspective-bar-border
+*/
+#PerspectiveSwitcher {
+  eclipse-perspective-keyline-color: #ededed;
+}
+
+.DragFeedback {
+	background-color: COLOR-WIDGET-NORMAL-SHADOW;
+}
+
+

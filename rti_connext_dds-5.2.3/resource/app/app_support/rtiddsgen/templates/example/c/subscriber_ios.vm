@@ -1,0 +1,221 @@
+##/* $Id$
+##
+##   (c) Copyright, Real-Time Innovations, Inc. 2015.  All rights reserved.
+##   No duplications, whole or partial, manual or electronic, may be made
+##   without prior written permission.  Any such copies, or
+##   revisions thereof, must display this notice unaltered.
+##   This code contains trade secrets of Real-Time Innovations, Inc.
+
+##modification history:
+##---------------------
+##2.2.3,23sep15,djs CODEGENII-481 Added iOS
+##========================================================================*/*#
+void ${constructMap.nativeFQName}Listener_on_requested_deadline_missed(
+    void* listener_data,
+    DDS_DataReader* reader,
+    const struct DDS_RequestedDeadlineMissedStatus *status)
+{
+}
+
+void ${constructMap.nativeFQName}Listener_on_requested_incompatible_qos(
+    void* listener_data,
+    DDS_DataReader* reader,
+    const struct DDS_RequestedIncompatibleQosStatus *status)
+{
+}
+
+void ${constructMap.nativeFQName}Listener_on_sample_rejected(
+    void* listener_data,
+    DDS_DataReader* reader,
+    const struct DDS_SampleRejectedStatus *status)
+{
+}
+
+void ${constructMap.nativeFQName}Listener_on_liveliness_changed(
+    void* listener_data,
+    DDS_DataReader* reader,
+    const struct DDS_LivelinessChangedStatus *status)
+{
+}
+
+void ${constructMap.nativeFQName}Listener_on_sample_lost(
+    void* listener_data,
+    DDS_DataReader* reader,
+    const struct DDS_SampleLostStatus *status)
+{
+}
+
+void ${constructMap.nativeFQName}Listener_on_subscription_matched(
+    void* listener_data,
+    DDS_DataReader* reader,
+    const struct DDS_SubscriptionMatchedStatus *status)
+{
+}
+
+void ${constructMap.nativeFQName}Listener_on_data_available(
+    void* listener_data,
+    DDS_DataReader* reader)
+{
+    ${constructMap.nativeFQName}DataReader *${constructMap.nativeFQName}_reader = NULL;
+    struct ${constructMap.nativeFQName}Seq data_seq = DDS_SEQUENCE_INITIALIZER;
+    struct DDS_SampleInfoSeq info_seq = DDS_SEQUENCE_INITIALIZER;
+    DDS_ReturnCode_t retcode;
+    int i;
+
+    ${constructMap.nativeFQName}_reader = ${constructMap.nativeFQName}DataReader_narrow(reader);
+    if (${constructMap.nativeFQName}_reader == NULL) {
+        printf("DataReader narrow error\n");
+        return;
+    }
+
+    retcode = ${constructMap.nativeFQName}DataReader_take(
+        ${constructMap.nativeFQName}_reader,
+        &data_seq, &info_seq, DDS_LENGTH_UNLIMITED,
+        DDS_ANY_SAMPLE_STATE, DDS_ANY_VIEW_STATE, DDS_ANY_INSTANCE_STATE);
+    if (retcode == DDS_RETCODE_NO_DATA) {
+        return;
+    } else if (retcode != DDS_RETCODE_OK) {
+        printf("take error %d\n", retcode);
+        return;
+    }
+
+    for (i = 0; i < ${constructMap.nativeFQName}Seq_get_length(&data_seq); ++i) {
+        if (DDS_SampleInfoSeq_get_reference(&info_seq, i)->valid_data) {
+            printf("Received data\n");
+            ${constructMap.nativeFQName}TypeSupport_print_data(
+                ${constructMap.nativeFQName}Seq_get_reference(&data_seq, i));
+        }
+    }
+
+    retcode = ${constructMap.nativeFQName}DataReader_return_loan(
+        ${constructMap.nativeFQName}_reader,
+        &data_seq, &info_seq);
+    if (retcode != DDS_RETCODE_OK) {
+        printf("return loan error %d\n", retcode);
+    }
+}
+
+/* Delete all entities */
+static int subscriber_shutdown(
+    DDS_DomainParticipant *participant)
+{
+    DDS_ReturnCode_t retcode;
+    int status = 0;
+
+    if (participant != NULL) {
+        retcode = DDS_DomainParticipant_delete_contained_entities(participant);
+        if (retcode != DDS_RETCODE_OK) {
+            printf("delete_contained_entities error %d\n", retcode);
+            status = -1;
+        }
+
+        retcode = DDS_DomainParticipantFactory_delete_participant(
+            DDS_TheParticipantFactory, participant);
+        if (retcode != DDS_RETCODE_OK) {
+            printf("delete_participant error %d\n", retcode);
+            status = -1;
+        }
+    }
+
+    /* RTI Data Distribution Service provides the finalize_instance() method on
+    domain participant factory for users who want to release memory used
+    by the participant factory. Uncomment the following block of code for
+    clean destruction of the singleton. */
+    /*
+    retcode = DDS_DomainParticipantFactory_finalize_instance();
+    if (retcode != DDS_RETCODE_OK) {
+        printf("finalize_instance error %d\n", retcode);
+        status = -1;
+    }
+    */
+
+    return status;
+}
+
+extern int subscriber_main(int domainId, int sample_count)
+{
+    DDS_DomainParticipant *participant = NULL;
+    DDS_Subscriber *subscriber = NULL;
+    DDS_Topic *topic = NULL;
+    struct DDS_DataReaderListener reader_listener =
+    DDS_DataReaderListener_INITIALIZER;
+    DDS_DataReader *reader = NULL;
+    DDS_ReturnCode_t retcode;
+    const char *type_name = NULL;
+    int count = 0;
+    struct DDS_Duration_t poll_period = {4,0};
+
+    /* To customize participant QoS, use 
+    the configuration file USER_QOS_PROFILES.xml */
+    participant = DDS_DomainParticipantFactory_create_participant(
+        DDS_TheParticipantFactory, domainId, &DDS_PARTICIPANT_QOS_DEFAULT,
+        NULL /* listener */, DDS_STATUS_MASK_NONE);
+    if (participant == NULL) {
+        printf("create_participant error\n");
+        subscriber_shutdown(participant);
+        return -1;
+    }
+
+    /* To customize subscriber QoS, use 
+    the configuration file USER_QOS_PROFILES.xml */
+    subscriber = DDS_DomainParticipant_create_subscriber(
+        participant, &DDS_SUBSCRIBER_QOS_DEFAULT, NULL /* listener */,
+        DDS_STATUS_MASK_NONE);
+    if (subscriber == NULL) {
+        printf("create_subscriber error\n");
+        subscriber_shutdown(participant);
+        return -1;
+    }
+
+    /* Register the type before creating the topic */
+    type_name = ${constructMap.nativeFQName}TypeSupport_get_type_name();
+    retcode = ${constructMap.nativeFQName}TypeSupport_register_type(participant, type_name);
+    if (retcode != DDS_RETCODE_OK) {
+        printf("register_type error %d\n", retcode);
+        subscriber_shutdown(participant);
+        return -1;
+    }
+
+    /* To customize topic QoS, use 
+    the configuration file USER_QOS_PROFILES.xml */
+    topic = DDS_DomainParticipant_create_topic(
+        participant, "Example ${constructMap.nativeFQName}",
+        type_name, &DDS_TOPIC_QOS_DEFAULT, NULL /* listener */,
+        DDS_STATUS_MASK_NONE);
+    if (topic == NULL) {
+        printf("create_topic error\n");
+        subscriber_shutdown(participant);
+        return -1;
+    }
+
+    /* Set up a data reader listener */
+    reader_listener.on_requested_deadline_missed  =
+    ${constructMap.nativeFQName}Listener_on_requested_deadline_missed;
+    reader_listener.on_requested_incompatible_qos =
+    ${constructMap.nativeFQName}Listener_on_requested_incompatible_qos;
+    reader_listener.on_sample_rejected =
+    ${constructMap.nativeFQName}Listener_on_sample_rejected;
+    reader_listener.on_liveliness_changed =
+    ${constructMap.nativeFQName}Listener_on_liveliness_changed;
+    reader_listener.on_sample_lost =
+    ${constructMap.nativeFQName}Listener_on_sample_lost;
+    reader_listener.on_subscription_matched =
+    ${constructMap.nativeFQName}Listener_on_subscription_matched;
+    reader_listener.on_data_available =
+    ${constructMap.nativeFQName}Listener_on_data_available;
+
+    /* To customize data reader QoS, use 
+    the configuration file USER_QOS_PROFILES.xml */
+    reader = DDS_Subscriber_create_datareader(
+        subscriber, DDS_Topic_as_topicdescription(topic),
+        &DDS_DATAREADER_QOS_DEFAULT, &reader_listener, DDS_STATUS_MASK_ALL);
+    if (reader == NULL) {
+        printf("create_datareader error\n");
+        subscriber_shutdown(participant);
+        return -1;
+    }
+
+    /* let the GCD infrastructure handle keeping alive */
+    return DDS_RETCODE_OK;
+}
+

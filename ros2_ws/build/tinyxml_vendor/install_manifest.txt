@@ -1,0 +1,3 @@
+/home/aust/ros2_ws/install/share/tinyxml_vendor/cmake/Modules/FindTinyXML.cmake
+/home/aust/ros2_ws/install/share/tinyxml_vendor/cmake/tinyxml_vendorConfig.cmake
+/home/aust/ros2_ws/install/share/tinyxml_vendor/cmake/tinyxml_vendorConfig-version.cmake

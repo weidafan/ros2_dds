@@ -1,0 +1,652 @@
+##/* $Id$
+##
+##   (c) Copyright, Real-Time Innovations, Inc. 2001.  All rights reserved.
+##   No duplications, whole or partial, manual or electronic, may be made
+##   without prior written permission.  Any such copies, or
+##   revisions thereof, must display this notice unaltered.
+##   This code contains trade secrets of Real-Time Innovations, Inc.
+##modification history:
+##---------------------
+##2.2,08apr15,ajm EDDY-433: Intializing long double 
+##2.2,10mar15,ajm CODEGENII-418 Fixing union's NDDSUSERDllExport
+##2.2,03sep14,ajm Fixes from CR-402
+##2.2,01sep14,ajm CODEGENII-219 Support C++11 features
+##2.2,28aug14,ajm CODEGENII-179 Support enums with duplicate values
+##2.2,12aug14,ajm CODEGENII-232 C++ PSM Swap function
+##2.2,22jul14,ajm CODEGENII-361 Fixing wrong initialization for string arrays
+##2.2,22jul14,ajm CODEGENII-238 Fixing structs with members with same name that
+## its baseStruct
+##2.2,21jul14,ajm CODEGENII-304 Removing references to nativeTypeFQName
+##2.2,24jun14,ajm Fixing problem in generated code  when using copy directives
+##2.2,24jun14,ajm CODEGENII-174 Pointers C++PSM Code generation
+##2.2,28may14,ajm CODEGENII-166 C++PSM Constructor with params with inheritance
+##2.2,27may14,ajm CODEGENII-225 Use of StreamFlagSaver
+##2.2,21may14,ajm CODEGENII-173 Support for alias in C++PSM
+##2.2,08may14,ajm CODEGENII-171 Adding support for sequence C++PSM
+##2.2,05may14,ajm Fixes from CR-264 
+##2.2,30apr14,ajm CODEGENII-170 and CODEGENII-186 adding arrays and long dobule support for C++PSM
+##2.2,11apr4,ajm CODEGENII-172 Fixes from CR-247
+##2.2,3abr14,ajm CODEGENII-172 Support for unions
+##2.2,20mar14,ajm CODEGENII-172 union 
+##2.2,10mar14,ajm CODEGENII-165 Enums
+##2.2,20feb14,ajm CODEGENII-165 Enums  CODEGENII-169:String CODEGENII-173:Alias 
+##2.2,24feb14,ajm CODEGENII-173: typedef of primitive types 
+##2.2,20feb14,ajm CODEGENII-167: Copy&Include, CODEGENII-168:Constant and CR-226 
+##2.2,19feb14,ajm CODEGENII-166 Modules & inheritance
+##2.2,17feb14,ajm CODEGENII-164 Operators override
+##2.0,03feb14,ajm CODEGENII-166 Modules C++PSM code generation
+##2.2,28jan13,ajm created 
+##-----------------------------------------------------------------
+##               
+##             Macros for TypeBody and TypeHeader
+## 
+##------------------------------------------------------------------
+##------------------------------------------------------------------
+
+
+#macro(declare  $node)
+#*--*##if($node.constructKind.equals("union"))
+#*--*##declareMember ($node.unionDiscriminatorMap)
+struct NDDSUSERDllExport ${node.unionStructName} {
+#*--*##end
+#*--*##foreach($member in $node.memberFieldMapList)
+#*----*##if($member.directive)
+#*----*##copyAllDirectives($member)
+#*----*##else
+#*----*##declareMember($member)
+#*----*##end
+#*--*##end
+#*----*##if($node.constructKind.equals("union"))
+    ${node.unionStructName}();
+    ${node.unionStructName}(#paramConstructorHeader($node));
+};
+${node.unionStructName} $node.unionMemberCName;
+#*----*##end
+#end
+
+#macro(declareMember $member)
+#if($member.pointerType && !$member.dimensionList)
+$member.pointerType ${member.cName};
+#else
+$member.completeSpecTypeName ${member.cName};
+#end
+#end
+
+#macro(declareAlias $member)
+#set($aliasTag ="_AliasTag_t")
+#if($member.pointerType && !$member.dimensionList)
+typedef $member.pointerType $node.nativeFQNameInModule;
+#else
+typedef $member.completeSpecTypeName $node.nativeFQNameInModule;
+#end
+#end
+
+#macro (declareEnum $node)
+struct ${node.nativeFQNameInModule}_def {
+enum type {
+#foreach($member in $node.memberFieldMapList)
+    $member.name#if($member.autoOrdinal=="false") = $member.ordinal#end#*
+*----*##commaIfNeeded($velocityCount $node.memberFieldMapList)
+     
+#end
+};
+static type get_default(){ return $node.firstMember.name;}
+};
+
+typedef dds::core::safe_enum<${node.nativeFQNameInModule}_def> ${node.nativeFQNameInModule};
+#end
+
+
+#macro (getterAndSettersHeader $node)
+#*----*##if($node.constructKind.equals("union"))
+#*----*##getMemberHeader ($node.unionDiscriminatorMap $node)
+#*----*##assignMemberHeader($node.unionDiscriminatorMap)
+#*----*##end
+#*--*##foreach($member in $node.memberFieldMapList)
+
+#*----*##if($member.directive)
+#*----*##copyAllDirectives($member)
+#*----*##else
+#*----*##getMemberHeader ($member $node)
+#*----*##assignMemberHeader($member)
+#*----*##end
+#*--*##end
+#end
+
+
+#macro (getMemberHeader $member $node)
+#*--*##if($member.complexType)
+$member.completeSpecTypeName& ${member.name}() #noExcept($node); 
+const $member.completeSpecTypeName& ${member.name}() const #noExcept($node);
+#*--*##else
+$member.completeSpecTypeName ${member.name}() const #noExcept($node);
+#*--*##end
+#end
+
+## set is reserver word so we need to call this differently
+#macro (assignMemberHeader $member)
+#*--*##if($member.complexType)
+void ${member.name}(const $member.completeSpecTypeName& value);
+#*--*##else
+void ${member.name}($member.completeSpecTypeName value);
+#*--*##end
+#end
+
+
+#macro (getterAndSettersBody $node)
+#*--*##if($node.constructKind.equals("union"))
+#*----*##getMemberBody ($node.unionDiscriminatorMap)
+
+#*----*##assignMemberBody($node.unionDiscriminatorMap $node)
+
+#*--*##end
+#*--*##foreach($member in $node.memberFieldMapList)
+#*----*##if($member.directive)
+#*----*##copyDirectiveNoDeclaration($member)
+#*----*##else
+#*----*##getMemberBody( $member $node)
+
+#*----*##assignMemberBody($member $node)
+
+#*----*##end
+#*--*##end
+#end
+
+#macro (getMemberBody $member $node)
+#*--*##if($member.complexType)
+${member.completeSpecTypeName}& ${member.FQName}() #noExcept($node) {
+#checkBadParamIfUnion ($member $node)
+#returnMember ($member $node)
+}
+
+const ${member.completeSpecTypeName}& ${member.FQName}() const #noExcept($node) {
+#checkBadParamIfUnion ($member $node)
+#returnMember ($member $node)
+}
+#*--*##else
+${member.completeSpecTypeName} ${member.FQName}() const #noExcept($node){
+#checkBadParamIfUnion ($member $node)
+#returnMember ($member $node)
+}
+#*--*##end
+#end
+
+
+#macro (returnMember $member $node)
+#if($member.isPointer && !$member.dimensionList)
+#*--*##if($node.constructKind.equals("union") && !$member.name.equals("_d"))
+return ${node.unionMemberCName}.${member.cName}.get();
+#*--*##else
+return ${member.cName}.get();
+#*--*##end
+#else
+#*--*##if($node.constructKind.equals("union") && !$member.name.equals("_d"))
+return ${node.unionMemberCName}.${member.cName};
+#*--*##else
+return ${member.cName};
+#*--*##end
+#*--*##end
+#end
+
+
+#macro (checkBadParamIfUnion $member $node)
+#*--*##if($node.constructKind.equals("union") && !$member.name.equals("_d"))#*
+----------This for the members that are not in the default case----------------
+----*##if($member.index!=$node.defaultIndex +1)#*
+--*#if (#foreach($element in $member.labelList) _d() != $element#*
+      *##if($member.labelList.size()>$velocityCount) && 
+         #end#end) {
+#*----------This for the members that are with the default case----------------           
+------------*##else#*
+--*#if (!(#foreach($element in $node.unionDiscriminatorMap.labelList)#*
+       *##if(!$element.contains("default") && !$member.labelList.contains($element))_d() != $element#* 
+       *##if($velocityCount <$node.unionDiscriminatorMap.labelList.size() - $member.labelList.size()) &&
+          #end#end#end)) {
+#end
+            throw dds::core::PreconditionNotMetError(
+                "$member.name not selected by the discriminator" );
+        }
+#end
+#end
+
+
+## set is reserver word so we need to call this differently
+#macro (assignMemberBody $member $node)
+#*--*##if($member.complexType)
+void ${member.FQName}(const $member.completeSpecTypeName& value) {
+#*--*##else
+void ${member.FQName}($member.completeSpecTypeName value) {
+#*--*##end
+#*----*##assignMember ($member $node)
+#*--*##if($node.constructKind.equals("union") && !$member.name.equals("_d"))
+#*--*##if(!$member.labelList.get(0).equals("default"))
+     m_d_= $member.labelList.get(0);
+#*--*##else
+#*----*##checkBadParamIfUnion ($member $node)
+#*----*##assignMember ($member $node)
+#*--*##end
+#*--*##end    
+}
+#end
+
+
+#macro (assignMember $member $node)
+#*--*##if($node.constructKind.equals("union") && !$member.name.equals("_d"))
+${node.unionMemberCName}.${member.cName} = value;
+#*--*##else
+#*--*#${member.cName} = value;
+#*--*##end
+#end
+
+#macro (operatorHeader $node)
+bool operator == (const ${node.name}& other_) const;
+bool operator != (const ${node.name}& other_) const;
+#end
+
+#macro (operatorBody $node)
+#equalsOperatorBody($node)
+#notEqualsOperatorBody($node)
+#end
+
+#macro (equalsOperatorBody $node)
+bool ${node.name}::operator == (const ${node.name}& other_) const {
+#*--*##if($node.baseTypeFQName)
+if (!${node.baseTypeFQName}::operator == (other_)){
+    return false;
+}
+#end
+#*--*##if($node.constructKind.equals("union"))
+#*--*##if($node.unionDiscriminatorMap.isEnum)
+if (_d().underlying() != other_._d().underlying()){
+    return false;
+}
+switch(_d().underlying()){
+#else
+if (_d() != other_._d()){
+    return false;
+}
+switch(_d()){
+#*--*##end
+#*--*##end
+#*--*##foreach($member in $node.memberFieldMapList)
+#*----*##if($member.directive)
+#*----*##copyDirectiveNoDeclaration($member)
+#*----*##else
+#*------*##if($node.constructKind=="union")
+#*------*##initCases($member)
+#*------*##end
+#*----*##equalsOperartorMemberBody($node $member)
+#*----*##if($node.constructKind=="union")
+#*----*#        } #if($member.labelList.get(0)!="default")break #end;
+#*----*##end
+#*----*##end
+#*--*##end
+#*--*##if($node.constructKind=="union")
+}
+#*--*##end
+return true;
+}
+#end
+
+#macro (equalsOperartorMemberBody $node $member)
+#*--*##if($node.constructKind.equals("union") && !$member.name.equals("_d"))
+if ( ${node.unionMemberCName}.${member.cName} != other_.${node.unionMemberCName}.${member.cName}) {
+     return false;
+}
+#else
+if (${member.cName} != other_.${member.cName}) {
+     return false;
+}
+#end     
+#end
+
+#macro (notEqualsOperatorBody $node)
+bool ${node.name}::operator != (const ${node.name}& other_) const {
+	    return !this->operator ==(other_);
+}
+#end
+
+#macro (swap $node)
+#*--*##if($node.constructKind.equals("union"))
+#swapUnion($node)
+#*--*##else
+#*--*##if($node.baseTypeFQName)
+${node.baseTypeFQName}::swap(other_);
+#*----*##end
+#swapMembers()
+#*--*##end
+#end
+
+#macro (swapMembers $node)
+#*--*##foreach($member in $node.memberFieldMapList)
+#*----*##if($member.directive)
+#*----*##copyDirectiveNoDeclaration($member)
+#*----*##else
+#*--------*#swap(${member.cName}, other_.${member.cName});
+#*----*##end
+#*--*##end
+#end
+
+## This one is not passing the move_ctor_and_assignemet test
+#macro (swapUnion $node)
+swap (m_d_,other_.m_d_);
+#*----*##if($node.unionDiscriminatorMap.isEnum)
+switch(_d().underlying()){
+#*----*##else
+switch(_d()){
+#*----*##end
+#swapUnionMembers ($node)
+}
+##We need to check that the discriminator are different
+## in order not to undo our previous swap
+#*----*##if($node.unionDiscriminatorMap.isEnum)
+if (_d().underlying() != other_._d().underlying()){
+#*----*##else
+if (_d() != other_._d()){
+#*----*##end
+#*----*##if($node.unionDiscriminatorMap.isEnum)
+switch(other_._d().underlying()){
+#*----*##else
+switch(other_._d()){
+#*----*##end
+#swapUnionMembers ($node)
+}
+}
+#end
+
+#macro (swapUnionMembers $node)
+#*--*##foreach($member in $node.memberFieldMapList)
+#*----*##if($member.directive)
+#*----*##copyDirectiveNoDeclaration($member)
+#*----*##else
+#*------*##initCases($member)
+#*--------*#swap(${node.unionMemberCName}.${member.cName}, other_.${node.unionMemberCName}.${member.cName});
+#*----*##if($node.constructKind.equals("union"))
+#*----*#        } #if($member.labelList.get(0)!="default")break#end;
+#*----*##end
+#*----*##end
+#*--*##end
+
+#end
+
+#macro (outOperatorBody $node)
+std::ostream& operator << (std::ostream& o,const $node.name& sample){
+rti::util::StreamFlagSaver flag_saver (o);
+o <<"[";
+#*--*##if($node.baseTypeFQName) ## We print the base type data
+o << static_cast<const $node.baseTypeFQName &>(sample);
+#*--*##end
+#*--*##if($node.constructKind.equals("union"))
+#outOperatorBodyMember($node.unionDiscriminatorMap) <<", ";
+#*--*##if($node.unionDiscriminatorMap.isEnum)
+switch(sample._d().underlying()){
+#else
+switch(sample._d()){
+#*--*##end
+#*--*##end
+#*--*##foreach($member in $node.memberFieldMapList)
+#*----*##if($member.directive)
+#*----*##copyDirectiveNoDeclaration($member)
+#*----*##else
+#*------*##if($node.constructKind=="union")
+#*------*##initCases($member)
+#*------*##end
+#outOperatorBodyMember($member)#*
+*##if ($velocityCount <$node.memberCount)<<", ";
+#else ;#end
+#*----*##if($node.constructKind=="union")
+#*----*#        } #if($member.labelList.get(0)!="default")break #end;
+#*----*##end
+#*----*##end
+#*--*##end
+
+#*--*##if($node.constructKind=="union")
+}
+#*--*##end
+o <<"]";
+return o;
+}
+#end
+
+#macro(outOperatorBodyMember $member)
+##if($member.isPointer && !$member.dimensionList)
+##rti::util::print_ptr(o, sample.${member.name}());
+#if($member.complexType)
+#*----*#o << "${member.name}: " << sample.${member.name}()#* 
+----*##elseif(($member.specTypeName.equals("float")) 
+              ||($member.specTypeName.equals("double")  ))
+#*----*#o << "${member.name}: " << std::fixed << std::setprecision(6) <<sample.${member.name}()#*  
+----*##elseif(($member.specTypeName.equals("uint8_t"))
+               ||($member.specTypeName.equals("DDS_Wchar")))
+#*----*#o << "${member.name}: <" << std::hex<<(int)sample.${member.name}() #* 
+----*##elseif($member.specTypeName.equals("char"))
+#*----*#o << "${member.name}: '" << sample.${member.name}()#* 
+----*##elseif($member.specTypeName.equals("boolean"))
+#*----*#o <<"${member.name}: " << std::boolalpha << sample.${member.name}() #* 
+----*##else
+#*----*#o << "${member.name}: " << sample.${member.name}()#* 
+----*##end
+#end
+
+#macro (outOperatorBodyEnum $node)
+std::ostream& operator << (std::ostream& o,const ${node.name}& sample){
+rti::util::StreamFlagSaver flag_saver (o);
+switch(sample.underlying()){
+#*--*##foreach($member in $node.memberFieldMapList)
+#*----*##if($member.directive)
+#*----*##copyDirectiveNoDeclaration($member)
+#*----*##elseif(!$member.duplicated)
+case $member.nativeFQNameInModule:
+#*----*#o << "$member.nativeFQNameInModule" << " ";
+break;
+#*----*##end
+#*--*##end
+}
+return o;
+}
+#end
+
+
+#macro (initialize $node)
+#*--*##foreach($member in $node.memberFieldMapList)
+#*----*##if(!$member.directive)
+#*------*##if(!$member.isOptional)
+#*--------*##if((!$member.complexType)
+              || (($member.isEnum || $member.nativeTypeFQName.equals("rti::core::LongDouble")) 
+                   && !$member.dimensionList && !$member.seqSize))
+#*----------*##if(!$firstInitialized):#set($firstInitialized="true")#else,#end
+
+#*---------*##if($member.isPointer && !$member.dimensionList)${member.cName} (NULL)#*
+-----------*##elseif($member.strSize)${member.cName} (${member.strSize})#*
+-----------*##elseif($member.isEnum)${member.cName}($member.nativeTypeFQName::get_default())#*---
+---------**##else ${member.cName} (${member.initialValue})#end #*
+--------*##end
+#*----*##end
+#*--*##end
+#*--*##end
+#set($firstInitialized=false)
+#end
+
+#macro (initializeArraysAndTypedef $node)
+#*--*##foreach($member in $node.memberFieldMapList)
+#*----*##if(!$member.directive)
+#*------*##if(!$member.isOptional && !$member.isPointer)
+#*--------*##if($member.dimensionList && !$member.seqSize)
+#*----------*##if($member.needsInitialize)
+rti::core::initialize_native_array<$member.nativeCFQNameInModule>( ${member.cName}, ${member.nativeCFQNameInModule}_initialize);
+#*----------*##elseif ($member.nativeTypeFQName.equals("rti::core::LongDouble"))
+rti::core::fill_array<$member.specTypeName>( ${member.cName}, ${member.specTypeName}(${member.initialValue}));
+#*----------*##elseif ($member.isEnum)
+rti::core::fill_array<$member.specTypeName>( ${member.cName}, $member.nativeTypeFQName::get_default());
+#*----------*##elseif($member.strSize) 
+rti::core::fill_array<$member.specTypeName>( ${member.cName}, ${member.specTypeName}(${member.strSize}));
+#*----------*##elseif(!$member.typeKind.equals("user")) 
+rti::core::fill_array<$member.specTypeName>( ${member.cName}, ${member.initialValue});
+#*----------*##end
+#*--------*##elseif($member.needsInitialize && !$member.isPointer)
+${member.nativeCFQNameInModule}_initialize(reinterpret_cast<${member.nativeCFQNameInModule}*>(&this->$member.cName));
+#*--------*##end
+#*------*##end
+#*----*##end
+#*--*##end
+#end
+
+#macro (initializeUnion $node)
+:${node.unionDiscriminatorMap.cName}(default_discriminator())
+#end
+
+#macro (copy $node)
+#if($node.baseTypeFQName)#set($firstInitialized="true") : 
+${node.baseTypeFQName}(other_)#end
+#*--*##foreach($member in $node.memberFieldMapList)
+#*----*##if((!$member.directive))
+#*------*##if(!$firstInitialized) :#set($firstInitialized="true")#else,#end
+
+#copyMember($member)#*
+-----*##end#*
+--*##end
+#set($firstInitialized=false)
+#end
+
+#macro (copyMember $member)
+${member.cName} (#if(!$node.constructKind.equals("union"))other_.${member.name}() #else other_.${member.cName} #end)#* 
+*##end
+
+
+
+#macro (move $node)
+#if($node.baseTypeFQName)#set($firstInitialized="true") : 
+${node.baseTypeFQName}(std::move(other_))#end
+#*--*##foreach($member in $node.memberFieldMapList)
+#*----*##if((!$member.directive))
+#*------*##if(!$firstInitialized) :#set($firstInitialized="true")#else,
+#end
+${member.cName} (std::move(other_.${member.cName}))
+#*-----*##end#*
+--*##end
+#set($firstInitialized=false)
+#end
+
+#macro (moveUnion $node)
+_d(std::move(other_._d()));
+#*----*##if($node.unionDiscriminatorMap.isEnum)
+switch(_d().underlying()){
+#*----*##else
+switch(_d()){
+#*----*##end
+#moveUnionMembers ($node)
+}
+#end
+
+#macro (moveUnionMembers $node)
+#*--*##foreach($member in $node.memberFieldMapList)
+#*----*##if($member.directive)
+#*----*##copyDirectiveNoDeclaration($member)
+#*----*##else
+#*------*##initCases($member)
+#*--------*#${member.name}( std::move(other_.${member.name}()));
+#*----*##if($node.constructKind.equals("union"))
+#*----*#        } #if($member.labelList.get(0)!="default")break#end;
+#*----*##end
+#*----*##end
+#*--*##end
+
+#end
+
+
+#macro (paramConstructorHeader $node)
+##We need to include the members of the base class
+#*--*##foreach($member in $node.baseTypeMembers)
+#paramConstructorHeaderMember ($member "")
+#*--*##end
+#*--*##foreach($member in $node.memberFieldMapList)
+#*----*##if($node.baseTypeMembersName.contains($member.name))
+#paramConstructorHeaderMember ($member "_2")
+#*----*##else
+#paramConstructorHeaderMember ($member "")
+#*----*##end
+#*--*##end
+#set($firstInitialized=false)
+#end
+
+#macro (paramConstructorHeaderMember $member $suffix)
+#*----*##if(!$member.directive)
+#*------*##if(!$firstInitialized)#set($firstInitialized="true")#else,#end
+
+#*--*##if($member.complexType)
+const ${member.completeSpecTypeName}& ${member.name}$suffix#*
+--------*##else
+${member.completeSpecTypeName} ${member.name}$suffix#*
+--------*##end
+#*----*##end
+#end
+
+#macro (paramConstructorBody $node)
+
+#if($node.baseTypeMembers)
+ :
+${node.baseTypeFQName}(#*
+---*##foreach($member in $node.baseTypeMembers)
+#*----*##if(!$member.directive)
+#*------*##if(!$firstInitialized)#set($firstInitialized="true")#else,#end
+${member.name}#*--*##end
+#*--*##end )#end
+#*--*##foreach($member in $node.memberFieldMapList)
+#*----*##if(!$member.directive)
+#*------*##if(!$firstInitialized):#set($firstInitialized="true")#else,#end
+
+${member.cName}(#if($node.baseTypeMembersName.contains($member.name))${member.name}_2#*
+*##else ${member.name}#end )#end
+#*------*##end
+#set($firstInitialized=false)
+#end
+
+#macro (noExcept $node)
+#if(!$node.constructKind.equals("union"))OMG_NOEXCEPT#end
+#end
+
+#macro (getDynamicType $node)
+#*--*##if($node.constructKind.equals("struct") ||$node.constructKind.equals("valuetype"))
+dds::core::xtypes::StructType#*
+----*##elseif($node.constructKind.equals("enum"))
+dds::core::xtypes::EnumType#*
+----*##elseif($node.constructKind.equals("alias"))
+dds::core::xtypes::AliasType#*
+----*##else
+dds::core::xtypes::UnionType#*
+----*##end
+#end
+
+#macro (defineNDDSUSERDllExport)
+${envMap.POUND_CHAR}if (defined(RTI_WIN32) || defined (RTI_WINCE)) && defined(NDDS_USER_DLL_EXPORT${envMap.dllExportMacroSuffix})
+/* If the code is building on Windows, start exporting symbols.
+*/
+${envMap.POUND_CHAR}undef NDDSUSERDllExport
+${envMap.POUND_CHAR}define NDDSUSERDllExport __declspec(dllexport)
+${envMap.POUND_CHAR}endif
+#end
+
+#macro (undefineNDDSUSERDllExport)
+${envMap.POUND_CHAR}if (defined(RTI_WIN32) || defined (RTI_WINCE)) && defined(NDDS_USER_DLL_EXPORT${envMap.dllExportMacroSuffix})
+/* If the code is building on Windows, stop exporting symbols.
+*/
+${envMap.POUND_CHAR}undef NDDSUSERDllExport
+${envMap.POUND_CHAR}define NDDSUSERDllExport
+${envMap.POUND_CHAR}endif
+#end
+#macro (defineRTIUSERDllExport)
+${envMap.POUND_CHAR}if (defined(RTI_WIN32) || defined (RTI_WINCE)) && defined(NDDS_USER_DLL_EXPORT${envMap.dllExportMacroSuffix})
+/* If the code is building on Windows, start exporting symbols.
+*/
+${envMap.POUND_CHAR}undef RTIUSERDllExport
+${envMap.POUND_CHAR}define RTIUSERDllExport __declspec(dllexport)
+${envMap.POUND_CHAR}endif
+#end
+#macro (undefineRTIUSERDllExport)
+${envMap.POUND_CHAR}if (defined(RTI_WIN32) || defined (RTI_WINCE)) && defined(NDDS_USER_DLL_EXPORT${envMap.dllExportMacroSuffix})
+/* If the code is building on Windows, stop exporting symbols.
+*/
+${envMap.POUND_CHAR}undef RTIUSERDllExport
+${envMap.POUND_CHAR}define RTIUSERDllExport
+${envMap.POUND_CHAR}endif
+#end

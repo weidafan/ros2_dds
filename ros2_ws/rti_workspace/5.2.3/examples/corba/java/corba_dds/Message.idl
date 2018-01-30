@@ -1,0 +1,29 @@
+/* 
+ (c) Copyright, Real-Time Innovations, 10/01/2006 
+ All rights reserved.
+ No duplications, whole or partial, manual or electronic, may be made
+ without express written permission.  Any such copies, or
+ revisions thereof, must display this notice unaltered.
+ This code contains trade secrets of Real-Time Innovations, Inc.
+
+===================================================================== */
+
+const long MSG_MAX_LENGTH = 255;
+
+struct DateTime {
+    long year;
+    long month;
+    long day;
+    long hour;
+    long minute;
+    long second;
+}; //@top-level false
+
+struct Message {
+    DateTime time;
+    string<MSG_MAX_LENGTH> msg;
+};
+
+interface MessageReceiver {
+    void sendMessage(in Message msg);
+};

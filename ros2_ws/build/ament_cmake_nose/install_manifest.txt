@@ -1,0 +1,14 @@
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/ament_cmake_nose
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/ament_cmake_nose
+/home/aust/ros2_ws/install/share/ament_cmake_nose/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/ament_cmake_nose/environment/path.sh
+/home/aust/ros2_ws/install/share/ament_cmake_nose/local_setup.bash
+/home/aust/ros2_ws/install/share/ament_cmake_nose/local_setup.sh
+/home/aust/ros2_ws/install/share/ament_cmake_nose/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/ament_cmake_nose
+/home/aust/ros2_ws/install/share/ament_cmake_nose/cmake/ament_cmake_nose-extras.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_nose/cmake/ament_cmake_noseConfig.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_nose/cmake/ament_cmake_noseConfig-version.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_nose/package.xml
+/home/aust/ros2_ws/install/share/ament_cmake_nose/cmake/ament_add_nose_test.cmake
+/home/aust/ros2_ws/install/share/ament_cmake_nose/cmake/ament_find_nosetests.cmake

@@ -1,0 +1,3 @@
+subscriber_lambda
+subscriber_member_function
+subscriber_old_school

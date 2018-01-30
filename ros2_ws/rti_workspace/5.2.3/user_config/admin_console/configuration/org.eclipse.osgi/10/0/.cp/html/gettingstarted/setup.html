@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Admin Console Setup</title>
+<link rel="stylesheet" href="../acdocs.css" type="text/css" />
+</head>
+
+<body>
+	<div class="centerContent">
+		<div class="docTopBanner" />
+	</div>
+
+	<div class="docPageTitle">
+		<a name="domainSetup">Domain Setup</a>
+	</div>
+
+	<br />
+	<div class="docSectionContent">
+		RTI Admin Console uses Connext to communicate with other RTI services
+		and Connext processes. Admin Console is configured by default to
+		automatically discover and join all active domains in your distributed
+		system. If you wish to manually control the joining and leaving of
+		domains, then open the <a
+			href="../reference/preferences.xhtml#administration">Preferences</a>
+		dialog with this button <img
+			src="../../branding/icons/preferences.png" /> or from the menu,
+		select View -> Preferences.
+	</div>
+
+	<br />
+	<br />
+	<div class="docPageTitle">
+		<a name="serviceSetup"> RTI services Setup </a>
+	</div>
+	<br />
+
+	<div class="docSectionContent">
+		To use RTI Admin Console with other RTI services, administration,
+		distributed logging, and monitoring (if supported) should be enabled.
+		The following snippet shows an example of how to setup RTI Routing
+		Service for use with Admin Console.
+
+		<ul>
+			<li>RTI Routing Service: <pre>	  
+&lt;routing_service name="default"&gt;
+	&lt;annotation&gt;
+		&lt;documentation&gt;Description of your Routing Service&lt;/documentation&gt;
+	&lt;/annotation&gt;		
+<b>
+	<span style="color: blue">&lt;!-- The administration tag below enables Administration and Distributed
+	     Logger on domain 0, and is required when using Admin Console. --&gt;</span>
+	&lt;administration&gt;
+		&lt;domain_id&gt;0&lt;/domain_id&gt;
+		&lt;distributed_logger&gt;
+			&lt;enabled&gt;true&lt;/enabled&gt;
+			&lt;filter_level&gt;WARNING&lt;/filter_level&gt;
+		&lt;/distributed_logger&gt;
+	&lt;/administration&gt;
+	
+	<span style="color: blue">&lt;!-- The monitoring tag enables Monitoring configuration for all the entities in  
+             this routing service, and are required when using Admin Console. --&gt;</span>
+	&lt;monitoring&gt;
+		<span style="color: blue">&lt;!-- The domain id where to publish the monitoring information --&gt;</span>
+		&lt;domain_id&gt;0&lt;/domain_id&gt;
+		<span style="color: blue">&lt;!-- How often to publish it --&gt;</span>
+		&lt;status_publication_period&gt;
+			&lt;sec&gt;5&lt;/sec&gt;
+			&lt;nanosec&gt;0&lt;/nanosec&gt;				
+		&lt;/status_publication_period&gt;
+		<span style="color: blue">&lt;!-- How often to compute statistics --&gt;</span>
+		&lt;statistics_sampling_period&gt;
+			&lt;sec&gt;1&lt;/sec&gt;
+			&lt;nanosec&gt;0&lt;/nanosec&gt;
+		&lt;/statistics_sampling_period&gt;
+		&lt;participant_qos&gt;
+			&lt;participant_name&gt;
+				&lt;name&gt;RoutingService&lt;/name&gt;
+			&lt;/participant_name&gt;
+		&lt;/participant_qos&gt;
+	&lt;/monitoring&gt;
+	</b>
+	
+	    ...
+
+&lt;/routing_service&gt;
+</pre>
+
+			</li>
+
+		</ul>
+		For other services, see the User&apos;s Manual of each service for
+		more details. <br /> <br /> <b>Important Note</b>: For Routing &amp;
+		Replay Service, do not use the &quot;name&quot; tag inside the
+		administration tag. This is a known issue and will be resolved in a
+		future release.
+	</div>
+
+	<br />
+	<br />
+	<div class="docPageTitle">
+		<a name="troubleShoot"> Troubleshooting Admin Console </a>
+	</div>
+	<div class="docSectionContent">
+		In cases where troubleshooting Admin Console is necessary, you can
+		view the logs for Admin Console by selecting the menu <strong>View
+			-&gt; Show Console Log</strong>.
+	</div>
+
+	<div class="docSectionContent">By default, the full log file is
+		in "&lt;My Documents&gt;/rti_workspace/&lt;product
+		version&gt;/user_config/admin_console /admin_console.log" on Windows
+		systems, and in "~/rti_workspace/&lt;product
+		version&gt;/user_config/admin_console/admin_console.log" on Linux
+		&amp; Mac systems. For other known issues with Admin Console, see the
+		Release Notes document.</div>
+
+</body>
+</html>

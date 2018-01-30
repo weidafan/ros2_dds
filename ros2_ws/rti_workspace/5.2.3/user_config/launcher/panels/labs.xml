@@ -1,0 +1,105 @@
+<launcher xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:noNamespaceSchemaLocation="launcher_panel.xsd">
+    <button name="webintegrationservice">
+        <icon>Web90.gif</icon>
+        <icon32>webintegration_32x32.gif</icon32>
+        <tooltip>Web Integration Service:
+            Enables web-based client applications to participate as
+            first class citizens in the DDS Global Data Space.
+        </tooltip>
+        <legend>Web Integration Service</legend>
+        <dialog>
+            <class>com.rti.tools.launcher.dialog.WebServiceDialog</class>
+            <title>Web Integration Service</title>
+            <!-- no <advanced_dialog> entry -->
+            <service_name>RTI Web Integration Service</service_name>
+            <service_dirname>web_integration_service</service_dirname>
+            <workdir_init>web_integration_service</workdir_init>
+            <service_xml_tag>web_integration_service</service_xml_tag>
+            <config_path>resource/xml/RTI_WEB_INTEGRATION_SERVICE.xml</config_path>
+            <user_config_filename>USER_WEB_INTEGRATION_SERVICE.xml</user_config_filename>
+        </dialog>
+        <toolexec>bin/rtiwebintegrationservice</toolexec>
+        <popupmenu>
+            <menuitem>
+                <label>Command help</label>
+                <options>-help</options>
+            </menuitem>
+            <menuitem>
+                <label>User's Manual - (HTML, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/web_integration_service/index.html
+                </url>
+            </menuitem>
+            <menuitem>
+                <label>User's Manual - (HTML, local)</label>
+                <doc>manuals/web_integration_service/index.html</doc>
+            </menuitem>
+            <menuitem>
+                <label>Tutorials - (HTML, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/web_integration_service/tutorials.html
+                </url>
+            </menuitem>
+            <menuitem>
+                <label>Tutorials - (HTML, local)</label>
+                <doc>manuals/web_integration_service/tutorials.html</doc>
+            </menuitem>
+            <menuitem>
+                <label>Release Notes - (HTML, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/web_integration_service/release_notes.html
+                </url>
+            </menuitem>
+            <menuitem>
+                <label>Release Notes - (HTML, local)</label>
+                <doc>manuals/web_integration_service/release_notes.html</doc>
+            </menuitem>
+            <menuitem>
+                <label>API Reference - (HTML, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/web_integration_service/rest_api.html
+                </url>
+            </menuitem>
+            <menuitem>
+                <label>API Reference - (HTML, local)</label>
+                <doc>manuals/web_integration_service/rest_api.html</doc>
+            </menuitem>
+        </popupmenu>
+    </button>
+    
+    <button name="rtiddsprototyper">
+        <icon>Prototyper90.gif</icon>
+        <icon32>prototyper_32x32.gif</icon32>
+        <tooltip>RTI DDS Prototyper:
+            Command-line utility to prototype, exercise, or test a DDS System.
+            Automatically create Topics, DataWriters and DataReaders.
+            Publish and subscribe to data. Generate specific data values.
+            Process data, verify values and produce other data as a result.
+        </tooltip>
+        <legend>DDS Prototyper</legend>
+        <dialog>
+            <class>com.rti.tools.launcher.dialog.PrototyperUtilityDialog</class>
+            <title>RTI DDS Prototyper</title>
+            <advanced_dialog>com.rti.tools.launcher.dialog.PrototyperAdvancedDialog</advanced_dialog>
+            <service_name>RTI DDS Prototyper</service_name>
+            <service_dirname>prototyper</service_dirname>
+            <workdir_init>prototyper</workdir_init>
+            <service_xml_tag>domain_participant</service_xml_tag>
+            <service_library_xml_tag>participant_library</service_library_xml_tag>
+            <config_path>resource/xml/RTI_PROTOTYPER_QOS_PROFILES.xml</config_path>
+            <user_config_filename>USER_QOS_PROFILES.xml</user_config_filename>
+        </dialog>
+        <toolexec>bin/rtiddsprototyper</toolexec>
+        <popupmenu>
+            <menuitem>
+                <label>Command help</label>
+                <options>-help</options>
+            </menuitem>
+            <menuitem>
+                <label>Getting Started Guide (PDF, local)</label>
+                <doc>manuals/connext_dds/prototyper/RTI_ConnextDDS_CoreLibraries_Prototyper_GettingStarted.pdf</doc>
+            </menuitem>
+            <menuitem>
+                <label>Getting Started Guide (PDF, on-line)</label>
+                <url>https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/connext_dds/prototyper/RTI_ConnextDDS_CoreLibraries_Prototyper_GettingStarted.pdf</url>
+            </menuitem>
+        </popupmenu>
+    </button>
+</launcher>

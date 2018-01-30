@@ -1,0 +1,21 @@
+[10:07:54] RTI Connext Launcher 5.2.3 started
+[10:08:41] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/rti_workspace/5.2.3/user_config/rtiddsgen/shape_type/ShapeType.idl -ppDisable -language Java -create typefiles -create examplefiles -create makefiles -platform x64Linux3gcc4.8.2)
+[10:15:11] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/dds_ws/myExample.idl -ppDisable -language Java -create typefiles -create examplefiles -create makefiles -platform x64Linux3gcc4.8.2)
+[10:16:34] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/dds_ws/myExample.idl -ppDisable -language Java -create typefiles -create examplefiles -create makefiles -platform x64Linux3gcc4.8.2)
+[10:39:45] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/dds_ws/myExample.idl -ppDisable -language Java -create typefiles -create examplefiles -create makefiles -platform x64Linux3gcc4.8.2)
+[10:39:45] Working directory does not exist: /home/aust/dds_ws
+[10:43:11] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/dds_ws/myExample.idl -ppDisable -language Java -create typefiles -create examplefiles -create makefiles -platform x64Linux3gcc4.8.2)
+[10:43:54] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/dds_ws/myExample.idl -ppDisable -language Java -create typefiles -create examplefiles -create makefiles -platform x64Linux3gcc4.8.2)
+[10:58:49] Run:   rtishapesdemo  (/home/aust/rti_connext_dds-5.2.3/bin/rtishapesdemo)
+[10:58:51] Run:   rtishapesdemo  (/home/aust/rti_connext_dds-5.2.3/bin/rtishapesdemo)
+[10:58:53] Run:   rtishapesdemo  (/home/aust/rti_connext_dds-5.2.3/bin/rtishapesdemo)
+[10:59:38] Run:   rtishapesdemo  (/home/aust/rti_connext_dds-5.2.3/bin/rtishapesdemo)
+[10:59:40] Run:   rtishapesdemo  (/home/aust/rti_connext_dds-5.2.3/bin/rtishapesdemo)
+[10:59:42] Run:   rtishapesdemo  (/home/aust/rti_connext_dds-5.2.3/bin/rtishapesdemo)
+[11:00:26] Run:   rtishapesdemo  (/home/aust/rti_connext_dds-5.2.3/bin/rtishapesdemo)
+[11:12:05] Parse: /home/aust/rti_connext_dds-5.2.3/resource/xml/RTI_PROTOTYPER_QOS_PROFILES.xml
+[11:12:05] Parse: /home/aust/rti_workspace/5.2.3/user_config/prototyper/USER_QOS_PROFILES.xml
+[11:14:42] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/dds_ws/myExample.idl -ppDisable -language Java -create typefiles -create examplefiles -create makefiles -platform x64Linux3gcc4.8.2)
+[11:44:44] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/dds_ws/myExample.idl -ppDisable -language Java -create typefiles -create examplefiles -create makefiles -platform x64Linux3gcc4.8.2)
+[12:00:12] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/dds_ex/myExample.idl -ppDisable -language Java -create typefiles -create examplefiles -create makefiles -platform x64Linux3gcc4.8.2)
+[12:00:26] Running:   rtiddsgen  (/home/aust/rti_connext_dds-5.2.3/bin/rtiddsgen /home/aust/dds_ex/myExample.idl -ppDisable -language Java -create typefiles -create examplefiles -create makefiles -platform x64Linux3gcc4.8.2)

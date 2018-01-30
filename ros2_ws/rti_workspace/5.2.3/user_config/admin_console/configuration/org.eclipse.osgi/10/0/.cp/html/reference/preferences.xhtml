@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Preferences</title>
+<link rel="stylesheet" href="../acdocs.css" type="text/css" />
+</head>
+
+<body>
+	<div class="centerContent">
+		<div class="docTopBanner" />
+	</div>
+
+	<div class="docPageTitle">Preferences</div>
+
+	<div class="docSectionTitle">
+		<a name="ConsoleLogViewOverview">Overview</a>
+	</div>
+
+	<div class="docSectionContent">The preferences dialog contains
+		controls to customize Admin Console to your needs and/or preferences.
+		There are many options which come from the Eclipse platform and which
+		will not be covered in detail here. Instead, this documentation will
+		focus on those settings that are specific to Admin Console.</div>
+
+
+	<br />
+	<div class="docSectionTitle">
+		<a name="administration">Administration</a>
+	</div>
+
+	<div class="docScreenShot">
+		<img src="../images/preferences_connection.png" />
+	</div>
+
+	<div class="docSectionContent">
+		The Administration preference page controls how Admin Console
+		interacts with DDS. Here you can set the cleanup period for entities
+		which are no longer present (<img
+			src="PLUGINS_ROOT/com.rti.tools.console.utils/icons/cleanup.gif" />)
+		You can also choose to automatically join discovered active domains or
+		manually join them. There is also a display of the currently joined
+		domains (where you can choose to leave domains if you&apos;re manually
+		joining domains). Finally, you can add QoS files from which you can
+		choose profiles that Admin Console will use when creating DDS
+		entities. Please take care when changing the profile that Admin
+		Console uses since it employs many non-standard QoS settings. Start
+		with the example QoS file in &lt;installation
+		dir&gt;/resource/xml/admin_console_example_profiles.xml.
+	</div>
+
+
+	<br />
+	<div class="docSectionTitle">
+		<a name="health">Health</a>
+	</div>
+
+	<div class="docScreenShot">
+		<img src="../images/preferences_health.png" />
+	</div>
+
+	<div class="docSectionContent">
+		The Health preference page controls the severity of each health
+		reason. They are:
+		<ul>
+			<li><strong>Error log entry</strong> - The severity of an error
+				log message (received from Distributed Logger).</li>
+
+			<li><strong>Warning log entry</strong> - The severity of a
+				warning log message (received from Distributed Logger).</li>
+
+			<li><strong>Requested/offered QoS</strong> - The severity of a
+				mismatched DDS Quality of Service.</li>
+
+            <li><strong>Transport message size max</strong> - The severity
+                of mismatched DomainParticipant transport message size max settings.</li>
+
+            <li><strong>Transport identifiers</strong> - The severity
+                of mismatched DomainParticipant transport identifiers.</li>
+
+			<li><strong>No matching partitions</strong> - The severity of
+				not having matching partitions.</li>
+
+			<li><strong>Keyed consistency</strong> - The severity of a
+				disagreement on whether the topic is keyed or not.</li>
+
+			<li><strong>Data type mismatch</strong> - The severity of having
+				incompatible data types.</li>
+
+			<li><strong>Writer-only Topic</strong> - The severity of having
+				only DataWriters (and hence, no flow of data) associated with a
+				topic.</li>
+
+			<li><strong>Reader-only Topic</strong> - The severity of having
+				only DataReaders (and hence, no flow of data) associated with a
+				topic.</li>
+
+		</ul>
+	</div>
+
+
+	<br />
+	<div class="docSectionTitle">Logging</div>
+
+	<div class="docScreenShot">
+		<img src="../images/preferences_logging.png" />
+	</div>
+
+	<div class="docSectionContent">
+		The Logging preference page controls RTI Logger configuration and
+		verbosity settings used by Admin Console. The output of the RTI Logger
+		is displayed in the <a href="views/consoleLogView.xhtml">Console
+			Log View</a>.
+	</div>
+
+
+	<br />
+	<div class="docSectionTitle">Notifications</div>
+
+	<div class="docScreenShot">
+		<img src="../images/preferences_notifications.png" />
+	</div>
+
+	<div class="docSectionContent">The Notifications preference page
+		controls if guide notifications (messages that replace a view&apos;s
+		content with helpful hints about why the view might be empty) are
+		displayed and whether a notification is displayed for successful
+		configuration of Routing Service.</div>
+</body>
+</html>

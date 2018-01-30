@@ -1,0 +1,1025 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="domainTopicViewPage" name="Domain Topic Editor Page" schema="schema/domainTopicViewPage.exsd"/>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="com.rti.tools.console.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="com.rti.tools.console.Perspective"
+            icon="branding/icons/system.gif"
+            id="com.rti.tools.console.perspective"
+            name="Administration">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="true"
+            class="com.rti.tools.console.views.HealthView"
+            icon="branding/icons/healthy.png"
+            id="com.rti.tools.console.views.HealthView"
+            name="Health"
+            restorable="false"/>
+      <view
+            allowMultiple="true"
+            class="com.rti.tools.console.views.DdsDatatypeView"
+            icon="branding/icons/datatype.png"
+            id="com.rti.tools.console.views.DdsDatatypeView"
+            name="DDS Data Type"
+            restorable="false"/>
+      <view
+            allowMultiple="true"
+            class="com.rti.tools.console.views.QosView"
+            icon="branding/icons/qos.png"
+            id="com.rti.tools.console.views.QosView"
+            name="DDS QoS"
+            restorable="false"/>
+      <view
+            allowMultiple="true"
+            class="com.rti.tools.console.views.MatchAnalysesView"
+            icon="branding/icons/matchcriterion.png"
+            id="com.rti.tools.console.views.MatchAnalysesView"
+            name="Match Analyses"
+            restorable="false"/>
+      <view
+            allowMultiple="false"
+            class="com.rti.tools.console.views.DdsLogicalTreeView"
+            icon="branding/icons/ddslogicaltree.png"
+            id="com.rti.tools.console.views.DdsLogicalTreeView"
+            name="DDS Logical View"
+            restorable="true"/>
+      <view
+            allowMultiple="false"
+            class="com.rti.tools.console.views.PhysicalTreeView"
+            icon="branding/icons/physicaltree.png"
+            id="com.rti.tools.console.views.PhysicalTreeView"
+            name="Physical View"
+            restorable="true"/>
+      <view
+            allowMultiple="false"
+            class="com.rti.tools.console.views.ProcessesView"
+            icon="branding/icons/running_process.png"
+            id="com.rti.tools.console.views.ProcessesView"
+            name="Processes"
+            restorable="true"/>
+      <view
+            allowMultiple="false"
+            class="com.rti.tools.console.views.ConsoleLogView"
+            icon="branding/icons/log.png"
+            id="com.rti.tools.console.views.ConsoleLogView"
+            name="Console Log"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="com.rti.tools.console.views.DomainTopicView"
+            default="false"
+            icon="branding/icons/domaintopic.png"
+            id="com.rti.tools.console.views.DomainTopicView"
+            name="Domain Topic">
+      </editor>
+      <editor
+            class="com.rti.tools.console.views.host.HostView"
+            default="false"
+            id="com.rti.tools.console.views.host.HostView"
+            name="Host">
+      </editor>
+      <editor
+            class="com.rti.tools.console.views.system.SystemView"
+            default="false"
+            id="com.rti.tools.console.views.system.SystemView"
+            name="System">
+      </editor>
+      <editor
+            class="com.rti.tools.console.views.process.ProcessView"
+            default="false"
+            id="com.rti.tools.console.views.process.ProcessView"
+            name="Application">
+      </editor>
+      <editor
+            class="com.rti.tools.console.views.process.routing.RoutingServiceView"
+            default="false"
+            id="com.rti.tools.console.views.process.routing.RoutingServiceView"
+            name="Routing Service">
+      </editor>
+      <editor
+            class="com.rti.tools.console.views.process.persistence.PersistenceServiceView"
+            default="false"
+            id="com.rti.tools.console.views.process.persistence.PersistenceServiceView"
+            name="Persistence Service">
+      </editor>
+      <editor
+            class="com.rti.tools.console.views.process.recorder.RecorderServiceView"
+            default="false"
+            id="com.rti.tools.console.views.process.recorder.RecorderServiceView"
+            name="Recorder Service">
+      </editor>
+      <editor
+            class="com.rti.tools.console.views.process.replay.ReplayServiceView"
+            default="false"
+            id="com.rti.tools.console.views.process.replay.ReplayServiceView"
+            name="Replay Service">
+      </editor>
+      <editor
+            class="com.rti.tools.console.editors.EnhancedXMLEditor"
+            default="true"
+            filenames="xml"
+            icon="branding/icons/configuration_file.png"
+            id="com.rti.tools.console.editors.EnhancedXMLEditor"
+            name="Enhanced XML Editor">
+      </editor>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="com.rti.tools.console.application"
+            name="RTI Administration Console">
+         <property
+               name="aboutImage"
+               value="branding/about.gif"/>
+         <property
+               name="aboutText"
+               value="%aboutText"/>
+         <property
+               name="appName"
+               value="RTI Administration Console">
+         </property>
+         <property
+               name="startupProgressRect"
+               value="55,285,400,12">
+         </property>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
+         <property
+               name="startupForegroundColor"
+               value="B9B9FF">
+         </property>
+         <property
+               name="startupMessageRect"
+               value="55,265,445,20">
+         </property>
+         <property
+               name="windowImages"
+               value="branding/icons/ac_16.png,branding/icons/ac_32.png,branding/icons/ac_48.png,branding/icons/ac_64.png,branding/icons/ac_128.png">
+         </property>
+         <property
+               name="applicationCSS"
+               value="platform:/plugin/com.rti.tools.console/css/default.css ">
+         </property>
+      </product>
+   </extension>
+   <extension
+         point="org.eclipse.ui.intro.config">
+      <config
+            introId="com.rti.tools.console.intro"
+            content="html/intro/introContent.xml"
+            id="com.rti.tools.console.configId">
+         <presentation
+               home-page-id="root">
+            <implementation
+                  kind="html"
+                  os="win32,linux,macosx">
+            </implementation>
+         </presentation>
+      </config>
+   </extension>
+   <extension
+         point="org.eclipse.ui.intro">
+      <intro
+            class="org.eclipse.ui.intro.config.CustomizableIntroPart"
+            id="com.rti.tools.console.intro">
+      </intro>
+      <introProductBinding
+            introId="com.rti.tools.console.intro"
+            productId="com.rti.tools.console.product">
+      </introProductBinding>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="com.rti.tools.console.preferences.AdministrationPreferencesPage"
+            id="com.rti.tools.console.preferences.administration"
+            name="Administration">
+      </page>
+      <page
+            class="com.rti.tools.console.preferences.LoggingPreferencesPage"
+            id="com.rti.tools.console.preferences.logging"
+            name="Logging">
+      </page>
+      <page
+            class="com.rti.tools.console.preferences.NotificationsPreferencePage"
+            id="com.rti.tools.console.preferences.notifications"
+            name="Notifications">
+      </page>
+      <page
+            class="com.rti.tools.console.preferences.HealthPreferencesPage"
+            id="com.rti.tools.console.preferences.health"
+            name="Health">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.themes">
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.tableHeader"
+               value="branding/column_header_bg.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.tableHeaderSelected"
+               value="branding/column_header_selected_bg.png">
+         </data>
+         <!--
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.tree"
+               value="branding/tree_background.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.view"
+               value="branding/background.png">
+         </data>
+         -->
+      <colorDefinition
+            categoryId="org.eclipse.ui.workbenchMisc"
+            id="com.rti.tools.console.colors.textFG"
+            isEditable="true"
+            label="Text Foreground"
+            value="20,20,20">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="org.eclipse.ui.workbenchMisc"
+            id="com.rti.tools.console.colors.textBG"
+            isEditable="true"
+            label="Text Background"
+            value="250, 250, 250">
+      </colorDefinition>
+      <themeElementCategory
+            id="com.rti.tools.console.themes.categories.table.colors"
+            label="Table Colors">
+         <description>
+            Colors and Fonts for the tables displayed in the console
+         </description>
+      </themeElementCategory>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.grid.horizontal"
+            isEditable="true"
+            label="Table Grid Lines - Horizontal"
+            value="243, 243, 243">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.grid.vertical"
+            isEditable="true"
+            label="Table Grid Lines - Vertical"
+            value="250, 250, 250">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.fatal.bg"
+            isEditable="true"
+            label="Table Log Fatal Background"
+            value="179, 0, 0">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.fatal.fg"
+            isEditable="true"
+            label="Table Log Fatal Foreground"
+            value="40, 40, 40">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.sever.bg"
+            isEditable="true"
+            label="Table Log Sever Background"
+            value="217, 0, 0">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.sever.fg"
+            isEditable="true"
+            label="Table Log Sever Foreground"
+            value="40, 40, 40">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.error.bg"
+            isEditable="true"
+            label="Table Log Error Background"
+            value="222, 150, 150">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.error.fg"
+            isEditable="true"
+            label="Table Log Error Foreground"
+            value="255, 255, 255">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.warning.bg"
+            isEditable="true"
+            label="Table Log Warning Background"
+            value="255, 255, 138">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.warning.fg"
+            isEditable="true"
+            label="Table Log Warning Foreground"
+            value="40, 40, 40">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.notice.bg"
+            isEditable="true"
+            label="Table Log Notice Background"
+            value="255, 255, 0">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.notice.fg"
+            isEditable="true"
+            label="Table Log Notice Foreground"
+            value="40, 40, 40">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.info.bg"
+            isEditable="true"
+            label="Table Log Info Background"
+            value="168, 168, 255">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.info.fg"
+            isEditable="true"
+            label="Table Log Info Foreground"
+            value="40, 40, 40">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.selection.fg"
+            isEditable="true"
+            label="Table Selection Foreground"
+            value="73,73,73">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.selection.bg"
+            isEditable="true"
+            label="Table Selection Background"
+            value="191, 211, 236">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.selection.row.bg"
+            isEditable="true"
+            label="Table Selection Row Background"
+            value="217, 232, 251">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.selection.anchor.bg"
+            isEditable="true"
+            label="Table Selection Anchor Background"
+            value="191, 211, 236">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.text.fg"
+            isEditable="true"
+            label="Table Text Foreground"
+            value="73,73,73">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.text.bg"
+            isEditable="true"
+            label="Table Text Background"
+            value="255,255,255">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.header.fg"
+            isEditable="true"
+            label="Table Header Foreground"
+            value="35,35,35">
+            <!-- value="250,250,250"> -->
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.header.bg"
+            isEditable="true"
+            label="Table Header Background"            
+            value="182,182,182">
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.filter.fg"
+            isEditable="true"
+            label="Table Filter Foreground"
+            value="238,0,0">
+      </colorDefinition>
+       <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.filter.bg"
+            isEditable="true"
+            label="Table Filter Background"
+            value="228,228,250">
+            <!-- value="255,255,230"> -->
+            <!-- value="243,243,241"> -->
+            <!-- value="182,182,182"> -->
+      </colorDefinition>
+      <colorDefinition
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.tips.fg"
+            isEditable="true"
+            label="Table Guidance Tips Foreground"
+            value="0, 0, 0">
+      </colorDefinition>      
+      <themeElementCategory
+            id="com.rti.tools.console.themes.categories.table.fonts"
+            label="Table Fonts">
+         <description>
+            Colors and Fonts for the tables displayed in the console
+         </description>
+      </themeElementCategory>
+       <fontDefinition
+             categoryId="com.rti.tools.console.themes.categories.table.fonts"
+             id="com.rti.tools.console.fonts.table.text"
+             isEditable="true"
+             label="Table Text Font">
+       </fontDefinition>
+       <fontDefinition
+             categoryId="com.rti.tools.console.themes.categories.table.fonts"
+             id="com.rti.tools.console.fonts.table.header"
+             isEditable="true"
+             label="Table Header Font">
+       </fontDefinition>
+       <fontDefinition
+             categoryId="com.rti.tools.console.themes.categories.table.fonts"
+             id="com.rti.tools.console.fonts.table.filter"
+             isEditable="true"
+             label="Table Filter Font">
+       </fontDefinition>
+       <fontDefinition
+             categoryId="com.rti.tools.console.themes.categories.table.fonts"
+             id="com.rti.tools.console.fonts.table.tips"
+             value="Comic Sans MS-regular-9"
+             isEditable="true"
+             label="Table Guidance Tips Font">
+       </fontDefinition>
+       <themeElementCategory
+             id="com.rti.tools.console.themes.categories.tree.colors"
+             label="Tree Colors">
+          <description>
+             Colors and Fonts for the system tree displayed in the console
+          </description>
+       </themeElementCategory>
+       <colorDefinition
+             categoryId="com.rti.tools.console.themes.categories.tree.colors"
+             id="com.rti.tools.console.colors.tree.selection.bg"
+             isEditable="true"
+             label="Tree Selection Background"
+             value="217, 232, 251">
+       </colorDefinition>
+       <colorDefinition
+             categoryId="com.rti.tools.console.themes.categories.tree.colors"
+             id="com.rti.tools.console.colors.tree.selection.fg"
+             isEditable="true"
+             label="Tree Selection Foreground"
+             value="255, 255, 255">
+       </colorDefinition>
+       <colorDefinition
+             categoryId="com.rti.tools.console.themes.categories.tree.colors"
+             id="com.rti.tools.console.colors.tree.highlight.bg"
+             isEditable="true"
+             label="Tree Highlight Background"
+             value="255, 255, 205">
+       </colorDefinition>
+       <colorDefinition
+             categoryId="com.rti.tools.console.themes.categories.tree.colors"
+             id="com.rti.tools.console.colors.tree.highlight.fg"
+             isEditable="true"
+             label="Tree Highlight Foreground"
+             value="0, 0, 0">
+       </colorDefinition>
+       <colorDefinition
+             categoryId="com.rti.tools.console.themes.categories.tree.colors"
+             id="com.rti.tools.console.colors.tree.text.fg"
+             isEditable="true"
+             label="Tree Text Foreground"
+             value="20,20,20">
+       </colorDefinition>
+       <colorDefinition
+             categoryId="com.rti.tools.console.themes.categories.tree.colors"
+             id="com.rti.tools.console.colors.tree.text.bg"
+             isEditable="true"
+             label="Tree Text Background"
+             value="255,255,255">
+       </colorDefinition>
+        <fontDefinition
+             categoryId="com.rti.tools.console.themes.categories.tree.fonts"
+             id="com.rti.tools.console.fonts.tree.selection"
+             isEditable="true"
+             label="Tree Selection Font">
+       </fontDefinition>
+        <fontDefinition
+              categoryId="com.rti.tools.console.themes.categories.tree.fonts"
+              id="com.rti.tools.console.fonts.tree.text"
+              isEditable="true"
+              label="Tree Text Font">
+       </fontDefinition>
+       <themeElementCategory
+             id="com.rti.tools.console.themes.categories.tree.fonts"
+             label="Tree Fonts">
+          <description>
+             Colors and Fonts for the system tree displayed in the console
+          </description>
+       </themeElementCategory>
+       <fontDefinition
+             categoryId="com.rti.tools.console.themes.categories.tree.fonts"
+             id="com.rti.tools.console.fonts.tree.highlight"
+             isEditable="true"
+             label="Tree Highlight Font">
+       </fontDefinition>
+       
+       
+       <theme
+             id="com.rti.tools.console.themes.dark"
+             name="Admin Console Night-Owl">
+	         <colorOverride
+	               id="HYPERLINK_COLOR"
+	               isEditable="true"
+	               value="139, 184, 252">
+	         </colorOverride>
+	         <colorOverride
+	               id="ACTIVE_HYPERLINK_COLOR"
+	               isEditable="true"
+	               value="0, 77, 113">
+	         </colorOverride>
+	         <colorOverride
+            		id="com.rti.tools.console.colors.textFG"
+            		isEditable="true"            
+            		value="240, 240, 240">
+      		</colorOverride>
+      		<colorOverride
+            		id="com.rti.tools.console.colors.textBG"
+            		isEditable="true"
+            		value="100, 100, 100">
+      		</colorOverride>
+	         <colorOverride
+	             categoryId="com.rti.tools.console.themes.categories.tree.colors"
+	             id="com.rti.tools.console.colors.tree.text.bg"
+	             isEditable="true"
+	             label="Tree Text Background"
+	             value="63,63,63">
+	       	</colorOverride>
+	         <colorOverride
+	             categoryId="com.rti.tools.console.themes.categories.tree.colors"
+	             id="com.rti.tools.console.colors.tree.text.fg"
+	             isEditable="true"
+	             label="Tree Text Foreground"
+	             value="245,245,245">
+	       	</colorOverride>
+	         <colorOverride
+            	categoryId="com.rti.tools.console.themes.categories.table"
+            	id="com.rti.tools.console.colors.table.text.bg"
+            	isEditable="true"
+            	value="63,63,63">
+     	 	</colorOverride>
+     	 	<colorOverride
+            	categoryId="com.rti.tools.console.themes.categories.table"
+            	id="com.rti.tools.console.colors.table.text.fg"
+            	isEditable="true"
+            	value="210,210,210">
+     	 	</colorOverride>
+     	 	<colorOverride
+            	categoryId="com.rti.tools.console.themes.categories.table"
+            	id="com.rti.tools.console.colors.table.selection.row.bg"
+            	isEditable="true"
+            	value="18,90,177">
+     	 	</colorOverride>
+     	 	<colorOverride
+            	categoryId="com.rti.tools.console.themes.categories.table"
+            	id="com.rti.tools.console.colors.table.selection.fg"
+            	isEditable="true"
+            	value="210,210,210">
+     	 	</colorOverride>
+     	 	 <colorOverride
+             	categoryId="org.eclipse.ui.workbenchMisc"
+             	id="com.rti.tools.console.colors.nonactive"
+             	isEditable="true"
+             	value="140, 140, 140">
+       		</colorOverride>
+     	 	<colorOverride
+	            categoryId="com.rti.tools.console.themes.categories.table.colors"
+	            id="com.rti.tools.console.colors.table.filter.bg"
+	            isEditable="true"
+	            value="182,182,182">
+      		</colorOverride>
+      		<colorOverride
+	            categoryId="com.rti.tools.console.themes.categories.table.colors"
+	            id="com.rti.tools.console.colors.table.filter.fg"
+	            isEditable="true"
+	            value="255,255,255">
+      		</colorOverride>
+     	 	<colorOverride
+	            categoryId="org.eclipse.ui.workbenchMisc"
+	            id="com.rti.tools.console.colors.title"
+	            isEditable="true"
+	            value="255, 255, 255">
+      		</colorOverride>
+     	 	<colorOverride
+	            categoryId="com.rti.tools.console.themes.categories.table"
+	            id="com.rti.tools.console.colors.table.grid.horizontal"
+	            isEditable="true"
+	            label="Table Grid Lines - Horizontal"
+	            value="48, 48, 48">
+	      	</colorOverride>
+	      	<colorOverride
+	            categoryId="com.rti.tools.console.themes.categories.table"
+	            id="com.rti.tools.console.colors.table.grid.vertical"
+	            isEditable="true"
+	            label="Table Grid Lines - Vertical"
+	            value="72, 72, 72">
+	      	</colorOverride>
+     	 	<fontOverride
+               id="org.eclipse.jface.bannerfont"
+               value="Calibri-regular-12">
+         	</fontOverride>
+         <description>
+            An alternative set of backgrounds, fonts and colors, for the RTI Administrative Console
+         </description>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.serviceState"
+               value="branding/service_state_background.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.serviceStateError"
+               value="branding/service_state_error_background.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.tree"
+               value="branding/tree_background_dark.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.view"
+               value="branding/background_dark.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.dialog"
+               value="branding/background_dialog_dark.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.editor"
+               value="branding/tab_background_dark.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.panel"
+               value="branding/panel_background_dark.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.tableHeader"
+               value="branding/column_header_bg_dark.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.tableHeaderSelected"
+               value="branding/column_header_selected_bg_dark.png">
+         </data>
+       </theme>
+      <theme
+            id="com.rti.tools.console.themes.classic"
+            name="Admin Console Classic">
+         <colorOverride
+               id="HYPERLINK_COLOR"
+               value="0, 50, 255">
+         </colorOverride>
+         <colorOverride
+               id="org.eclipse.ui.workbench.ACTIVE_TAB_BG_START"
+               value="240, 240, 255">
+         </colorOverride>
+         <colorOverride
+               id="org.eclipse.ui.workbench.ACTIVE_TAB_BG_END"
+               value="223, 225, 244">
+         </colorOverride>
+         <colorOverride
+               id="ACTIVE_HYPERLINK_COLOR"
+               value="0, 77, 113">
+         </colorOverride>
+         <colorOverride
+            		id="com.rti.tools.console.colors.textFG"
+            		isEditable="true"            
+            		value="44, 44, 84">
+      	 </colorOverride>
+      	 <colorOverride
+            		id="com.rti.tools.console.colors.textBG"
+            		isEditable="true"
+            		value="251,251,249">
+      	 </colorOverride>      		
+         <fontOverride
+               id="org.eclipse.jface.bannerfont"
+               value="Calibri-regular-12">
+         </fontOverride>
+         <description>
+            The standad set of backgrounds, fonts and colors, for the RTI Administrative Console
+         </description>
+          <colorOverride
+             categoryId="com.rti.tools.console.themes.categories.tree.colors"
+             id="com.rti.tools.console.colors.tree.text.bg"
+             isEditable="true"
+             label="Tree Text Background"
+             value="251,251,249">
+       	</colorOverride>
+         <colorOverride
+             categoryId="com.rti.tools.console.themes.categories.tree.colors"
+             id="com.rti.tools.console.colors.tree.text.fg"
+             isEditable="true"
+             label="Tree Text Foreground"
+             value="60,60,100">
+       	</colorOverride>
+         <colorOverride
+               categoryId="com.rti.tools.console.themes.categories.table"
+               id="com.rti.tools.console.colors.table.text.bg"
+               isEditable="true"
+               value="251,251,249">
+         </colorOverride>
+         <colorOverride
+               categoryId="com.rti.tools.console.themes.categories.table"
+               id="com.rti.tools.console.colors.table.text.fg"
+               isEditable="true"
+               value="60,60,100">
+         </colorOverride>
+         <colorOverride
+            categoryId="org.eclipse.ui.workbenchMisc"
+            id="com.rti.tools.console.colors.title"
+            isEditable="true"
+            value="10, 70, 175">
+      	</colorOverride>
+      	<colorOverride
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.filter.bg"
+            isEditable="true"
+            value="228,228,250">
+            <!-- value="242,245,255"> -->
+            <!-- value="156,177,207"> -->
+      </colorOverride>
+         <colorOverride
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.header.bg"
+            isEditable="true"
+            value="206,217,232">
+      	</colorOverride>
+      	<colorOverride
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.header.fg"
+            isEditable="true"
+            value="35,35,35">
+      </colorOverride>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.serviceState"
+               value="branding/service_state_background.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.serviceStateError"
+               value="branding/service_state_error_background.png">
+         </data>
+         <!--
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.tree"
+               value="branding/tree_background_blue.png">
+         </data>
+         -->
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.view"
+               value="branding/background_blue.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.dialog"
+               value="branding/background_dialog.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.editor"
+               value="branding/tab_background.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.panel"
+               value="branding/panel_background.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.tableHeader"
+               value="branding/column_header_bg.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.tableHeaderSelected"
+               value="branding/column_header_selected_bg.png">
+         </data>
+      </theme>
+      <theme
+             id="com.rti.tools.console.themes.nonglare"
+             name="Admin Console Reduced Glare">
+         <colorOverride
+           id="HYPERLINK_COLOR"
+           value="52, 65, 156">
+         </colorOverride>
+         <colorOverride
+           id="ACTIVE_HYPERLINK_COLOR"
+           value="0, 77, 113">
+         </colorOverride>
+         <colorOverride
+            		id="com.rti.tools.console.colors.textFG"
+            		isEditable="true"            
+            		value="73, 73, 73">
+      	 </colorOverride>
+      	 <colorOverride
+            		id="com.rti.tools.console.colors.textBG"
+            		isEditable="true"
+            		value="245,245,245">
+      	 </colorOverride>             
+       <colorOverride
+             categoryId="com.rti.tools.console.themes.categories.tree.colors"
+             id="com.rti.tools.console.colors.tree.text.bg"
+             isEditable="true"
+             label="Tree Text Background"
+             value="247,247,247">
+       	</colorOverride>
+         <colorOverride
+             categoryId="com.rti.tools.console.themes.categories.tree.colors"
+             id="com.rti.tools.console.colors.tree.text.fg"
+             isEditable="true"
+             label="Tree Text Foreground"
+             value="73,73,73">
+       	</colorOverride>          	 	
+        <colorOverride
+               categoryId="com.rti.tools.console.themes.categories.table"
+               id="com.rti.tools.console.colors.table.text.bg"
+               isEditable="true"
+               value="245,245,245">
+         </colorOverride>
+         <colorOverride
+               categoryId="com.rti.tools.console.themes.categories.table"
+               id="com.rti.tools.console.colors.table.text.fg"
+               isEditable="true"
+               value="73,73,73">
+         </colorOverride>
+         <colorOverride
+	            categoryId="com.rti.tools.console.themes.categories.table.colors"
+	            id="com.rti.tools.console.colors.table.filter.bg"
+	            isEditable="true"
+	            value="182,182,182">
+      	</colorOverride>
+  		<colorOverride
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.filter.fg"
+            isEditable="true"
+            value="255,255,255">
+  		</colorOverride>    
+         <colorOverride
+            categoryId="org.eclipse.ui.workbenchMisc"
+            id="com.rti.tools.console.colors.title"
+            isEditable="true"
+            value="43, 43, 43">
+      	</colorOverride>
+         <fontOverride
+               id="org.eclipse.jface.bannerfont"
+               value="Calibri-regular-12">
+         </fontOverride>         
+         <description>
+            An alternative set of backgrounds, fonts and colors, for the RTI Administrative Console
+         </description>
+         <!-- data
+               name="com.rti.tools.console.themes.classic.backgroundImage.tree"
+               value="branding/tree_background_gray.png">
+         </data -->
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.view"
+               value="branding/background_gray.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.dialog"
+               value="branding/background_dialog_gray.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.editor"
+               value="branding/tab_background_gray.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.panel"
+               value="branding/panel_background_gray.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.tableHeader"
+               value="branding/column_header_bg_gray.png">
+         </data>
+         <data
+               name="com.rti.tools.console.themes.classic.backgroundImage.tableHeaderSelected"
+               value="branding/column_header_selected_bg_gray.png">
+         </data>
+         <colorOverride
+            categoryId="com.rti.tools.console.themes.categories.table.colors"
+            id="com.rti.tools.console.colors.table.header.bg"
+            isEditable="true"            
+            value="156,177,207">
+      	</colorOverride>
+      	<colorOverride
+	           categoryId="com.rti.tools.console.themes.categories.table.colors"
+	           id="com.rti.tools.console.colors.table.header.fg"
+	           isEditable="true"
+	           value="245,245,245">
+	     </colorOverride>
+       </theme>
+      <colorDefinition
+            categoryId="org.eclipse.ui.workbenchMisc"
+            id="com.rti.tools.console.colors.title"
+            isEditable="true"
+            label="Banner Foreground"
+            value="63, 63, 63">
+      </colorDefinition>
+       <colorDefinition
+             categoryId="org.eclipse.ui.workbenchMisc"
+             id="com.rti.tools.console.colors.nonactive"
+             isEditable="true"
+             label="Non-active Foreground"
+             value="200, 200, 200">
+       </colorDefinition>
+   </extension>
+   <extension
+         point="org.eclipse.ui.installationPages">
+      <page
+            class="com.rti.tools.console.license.RTILicenseAgreement"
+            id="1.com.rti.tools.console.help.about.license.agreement"
+            name="RTI License Agreement">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.systemSummarySections">
+      <section
+            class="com.rti.tools.console.ConfigurationDetailsSystemSummarySection"
+            sectionTitle="AdminConsoleConfig">
+      </section>
+   </extension>   
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="help/toc.xml"
+            primary="true">
+      </toc>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="com.rti.tools.console.preferences.PreferencesInitializer">
+      </initializer>
+   </extension>
+   
+   
+	<extension point="org.eclipse.ui.contexts">
+    	<context
+           id="com.rti.tools.console.context"
+           name="Console Context"
+           parentid="org.eclipse.ui.contexts.window">
+    	</context>
+	</extension>
+ <extension
+       point="org.eclipse.ui.bindings">
+    <key
+          contextId="org.eclipse.ui.contexts.window"
+          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+          sequence="M1+S">
+    </key>
+    <key
+          contextId="org.eclipse.ui.contexts.window"
+          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+          sequence="F5">
+    </key>
+ </extension>
+ <extension point="org.eclipse.help.contexts">
+    <contexts file="help/contexts.xml"/>
+ </extension>
+ <extension
+       point="com.rti.tools.console.domainTopicViewPage">
+    <DomainTopicViewPage
+          factory_class="com.rti.tools.console.views.MatchesGraphPageFactory">
+    </DomainTopicViewPage>
+ </extension>
+	
+	
+
+   
+   
+</plugin>

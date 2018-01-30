@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>root.xhtml</title>
+    <link rel="stylesheet" href="shared.css" type="text/css" />
+    <link rel="stylesheet" href="root.css" type="text/css" />    
+    <script type="text/javascript" src="js/swfobject.js"></script>
+    <script type="text/javascript">
+    	swfobject.registerObject("myId", "9");
+    </script>
+  </head>
+  <body>
+    <div class="myWelcomeContent">      
+      <!-- CSS layout doesn't seem to work properly inside Eclipse's browser. Sticking with old school table style layout for now. -->
+      <div class="centerContent">
+      	<!--<div class="topBanner"/>-->
+      	<div>
+      	<img src="./rti-logounit.gif" style="padding-left:100px;width:362px;height:55px"/>
+      	</div>
+      	
+      	<div class="textIntro">      		
+	            <span style="color:orange;font-size:xx-large"><b> Welcome! </b></span> 
+	            The RTI Administration Console offers you a centralized tool for monitoring and administering your distributed system. Watch the video below for a quick introduction.<p/><p/>
+              
+        </div>
+      </div>
+      <div class="centerContent">
+      <table align="center">
+        <tr valign="top" align="center"> 
+          <td>                   
+          </td>
+          <td>
+           
+          </td>
+        </tr>              
+        <tr valign="top"> <!--Main row to separate the colums -->        
+          <td >
+            <table>                                                    
+              <tr>                
+                <td width="380px">                  
+                  <div class="linkBoxLeft">
+                    <a href="http://org.eclipse.ui.intro/close">
+                      <img class="arrowImage" src="ac_90.png" alt="Start using Admin Console"/>
+                      <span class="textLabel"> Start using Admin Console </span>                      
+                    </a>                    
+                  </div>
+                  <div class="linkBoxLeft">
+                    <a href="http://org.eclipse.ui.intro/showHelpTopic?id=/com.rti.tools.console/html/toc.html" id="toc">
+                      <img class="arrowImage" src="BigBooks.png" alt="Documentation"/>
+                      <span class="textLabel"> Documentation </span>
+                    </a>
+                  </div>                  
+                  <div class="linkBoxLeft">
+                    <a href="http://community.rti.com/">
+                      <img class="arrowImage" src="Community.png" alt="Community"/>
+                      <span class="textLabel"> Community </span>
+                    </a>
+                  </div>
+                  
+                  <div class="linkBoxLeft">
+                    <a href="http://www.rti.com/support/">
+                      <img class="arrowImage" src="BigPhone.png" alt="Support Portal" />
+                      <span class="textLabel"> Technical Support </span>
+                    </a>
+                  </div>
+                        
+                </td>
+                <td align="center">                 
+				  <div class="textLabel" style="margin-top:20px">Admin Console Features Overview</div>
+				  <br/>
+				  <div>
+					  <object id="myId" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="650" height="375"><!-- 800,550 -->
+	
+				        <param name="movie" value="http://www.rti.com/go/admin-console-intro-video-5.2.0" />
+				        <!--[if !IE]>-->
+				        <object type="application/x-shockwave-flash" data="http://www.rti.com/go/admin-console-intro-video-5.2.0" width="650" height="375"> <!-- 650,400 -->
+				        <!--<![endif]-->
+				          <p>You need Flash player 8+ and JavaScript enabled to view this video. <a style="color:blue" href="http://get.adobe.com/flashplayer/">http://get.adobe.com/flashplayer/</a></p>
+				        <!--[if !IE]>-->
+				        </object>
+				        <!--<![endif]-->
+				      </object>
+				  </div>
+				
+					<br/>
+					<div class="textLabel" style="margin-top:20px">
+					<a style="color:blue" href="http://www.rti.com/resources/videos.html">
+						Visit rti.com to view and download more videos
+					</a>
+					</div>
+                </td>
+              </tr>
+            </table>          
+          </td>
+        </tr>      
+      </table>
+    </div>
+    </div>              
+  </body>
+</html>
+
+<!-- all the links -->
+<!--
+  <div class="page-style">
+        <div id="content">
+
+          
+          <anchor id="anchor1" />
+        </div>
+      </div>
+      
+    -->
+<!--
+<a href="http://org.eclipse.ui.intro/close">
+          <img class="arrowImage" src="admin_console.png" alt="Get Started..."/>
+          <strong>Open the RTI Administration Console</strong>
+          </a>
+          <a href="http://org.eclipse.ui.intro/openBrowser?url=http://youtu.be/CCHz0xiOJ0M">
+          <img class="arrowImage" src="video.png" alt="Watch a quick introductory video"/>
+          <strong>Watch a quick introductory video</strong>
+          </a>
+          <object width="560" height="315">
+            <param name="movie" value="http://www.youtube.com/v/CCHz0xiOJ0M?version=3&amp;hl=en_US&amp;rel=0">
+            </param>
+            <param name="allowFullScreen" value="true">
+            </param>
+            <param name="allowscriptaccess" value="always">
+            </param>
+            <embed src="http://www.youtube.com/v/CCHz0xiOJ0M?version=3&amp;hl=en_US&amp;rel=0" type="application/x-shockwave-flash" width="560" height="315" allowscriptaccess="always" allowfullscreen="true"></embed>
+          </object>
+          <a href="http://org.eclipse.ui.intro/showHelpTopic?id=/com.rti.tools.console/html/toc.html">
+          <img class="arrowImage"  src="Books.jpg" alt="Show the Getting-Started Guide" />
+          <strong>Getting Started Guide</strong>
+          </a>
+          <a href="http://www.rti.com/support/">
+          <img class="arrowImage" src="TechSupport.jpg" alt="Go to RTI's Online Technical-Support Portal" />
+          <strong>Technical Support</strong>
+          </a>
+          <a href="http://www.rti.com">
+          <img class="arrowImage" src="rti_48x48.gif" alt="Visit RTI on the web..." />
+          <strong>Visit Real-Time Innovations, Inc.</strong>
+          </a>
+        -->

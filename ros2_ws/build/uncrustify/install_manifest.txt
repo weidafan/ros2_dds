@@ -1,0 +1,12 @@
+/home/aust/ros2_ws/install/bin/uncrustify
+/home/aust/ros2_ws/install/share/ament_index/resource_index/package_run_dependencies/uncrustify
+/home/aust/ros2_ws/install/share/ament_index/resource_index/parent_prefix_path/uncrustify
+/home/aust/ros2_ws/install/share/uncrustify/environment/ament_prefix_path.sh
+/home/aust/ros2_ws/install/share/uncrustify/environment/path.sh
+/home/aust/ros2_ws/install/share/uncrustify/local_setup.bash
+/home/aust/ros2_ws/install/share/uncrustify/local_setup.sh
+/home/aust/ros2_ws/install/share/uncrustify/local_setup.zsh
+/home/aust/ros2_ws/install/share/ament_index/resource_index/packages/uncrustify
+/home/aust/ros2_ws/install/share/uncrustify/cmake/uncrustifyConfig.cmake
+/home/aust/ros2_ws/install/share/uncrustify/cmake/uncrustifyConfig-version.cmake
+/home/aust/ros2_ws/install/share/uncrustify/package.xml

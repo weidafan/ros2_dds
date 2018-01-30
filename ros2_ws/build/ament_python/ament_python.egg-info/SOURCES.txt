@@ -1,0 +1,12 @@
+setup.py
+/home/aust/ros2_ws/build/ament_python/ament_python.egg-info/PKG-INFO
+/home/aust/ros2_ws/build/ament_python/ament_python.egg-info/SOURCES.txt
+/home/aust/ros2_ws/build/ament_python/ament_python.egg-info/dependency_links.txt
+/home/aust/ros2_ws/build/ament_python/ament_python.egg-info/requires.txt
+/home/aust/ros2_ws/build/ament_python/ament_python.egg-info/top_level.txt
+ament_python/__init__.py
+ament_python/data_files.py
+ament_python/script_dir.py
+test/test_copyright.py
+test/test_flake8.py
+test/test_pep257.py

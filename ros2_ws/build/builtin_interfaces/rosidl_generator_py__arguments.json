@@ -1,0 +1,19 @@
+{
+  "package_name": "builtin_interfaces",
+  "output_dir": "/home/aust/ros2_ws/build/builtin_interfaces/rosidl_generator_py/builtin_interfaces",
+  "template_dir": "/home/aust/ros2_ws/install/share/rosidl_generator_py/cmake/../resource",
+  "ros_interface_files": [
+    "/home/aust/ros2_ws/src/ros2/common_interfaces/builtin_interfaces/msg/Duration.msg",
+    "/home/aust/ros2_ws/src/ros2/common_interfaces/builtin_interfaces/msg/Time.msg"
+  ],
+  "target_dependencies": [
+    "/home/aust/ros2_ws/install/share/rosidl_generator_py/cmake/../../../lib/rosidl_generator_py/rosidl_generator_py",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_py/cmake/../../../lib/python3.5/site-packages/rosidl_generator_py/__init__.py",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_py/cmake/../resource/_msg_support.c.em",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_py/cmake/../resource/_msg_support.entry_point.c.em",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_py/cmake/../resource/_msg.py.em",
+    "/home/aust/ros2_ws/install/share/rosidl_generator_py/cmake/../resource/_srv.py.em",
+    "/home/aust/ros2_ws/src/ros2/common_interfaces/builtin_interfaces/msg/Duration.msg",
+    "/home/aust/ros2_ws/src/ros2/common_interfaces/builtin_interfaces/msg/Time.msg"
+  ]
+}

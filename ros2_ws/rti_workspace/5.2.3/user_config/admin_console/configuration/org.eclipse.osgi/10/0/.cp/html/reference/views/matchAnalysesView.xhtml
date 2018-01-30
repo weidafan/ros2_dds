@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Match Analyses View</title>
+<link rel="stylesheet" href="../../acdocs.css" type="text/css" />
+</head>
+
+<body>
+	<div class="centerContent">
+		<div class="docTopBanner" />
+	</div>
+
+	<div class="docPageTitle">Match Analyses View</div>
+
+	<div class="docScreenShot">
+		<img src="../../images/matchAnalysesView.png" align="middle" />
+	</div>
+
+	<div class="docSectionTitle">
+		<a name="MatchAnalysesViewOverview">Overview</a>
+	</div>
+
+	<div class="docSectionContent">
+		The match analyses view presents a hierarchical view of one or more
+		match analyses for the selected entity. Currently, match analysis is
+		performed by matching quality of service (QoS) values for DataReaders
+		and Data Writers as well as for DomainParticipants using transport
+		settings.
+
+		<ul>
+			<li><strong>Name</strong> - The name of entity to which the
+				selected entity is being compared or the name of the match criterion
+				for this row. If the row is highlighted as a link, clicking on it
+				will open a web page with a more detailed description of the
+				matching rules (Note: this feature requires a connection to the
+				internet as the web pages are retrieved from RTI's Community
+				Portal).</li>
+
+			<li><strong>Offered</strong> - The value supplied by the
+				DataWriter or DomainParticipant for the match criterion.</li>
+
+			<li><strong>Requested</strong> - The value supplied by the
+				DataReader or DomainParticipant for the match criterion.</li>
+
+			<li><strong>Notes</strong> - This cell indicates the state
+				(Mismatched or OK) as well as further details about the match
+				criterion.</li>
+		</ul>
+	</div>
+
+	<div class="docSectionTitle">Toolbar</div>
+
+	<div class="docSectionContent">
+		The toolbar in this view contains controls to:
+		<ul>
+			<li><img src="../../../branding/icons/matchcriterion.png" />
+				Toggle this button to show/hide mismatches from the view. When
+				unselected (the default), both mismatches and matches are displayed
+				in the view. If selected, then only mismatched entries are
+				displayed. Note that changes to this setting will be preserved and
+				restored the next time the Admin Console is run.</li>
+
+			<li><img src="../../../branding/icons/tree_expand_all.gif" />
+				Expand all tree nodes.</li>
+
+			<li><img src="../../../branding/icons/tree_collapse_all.gif" />
+				Collapse all tree nodes.</li>
+
+			<li><img
+				src="PLUGINS_ROOT/com.rti.tools.console.utils/icons/connected.png" />
+				Link with selection - Toggling this button will link/unlink this
+				view to/from displaying information about the current selection. One
+				way to use this feature is to select something and then unlink this
+				view from the selection. Then, a new instance of this view can be
+				created and a populated with a new selection. Data can then be
+				compared between the first and second selection.</li>
+
+			<li>Minimize and maximize the view.</li>
+		</ul>
+	</div>
+
+</body>
+</html>

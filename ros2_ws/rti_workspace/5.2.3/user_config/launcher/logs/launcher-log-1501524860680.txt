@@ -1,0 +1,6 @@
+[14:14:20] RTI Connext Launcher 5.2.3 started
+[14:14:32] Run:   rtiadminconsole  (/home/aust/rti_connext_dds-5.2.3/bin/rtiadminconsole)
+[14:28:13] Run:   rtiadminconsole  (/home/aust/rti_connext_dds-5.2.3/bin/rtiadminconsole)
+[14:28:52] Run:   rtiadminconsole  (/home/aust/rti_connext_dds-5.2.3/bin/rtiadminconsole)
+[16:00:26] Run:   rtiadminconsole  (/home/aust/rti_connext_dds-5.2.3/bin/rtiadminconsole)
+[16:29:45] Run:   rtiadminconsole  (/home/aust/rti_connext_dds-5.2.3/bin/rtiadminconsole)

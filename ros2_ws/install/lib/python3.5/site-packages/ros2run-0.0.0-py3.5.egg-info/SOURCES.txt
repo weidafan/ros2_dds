@@ -1,0 +1,14 @@
+setup.py
+/home/aust/ros2_ws/build/ros2run/ros2run.egg-info/PKG-INFO
+/home/aust/ros2_ws/build/ros2run/ros2run.egg-info/SOURCES.txt
+/home/aust/ros2_ws/build/ros2run/ros2run.egg-info/dependency_links.txt
+/home/aust/ros2_ws/build/ros2run/ros2run.egg-info/entry_points.txt
+/home/aust/ros2_ws/build/ros2run/ros2run.egg-info/requires.txt
+/home/aust/ros2_ws/build/ros2run/ros2run.egg-info/top_level.txt
+ros2run/__init__.py
+ros2run/api/__init__.py
+ros2run/command/__init__.py
+ros2run/command/run.py
+test/test_copyright.py
+test/test_flake8.py
+test/test_pep257.py
